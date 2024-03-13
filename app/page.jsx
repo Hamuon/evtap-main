@@ -29,7 +29,7 @@ export default function Home() {
           <Image className='scale-125' src="/media/expert-cartoon.jpg" alt="expert" layout='fill' style={{ objectFit: "cover" }} />
         </div>
 
-        <div className='sm:h-[400px] lg:h-full sm:w-full lg:w-[352px] rounded-3xl overflow-hidden'>
+        <div className='sm:h-[400px] lg:h-full sm:w-full lg:w-[352px] overflow-hidden'>
           <div className='w-full h-1/3 flex sm:justify-between'>
             <div className='bg-[#F66120] shadow-lg w-full rounded-3xl flex justify-center items-center'>
               <svg width="36" height="39" viewBox="0 0 36 39" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +52,8 @@ export default function Home() {
               <span className='text-4xl font-semibold '>ایران، تبریز</span>
             </div>
           </div>
-          <div className='w-full h-1/3 relative'>
+          <div className='w-full h-1/3 relative overflow-x-scroll no-scrollbar'>
+            <div className='h-28 w-28 bg-slate-50 rounded-full absolute right-72'></div>
             <div className='h-28 w-28 bg-slate-50 rounded-full absolute right-60'></div>
             <div className='h-28 w-28 bg-slate-100 rounded-full absolute right-48'></div>
             <div className='h-28 w-28 bg-slate-200 rounded-full absolute right-36'></div>
