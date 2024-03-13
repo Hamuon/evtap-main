@@ -1,12 +1,17 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 export default function Home() {
+  const [inquiry, setInquiry] = useState(false)
+
+
   return (
     <main className='flex justify-center items-center mx-auto sm:pt-10 sm:pb-20 md:mb-44'>
       <div className='flex sm:flex-col lg:flex-row sm:px-10 md:px-0 w-full lg:gap-4 justify-center items-center 2xl:px-56 md:container sm:h-full lg:h-96'>
 
         <div className='sm:w-full lg:w-80 lg:gap-4 h-full'>
-          <div className='bg-slate-200 shadow-lg sm:h-72 lg:h-2/3 w-full rounded-3xl overflow-hidden relative'>
+          <div className='bg-slate-200 cursor-pointer shadow-lg sm:h-72 lg:h-2/3 w-full rounded-3xl overflow-hidden relative'>
             <div className='absolute bottom-8 w-full flex justify-between px-10 z-10'>
               <span className='text-4xl font-semibold text-white'>آگهی ها</span>
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -14,22 +19,34 @@ export default function Home() {
               </svg>
 
             </div>
-            <Image className='scale-125' src="/media/building.svg" alt="building" style={{ objectFit: "cover" }} layout='fill' />
+            <Image className='hover:scale-150 scale-125 button-animation' src="/media/building.svg" alt="building" style={{ objectFit: "cover" }} layout='fill' />
           </div>
-          <div className='h-28 my-4 w-full flex items-center justify-evenly rounded-3xl border-black border-4'>
-            <svg width="28" height="16" viewBox="0 0 28 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 2L14 14.0519L26 2" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <span className='text-4xl font-semibold'>استعلام</span>
+          <div className='h-28 my-4  flex items-center justify-evenly rounded-3xl border-black border-4 hover:shadow-lg cursor-pointer button-animation relative'>
+            <div onClick={() => setInquiry(!inquiry)} className='flex w-full items-center justify-evenly '>
+              <svg width="28" height="16" viewBox="0 0 28 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 2L14 14.0519L26 2" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span className='text-4xl font-semibold'>استعلام</span>
+            </div>
+            <ul
+              className={`bg-white shadow-lg z-30 w-full -bottom-40 rounded-3xl p-6 absolute ${inquiry ? 'transform translate-y-0 opacity-100 visible transition duration-300 ease-in-out' : 'transform bg-slate-100 -translate-y-2 opacity-0 invisible transition duration-300 ease-in-out'}`}
+            >
+              <Link href="https://my.ssaa.ir/portal/estate">
+                <li className='text-xl pb-4 border-b font-semibold hover:text-gray-500 button-animation'>استعلام اصالت سند</li>
+              </Link>
+              <Link href="https://www.iranamlaak.ir/forms/contracts/filtercontractsbycontractside.aspx">
+                <li className='text-xl pt-4 font-semibold hover:text-gray-500 button-animation'>استعلام کد رهگیری</li>
+              </Link>
+            </ul>
           </div>
         </div>
 
-        <div className='sm:mb-4 lg:mb-0 shadow-lg bg-slate-200 sm:h-[400px] lg:h-full sm:w-full lg:w-80 relative overflow-hidden rounded-3xl pb-4'>
+        <div className='sm:mb-4 lg:mb-0 shadow-lg cursor-pointer bg-slate-200 sm:h-[400px] lg:h-full sm:w-full lg:w-80 relative overflow-hidden rounded-3xl pb-4'>
           <span className='absolute z-10 bottom-8 w-full flex justify-center text-white text-4xl font-semibold'>درخواست کارشناسی</span>
-          <Image className='scale-125' src="/media/expert-cartoon.jpg" alt="expert" layout='fill' style={{ objectFit: "cover" }} />
+          <Image className='scale-125 hover:scale-150 button-animation' src="/media/expert-cartoon.jpg" alt="expert" layout='fill' style={{ objectFit: "cover" }} />
         </div>
 
-        <div className='sm:h-[400px] lg:h-full sm:w-full lg:w-[352px] overflow-hidden'>
+        <div className='sm:h-[400px] lg:h-full sm:w-full lg:w-[352px]'>
           <div className='w-full h-1/3 flex sm:justify-between'>
             <div className='bg-[#F66120] shadow-lg w-full rounded-3xl flex justify-center items-center'>
               <svg width="36" height="39" viewBox="0 0 36 39" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,26 +69,26 @@ export default function Home() {
               <span className='text-4xl font-semibold '>ایران، تبریز</span>
             </div>
           </div>
-          <div className='w-full h-1/3 relative overflow-x-scroll no-scrollbar'>
+          <div className='w-full h-1/3 relative z-40 cursor-pointer'>
 
-            <div className='h-28 w-28 bg-slate-50 rounded-full absolute right-60'>
+            <div className='h-28 w-28 bg-slate-50 rounded-full absolute right-60 hover:right-64 button-animation'>
               <Image src="/experts/expert-2.png" alt="expert" layout='fill' />
             </div>
-            <div className='h-28 w-28 bg-slate-100 rounded-full absolute right-48'>
+            <div className='h-28 w-28 bg-slate-100 rounded-full absolute right-48 hover:right-52 button-animation'>
               <Image src="/experts/expert-3.png" alt="expert" layout='fill' />
             </div>
-            <div className='h-28 w-28 bg-slate-200 rounded-full absolute right-36'>
+            <div className='h-28 w-28 bg-slate-200 rounded-full absolute right-36 hover:right-40 button-animation'>
               <Image src="/experts/expert-4.png" alt="expert" layout='fill' />
             </div>
-            <div className='h-28 w-28 bg-slate-300 rounded-full absolute right-24'>
+            <div className='h-28 w-28 bg-slate-300 rounded-full absolute right-24 hover:right-28 button-animation'>
               <Image src="/experts/expert-1.png" alt="expert" layout='fill' />
             </div>
-            <div className='h-28 w-28 bg-slate-400 rounded-full absolute right-12'>
+            <div className='h-28 w-28 bg-slate-400 rounded-full absolute right-12 hover:right-16 button-animation'>
               <Image src="/experts/expert-3.png" alt="expert" layout='fill' />
             </div>
             <div className='h-28 w-28 bg-white rounded-full absolute right-0 flex justify-center items-center font-numerals'>
               <span className='text-4xl font-bold flex justify-center items-center'>
-                17+
+                100+
               </span>
             </div>
           </div>

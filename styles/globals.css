@@ -169,4 +169,8 @@ body {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  .button-animation {
+    transition: all 0.3s ease-in-out;
+  }
 }
