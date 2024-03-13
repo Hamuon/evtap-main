@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 export default function MainFooter() {
     return (
-        <footer className='flex mx-auto mt-auto w-full absolute bottom-0 justify-center'>
+        <footer className='flex mx-auto w-full justify-center'>
             <div className='flex w-full justify-center items-center md:container h-24 relative'>
                 {/* mobile visible footer */}
                 <ul className='sm:flex md:hidden'>
@@ -18,7 +18,7 @@ export default function MainFooter() {
                 </ul>
                 {/* desktop visible navigation */}
                 <div className='block absolute sm:hidden md:block w-full'>
-                    <Image src="/media/evtap-logo.png" alt="evtap logo" width={50} height={50} />
+                    <Image src="/media/evtap-logo.png" alt="evtap logo" width={65} height={65} />
                 </div>
                 <ul className='sm:hidden md:flex'>
                     <li className='px-6 py-1 border-2 border-black font-semibold rounded-full'>اینستاگرام</li>
