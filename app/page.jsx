@@ -36,7 +36,7 @@ export default function Home() {
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M1.99998 5.90271L1.99998 33.0975C1.99998 36.0887 5.23318 37.9663 7.83109 36.4801L31.5885 22.8931C34.2034 21.3975 34.2053 17.6273 31.5904 16.1298L7.83298 2.52013C5.23507 1.03399 1.99998 2.90963 1.99998 5.90271Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
-            <div className='bg-black shadow-lg rounded-full w-48 mr-2 flex justify-center items-center'>
+            <div className='bg-black shadow-lg rounded-full mr-2 flex justify-center items-center aspect-square'>
               <svg width="34" height="42" viewBox="0 0 34 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M28.0292 11.1897C28.0292 17.3085 23.1232 22.2148 17 22.2148C10.879 22.2148 5.97091 17.3085 5.97091 11.1897C5.97091 5.07087 10.879 0.166656 17 0.166656C23.1232 0.166656 28.0292 5.07087 28.0292 11.1897ZM17 41.8333C7.96332 41.8333 0.333374 40.3646 0.333374 34.6978C0.333374 29.029 8.01125 27.6123 17 27.6123C26.0388 27.6123 33.6667 29.0811 33.6667 34.7478C33.6667 40.4166 25.9888 41.8333 17 41.8333Z" fill="white" />
               </svg>
@@ -53,13 +53,27 @@ export default function Home() {
             </div>
           </div>
           <div className='w-full h-1/3 relative overflow-x-scroll no-scrollbar'>
-            <div className='h-28 w-28 bg-slate-50 rounded-full absolute right-72'></div>
-            <div className='h-28 w-28 bg-slate-50 rounded-full absolute right-60'></div>
-            <div className='h-28 w-28 bg-slate-100 rounded-full absolute right-48'></div>
-            <div className='h-28 w-28 bg-slate-200 rounded-full absolute right-36'></div>
-            <div className='h-28 w-28 bg-slate-300 rounded-full absolute right-24'></div>
-            <div className='h-28 w-28 bg-slate-400 rounded-full absolute right-12'></div>
-            <div className='h-28 w-28 bg-slate-500 rounded-full absolute right-0'></div>
+
+            <div className='h-28 w-28 bg-slate-50 rounded-full absolute right-60'>
+              <Image src="/experts/expert-2.png" alt="expert" layout='fill' />
+            </div>
+            <div className='h-28 w-28 bg-slate-100 rounded-full absolute right-48'>
+              <Image src="/experts/expert-3.png" alt="expert" layout='fill' />
+            </div>
+            <div className='h-28 w-28 bg-slate-200 rounded-full absolute right-36'>
+              <Image src="/experts/expert-4.png" alt="expert" layout='fill' />
+            </div>
+            <div className='h-28 w-28 bg-slate-300 rounded-full absolute right-24'>
+              <Image src="/experts/expert-1.png" alt="expert" layout='fill' />
+            </div>
+            <div className='h-28 w-28 bg-slate-400 rounded-full absolute right-12'>
+              <Image src="/experts/expert-3.png" alt="expert" layout='fill' />
+            </div>
+            <div className='h-28 w-28 bg-white rounded-full absolute right-0 flex justify-center items-center font-numerals'>
+              <span className='text-4xl font-bold flex justify-center items-center'>
+                17+
+              </span>
+            </div>
           </div>
         </div>
       </div>
