@@ -1,9 +1,9 @@
 import React from 'react';
 
-const SubmitButton = ({ children, handleClick }) => {
+const SubmitButton = ({ text, handleClick }) => {
     return (
-        <button type='submit' className='py-2 px-6 w-fit bg-[#5227CC] text-white rounded-lg' onClick={handleClick}>
-            {children}
+        <button onClick={handleClick} className='py-2 px-6 w-fit bg-[#5227CC] text-white rounded-lg'>
+            {text}
         </button>
     );
 };

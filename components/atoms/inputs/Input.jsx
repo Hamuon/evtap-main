@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function Input({ type, placeholder, value, name, className, handleChange }) {
+export default function Input(props) {
 
 
     return (
         <div className='w-full'>
-            <input className={className} type={type} placeholder={placeholder} value={value} name={name} onChange={handleChange} />
+            <input {...props} className={props.className} type={props.type} placeholder={props.placeholder} value={props.value} name={props.name} onChange={props.handleChange} />
         </div>
     )
 }
