@@ -1,41 +1,49 @@
 "use client"
-import React, { useContext, useEffect } from "react";
-import { FormCtx } from "@/components/molecules/forms/Form";
+import React, { useReducer, useEffect } from "react";
 
-const Input = props => {
-    const { id } = props;
-    const { fields, setFields, addField, errors, validateField } = useContext(
-        FormCtx
-    );
-    const field = fields[id] || {};
-    const fieldError = errors[id] || "";
-    const { value = "" } = field;
+const inputReducer = (state, action) => {
+    switch (action.type) {
+        case "CHANGE":
+            return {
+                ...state,
+                value: action.value
+            };
+        default:
+            return state;
+    }
+}
 
-    useEffect(() => {
-        addField({
-            field: props,
-            value: ""
-        });
-    }, []);
+const Input = (props) => {
+    const [inputState, dispatch] = useReducer(inputReducer, {
+        value: props.value
+    })
 
-    useEffect(() => {
-        if (field.value !== undefined) {
-            validateField(id);
-        }
-    }, [value]);
+    const { id, onInput } = props;
+    const { value } = inputState;
 
-    return field ? (
-        <div>
-            <input
-                type="text"
-                value={field && value}
-                onChange={event => setFields(event, field)}
-            />
-            <p>{fieldError}</p>
-        </div>
+    useEffect(() => { onInput(id, value) }, [id, onInput, value])
+
+    const changeHandler = (event) => {
+        dispatch({
+            type: "CHANGE",
+            value: event.target.value
+        })
+    }
+
+    const element = props.element === "input" ? (
+        <input className={props.className} id={props.id} type={props.type} placeholder={props.placeholder}
+            onChange={changeHandler} value={inputState.value} />
     ) : (
-        ""
+        <textarea id={props.id} rows={props.rows || 3} onChange={changeHandler} value={inputState.value} />
     );
-};
+
+    return (
+        <div>
+            <label htmlFor={props.id}>{props.label}</label>
+            {element}
+        </div>
+    )
+
+}
 
 export default Input;
