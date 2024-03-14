@@ -7,7 +7,7 @@ export default function Home() {
 
 
   return (
-    <main className='flex justify-center items-center mx-auto sm:pt-10 sm:pb-20 md:mb-44'>
+    <main className='flex justify-center items-center mx-auto h-full lg:absolute lg:top-1/2 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2'>
       <div className='flex sm:flex-col lg:flex-row sm:px-10 md:px-0 w-full lg:gap-4 justify-center items-center 2xl:px-56 md:container sm:h-full lg:h-96'>
         {/* inquiry and add */}
         <div className='sm:w-full lg:w-80 lg:gap-4 h-full'>
