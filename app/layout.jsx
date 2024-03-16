@@ -1,16 +1,18 @@
 "use client"
 import "@/styles/globals.css";
 import { useEffect, useState } from "react";
-import MainNavigation from "@/components/organisms/MainNavigation";
-import MainFooter from "@/components/organisms/MainFooter";
-import { usePathname } from "next/navigation";
 import StepForm from "@/components/StepForm";
+import { usePathname } from "next/navigation";
 import SignUpStepForm from "@/components/SignupStepForm";
+import MainFooter from "@/components/organisms/MainFooter";
+import MainNavigation from "@/components/organisms/MainNavigation";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function RootLayout({ children }) {
 
   const pathname = usePathname();
-  const [showLogin, setShowLogin] = useState(pathname === "/login" ? true : pathname === "/signup" ? false : false);
-  const [showSignup, setShowSignup] = useState(pathname === "/signup" ? true : pathname === "/login" ? false : false);
+  const [showLogin, setShowLogin] = useState(pathname === "/login" ? true : false);
+  const [showSignup, setShowSignup] = useState(pathname === "/signup" ? true : false);
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -21,6 +23,9 @@ export default function RootLayout({ children }) {
     } else if (pathname === "/signup") {
       setShowSignup(true)
       setShowLogin(false)
+    } else {
+      setShowLogin(false)
+      setShowSignup(false)
     }
   }, [pathname])
 
@@ -37,6 +42,7 @@ export default function RootLayout({ children }) {
         {
           mounted &&
           <>
+            <ToastContainer />
             <MainNavigation />
             {
               showLogin ? <StepForm showLogin={showLogin} setShowLogin={setShowLogin} setShowSignup={setShowSignup} /> :

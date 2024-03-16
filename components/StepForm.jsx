@@ -3,6 +3,7 @@ import LoginModal from './molecules/modals/LoginModal';
 import OtpModal from './molecules/modals/OtpModal';
 const StepForm = ({ setShowLogin }) => {
 
+    const [phone, setPhone] = useState("")
     const [step, setStep] = useState(1)
 
     const nextStep = () => {
@@ -18,9 +19,9 @@ const StepForm = ({ setShowLogin }) => {
 
     switch (step) {
         case 1:
-            return <LoginModal setShowLogin={setShowLogin} nextStep={nextStep} />;
+            return <LoginModal setPhone={setPhone} setShowLogin={setShowLogin} nextStep={nextStep} />;
         case 2:
-            return <OtpModal setShowLogin={setShowLogin} nextStep={nextStep} prevStep={prevStep} />;
+            return <OtpModal setPhone={setPhone} phone={phone} setShowLogin={setShowLogin} nextStep={nextStep} prevStep={prevStep} />;
         default:
             return <LoginModal setShowLogin={setShowLogin} nextStep={nextStep} />
 

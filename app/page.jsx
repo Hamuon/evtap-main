@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import LinkButton from '@/components/atoms/buttons/LinkButton'
 export default function Home() {
   const [inquiry, setInquiry] = useState(false)
 
@@ -12,12 +13,14 @@ export default function Home() {
         {/* inquiry and add */}
         <div className='sm:w-full lg:w-80 lg:gap-4 h-full'>
           <div className='bg-slate-200 cursor-pointer shadow-lg sm:h-72 lg:h-2/3 w-full rounded-3xl overflow-hidden relative'>
-            <div className='absolute bottom-8 w-full flex justify-between px-10 z-10'>
-              <span className='text-4xl font-semibold text-white'>آگهی ها</span>
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2171 3.3335H27.7671C33.4337 3.3335 36.6671 6.5335 36.6671 12.2168V27.7835C36.6671 33.4335 33.4504 36.6668 27.7837 36.6668H12.2171C6.53374 36.6668 3.33374 33.4335 3.33374 27.7835V12.2168C3.33374 6.5335 6.53374 3.3335 12.2171 3.3335ZM21.3671 21.3835H26.1004C26.8671 21.3668 27.4837 20.7502 27.4837 19.9835C27.4837 19.2168 26.8671 18.6002 26.1004 18.6002H21.3671V13.9002C21.3671 13.1335 20.7504 12.5168 19.9837 12.5168C19.2171 12.5168 18.6004 13.1335 18.6004 13.9002V18.6002H13.8837C13.5171 18.6002 13.1671 18.7502 12.9004 19.0002C12.6504 19.2668 12.5004 19.6152 12.5004 19.9835C12.5004 20.7502 13.1171 21.3668 13.8837 21.3835H18.6004V26.1002C18.6004 26.8668 19.2171 27.4835 19.9837 27.4835C20.7504 27.4835 21.3671 26.8668 21.3671 26.1002V21.3835Z" fill="white" />
-              </svg>
-            </div>
+            <LinkButton href="/advertisements">
+              <div className='absolute bottom-8 w-full flex justify-between px-10 z-10'>
+                <span className='text-4xl font-semibold text-white'>آگهی ها</span>
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2171 3.3335H27.7671C33.4337 3.3335 36.6671 6.5335 36.6671 12.2168V27.7835C36.6671 33.4335 33.4504 36.6668 27.7837 36.6668H12.2171C6.53374 36.6668 3.33374 33.4335 3.33374 27.7835V12.2168C3.33374 6.5335 6.53374 3.3335 12.2171 3.3335ZM21.3671 21.3835H26.1004C26.8671 21.3668 27.4837 20.7502 27.4837 19.9835C27.4837 19.2168 26.8671 18.6002 26.1004 18.6002H21.3671V13.9002C21.3671 13.1335 20.7504 12.5168 19.9837 12.5168C19.2171 12.5168 18.6004 13.1335 18.6004 13.9002V18.6002H13.8837C13.5171 18.6002 13.1671 18.7502 12.9004 19.0002C12.6504 19.2668 12.5004 19.6152 12.5004 19.9835C12.5004 20.7502 13.1171 21.3668 13.8837 21.3835H18.6004V26.1002C18.6004 26.8668 19.2171 27.4835 19.9837 27.4835C20.7504 27.4835 21.3671 26.8668 21.3671 26.1002V21.3835Z" fill="white" />
+                </svg>
+              </div>
+            </LinkButton>
             <Image className='hover:scale-150 scale-125 button-animation' src="/media/building.svg" alt="building" style={{ objectFit: "cover" }} layout='fill' />
           </div>
           <div className='h-28 my-4  flex items-center justify-evenly rounded-3xl border-black border-4 hover:shadow-lg cursor-pointer button-animation relative'>
@@ -57,11 +60,11 @@ export default function Home() {
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M1.99998 5.90271L1.99998 33.0975C1.99998 36.0887 5.23318 37.9663 7.83109 36.4801L31.5885 22.8931C34.2034 21.3975 34.2053 17.6273 31.5904 16.1298L7.83298 2.52013C5.23507 1.03399 1.99998 2.90963 1.99998 5.90271Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
-            <div className='bg-black shadow-lg rounded-full mr-2 flex justify-center items-center aspect-square'>
+            <LinkButton href="/login" className="bg-black shadow-lg rounded-full mr-2 flex justify-center items-center aspect-square">
               <svg width="34" height="42" viewBox="0 0 34 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M28.0292 11.1897C28.0292 17.3085 23.1232 22.2148 17 22.2148C10.879 22.2148 5.97091 17.3085 5.97091 11.1897C5.97091 5.07087 10.879 0.166656 17 0.166656C23.1232 0.166656 28.0292 5.07087 28.0292 11.1897ZM17 41.8333C7.96332 41.8333 0.333374 40.3646 0.333374 34.6978C0.333374 29.029 8.01125 27.6123 17 27.6123C26.0388 27.6123 33.6667 29.0811 33.6667 34.7478C33.6667 40.4166 25.9888 41.8333 17 41.8333Z" fill="white" />
               </svg>
-            </div>
+            </LinkButton>
           </div>
           <div className='w-full h-28 my-4'>
             <div className=' h-full bg-white w-full flex items-center justify-evenly rounded-3xl shadow-lg'>
