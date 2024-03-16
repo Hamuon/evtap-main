@@ -1,18 +1,15 @@
 "use client"
 import "@/styles/globals.css";
-<<<<<<< HEAD
-import MainNavigation from "@/components/organisms/navs/MainNavigation";
-import MainFooter from "@/components/organisms/footers/MainFooter";
-=======
+
 import { useEffect, useState } from "react";
 import StepForm from "@/components/StepForm";
 import { usePathname } from "next/navigation";
 import SignUpStepForm from "@/components/SignupStepForm";
-import MainFooter from "@/components/organisms/MainFooter";
-import MainNavigation from "@/components/organisms/MainNavigation";
+import MainFooter from "@/components/organisms/footers/MainFooter";
+import MainNavigation from "@/components/organisms/navs/MainNavigation";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
->>>>>>> develop
+
 export default function RootLayout({ children }) {
 
   const pathname = usePathname();
