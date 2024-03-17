@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 export default function MainFooter() {
     const pathname = usePathname()
     return (
-        <footer className='flex mx-auto w-full justify-center absolute bottom-0'>
+        <footer className={`flex mx-auto w-full justify-center ${pathname === "/" ? "md:absolute md:bottom-0" : "absolute bottom-0 mt-32"}`}>
             {
                 pathname === "/" ? (
                     <div className='flex w-full justify-center items-center md:container px-10 h-28 relative'>
@@ -38,7 +38,7 @@ export default function MainFooter() {
                                 <div className=''>
                                     <Image src="/media/evtap-logo.png" alt="evtap logo" width={65} height={65} />
                                 </div>
-                                <h1>
+                                <h1 className='sm:hidden md:block'>
                                     مجموعه کارشناسی املاک اوتاپ
                                 </h1>
                             </div>

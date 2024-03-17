@@ -1,13 +1,13 @@
 import React from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import Link from 'next/link'
 
 export default function MainNavigation() {
 
     const pathname = usePathname()
     return (
-        <nav className='flex justify-center mx-auto'>
+        <nav className='flex justify-center mx-auto relative z-50'>
             {
                 pathname === "/" ?
                     (
