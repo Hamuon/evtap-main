@@ -47,8 +47,9 @@ export default function MainFooter() {
                             </div>
                             {/* desktop visible navigation */}
                         </div>
-                    ) : null
+                    ) :  null
                 )
+            
             }
         </footer>
     )

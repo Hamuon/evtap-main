@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import SubmitButton from '@/components/atoms/buttons/SubmitButton'
 
 export default function MainNavigation() {
 
@@ -23,7 +24,7 @@ export default function MainNavigation() {
                         مجموعه کارشناسی املاک اوتاپ
                     </h1>
                     <ul className='sm:hidden md:flex'>
-                        <li className='mr-12 font-semibold'>کارشناسان</li>
+                        <li className='mr-12 font-semibold '>کارشناسان</li>
                         <li className='mr-12 font-semibold'>درباره ما</li>
                     </ul>
                 </div>
@@ -47,27 +48,26 @@ export default function MainNavigation() {
                             {/* mobile visible navigation */}
                             <ul className='sm:hidden md:flex'>
                                 <Link href="">
-                                    <li className='mr-12 font-semibold'>تبریز</li>
+                                    <li className='mr-12 font-semibold mt-2'>تبریز</li>
                                 </Link>
                                 <Link href="">
-                                    <li className='mr-12 font-semibold'>درخواست کارشناسی</li>
+                                    <li className='mr-12 font-semibold mt-2'>درخواست کارشناسی</li>
                                 </Link>
                                 <Link href="">
-                                    <li className='mr-12 font-semibold'>آگهی های من</li>
+                                    <li className='mr-12 font-semibold mt-2'>آگهی های من</li>
                                 </Link>
-                                <form class="max-w-md mx-auto">   
-                                    {/* <label for="default-search" class="mb-2 text-sm font-medium text-light sr-only dark:text-white">Search</label> */}
+                                <form class="max-w-md mx-8">   
                                     <div class="relative">
                                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                             <svg class="w-4 h-4 text-black dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                             </svg>
                                         </div>
-                                        <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-black border-2 border-black rounded-lg bg-transparent dark:bg-transparent dark:placeholder-gray-400 dark:text-black" placeholder="" required />
-                                        <button type="submit" class="text-black absolute end-2.5 bottom-2.5 bg-transparent hover:bg-transparent focus:ring-4 focus:outline-none focus:ring-transparent font-medium rounded-lg text-sm px-4 py-2 dark:bg-transparent dark:hover:bg-transparent dark:focus:ring-transparent">جستجو</button>
+                                        <input type="search" id="default-search" class="block w-full py-2 pr-8 text-sm text-black border-2 border-black rounded-lg bg-transparent dark:bg-transparent dark:placeholder-gray-400 dark:text-black" placeholder="" required />
+                                        <button type="submit" class="text-black absolute end-2.5 bottom-2.5 bg-transparent hover:bg-transparent focus:ring-4 focus:outline-none focus:ring-transparent font-medium rounded-lg text-sm px-2 pt-2 dark:bg-transparent dark:hover:bg-transparent dark:focus:ring-transparent">جستجو</button>
                                     </div>
                                 </form>
-
+                                <SubmitButton class="" text="ثبت آگهی" />
                             </ul>
                         </div>
                     ) : null
