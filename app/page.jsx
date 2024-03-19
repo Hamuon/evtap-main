@@ -45,10 +45,12 @@ export default function Home() {
 
 
         {/* request for expert */}
-        <div className='sm:mb-4 lg:mb-0 shadow-lg cursor-pointer bg-slate-200 sm:h-[400px] lg:h-full sm:w-full lg:w-80 relative overflow-hidden rounded-3xl pb-4'>
-          <span className='absolute z-10 bottom-8 w-full flex justify-center text-white text-4xl font-semibold'>درخواست کارشناسی</span>
-          <Image className='scale-125 hover:scale-150 button-animation' src="/media/expert-cartoon.jpg" alt="expert" layout='fill' style={{ objectFit: "cover" }} />
-        </div>
+        <LinkButton className='sm:mb-4 lg:mb-0 shadow-lg cursor-pointer bg-slate-200 sm:h-[400px] lg:h-full sm:w-full lg:w-80 relative overflow-hidden rounded-3xl pb-4' href="/request">
+          <div >
+            <span className='absolute z-10 bottom-8 w-full flex justify-center text-white text-4xl font-semibold'>درخواست کارشناسی</span>
+            <Image className='scale-125 hover:scale-150 button-animation' src="/media/expert-cartoon.jpg" alt="expert" layout='fill' style={{ objectFit: "cover" }} />
+          </div>
+        </LinkButton>
 
 
 
