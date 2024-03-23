@@ -106,8 +106,8 @@ export default function OtpModal({ nextStep, prevStep, phone, setPhone }) {
                     <span className='text-3xl font-semibold mb-3'>احراز هویت</span>
                     <Label htmlFor="otp">کد ارسالی را وارد کنید</Label>
                     <div className='flex items-center gap-2 w-full'>
-                        <input {...register("verify_code")} className="w-full my-2 p-2 border border-slate-400 rounded-lg focus:border-[#AB7CF8]" name="verify_code" type="text" placeholder="کد ارسالی" />
-                        <button disabled={seconds > 0 || minutes > 0} onClick={resendOTP} className={`font-numerals px-4 py-2 text-white rounded-lg min-w-20 flex justify-center ${seconds > 0 || minutes > 0 ? 'bg-[#54515d]' : 'bg-[#5227CC]'}`}>
+                        <input {...register("verify_code")} className="input input-bordered w-full font-numerals my-2" name="verify_code" type="text" placeholder="کد ارسالی" />
+                        <button disabled={seconds > 0 || minutes > 0} onClick={resendOTP} className={`font-numerals px-4 py-3 text-white rounded-lg min-w-20 flex items-center justify-center ${seconds > 0 || minutes > 0 ? 'bg-[#54515d]' : 'bg-[#5227CC]'}`}>
                             {seconds > 0 || minutes > 0 ? (
                                 <p>
                                     {minutes < 10 ? `0${minutes}` : minutes}:

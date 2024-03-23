@@ -1,14 +1,11 @@
 "use client"
 import { z } from 'zod'
 import React, { useState } from 'react'
-import Link from 'next/link'
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form'
 import { getOtp } from '@/services/authService'
-import Input from '@/components/atoms/inputs/Input'
 import Label from '@/components/atoms/labels/Label'
 import { zodResolver } from '@hookform/resolvers/zod'
-import BackButton from '@/components/atoms/buttons/BackButton'
 import SubmitButton from '@/components/atoms/buttons/SubmitButton'
 
 const schema = z.object({
@@ -59,10 +56,9 @@ export default function LoginModal({ nextStep, setPhone }) {
                     <Label htmlFor="phone">
                         لطفا شماره تماس خود را وارد کنید
                     </Label>
-                    <input {...register("phone")} className="w-full my-2 p-2 border border-slate-400 rounded-lg focus:border-[#AB7CF8]" name="phone" type="text" placeholder="شماره تماس" />
+                    <input {...register("phone")} className="input input-bordered w-full my-2 font-numerals" name="phone" type="text" placeholder="شماره تماس" />
                     <div className='flex gap-2 mt-2 sm:w-full'>
-                        <SubmitButton loading={loading} text="ارسال کد" />
-                        <BackButton />
+                        <SubmitButton className="w-full" loading={loading} text="ارسال کد" />
                     </div>
                 </div>
             </form >
