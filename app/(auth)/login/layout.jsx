@@ -25,14 +25,6 @@ export default function AuthLayout({ children }) {
         <>
             <ToastContainer />
             <AuthNavigation />
-            <div
-                style={{
-                    backgroundImage: `url("/media/bgotp.jpg")`,
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                }}
-                className="absolute z-0 inset-0 h-full w-full"
-            ></div>
             {
                 showLogin ? <StepForm /> : null
             }

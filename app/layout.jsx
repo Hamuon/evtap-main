@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import MainFooter from "@/components/organisms/footer/MainFooter";
 import MainNavigation from "@/components/organisms/navigation/MainNavigation";
+import ProtectRoute from "@/components/ProtectRoute";
 export default function RootLayout({ children }) {
 
   const pathname = usePathname();
@@ -20,26 +21,27 @@ export default function RootLayout({ children }) {
       <body>
         {
           mounted &&
-          <>
-            <ToastContainer />
-            {
-              pathname === "/" ? <MainNavigation /> : null
-            }
+          <ProtectRoute>
             <div
               style={{
-                backgroundImage: `url("/media/mainbg.jpg")`,
+                backgroundImage: `url(${pathname === "/" ? "/media/mainbg.jpg" : pathname === "/login" ? "/media/bgotp.jpg" : pathname === "/request" ? "/media/reqbg.jpg" : null})`,
+                height: "100vh",
                 backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
+                backgroundSize: "cover"
               }}
-              className="absolute z-0 inset-0 h-full w-full"
-            ></div>
-            {children}
-            {
-              pathname === "/" ? <MainFooter /> : null
-            }
-          </>
+            >
+              <ToastContainer />
+              {
+                pathname === "/" ? <MainNavigation /> : null
+              }
+              {children}
+              {
+                pathname === "/" ? <MainFooter /> : null
+              }
+            </div>
+          </ProtectRoute>
         }
       </body>
-    </html>
+    </html >
   );
 }
