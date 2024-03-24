@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react'
 import AuthFooter from '@/components/organisms/footer/AuthFooter'
 import AuthNavigation from '@/components/organisms/navigation/AuthNavigation'
 import AuthProvider from '@/context/AuthProvider';
+import ProtectLogin from '@/components/ProtectLogin';
 export default function AuthLayout({ children }) {
 
     const pathname = usePathname();
@@ -23,7 +24,7 @@ export default function AuthLayout({ children }) {
     }, [pathname])
 
     return (
-        <>
+        <ProtectLogin>
             <AuthProvider>
                 <ToastContainer />
                 <AuthNavigation />
@@ -33,6 +34,6 @@ export default function AuthLayout({ children }) {
                 {children}
                 <AuthFooter />
             </AuthProvider>
-        </>
+        </ProtectLogin>
     )
 }

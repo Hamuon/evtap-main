@@ -5,12 +5,16 @@ import { usePathname } from "next/navigation";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import MainFooter from "@/components/organisms/footer/MainFooter";
+import { useRouter } from "next/navigation";
 import MainNavigation from "@/components/organisms/navigation/MainNavigation";
 import ProtectRoute from "@/components/ProtectRoute";
 import AuthProvider from "@/context/AuthProvider";
+import ProtectLogin from "@/components/ProtectLogin";
 export default function RootLayout({ children }) {
 
   const pathname = usePathname();
+  const router = useRouter()
+
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -40,9 +44,9 @@ export default function RootLayout({ children }) {
                   pathname === "/" ? <MainNavigation /> : null
                 }
                 {children}
-                {/* {
-                pathname === "/" ? <MainFooter /> : null
-              } */}
+                {
+                  pathname === "/" ? <MainFooter /> : null
+                }
               </div>
             </ProtectRoute>
           </AuthProvider>

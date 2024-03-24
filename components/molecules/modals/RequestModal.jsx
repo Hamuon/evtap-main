@@ -67,7 +67,7 @@ export default function RequestModal() {
 
     return (
         <div className='modal-container'>
-            <form onSubmit={handleSubmit(submitHandler)} className='modal-form font-numerals relative sm:w-[350px] md:w-[550px] sm:-top-6 sm:h-96 xl:h-auto sm:px-4 xl:px-10 sm:bg-transparent xl:bg-white sm:shadow-none xl:shadow-xl'>
+            <form onSubmit={handleSubmit(submitHandler)} className='modal-form font-numerals relative sm:w-[350px] md:w-[550px] sm:-top-6 md:top-0 sm:h-96 xl:h-auto sm:px-4 xl:px-10 sm:bg-transparent xl:bg-white sm:shadow-none xl:shadow-xl'>
                 {/* {errors.phone && <span className="modal-error">{errors.phone.message}</span>} */}
                 <div className='flex flex-col items-start w-full relative'>
                     <div className='flex w-full justify-between mb-3 items-center'>
@@ -113,7 +113,7 @@ export default function RequestModal() {
                         <input {...register("region")} className="input input-bordered w-full my-2" placeholder="منطقه" />
                     </div>
                     <div className='flex gap-3 w-full items-center'>
-                        <input {...register("main_street")} className="input input-bordered w-full" placeholder="خیابان اصلی" />
+                        <input {...register("main_street")} className="input input-bordered w-full my-2" placeholder="خیابان اصلی" />
                     </div>
                     <div className='flex gap-3 w-full'>
                         <input {...register("street")} className="input input-bordered w-full my-2" placeholder="خیابان فرعی" />
