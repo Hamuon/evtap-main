@@ -33,7 +33,9 @@ export default function LoginModal({ nextStep, setPhone }) {
                     setLoading(false)
                     nextStep()
                 } else {
-                    toast.error(res.errors.phone[0])
+                    toast.error(res.errors.phone[0], {
+                        position: "top-center"
+                    })
                     setLoading(false)
                 }
             }).catch((err) => {

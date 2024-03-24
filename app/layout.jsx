@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import MainFooter from "@/components/organisms/footer/MainFooter";
 import MainNavigation from "@/components/organisms/navigation/MainNavigation";
 import ProtectRoute from "@/components/ProtectRoute";
+import AuthProvider from "@/context/AuthProvider";
 export default function RootLayout({ children }) {
 
   const pathname = usePathname();
@@ -18,28 +19,33 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="fa">
+      <head>
+        <title>اوتاپ | کارشناسی تخصصی ملک</title>
+      </head>
       <body>
         {
           mounted &&
-          <ProtectRoute>
-            <div
-              style={{
-                backgroundImage: `url(${pathname === "/" ? "/media/mainbg.jpg" : pathname === "/login" ? "/media/bgotp.jpg" : pathname === "/request" ? "/media/reqbg.jpg" : null})`,
-                height: "100vh",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover"
-              }}
-            >
-              <ToastContainer />
-              {
-                pathname === "/" ? <MainNavigation /> : null
-              }
-              {children}
-              {
+          <AuthProvider>
+            <ProtectRoute>
+              <div
+                style={{
+                  backgroundImage: `url(${pathname === "/" ? "/media/mainbg.jpg" : pathname === "/login" ? "/media/bgotp.jpg" : pathname === "/request" ? "/media/reqbg.jpg" : null})`,
+                  height: "100vh",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover"
+                }}
+              >
+                <ToastContainer />
+                {
+                  pathname === "/" ? <MainNavigation /> : null
+                }
+                {children}
+                {/* {
                 pathname === "/" ? <MainFooter /> : null
-              }
-            </div>
-          </ProtectRoute>
+              } */}
+              </div>
+            </ProtectRoute>
+          </AuthProvider>
         }
       </body>
     </html >

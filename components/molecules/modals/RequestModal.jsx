@@ -1,20 +1,19 @@
 "use client"
 import { z } from 'zod'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { toast } from 'react-toastify';
-import { useForm } from 'react-hook-form'
+import { get, useForm } from 'react-hook-form'
 import { MapComponent } from '@/components/Map';
-import Input from '@/components/atoms/inputs/Input'
 import Label from '@/components/atoms/labels/Label'
 import { zodResolver } from '@hookform/resolvers/zod'
 import BackButton from '@/components/atoms/buttons/BackButton'
 import SubmitButton from '@/components/atoms/buttons/SubmitButton'
+import { expertRequest, getCities } from '@/services/authService';
 
 const schema = z.object({
     state: z.string().min(1, { message: "لطفا استان را انتخاب کنید" }),
     city: z.string().min(1, { message: "لطفا شهر را انتخاب کنید" }),
-    area: z.string().min(1, { message: "لطفا منطقه را وارد کنید" }),
-    neighbourhood: z.string().min(1, { message: "لطفا محله را وارد کنید" }).max(100, { message: "محله بیش از 100 کاراکتر" }),
+    region: z.string().min(1, { message: "لطفا منطقه را وارد کنید" }).max(100, { message: "منطقه بیش از 100 کاراکتر" }),
     main_street: z.string().min(1, { message: "لطفا خیابان اصلی را وارد کنید" }).max(20, { message: "خیابان اصلی بیش از 20 کاراکتر" }),
     street: z.string().min(1, { message: "لطفا خیابان فرعی را وارد کنید" }).max(20, { message: "خیابان فرعی بیش از 20 کاراکتر" }),
     alley: z.string().min(1, { message: "لطفا کوچه را وارد کنید" }).max(100, { message: " کوچه بیش از 100 کاراکتر" }),
@@ -24,14 +23,16 @@ const schema = z.object({
 
 })
 export default function RequestModal() {
+    const [provinces, setProvinces] = useState(null)
+    const [selectedProvince, setSelectedProvince] = useState(null)
+
     const [mapOpen, setMapOpen] = useState(false)
-    const { setValue, register, handleSubmit, formState: { errors }, formState } = useForm(
+    const { setValue, register, handleSubmit, formState: { errors } } = useForm(
         {
             defaultValues: {
                 state: "",
                 city: "",
-                area: "",
-                neighbourhood: "",
+                region: "",
                 main_street: "",
                 street: "",
                 alley: "",
@@ -42,10 +43,27 @@ export default function RequestModal() {
             resolver: zodResolver(schema)
         }
     )
+    console.log(errors);
+    async function getAllCities() {
+        await getCities()
+            .then((res) => {
+                setProvinces(res.data.province)
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
+
+    useEffect(() => {
+        getAllCities()
+    }, [])
+
+    const changeHandler = (e) => {
+        setSelectedProvince(e.target.value)
+    }
+
     const submitHandler = (data) => {
         console.log(data);
     }
-
 
     return (
         <div className='modal-container'>
@@ -54,7 +72,7 @@ export default function RequestModal() {
                 <div className='flex flex-col items-start w-full relative'>
                     <div className='flex w-full justify-between mb-3 items-center'>
                         <span className='md:text-3xl font-semibold '>درخواست کارشناسی ملک</span>
-                        <div className="tooltip hover:tooltip-open md:tooltip-left sm:tooltip-right cursor-pointer" data-tip="انتخاب از روی نقشه" onClick={() => setMapOpen(!mapOpen)}>
+                        <div className="tooltip tooltip-open md:tooltip-left sm:tooltip-right cursor-pointer" data-tip="انتخاب از روی نقشه" onClick={() => setMapOpen(!mapOpen)}>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fillRule="evenodd" clipRule="evenodd" d="M11.2116 11.2119L10.1646 14.5589L13.5106 13.5109L14.5586 10.1639L11.2116 11.2119ZM9.02057 16.4519C8.82457 16.4519 8.63257 16.3749 8.48957 16.2329C8.29257 16.0349 8.22057 15.7439 8.30457 15.4789L9.89757 10.3899C9.97057 10.1539 10.1546 9.97089 10.3886 9.89789L15.4776 8.30489C15.7446 8.21989 16.0346 8.29289 16.2326 8.48989C16.4296 8.68789 16.5016 8.97889 16.4176 9.24389L14.8256 14.3329C14.7526 14.5679 14.5676 14.7519 14.3336 14.8249L9.24457 16.4179C9.17057 16.4409 9.09457 16.4519 9.02057 16.4519Z" fill="black" />
                                 <mask id="mask0_360_961" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="21">
@@ -70,23 +88,31 @@ export default function RequestModal() {
                         برای ثبت درخواست لطفا آدرس دقیق را وارد کنید
                     </Label>
                     <div className='flex gap-2 w-full'>
-                        <select {...register("state")} name='state' className="select select-bordered w-full my-2" >
+                        <select {...register("state")} onChange={changeHandler} name='state' className="select select-bordered w-full my-2" >
                             <option selected disabled value="">استان</option>
-                            <option value="تهران">تهران</option>
-                            <option value="آذربایجان شرقی">آذربایجان شرقی</option>
+                            {
+                                provinces && provinces.map((province, index) => (
+                                    <option id={province.id} key={index} value={province.name}>{province.name}</option>
+                                ))
+                            }
                         </select>
                         <select {...register("city")} name='city' className="select select-bordered w-full my-2" >
                             <option selected disabled value="">شهر</option>
-                            <option value="تهران">تهران</option>
-                            <option value="تبریز">تبریز</option>
+                            {
+                                provinces && provinces.map((province) => (
+                                    selectedProvince ?
+                                        selectedProvince === province.name ?
+                                            province.cities.map((city, index) => (
+                                                <option id={city.id} key={index} value={city.name}>{city.name}</option>
+                                            ))
+                                            : null
+                                        : null
+                                ))
+                            }
                         </select>
-                        <select {...register("area")} name='area' className="select select-bordered w-full my-2" >
-                            <option selected disabled value="">منطقه</option>
-                            <option value="ولیعصر">ولیعصر</option>
-                        </select>
+                        <input {...register("region")} className="input input-bordered w-full my-2" placeholder="منطقه" />
                     </div>
                     <div className='flex gap-3 w-full items-center'>
-                        <input {...register("neighbourhood")} className="input input-bordered w-full my-2" placeholder="محله" />
                         <input {...register("main_street")} className="input input-bordered w-full" placeholder="خیابان اصلی" />
                     </div>
                     <div className='flex gap-3 w-full'>
@@ -98,10 +124,7 @@ export default function RequestModal() {
                         <input {...register("floor")} className="input input-bordered w-full my-2" placeholder="طبقه/واحد" />
                     </div>
                     <textarea {...register("address")} rows={2} className="textarea textarea-bordered w-full my-2" placeholder="استان، شهر، منطقه، محل، خیابان اصلی، خیابان فرعی، کوچه، پلاک، طبقه" />
-                    <div className="w-full my-2 p-2 border border-gray-400 outline-0 rounded-lg flex justify-between items-center bg-white">
-                        <span className='text-gray-400'>محاسبه قیمت</span>
-                        <span className='font-numerals text-gray-400'>7900000 ریال</span>
-                    </div>
+
                     <div className='flex gap-2 mt-2 w-full'>
                         <SubmitButton text="پرداخت" />
                         <BackButton />

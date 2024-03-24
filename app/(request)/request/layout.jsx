@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react'
 import AuthFooter from '@/components/organisms/footer/AuthFooter'
 import AuthNavigation from '@/components/organisms/navigation/AuthNavigation'
 import RequestModal from '@/components/molecules/modals/RequestModal';
+import ProtectRoute from '@/components/ProtectRoute';
 export default function ReqLayout({ children }) {
 
     const pathname = usePathname();

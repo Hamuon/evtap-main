@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import React, { useState, useEffect } from 'react'
 import AuthFooter from '@/components/organisms/footer/AuthFooter'
 import AuthNavigation from '@/components/organisms/navigation/AuthNavigation'
+import AuthProvider from '@/context/AuthProvider';
 export default function AuthLayout({ children }) {
 
     const pathname = usePathname();
@@ -23,13 +24,15 @@ export default function AuthLayout({ children }) {
 
     return (
         <>
-            <ToastContainer />
-            <AuthNavigation />
-            {
-                showLogin ? <StepForm /> : null
-            }
-            {children}
-            <AuthFooter />
+            <AuthProvider>
+                <ToastContainer />
+                <AuthNavigation />
+                {
+                    showLogin ? <StepForm /> : null
+                }
+                {children}
+                <AuthFooter />
+            </AuthProvider>
         </>
     )
 }

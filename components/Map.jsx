@@ -29,8 +29,8 @@ export const MapComponent = ({ setValue, setMapOpen }) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                setValue("neighbourhood", data.neighbourhood)
                 setValue("main_street", data.primary)
+                setValue("region", data.name)
                 setValue("street", data.last)
                 setValue("alley", data.name)
                 setValue("block", data.plaque)

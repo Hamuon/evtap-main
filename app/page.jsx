@@ -8,7 +8,7 @@ export default function Home() {
 
 
   return (
-    <main className='flex justify-center items-center mx-auto h-full lg:absolute lg:top-1/2 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2'>
+    <main className='flex justify-center items-center mx-auto h-full lg:absolute lg:top-1/2 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 sm:pt-20 md:pb-0'>
       <div className='flex sm:flex-col lg:flex-row sm:px-10 md:px-0 w-full lg:gap-4 justify-center items-center 2xl:px-56 md:container sm:h-full lg:h-96'>
         {/* inquiry and add */}
         <div className='sm:w-full lg:w-80 lg:gap-4 h-full'>
@@ -45,7 +45,7 @@ export default function Home() {
 
 
         {/* request for expert */}
-        <LinkButton className='sm:mb-4 lg:mb-0 shadow-lg cursor-pointer bg-slate-200 sm:h-[400px] lg:h-full sm:w-full lg:w-80 relative overflow-hidden rounded-3xl pb-4' href="/request">
+        <LinkButton className='sm:mb-4 lg:mb-0 sm:min-h-96 shadow-lg cursor-pointer bg-slate-200 h-full sm:w-full lg:w-80 relative overflow-hidden rounded-3xl pb-4' href="/request">
           <div >
             <span className='absolute z-10 bottom-8 w-full flex justify-center text-white text-4xl font-semibold'>درخواست کارشناسی</span>
             <Image className='scale-125 hover:scale-150 button-animation' src="/media/expert-cartoon.jpg" alt="expert" layout='fill' style={{ objectFit: "cover" }} />

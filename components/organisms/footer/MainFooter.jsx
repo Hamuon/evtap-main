@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 export default function MainFooter() {
     return (
-        <footer className="flex mx-auto w-full justify-center md:absolute md:bottom-0">
+        <footer className="flex mx-auto w-full justify-center">
             <div className='flex w-full justify-center items-center md:container px-10 h-28 relative'>
                 {/* mobile visible footer */}
                 <ul className='sm:flex md:hidden'>
