@@ -1,63 +1,53 @@
 "use client"
 import "@/styles/globals.css";
-<<<<<<< HEAD
-import MainNavigation from "@/components/organisms/navs/MainNavigation";
-import MainFooter from "@/components/organisms/footers/MainFooter";
-=======
-import { useEffect, useState } from "react";
-import StepForm from "@/components/StepForm";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import SignUpStepForm from "@/components/SignupStepForm";
-import MainFooter from "@/components/organisms/MainFooter";
-import MainNavigation from "@/components/organisms/MainNavigation";
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
->>>>>>> develop
+import { ToastContainer } from 'react-toastify';
+import AuthProvider from "@/context/AuthProvider";
+import ProtectRoute from "@/components/ProtectRoute";
+import MainNavigation from "@/components/organisms/navigation/MainNavigation";
+import MainFooter from "@/components/organisms/footer/MainFooter";
 export default function RootLayout({ children }) {
 
   const pathname = usePathname();
-  const [showLogin, setShowLogin] = useState(pathname === "/login" ? true : false);
-  const [showSignup, setShowSignup] = useState(pathname === "/signup" ? true : false);
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-    if (pathname === "/login") {
-      setShowLogin(true)
-      setShowSignup(false)
-    } else if (pathname === "/signup") {
-      setShowSignup(true)
-      setShowLogin(false)
-    } else {
-      setShowLogin(false)
-      setShowSignup(false)
-    }
-  }, [pathname])
+  }, [])
 
   return (
     <html lang="fa">
-      <body
-        className=""
-        style={{
-          backgroundImage: `url(${pathname === "/" ? "/media/mainbg.jpg" : pathname === "/login" || "/signup" ? "/media/bgotp.jpg" : "/media/bgotp.jpg"})`,
-          backgroundRepeat: "",
-          backgroundSize: "cover",
-        }}
-      >
+      <head>
+        <title>اوتاپ | کارشناسی تخصصی ملک</title>
+      </head>
+      <body>
         {
           mounted &&
-          <>
-            <ToastContainer />
-            <MainNavigation />
-            {
-              showLogin ? <StepForm showLogin={showLogin} setShowLogin={setShowLogin} setShowSignup={setShowSignup} /> :
-                showSignup ? <SignUpStepForm showSignup={showSignup} setShowSignup={setShowSignup} setShowLogin={setShowLogin} /> : null
-            }
-            {children}
-            <MainFooter />
-          </>
+          <AuthProvider>
+            <ProtectRoute>
+              <div
+                style={{
+                  backgroundImage: `url(${pathname === "/" ? "/media/mainbg.jpg" : pathname === "/login" ? "/media/bgotp.jpg" : pathname === "/request" ? "/media/reqbg.jpg" : null})`,
+                  height: "100vh",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover"
+                }}
+              >
+                <ToastContainer />
+                {
+                  pathname === "/" ? <MainNavigation /> : null
+                }
+                {children}
+                {/* {
+                pathname === "/" ? <MainFooter /> : null
+              } */}
+              </div>
+            </ProtectRoute>
+          </AuthProvider>
         }
       </body>
-    </html>
+    </html >
   );
 }
