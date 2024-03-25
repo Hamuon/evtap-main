@@ -6,6 +6,24 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    colors: {
+      transparent: "transparent",
+      white: "#FFFFFF",
+      black: "#000000",
+      "gray-100": "#F7F7F7",
+      "gray-200": "#EBEBEB",
+      "gray-300": "#D6D6D6",
+      "gray-400": "#BDBDBD",
+      "gray-500": "#999999",
+      "gray-600": "#757575",
+      "gray-700": "#616161",
+      "gray-800": "#424242",
+      "gray-900": "#212121",
+      "button-primary-color": "#5227CC",
+      "button-secondary-color": "#7749F8",
+      "button-tertiary-color": "#EBE5FC",
+      "button-primary-hover-color": "#A370F7",
+    },
     screens: {
       sm: "270px",
       // => @media (min-width: 390px) { ... }
@@ -30,5 +48,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };

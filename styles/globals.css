@@ -161,7 +161,7 @@ body {
 
 @layer components {
   .modal-form {
-    @apply flex flex-col justify-center py-12 px-10 items-center bg-white w-[450px] rounded-3xl shadow-xl;
+    @apply flex flex-col justify-center py-12 px-10 items-center bg-white sm:w-[320px] md:w-[400px] rounded-3xl shadow-xl;
   }
   .modal-container {
     @apply w-full flex justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;

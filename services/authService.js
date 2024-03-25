@@ -1,34 +1,28 @@
 import http from "./httpService";
 
+const token = localStorage.getItem("token");
+
+const config = {
+  method: "POST",
+  headers: { Authorization: `Bearer ${token}`},
+};
+
 export function getOtp(data) {
-  return http.post("/user/send-code", data);
+  return http.post("/send-code", data);
 }
 
 export function checkOtp(data) {
-  return http.post("/user/verify", data);
+  return http.post("/verify", data);
 }
 
 export function completeProfile(data) {
-  return http
-    .post("/user/complete-profile", data)
-    .then(({ data }) => data.data);
+  return http.post("/user/complete", data, config);
 }
 
-// export function getUser() {
-//   return http.get("/user/profile").then(({ data }) => data.data);
-// }
+export function expertRequest(data) {
+  return http.post("/user/request", data, config);
+}
 
-// export function logoutApi() {
-//   return http.post("/user/logout").then(({ data }) => data.data);
-// }
-
-// export function getUsersApi() {
-//   return http.get("/admin/user/list").then(({ data }) => data.data);
-// }
-
-// export function changeUserStatusApi({ userId, data }) {
-//   // data => {status:0, 1, 2}
-//   return http
-//     .patch(`/admin/user/verify/${userId}`, data)
-//     .then(({ data }) => data.data);
-// }
+export function getCities() {
+  return http.get("/get-cities");
+}
