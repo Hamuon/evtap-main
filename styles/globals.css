@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
 @font-face {
   font-family: PeydaWeb;
   font-style: normal;
@@ -158,6 +160,13 @@ body {
 }
 
 @tailwind utilities;
+
+input[type="range"]::-webkit-slider-thumb {
+  pointer-events: auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
 
 @layer components {
   .modal-form {

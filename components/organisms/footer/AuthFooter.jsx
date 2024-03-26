@@ -3,7 +3,7 @@ import Image from 'next/image'
 export default function AuthFooter() {
     return (
         <footer className="flex mx-auto w-full justify-center absolute bottom-0 mt-32">
-            <div className='flex w-full justify-between items-center md:container h-28 relative px-10'>
+            <div className='flex w-full justify-between items-center md:container h-28 relative sm:px-10 lg:px-10'>
                 {/* mobile visible footer */}
                 <div className='flex items-center'>
                     <div className=''>

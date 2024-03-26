@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
 import Mapir from "mapir-react-component";
-
+import { usePathname } from "next/navigation";
 const Map = Mapir.setToken({
     transformRequest: url => {
         return {
@@ -17,6 +17,7 @@ const Map = Mapir.setToken({
 export const MapComponent = ({ setValue, setMapOpen }) => {
     const [markerArray, setMarkerArray] = useState(null);
     const [coord, setCoord] = useState([51.42, 35.72]);
+    const pathname = usePathname()
 
     async function reverseFunction(map, e) {
         var url = `https://map.ir/reverse/no?lat=${e.lngLat.lat}&lon=${e.lngLat.lng}`;
@@ -28,14 +29,18 @@ export const MapComponent = ({ setValue, setMapOpen }) => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
-                setValue("main_street", data.primary)
-                setValue("region", data.name)
-                setValue("street", data.last)
-                setValue("alley", data.name)
-                setValue("block", data.plaque)
-                setValue("address", data.address_compact)
-                setMapOpen(false)
+                if (pathname === "/request") {
+                    console.log(data);
+                    setValue("main_street", data.primary)
+                    setValue("region", data.name)
+                    setValue("street", data.last)
+                    setValue("alley", data.name)
+                    setValue("block", data.plaque)
+                    setValue("address", data.address_compact)
+                    setMapOpen(false)
+                } else {
+
+                }
             })
 
         const array = [];

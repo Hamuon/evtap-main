@@ -84,6 +84,9 @@ export default function OtpModal({ nextStep, prevStep, phone, setPhone }) {
                         nextStep()
                     } else {
                         router.push("/")
+                        toast.success('با موفقیت وارد شدید', {
+                            position: "top-center",
+                        });
                     }
                 } else {
                     toast.error(res.data.message, {
@@ -117,7 +120,7 @@ export default function OtpModal({ nextStep, prevStep, phone, setPhone }) {
                         </button>
                     </div>
                     <div className='flex gap-2 mt-2 sm:w-full'>
-                        <SubmitButton text="ورود" />
+                        <SubmitButton type="submit" text="ورود" />
                         <BackButton handleBack={handleBack} />
                     </div>
                 </div>

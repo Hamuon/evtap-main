@@ -22,7 +22,7 @@ const schema = z.object({
     address: z.string().min(1, { message: "لطفا آدرس دقیق را وارد کنید" }).max(150, { message: " آدرس بیش از 150 کاراکتر" }),
 
 })
-export default function RequestModal() {
+export default function RequestModal({ nextStep }) {
     const [provinces, setProvinces] = useState(null)
     const [selectedProvince, setSelectedProvince] = useState(null)
 
@@ -61,13 +61,14 @@ export default function RequestModal() {
         setSelectedProvince(e.target.value)
     }
 
-    const submitHandler = (data) => {
-        console.log(data);
+    const handleClick = (e) => {
+        e.preventDefault()
+        nextStep()
     }
 
     return (
         <div className='modal-container'>
-            <form onSubmit={handleSubmit(submitHandler)} className='modal-form font-numerals relative sm:w-[350px] md:w-[550px] sm:-top-6 md:top-0 sm:h-96 xl:h-auto sm:px-4 xl:px-10 sm:bg-transparent xl:bg-white sm:shadow-none xl:shadow-xl'>
+            <form className='modal-form font-numerals relative sm:w-[350px] md:w-[450px] sm:-top-6 md:top-0 sm:h-96 md:h-auto sm:px-4 md:px-10 sm:bg-transparent md:bg-white sm:shadow-none md:shadow-xl'>
                 {/* {errors.phone && <span className="modal-error">{errors.phone.message}</span>} */}
                 <div className='flex flex-col items-start w-full relative'>
                     <div className='flex w-full justify-between mb-3 items-center'>
@@ -88,7 +89,7 @@ export default function RequestModal() {
                         برای ثبت درخواست لطفا آدرس دقیق را وارد کنید
                     </Label>
                     <div className='flex gap-2 w-full'>
-                        <select {...register("state")} onChange={changeHandler} name='state' className="select select-bordered w-full my-2" >
+                        <select {...register("state")} onChange={changeHandler} name='state' className="select select-sm select-bordered w-full my-2" >
                             <option selected disabled value="">استان</option>
                             {
                                 provinces && provinces.map((province, index) => (
@@ -96,7 +97,7 @@ export default function RequestModal() {
                                 ))
                             }
                         </select>
-                        <select {...register("city")} name='city' className="select select-bordered w-full my-2" >
+                        <select {...register("city")} name='city' className="select select-sm select-bordered w-full my-2" >
                             <option selected disabled value="">شهر</option>
                             {
                                 provinces && provinces.map((province) => (
@@ -110,23 +111,23 @@ export default function RequestModal() {
                                 ))
                             }
                         </select>
-                        <input {...register("region")} className="input input-bordered w-full my-2" placeholder="منطقه" />
+                        <input {...register("region")} className="input input-sm input-bordered w-full my-2" placeholder="منطقه" />
                     </div>
                     <div className='flex gap-3 w-full items-center'>
-                        <input {...register("main_street")} className="input input-bordered w-full my-2" placeholder="خیابان اصلی" />
+                        <input {...register("main_street")} className="input input-sm input-bordered w-full my-2" placeholder="خیابان اصلی" />
                     </div>
                     <div className='flex gap-3 w-full'>
-                        <input {...register("street")} className="input input-bordered w-full my-2" placeholder="خیابان فرعی" />
-                        <input {...register("alley")} className="input input-bordered w-full my-2" placeholder="کوچه/مجتمع" />
+                        <input {...register("street")} className="input input-sm input-bordered w-full my-2" placeholder="خیابان فرعی" />
+                        <input {...register("alley")} className="input input-sm input-bordered w-full my-2" placeholder="کوچه/مجتمع" />
                     </div>
                     <div className='flex gap-3 w-full'>
-                        <input {...register("block")} className="input input-bordered w-full my-2" placeholder=" پلاک/بلوک" />
-                        <input {...register("floor")} className="input input-bordered w-full my-2" placeholder="طبقه/واحد" />
+                        <input {...register("block")} className="input input-sm input-bordered w-full my-2" placeholder=" پلاک/بلوک" />
+                        <input {...register("floor")} className="input input-sm input-bordered w-full my-2" placeholder="طبقه/واحد" />
                     </div>
                     <textarea {...register("address")} rows={2} className="textarea textarea-bordered w-full my-2" placeholder="استان، شهر، منطقه، محل، خیابان اصلی، خیابان فرعی، کوچه، پلاک، طبقه" />
 
                     <div className='flex gap-2 mt-2 w-full'>
-                        <SubmitButton text="پرداخت" />
+                        <SubmitButton handleClick={handleClick} type="submit" text="پرداخت" />
                         <BackButton />
                     </div>
                     {mapOpen ?

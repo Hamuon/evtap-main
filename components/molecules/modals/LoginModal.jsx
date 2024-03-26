@@ -60,7 +60,7 @@ export default function LoginModal({ nextStep, setPhone }) {
                     </Label>
                     <input {...register("phone")} className="input input-bordered w-full my-2 font-numerals" name="phone" type="text" placeholder="شماره تماس" />
                     <div className='flex gap-2 mt-2 sm:w-full'>
-                        <SubmitButton className="w-full" loading={loading} text="ارسال کد" />
+                        <SubmitButton type="submit" className="w-full" loading={loading} text="ارسال کد" />
                     </div>
                 </div>
             </form >

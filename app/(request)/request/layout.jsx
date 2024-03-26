@@ -5,8 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import React, { useState, useEffect } from 'react'
 import AuthFooter from '@/components/organisms/footer/AuthFooter'
 import AuthNavigation from '@/components/organisms/navigation/AuthNavigation'
-import RequestModal from '@/components/molecules/modals/RequestModal';
-import ProtectRoute from '@/components/ProtectRoute';
+import ReqStepModal from '@/components/ReqStepForm';
 export default function ReqLayout({ children }) {
 
     const pathname = usePathname();
@@ -26,7 +25,7 @@ export default function ReqLayout({ children }) {
             <ToastContainer />
             <AuthNavigation />
             {
-                showRequest ? <RequestModal /> : null
+                showRequest ? <ReqStepModal /> : null
             }
             {children}
             <AuthFooter />

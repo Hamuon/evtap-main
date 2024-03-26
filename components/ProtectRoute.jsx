@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 const publicPages = ["/", "/ads", "/login"]
 
 function ProtectRoute({ children }) {
-    
+
     const { isAuth, isLoading } = useContext(AuthContext)
     const router = useRouter()
     const pathname = usePathname()
@@ -28,7 +28,7 @@ function ProtectRoute({ children }) {
     if (isAuth || publicPages.includes(pathname)) {
         return children;
     }
-    return null;
+    return null
 }
 
 export default ProtectRoute;

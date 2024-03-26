@@ -4,7 +4,7 @@ const token = localStorage.getItem("token");
 
 const config = {
   method: "POST",
-  headers: { Authorization: `Bearer ${JSON.parse(token)}` },
+  headers: { Authorization: `Bearer ${token ? JSON.parse(token) : ""}` },
 };
 
 export function getOtp(data) {

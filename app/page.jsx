@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <main className='flex justify-center items-center w-full '>
-      <div className='grid grid-cols-1 grid-rows-3 lg:grid-rows-1 place-items-center place-content-center lg:h-96 lg:mt-10 max-w-[68rem] gap-4 lg:grid-cols-3 w-full h-full sm:px-10 lg:px-0'>
+      <div className='grid grid-cols-1 grid-rows-3 lg:grid-rows-1 place-items-center place-content-center lg:h-96 lg:mt-10 max-w-[70rem] gap-4 lg:grid-cols-3 w-full h-full sm:px-10 lg:px-0'>
         {/* inquiry and add */}
         <div className='col-span-1 w-full h-full grid grid-rows-3 gap-4'>
           <div className='bg-slate-200 cursor-pointer shadow-lg row-span-2 w-full rounded-3xl overflow-hidden relative'>
@@ -55,7 +55,7 @@ export default function Home() {
 
 
         {/* play, location and badges */}
-        <div className='col-span-1 grid-rows-3 place-items-center place-content-center sm:h-[400px] lg:h-full w-full'>
+        <div className='col-span-1 grid-rows-3 place-items-center place-content-center sm:h-[400px] lg:h-full w-full gap-4 flex flex-col justify-between'>
           <div className='w-full h-1/3 flex sm:justify-between'>
             <div className='bg-[#F66120] shadow-lg w-full rounded-3xl flex justify-center items-center'>
               <svg width="36" height="39" viewBox="0 0 36 39" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +68,7 @@ export default function Home() {
               </svg>
             </LinkButton>
           </div>
-          <div className='w-full h-28 my-4'>
+          <div className='w-full h-1/3'>
             <div className=' h-full bg-white w-full flex items-center justify-evenly rounded-3xl shadow-lg'>
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" clipRule="evenodd" d="M5.83337 17.1963C5.83337 9.52981 12.2398 3.33333 19.9891 3.33333C27.7602 3.33333 34.1667 9.52981 34.1667 17.1963C34.1667 21.0595 32.7617 24.646 30.4492 27.686C27.898 31.0392 24.7536 33.9608 21.2143 36.254C20.4042 36.784 19.6732 36.824 18.7841 36.254C15.2246 33.9608 12.0802 31.0392 9.55087 27.686C7.23668 24.646 5.83337 21.0595 5.83337 17.1963ZM15.3238 17.6279C15.3238 20.1962 17.4195 22.2161 19.9891 22.2161C22.5604 22.2161 24.6763 20.1962 24.6763 17.6279C24.6763 15.0797 22.5604 12.9614 19.9891 12.9614C17.4195 12.9614 15.3238 15.0797 15.3238 17.6279Z" fill="black" />
@@ -77,22 +77,22 @@ export default function Home() {
             </div>
           </div>
           <div className='w-full h-1/3 relative z-40 cursor-pointer'>
-            <div className='lg:h-24 lg:w-24 sm:hidden lg:block bg-slate-50 rounded-full absolute right-60 hover:right-64 button-animation'>
+            <div className='h-full sm:hidden lg:block bg-slate-50 rounded-full absolute right-60 hover:right-64 button-animation aspect-square'>
               <Image src="/experts/expert-2.png" alt="expert" layout='fill' />
             </div>
-            <div className='lg:h-24 lg:w-24 sm:h-24 sm:w-24 bg-slate-100 rounded-full absolute right-48 hover:right-52 button-animation'>
+            <div className='h-full bg-slate-100 rounded-full absolute right-48 hover:right-52 button-animation aspect-square'>
               <Image src="/experts/expert-3.png" alt="expert" layout='fill' />
             </div>
-            <div className='lg:h-24 lg:w-24 sm:h-24 sm:w-24 bg-slate-200 rounded-full absolute right-36 hover:right-40 button-animation'>
+            <div className='h-full bg-slate-200 rounded-full absolute right-36 hover:right-40 button-animation aspect-square'>
               <Image src="/experts/expert-4.png" alt="expert" layout='fill' />
             </div>
-            <div className='lg:h-24 lg:w-24 sm:h-24 sm:w-24 bg-slate-300 rounded-full absolute right-24 hover:right-28 button-animation'>
+            <div className='h-full bg-slate-300 rounded-full absolute right-24 hover:right-28 button-animation aspect-square'>
               <Image src="/experts/expert-1.png" alt="expert" layout='fill' />
             </div>
-            <div className='lg:h-24 lg:w-24 sm:h-24 sm:w-24 bg-slate-400 rounded-full absolute right-12 hover:right-16 button-animation'>
+            <div className='h-full bg-slate-400 rounded-full absolute right-12 hover:right-16 button-animation aspect-square'>
               <Image src="/experts/expert-3.png" alt="expert" layout='fill' />
             </div>
-            <div className='lg:h-24 lg:w-24 sm:h-24 sm:w-24 bg-white rounded-full absolute right-0 flex justify-center items-center font-numerals'>
+            <div className='h-full bg-white rounded-full absolute right-0 flex justify-center items-center font-numerals aspect-square'>
               <span className='text-4xl font-bold flex justify-center items-center'>
                 100+
               </span>

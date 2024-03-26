@@ -17,8 +17,12 @@ function ProtectLogin({ children }) {
 
     if (!isAuth && pathname === "/login") {
         return children;
+    } else {
+        return <div className="flex justify-center items-center text-3xl w-full h-full z-50 bg-gray-100">
+            در حال انتقال...
+        </div>
     }
-    return null;
+
 }
 
 export default ProtectLogin;
