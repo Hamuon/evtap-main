@@ -131,7 +131,7 @@ export default function RequestModal({ nextStep }) {
                         <BackButton />
                     </div>
                     {mapOpen ?
-                        <div className='w-full h-full flex justify-center items-center absolute overflow-hidden rounded-xl'>
+                        <div className='w-full h-full flex justify-center items-center absolute overflow-hidden rounded-xl z-50'>
                             <MapComponent setMapOpen={setMapOpen} setValue={setValue} />
                         </div>
                         : null}

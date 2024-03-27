@@ -158,15 +158,14 @@ body {
   font-family: PeydaWeb;
   direction: rtl;
 }
-
-@tailwind utilities;
-
 input[type="range"]::-webkit-slider-thumb {
   pointer-events: auto;
   width: 24px;
   height: 24px;
   border-radius: 50%;
 }
+
+@tailwind utilities;
 
 @layer components {
   .modal-form {
