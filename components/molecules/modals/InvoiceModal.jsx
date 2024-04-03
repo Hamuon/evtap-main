@@ -1,10 +1,10 @@
 import BackButton from '@/components/atoms/buttons/BackButton';
 import SubmitButton from '@/components/atoms/buttons/SubmitButton';
 import React from 'react'
-
-export default function InvoiceModal() {
-
-
+import { useRouter } from 'next/navigation';
+export default function InvoiceModal({ reqData, prevStep }) {
+    console.log(reqData);
+    const router = useRouter()
 
     return (
         <div className='modal-container'>
@@ -23,27 +23,21 @@ export default function InvoiceModal() {
                     <div className='flex w-full border-b border-gray-300 md:px-6 py-2'>
                         <span className='ml-7 w-10'>آدرس</span>
                         <div className='flex gap-1 text-gray-500'>
-                            <span> استان، شهر، منطقه، محل، خیابان اصلی، کوچه، پلاک</span>
+                            <span>{reqData?.data.request?.address}</span>
                         </div>
                     </div>
                     <div className='flex w-full border-b border-gray-300 md:px-6 py-2'>
-                        <span className='ml-7 w-10'>کارشناس</span>
+                        <span className='ml-7 w-10'>نام</span>
                         <div className='flex gap-1 text-gray-500'>
-                            <span> وحید افضلی نیا</span>
+                            <span>{reqData?.data.request?.user.first_name} {reqData?.data.request?.user.last_name}</span>
                         </div>
                     </div>
                     <div className='flex w-full border-b border-gray-300 md:px-6 py-2'>
                         <span className='ml-7 w-10'>هزینه</span>
                         <div className='flex gap-1 text-gray-500'>
-                            <span>7900000</span>
+                            <span>{reqData?.data.setting?.request_amount}</span>
                             <span className="ml-2"> ریال</span>
-                            <span className='bg-green text-white px-3 py-1 text-xs rounded-lg'>پرداخت شده</span>
-                        </div>
-                    </div>
-                    <div className='flex w-full border-b border-gray-300 md:px-6 py-2'>
-                        <span className='ml-7 w-10'>تاریخ</span>
-                        <div className='flex gap-1 text-gray-500'>
-                            <span> 1402.12.22</span>
+                            <span className='bg-green text-white px-3 py-1 text-xs rounded-lg'>{reqData?.data.request?.status_title}</span>
                         </div>
                     </div>
                 </div>
@@ -51,7 +45,7 @@ export default function InvoiceModal() {
                     کارشناس مربوطه در سریع ترین زمان ممکن با شما تماس خواهد گرفت، در صورت تاخیر در پیگیری کارشناس با شماره 04133356848 تماس حاصل فرمائید.
                 </p>
                 <div className='flex gap-2 mt-2 w-full'>
-                    <SubmitButton className="w-full" type="button" text="پروفایل" />
+                    <SubmitButton handleClick={() => router.push(reqData?.data.url)} type="button" text="پرداخت" />
                 </div>
             </div>
         </div >

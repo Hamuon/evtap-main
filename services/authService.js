@@ -3,7 +3,6 @@ import http from "./httpService";
 const token = localStorage.getItem("token");
 
 const config = {
-  method: "POST",
   headers: { Authorization: `Bearer ${token ? JSON.parse(token) : ""}` },
 };
 
@@ -25,4 +24,8 @@ export function expertRequest(data) {
 
 export function getCities() {
   return http.get("/get-cities");
+}
+
+export function getDashboard() {
+  return http.get("/user/dashboard", config);
 }

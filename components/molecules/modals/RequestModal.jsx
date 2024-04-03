@@ -2,7 +2,7 @@
 import { z } from 'zod'
 import React, { useState, useEffect } from 'react'
 import { toast } from 'react-toastify';
-import { get, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { MapComponent } from '@/components/Map';
 import Label from '@/components/atoms/labels/Label'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -11,39 +11,39 @@ import SubmitButton from '@/components/atoms/buttons/SubmitButton'
 import { expertRequest, getCities } from '@/services/authService';
 
 const schema = z.object({
-    state: z.string().min(1, { message: "لطفا استان را انتخاب کنید" }),
-    city: z.string().min(1, { message: "لطفا شهر را انتخاب کنید" }),
+    city_id: z.string().min(1, { message: "لطفا شهر را انتخاب کنید" }),
     region: z.string().min(1, { message: "لطفا منطقه را وارد کنید" }).max(100, { message: "منطقه بیش از 100 کاراکتر" }),
-    main_street: z.string().min(1, { message: "لطفا خیابان اصلی را وارد کنید" }).max(20, { message: "خیابان اصلی بیش از 20 کاراکتر" }),
-    street: z.string().min(1, { message: "لطفا خیابان فرعی را وارد کنید" }).max(20, { message: "خیابان فرعی بیش از 20 کاراکتر" }),
+    street: z.string().min(1, { message: "لطفا خیابان اصلی را وارد کنید" }).max(20, { message: "خیابان اصلی بیش از 20 کاراکتر" }),
+    street_sec: z.string().min(1, { message: "لطفا خیابان فرعی را وارد کنید" }).max(20, { message: "خیابان فرعی بیش از 20 کاراکتر" }),
     alley: z.string().min(1, { message: "لطفا کوچه را وارد کنید" }).max(100, { message: " کوچه بیش از 100 کاراکتر" }),
-    block: z.string().min(1, { message: "لطفا بلوک یا پلاک را وارد کنید" }).max(10, { message: " بلوک/پلاک بیش از 10 کاراکتر" }),
+    plate: z.string().min(1, { message: "لطفا بلوک یا پلاک را وارد کنید" }).max(10, { message: " بلوک/پلاک بیش از 10 کاراکتر" }),
     floor: z.string().min(1, { message: "لطفا طبقه یا واحد را وارد کنید" }).max(10, { message: " طبقه/واحد بیش از 10 کاراکتر" }),
     address: z.string().min(1, { message: "لطفا آدرس دقیق را وارد کنید" }).max(150, { message: " آدرس بیش از 150 کاراکتر" }),
 
 })
-export default function RequestModal({ nextStep }) {
+export default function RequestModal({ nextStep, setReqData }) {
     const [provinces, setProvinces] = useState(null)
     const [selectedProvince, setSelectedProvince] = useState(null)
+    const [cityId, setCityId] = useState("")
+
+    const [loading, setLoading] = useState(false)
 
     const [mapOpen, setMapOpen] = useState(false)
     const { setValue, register, handleSubmit, formState: { errors } } = useForm(
         {
             defaultValues: {
-                state: "",
-                city: "",
+                city_id: "",
                 region: "",
-                main_street: "",
                 street: "",
+                street_sec: "",
                 alley: "",
-                block: "",
+                plate: "",
                 floor: "",
                 address: ""
             },
             resolver: zodResolver(schema)
         }
     )
-    console.log(errors);
     async function getAllCities() {
         await getCities()
             .then((res) => {
@@ -61,14 +61,57 @@ export default function RequestModal({ nextStep }) {
         setSelectedProvince(e.target.value)
     }
 
-    const handleClick = (e) => {
-        e.preventDefault()
-        nextStep()
+    const handleCityId = (e) => {
+        provinces && provinces.map((province) => (
+            selectedProvince ?
+                selectedProvince === province.name ?
+                    province.cities.map((city) => (
+                        city.name === e.target.value ? setCityId(city.id) : null
+                    ))
+                    : null
+                : null
+        ))
+    }
+
+    const handleClick = async (data) => {
+        const dataToSubmit = {
+            city_id: cityId,
+            region: data.region,
+            street: data.street,
+            street_sec: data.street_sec,
+            alley: data.alley,
+            plate: data.plate,
+            floor: data.floor,
+            address: data.address
+        }
+
+        setLoading(true)
+
+        await expertRequest(dataToSubmit)
+            .then((res) => {
+                if (res.status === 200) {
+                    setReqData(res)
+                    toast.success('درخواست شما ثبت شد', {
+                        position: "top-center",
+                    });
+                    setLoading(false)
+                    nextStep()
+                } else {
+                    toast.error("درخواست شما ثبت نشد")
+                    setLoading(false)
+                }
+            }).catch((err) => {
+                console.log(err);
+                setLoading(false)
+                toast.error("مشکل در برقراری ارتباط", {
+                    position: "top-center"
+                })
+            })
     }
 
     return (
         <div className='modal-container'>
-            <form className='modal-form font-numerals relative sm:w-[350px] md:w-[450px] sm:-top-6 md:top-0 sm:h-96 md:h-auto sm:px-4 md:px-10 sm:bg-transparent md:bg-white sm:shadow-none md:shadow-xl'>
+            <form onSubmit={handleSubmit(handleClick)} className='modal-form font-numerals relative sm:w-[350px] md:w-[450px] sm:-top-6 md:top-0 sm:h-96 md:h-auto sm:px-4 md:px-10 sm:bg-transparent md:bg-white sm:shadow-none md:shadow-xl'>
                 {/* {errors.phone && <span className="modal-error">{errors.phone.message}</span>} */}
                 <div className='flex flex-col items-start w-full relative'>
                     <div className='flex w-full justify-between mb-3 items-center'>
@@ -97,7 +140,7 @@ export default function RequestModal({ nextStep }) {
                                 ))
                             }
                         </select>
-                        <select {...register("city")} name='city' className="select select-sm select-bordered w-full my-2" >
+                        <select {...register("city_id")} onChange={handleCityId} name='city_id' className="select select-sm select-bordered w-full my-2" >
                             <option selected disabled value="">شهر</option>
                             {
                                 provinces && provinces.map((province) => (
@@ -114,20 +157,20 @@ export default function RequestModal({ nextStep }) {
                         <input {...register("region")} className="input input-sm input-bordered w-full my-2" placeholder="منطقه" />
                     </div>
                     <div className='flex gap-3 w-full items-center'>
-                        <input {...register("main_street")} className="input input-sm input-bordered w-full my-2" placeholder="خیابان اصلی" />
+                        <input {...register("street")} className="input input-sm input-bordered w-full my-2" placeholder="خیابان اصلی" />
                     </div>
                     <div className='flex gap-3 w-full'>
-                        <input {...register("street")} className="input input-sm input-bordered w-full my-2" placeholder="خیابان فرعی" />
+                        <input {...register("street_sec")} className="input input-sm input-bordered w-full my-2" placeholder="خیابان فرعی" />
                         <input {...register("alley")} className="input input-sm input-bordered w-full my-2" placeholder="کوچه/مجتمع" />
                     </div>
                     <div className='flex gap-3 w-full'>
-                        <input {...register("block")} className="input input-sm input-bordered w-full my-2" placeholder=" پلاک/بلوک" />
+                        <input {...register("plate")} className="input input-sm input-bordered w-full my-2" placeholder=" پلاک/بلوک" />
                         <input {...register("floor")} className="input input-sm input-bordered w-full my-2" placeholder="طبقه/واحد" />
                     </div>
                     <textarea {...register("address")} rows={2} className="textarea textarea-bordered w-full my-2" placeholder="استان، شهر، منطقه، محل، خیابان اصلی، خیابان فرعی، کوچه، پلاک، طبقه" />
 
                     <div className='flex gap-2 mt-2 w-full'>
-                        <SubmitButton handleClick={handleClick} type="submit" text="پرداخت" />
+                        <SubmitButton loading={loading} type="submit" text="ثبت درخواست" />
                         <BackButton />
                     </div>
                     {mapOpen ?

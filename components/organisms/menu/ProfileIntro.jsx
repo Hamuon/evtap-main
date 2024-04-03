@@ -120,7 +120,7 @@ export default function ProfileIntro() {
         }
     ]
     return (
-        <div className='col-span-1 flex flex-col items-center py-6 h-fit w-full rounded-xl shadow-lg'>
+        <div className='col-span-1 flex flex-col items-center py-6 h-fit w-full rounded-xl shadow-lg mb-8'>
             <svg className='mb-3' width="60" height="69" viewBox="0 0 60 69" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="60" height="60" rx="12" fill="#D9D9D9" />
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M29.8335 30.9281H29.8815C34.2735 30.9281 37.845 27.3566 37.845 22.9646C37.845 18.5726 34.2735 14.9996 29.8815 14.9996C25.488 14.9996 21.915 18.5726 21.915 22.9601C21.9 27.3401 25.4505 30.9146 29.8335 30.9281ZM24.057 22.9646C24.057 19.7531 26.67 17.1416 29.8815 17.1416C33.0915 17.1416 35.703 19.7531 35.703 22.9646C35.703 26.1746 33.0915 28.7876 29.8815 28.7876H29.838C26.64 28.7756 24.0465 26.1656 24.057 22.9646Z" fill="#A6A6A6" />

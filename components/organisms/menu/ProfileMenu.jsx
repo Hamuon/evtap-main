@@ -113,7 +113,7 @@ export default function ProfileMenu() {
             <div className='text-lg flex flex-col rounded-xl shadow-lg overflow-hidden'>
                 {
                     menuItems.map((item, index) => (
-                        <div key={index} className='flex items-center w-full p-3 border-b border-gray-200'>
+                        <div key={index} className='flex items-center w-full p-4 border-b border-gray-200'>
                             {item.icon}
                             <span className={`${item.additionalStyle ? item.additionalStyle : null}`}>{item.title}</span>
                         </div>
