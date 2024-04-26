@@ -1,9 +1,14 @@
+"use client";
 import http from "./httpService";
 
-const token = localStorage.getItem("token");
+let token;
+
+if (typeof window !== "undefined") {
+  token = localStorage.getItem("token");
+}
 
 const config = {
-  headers: { Authorization: `Bearer ${token ? JSON.parse(token) : ""}` },
+  headers: { Authorization: `Bearer ${token ? JSON.parse(token) : null}` },
 };
 
 export function getOtp(data) {
@@ -28,4 +33,8 @@ export function getCities() {
 
 export function getDashboard() {
   return http.get("/user/dashboard", config);
+}
+
+export function getExperts() {
+  return http.get("/home");
 }

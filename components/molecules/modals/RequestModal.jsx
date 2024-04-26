@@ -3,7 +3,7 @@ import { z } from 'zod'
 import React, { useState, useEffect } from 'react'
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form'
-import { MapComponent } from '@/components/Map';
+import Map from '@/components/Map';
 import Label from '@/components/atoms/labels/Label'
 import { zodResolver } from '@hookform/resolvers/zod'
 import BackButton from '@/components/atoms/buttons/BackButton'
@@ -116,7 +116,7 @@ export default function RequestModal({ nextStep, setReqData }) {
                 <div className='flex flex-col items-start w-full relative'>
                     <div className='flex w-full justify-between mb-3 items-center'>
                         <span className='md:text-3xl font-semibold '>درخواست کارشناسی ملک</span>
-                        <div className="tooltip tooltip-open md:tooltip-left sm:tooltip-right cursor-pointer" data-tip="انتخاب از روی نقشه" onClick={() => setMapOpen(!mapOpen)}>
+                        <div className="tooltip tooltip-open md:tooltip-left sm:tooltip-right cursor-pointer" data-tip={mapOpen ? "بازگشت به فرم" : "انتخاب از روی نقشه"} onClick={() => setMapOpen(!mapOpen)}>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fillRule="evenodd" clipRule="evenodd" d="M11.2116 11.2119L10.1646 14.5589L13.5106 13.5109L14.5586 10.1639L11.2116 11.2119ZM9.02057 16.4519C8.82457 16.4519 8.63257 16.3749 8.48957 16.2329C8.29257 16.0349 8.22057 15.7439 8.30457 15.4789L9.89757 10.3899C9.97057 10.1539 10.1546 9.97089 10.3886 9.89789L15.4776 8.30489C15.7446 8.21989 16.0346 8.29289 16.2326 8.48989C16.4296 8.68789 16.5016 8.97889 16.4176 9.24389L14.8256 14.3329C14.7526 14.5679 14.5676 14.7519 14.3336 14.8249L9.24457 16.4179C9.17057 16.4409 9.09457 16.4519 9.02057 16.4519Z" fill="black" />
                                 <mask id="mask0_360_961" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="21">
@@ -132,16 +132,16 @@ export default function RequestModal({ nextStep, setReqData }) {
                         برای ثبت درخواست لطفا آدرس دقیق را وارد کنید
                     </Label>
                     <div className='flex gap-2 w-full'>
-                        <select {...register("state")} onChange={changeHandler} name='state' className="select select-sm select-bordered w-full my-2" >
-                            <option selected disabled value="">استان</option>
+                        <select defaultValue={"STATE"} {...register("state")} onChange={changeHandler} name='state' className="select select-sm select-bordered w-full my-2" >
+                            <option disabled value="STATE">استان</option>
                             {
                                 provinces && provinces.map((province, index) => (
                                     <option id={province.id} key={index} value={province.name}>{province.name}</option>
                                 ))
                             }
                         </select>
-                        <select {...register("city_id")} onChange={handleCityId} name='city_id' className="select select-sm select-bordered w-full my-2" >
-                            <option selected disabled value="">شهر</option>
+                        <select defaultValue={"CITY"} {...register("city_id")} onChange={handleCityId} name='city_id' className="select select-sm select-bordered w-full my-2" >
+                            <option disabled value="CITY">شهر</option>
                             {
                                 provinces && provinces.map((province) => (
                                     selectedProvince ?
@@ -171,11 +171,10 @@ export default function RequestModal({ nextStep, setReqData }) {
 
                     <div className='flex gap-2 mt-2 w-full'>
                         <SubmitButton loading={loading} type="submit" text="ثبت درخواست" />
-                        <BackButton />
                     </div>
                     {mapOpen ?
-                        <div className='w-full h-full flex justify-center items-center absolute overflow-hidden rounded-xl z-50'>
-                            <MapComponent setMapOpen={setMapOpen} setValue={setValue} />
+                        <div className='w-full h-full flex absolute z-50 rounded-xl'>
+                            <Map setValue={setValue} setMapOpen={setMapOpen} />
                         </div>
                         : null}
                 </div>

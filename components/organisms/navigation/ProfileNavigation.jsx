@@ -14,7 +14,6 @@ export default function ProfileNavigation() {
 
                 <div className=' items-center sm:hidden lg:flex'>
                     <ul className='sm:hidden md:flex ml-6'>
-                        <li className='mr-12 font-semibold'>استعلام</li>
                         <Link href="/request">
                             <li className='mr-12 font-semibold'>درخواست کارشناسی</li>
                         </Link>

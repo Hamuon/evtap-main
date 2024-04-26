@@ -12,7 +12,6 @@ export default function AuthNavigation() {
                     <Link href="/ads">
                         <li className='mr-12 font-semibold'> آگهی ها</li>
                     </Link>
-                    <li className='mr-12 font-semibold'> استعلام</li>
                 </ul>
             </div>
         </nav>

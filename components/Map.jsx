@@ -1,60 +1,62 @@
 "use client"
-import React, { useState } from "react";
-import Mapir from "mapir-react-component";
-import { usePathname } from "next/navigation";
-const Map = Mapir.setToken({
-    transformRequest: url => {
-        return {
-            url: url,
-            headers: {
-                "x-api-key": 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjcwYTgyN2VkOGY3YjY1YzFjYmFlYzFhYWE2NzEwNDk2ZjJlNDczOWZlZDE3OGE3MTUwZDE1OTUxNTdiNzBjZDA5Zjc0MjNjY2RiNzNmMWY5In0.eyJhdWQiOiIyNjcwNyIsImp0aSI6IjcwYTgyN2VkOGY3YjY1YzFjYmFlYzFhYWE2NzEwNDk2ZjJlNDczOWZlZDE3OGE3MTUwZDE1OTUxNTdiNzBjZDA5Zjc0MjNjY2RiNzNmMWY5IiwiaWF0IjoxNzEwNjk5OTYzLCJuYmYiOjE3MTA2OTk5NjMsImV4cCI6MTcxMzExOTE2Mywic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.CS8uYFnBTVKuccJuIxvo-F3VfYkWdAOMu2DmennPFrwPKQYDk6qcbxX97u1MTcAQw9uyeAnuQt51i4DanOeWmJoE4YIOwRLbqlPODhoIkiSGOmqSBeXEeAXNOiKQrvPzgp-w4e7yH2upcsKkZDypBvkc4L1PJ2sP6AvCYOyj_lsgB5c_0myILTfkBvwotP_mhdduXusZALzgkHL5pYh29ToNkKq2mZJV5GYrkzxVVaA6zjTuYB5Ept7RJCLRVtWCRQyL6V_OC8XLzePywd1nEwYYXVkuhmqvB8wvrhlpPHiqKX1_242lAcB2t-53ZJG9LmqYxxrMU4Oj3kkKwukOQA', //Mapir api key
-                "Mapir-SDK": "reactjs"
-            }
-        };
+import React, { useEffect, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import icon from "../constants";
+import axios from "axios";
+
+function Map({ setValue, setMapOpen }) {
+
+    const [map, setMap] = useState(null);
+    const [coords, setCoords] = useState(null);
+
+    const DEFAULT_LATITUDE = 38.0777017;
+    const DEFAULT_LONGITUDE = 46.2196279;
+
+    const latitude = coords ? coords.latitude : DEFAULT_LATITUDE;
+    const longitude = coords ? coords.longitude : DEFAULT_LONGITUDE;
+
+    const mapHandler = async (e) => {
+        setCoords({ latitude: e.latlng.lat, longitude: e.latlng.lng })
     }
-});
 
-export const MapComponent = ({ setValue, setMapOpen }) => {
-    const [markerArray, setMarkerArray] = useState(null);
-    const [coord, setCoord] = useState([51.42, 35.72]);
-    const pathname = usePathname()
-
-    async function reverseFunction(map, e) {
-        var url = `https://map.ir/reverse/no?lat=${e.lngLat.lat}&lon=${e.lngLat.lng}`;
-        await fetch(url, {
-            headers: {
-                "Content-Type": "application/json",
-                "x-api-key": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjcwYTgyN2VkOGY3YjY1YzFjYmFlYzFhYWE2NzEwNDk2ZjJlNDczOWZlZDE3OGE3MTUwZDE1OTUxNTdiNzBjZDA5Zjc0MjNjY2RiNzNmMWY5In0.eyJhdWQiOiIyNjcwNyIsImp0aSI6IjcwYTgyN2VkOGY3YjY1YzFjYmFlYzFhYWE2NzEwNDk2ZjJlNDczOWZlZDE3OGE3MTUwZDE1OTUxNTdiNzBjZDA5Zjc0MjNjY2RiNzNmMWY5IiwiaWF0IjoxNzEwNjk5OTYzLCJuYmYiOjE3MTA2OTk5NjMsImV4cCI6MTcxMzExOTE2Mywic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.CS8uYFnBTVKuccJuIxvo-F3VfYkWdAOMu2DmennPFrwPKQYDk6qcbxX97u1MTcAQw9uyeAnuQt51i4DanOeWmJoE4YIOwRLbqlPODhoIkiSGOmqSBeXEeAXNOiKQrvPzgp-w4e7yH2upcsKkZDypBvkc4L1PJ2sP6AvCYOyj_lsgB5c_0myILTfkBvwotP_mhdduXusZALzgkHL5pYh29ToNkKq2mZJV5GYrkzxVVaA6zjTuYB5Ept7RJCLRVtWCRQyL6V_OC8XLzePywd1nEwYYXVkuhmqvB8wvrhlpPHiqKX1_242lAcB2t-53ZJG9LmqYxxrMU4Oj3kkKwukOQA"
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (pathname === "/request") {
-                    console.log(data);
-                    setValue("main_street", data.primary)
-                    setValue("region", data.name)
-                    setValue("street", data.last)
-                    setValue("alley", data.name)
-                    setValue("block", data.plaque)
-                    setValue("address", data.address_compact)
-                    setMapOpen(false)
-                } else {
-
+    useEffect(() => {
+        const config = { headers: { "x-api-key": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjExMTc0YmFlMTdjNGVhOWE1MjAwZmRiMjg5NzFiYTBiM2M5MTU2NGZlODk3OTUyMzQ4Y2ZlYzEyYjhmZGViYjI2ZTQzMTI0N2UxYzRlNzgwIn0.eyJhdWQiOiIyMjA5MSIsImp0aSI6IjExMTc0YmFlMTdjNGVhOWE1MjAwZmRiMjg5NzFiYTBiM2M5MTU2NGZlODk3OTUyMzQ4Y2ZlYzEyYjhmZGViYjI2ZTQzMTI0N2UxYzRlNzgwIiwiaWF0IjoxNjgyOTMyMjE0LCJuYmYiOjE2ODI5MzIyMTQsImV4cCI6MTY4NTUyNDIxNCwic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.huFPDzzZeqLjW8qummnC9aAEZbpiM2Ej3Uhc0AmiRw-VrN8rx0OKyQj-olsPwxNksD0mQ9jRmZByGm_ntTQQyxmIvhJrBe9M4QhlGY8ilkauQf1ogDz2sNy76UP6ly8Uk4tXoWuupklvMG5TYMPUkOsX73_6izWa-fIFC-lpNdBhpf6rSF4LjP4svQzH8mHH_PhJyGXN-CUHoyBXvvNtfmdBp8iaa0msvBQemPdIyqfmxqSC4asOOpSxOXl_bx0NPXZpBDa2j0uAJPvC7GjQsn5UOmQJDvLI7nASn7VWi_0SN21F8WpdGKmMSNQoSZtMIO1pVlQtKD9PVbceNODzgg" } }
+        axios.get(`https://map.ir/reverse/no?lat=${coords ? coords.latitude : latitude}&lon=${coords ? coords.longitude : longitude}`, config)
+            .then((res) => {
+                if (res.status === 200) {
+                    console.log(res);
+                    setValue("address", res.data.address_compact)
                 }
             })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, [coords])
 
-        const array = [];
-        array.push(
-            <Mapir.Marker
-                coordinates={[e.lngLat.lat, e.lngLat.lng]}
-                anchor="bottom"
-            />
-        );
-        setMarkerArray(array);
-    }
+    useEffect(() => {
+        if (map) {
+            map.on('click', mapHandler);
+        }
+    }, [map]);
+
     return (
-        <Mapir center={coord} Map={Map} onClick={reverseFunction}>
-            {markerArray}
-        </Mapir>
+        <MapContainer
+            className="w-full h-full"
+            center={[latitude, longitude]}
+            zoom={13}
+            scrollWheelZoom={true}
+            ref={setMap}
+        >
+            <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={[coords ? coords.latitude : latitude, coords ? coords.longitude : longitude]} icon={icon}>
+                <Popup >محل کارشناسی</Popup>
+            </Marker>
+        </MapContainer>
     );
-};
+}
+
+export default Map;
