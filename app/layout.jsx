@@ -8,10 +8,13 @@ import MainFooter from "@/components/organisms/footer/MainFooter";
 import MainNavigation from "@/components/organisms/navigation/MainNavigation";
 import ProtectRoute from "@/components/ProtectRoute";
 import AuthProvider from "@/context/AuthProvider";
+import MobileMenu from "@/components/organisms/menu/MobileMenu";
+import useMenu from "@/hooks/useMenu";
 export default function RootLayout({ children }) {
 
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false)
+  const { open, toggleMenu } = useMenu();
 
   useEffect(() => {
     setMounted(true)
@@ -37,8 +40,9 @@ export default function RootLayout({ children }) {
               >
                 <ToastContainer />
                 {
-                  pathname === "/" ? <MainNavigation /> : null
+                  pathname === "/" ? <MainNavigation toggleMenu={toggleMenu} /> : null
                 }
+                {open ? <MobileMenu open={open} toggleMenu={toggleMenu} /> : null}
                 {children}
                 {
                   pathname === "/" ? <MainFooter /> : null

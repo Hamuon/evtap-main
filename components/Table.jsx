@@ -3,11 +3,13 @@ import { getDashboard } from '@/services/authService'
 export default function Table() {
 
   const [user, setUser] = useState(null)
-  console.log(user);
 
   async function getUser() {
-    const response = await getDashboard()
-    setUser(response.data.user[0].requests)
+    await getDashboard().then(response => {
+      setUser(response.data.user[0].requests)
+    }).catch(error => {
+      console.log(error)
+    })
   }
 
   useEffect(() => {

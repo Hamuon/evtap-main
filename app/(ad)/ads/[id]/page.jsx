@@ -2,7 +2,8 @@
 import React from 'react'
 import MyGallery from '@/components/ImageGallery'
 import SubmitButton from '@/components/atoms/buttons/SubmitButton'
-import { MapComponent } from '@/components/Map'
+import dynamic from 'next/dynamic'
+const AdPageMap = dynamic(() => import('@/components/AdPageMap'), { ssr: false })
 
 export default function page({ params: { id } }) {
 
@@ -170,12 +171,12 @@ export default function page({ params: { id } }) {
                 </div>
                 <div className='col-span-1 aspect-square flex flex-col gap-6'>
                     <div className='h-96 overflow-hidden w-full md:block sm:hidden'>
-                        <MapComponent />
+                        <AdPageMap />
                     </div>
                     <MyGallery {...defaultProps} />
                 </div>
                 <div className='h-96 order-3 overflow-hidden w-full sm:flex justify-center md:hidden sm:mb-10 px-6'>
-                    <MapComponent />
+                    <AdPageMap />
                 </div>
             </div>
         </main>

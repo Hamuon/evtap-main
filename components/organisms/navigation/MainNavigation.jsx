@@ -1,13 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
 
-export default function MainNavigation() {
+export default function MainNavigation({ toggleMenu }) {
 
     return (
         <nav className='flex justify-center mx-auto relative z-50'>
             <div className='flex w-full justify-between items-center md:px-10 sm:px-10 md:container h-32'>
                 {/* mobile visible navigation */}
-                <div className='md:hidden'>
+                <div onClick={toggleMenu} className='md:hidden'>
                     <Image src="/icons/mobile-menu.svg" alt="mobile menu" width={45} height={45} />
                 </div>
                 <div className='md:hidden'>
