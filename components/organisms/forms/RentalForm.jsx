@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import SubmitButton from '@/components/atoms/buttons/SubmitButton'
 import FieldLabel from '@/components/atoms/labels/FieldLabel'
+import dynamic from 'next/dynamic'
+const AddAdMap = dynamic(() => import('@/components/AddAdMap'), { ssr: false })
 
 const schema = z.object({
     title: z.string().min(1, { message: "لطفا عنوان را وارد کنید" }).max(150, { message: "نام بیش از 100 کاراکتر" }),
@@ -31,7 +33,7 @@ const schema = z.object({
 
 export default function RentalForm() {
     const buildYear = ["قبل از 1387", "1387", "1388", "1389", "1390", "1391", "1392", "1393", "1394", "1395", "1396", "1397", "1398", "1399", "1400", "1401", "1402"]
-    const { register, handleSubmit, formState: { errors } } = useForm(
+    const { setValue, register, handleSubmit, formState: { errors } } = useForm(
         {
             resolver: zodResolver(schema)
         }
@@ -42,6 +44,10 @@ export default function RentalForm() {
 
     return (
         <form onSubmit={handleSubmit(submitHandler)} className='font-numerals w-full'>
+            <div className="h-96 overflow-hidden w-full flex flex-col items-start mb-10 max-w-[60rem] rounded-lg">
+                <FieldLabel>موقعیت مکانی</FieldLabel>
+                <AddAdMap setValue={setValue} />
+            </div>
             <div className="w-full my-2 flex flex-col items-start mb-10">
                 <FieldLabel>عکس آگهی</FieldLabel>
                 <label for="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ">

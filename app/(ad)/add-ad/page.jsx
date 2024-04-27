@@ -14,10 +14,6 @@ export default function AddAd() {
     return (
         <main className='w-full mx-auto flex justify-center'>
             <div className='w-full md:container mt-10 px-10 flex flex-col items-center'>
-                <div className="h-96 overflow-hidden w-full flex flex-col items-start mb-10 max-w-[60rem] rounded-lg">
-                    <FieldLabel>موقعیت مکانی</FieldLabel>
-                    <AddAdMap />
-                </div>
                 <div className='max-w-[60rem] w-full mb-20 flex flex-col gap-4 items-center'>
                     <div className='w-full my-2 flex flex-col'>
                         <FieldLabel>نوع آگهی</FieldLabel>
