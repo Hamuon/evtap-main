@@ -9,9 +9,9 @@ function AddAdMap({ setValue }) {
     const [map, setMap] = useState(null);
     const [coords, setCoords] = useState(null);
 
-    const DEFAULT_LATITUDE = 38.0777017;
-    const DEFAULT_LONGITUDE = 46.2196279;
-
+    const DEFAULT_LATITUDE = 38.074;
+    const DEFAULT_LONGITUDE = 46.296;
+    
     const latitude = coords ? coords.latitude : DEFAULT_LATITUDE;
     const longitude = coords ? coords.longitude : DEFAULT_LONGITUDE;
 
