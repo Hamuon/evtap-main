@@ -144,7 +144,7 @@ export default function MortgageForm() {
                 </div>
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel> منطقه</FieldLabel>
-                    <input {...register("region")} className="input input-bordered " placeholder=" منطقه آگهی را بنویسید" />
+                    <input {...register("region")} className="input input-bordered " placeholder=" منطقه " />
                 </div>
             </div>
 
@@ -165,18 +165,18 @@ export default function MortgageForm() {
             <div className='flex sm:flex-col md:flex-row md:gap-3 w-full'>
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel> پلاک</FieldLabel>
-                    <input {...register("plate")} className="input input-bordered " placeholder=" عنوان آگهی را بنویسید" />
+                    <input {...register("plate")} className="input input-bordered " placeholder=" پلاک" />
                 </div>
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel> کوچه</FieldLabel>
-                    <input {...register("alley")} className="input input-bordered " placeholder=" منطقه آگهی را بنویسید" />
+                    <input {...register("alley")} className="input input-bordered " placeholder=" کوچه" />
                 </div>
             </div>
 
             <div className='flex sm:flex-col md:flex-row md:gap-3 w-full'>
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel> خیابان</FieldLabel>
-                    <input {...register("street")} className="input input-bordered " placeholder=" عنوان آگهی را بنویسید" />
+                    <input {...register("street")} className="input input-bordered " placeholder=" خیابان" />
                 </div>
             </div>
 

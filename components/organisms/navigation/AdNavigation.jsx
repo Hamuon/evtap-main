@@ -46,7 +46,7 @@ export default function AuthNavigation({ setSearch, search, toggleMenu }) {
                                     </svg>
                                 </span>
                                 <span>
-                                    جستوجو
+                                    جستجو
                                 </span>
                             </button>
                             :
