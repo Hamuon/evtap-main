@@ -22,8 +22,8 @@ export default function Home() {
 
 
   return (
-    <main className='flex justify-center items-center w-full '>
-      <div className='grid grid-cols-1 grid-rows-3 lg:grid-rows-1 place-items-center place-content-center lg:h-96 lg:mt-10 max-w-[70rem] gap-4 lg:grid-cols-3 w-full h-full sm:px-10 lg:px-0'>
+    <main className='flex justify-center items-center w-full sm:h-full lg:h-auto'>
+      <div className='grid grid-cols-1 grid-rows-3 lg:grid-rows-1 place-items-center place-content-center lg:h-96 max-w-[70rem] gap-4 lg:grid-cols-3 w-full h-full sm:px-10 lg:px-0'>
         {/* inquiry and add */}
         <div className='col-span-1 w-full h-full grid grid-rows-3 gap-4'>
           <div className='bg-slate-200 cursor-pointer shadow-lg row-span-2 w-full rounded-3xl overflow-hidden relative'>
@@ -69,7 +69,7 @@ export default function Home() {
 
 
         {/* play, location and badges */}
-        <div className='col-span-1 grid-rows-3 place-items-center place-content-center sm:h-[400px] lg:h-full w-full gap-4 flex flex-col justify-between'>
+        <div className='col-span-1 grid-rows-3 place-items-center place-content-center sm:h-[400px] lg:h-full w-full gap-4 flex flex-col justify-between sm:pt-14 lg:pt-0'>
           <div className='w-full h-1/3 flex sm:justify-between'>
             <div className='bg-[#F66120] shadow-lg w-full rounded-3xl flex justify-center items-center'>
               <svg width="36" height="39" viewBox="0 0 36 39" fill="none" xmlns="http://www.w3.org/2000/svg">

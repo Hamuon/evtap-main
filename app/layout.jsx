@@ -30,7 +30,9 @@ export default function RootLayout({ children }) {
           mounted &&
           <AuthProvider>
             <ProtectRoute>
+              <ToastContainer />
               <div
+                className="flex flex-col justify-between"
                 style={{
                   backgroundImage: `url(${pathname === "/" ? "/media/mainbg.jpg" : pathname === "/login" ? "/media/bgotp.jpg" : pathname === "/request" ? "/media/reqbg.jpg" : null})`,
                   height: "100vh",
@@ -38,7 +40,6 @@ export default function RootLayout({ children }) {
                   backgroundSize: "cover"
                 }}
               >
-                <ToastContainer />
                 {
                   pathname === "/" ? <MainNavigation toggleMenu={toggleMenu} /> : null
                 }

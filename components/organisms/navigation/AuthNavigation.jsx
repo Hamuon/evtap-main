@@ -3,8 +3,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 export default function AuthNavigation({ toggleMenu }) {
     return (
-        <nav className='flex justify-center mx-auto relative z-50'>
-            <div className='flex w-full justify-end items-center md:px-10 sm:px-10 md:container h-32'>
+        <nav className='flex justify-between mx-auto z-50 w-full absolute top-0'>
+            <div className='flex w-full justify-end items-center md:px-10 sm:px-10 mx-auto md:container h-32'>
                 <div onClick={toggleMenu} className='md:hidden'>
                     <Image src="/icons/mobile-menu.svg" alt="mobile menu" width={45} height={45} />
                 </div>
