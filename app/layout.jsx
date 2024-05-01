@@ -45,11 +45,12 @@ export default function RootLayout({ children }) {
                   backgroundSize: "cover"
                 }}
               >
-
-                {
-                  pathname === "/" ? <MainNavigation toggleMenu={toggleMenu} /> : null
-                }
-                {open ? <MobileMenu open={open} toggleMenu={toggleMenu} /> : null}
+                {pathname === "/" ? (
+                  <MainNavigation toggleMenu={toggleMenu} />
+                ) : null}
+                {open ? (
+                  <MobileMenu open={open} toggleMenu={toggleMenu} />
+                ) : null}
                 {children}
                 {pathname === "/" ? <MainFooter /> : null}
               </div>
