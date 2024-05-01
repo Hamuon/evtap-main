@@ -17,6 +17,8 @@ function AddAdMap({ setValue }) {
 
     const mapHandler = async (e) => {
         setCoords({ latitude: e.latlng.lat, longitude: e.latlng.lng })
+        setValue("latitude", e.latlng.lat)
+        setValue("longitude", e.latlng.lng)
     }
 
     useEffect(() => {

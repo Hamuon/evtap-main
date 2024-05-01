@@ -11,7 +11,7 @@ function ProtectLogin({ children }) {
 
     useEffect(() => {
         if (isAuth && pathname === "/login") {
-            router.replace("/profile")
+            router.replace("/request")
         }
     }, [isAuth, router, pathname])
 

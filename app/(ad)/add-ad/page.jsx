@@ -5,6 +5,7 @@ import FieldLabel from '@/components/atoms/labels/FieldLabel'
 import RentalForm from '@/components/organisms/forms/RentalForm'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
+import MortgageForm from '@/components/organisms/forms/MortgageForm'
 const AddAdMap = dynamic(() => import('@/components/AddAdMap'), { ssr: false })
 export default function AddAd() {
     // const [longitude, setLongitude] = useState(null)
@@ -14,10 +15,6 @@ export default function AddAd() {
     return (
         <main className='w-full mx-auto flex justify-center'>
             <div className='w-full md:container mt-10 px-10 flex flex-col items-center'>
-                <div className="h-96 overflow-hidden w-full flex flex-col items-start mb-10 max-w-[60rem] rounded-lg">
-                    <FieldLabel>موقعیت مکانی</FieldLabel>
-                    <AddAdMap />
-                </div>
                 <div className='max-w-[60rem] w-full mb-20 flex flex-col gap-4 items-center'>
                     <div className='w-full my-2 flex flex-col'>
                         <FieldLabel>نوع آگهی</FieldLabel>
@@ -29,7 +26,7 @@ export default function AddAd() {
                         </select>
                     </div>
                     {
-                        adType === "sale" ? <SaleForm adType={adType} /> : adType === "rental" ? <RentalForm adType={adType} /> : null
+                        adType === "sale" ? <SaleForm adType={adType} /> : adType === "rental" ? <RentalForm adType={adType} /> : adType === "mortgage" ? <MortgageForm adType={adType} /> : null
                     }
                 </div>
             </div >

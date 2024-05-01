@@ -8,7 +8,10 @@ import AuthFooter from '@/components/organisms/footer/AuthFooter'
 import AuthNavigation from '@/components/organisms/navigation/AuthNavigation'
 import AuthProvider from '@/context/AuthProvider';
 import ProtectLogin from '@/components/ProtectLogin';
+import useMenu from '@/hooks/useMenu';
+import RequestMenu from '@/components/organisms/menu/RequestMenu';
 export default function AuthLayout({ children }) {
+    const { toggleMenu, open } = useMenu()
 
     const pathname = usePathname();
     const [showLogin, setShowLogin] = useState(pathname === "/login" ? true : false);
@@ -20,14 +23,14 @@ export default function AuthLayout({ children }) {
         } else {
             setShowLogin(false)
         }
-
     }, [pathname])
 
     return (
         <ProtectLogin>
             <AuthProvider>
                 <ToastContainer />
-                <AuthNavigation />
+                <AuthNavigation toggleMenu={toggleMenu} />
+                {open ? <RequestMenu toggleMenu={toggleMenu} open={open} /> : null}
                 {
                     showLogin ? <StepForm /> : null
                 }
