@@ -24,6 +24,7 @@ export default function OtpModal({ nextStep, prevStep, phone, setPhone }) {
         }
     )
 
+    const [loading, setLoading] = useState(false)
     const [minutes, setMinutes] = useState(2);
     const [seconds, setSeconds] = useState(0o0);
 
@@ -70,6 +71,7 @@ export default function OtpModal({ nextStep, prevStep, phone, setPhone }) {
     };
 
     const submitHandler = async (data) => {
+        setLoading(true)
         const verifyData = { ...data, ...phone }
         await checkOtp(verifyData)
             .then((res) => {
@@ -88,16 +90,19 @@ export default function OtpModal({ nextStep, prevStep, phone, setPhone }) {
                             position: "top-center",
                         });
                     }
+                    setLoading(false)
                 } else {
                     toast.error(res.data.message, {
                         position: "top-center"
                     })
+                    setLoading(false)
                 }
             }).catch((err) => {
                 console.log(err);
                 toast.error("مشکل در برقراری ارتباط", {
                     position: "top-center"
                 })
+                setLoading(false)
             })
     }
 
@@ -120,7 +125,7 @@ export default function OtpModal({ nextStep, prevStep, phone, setPhone }) {
                         </button>
                     </div>
                     <div className='flex gap-2 mt-2 sm:w-full'>
-                        <SubmitButton type="submit" text="ورود" />
+                        <SubmitButton loading={loading} type="submit" text="ورود" />
                         <BackButton handleBack={handleBack} />
                     </div>
                 </div>

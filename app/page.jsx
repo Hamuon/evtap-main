@@ -9,6 +9,7 @@ export default function Home() {
 
   async function getAllExperts() {
     await getExperts().then(response => {
+      console.log(response);
       setExperts(response.data.experts)
     }).catch(error => {
       console.log(error)
@@ -107,7 +108,7 @@ export default function Home() {
             </div>
             <div className='h-full bg-white rounded-full absolute right-0 flex justify-center items-center font-numerals aspect-square '>
               <span className='text-4xl font-bold flex justify-center items-center'>
-                100+
+                20+
               </span>
             </div>
           </div>

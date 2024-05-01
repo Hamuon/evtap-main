@@ -42,13 +42,13 @@ const schema = z.object({
     longitude: z.number().min(-180).max(180),
     latitude: z.number().min(-90).max(90),
     main_image: imageSchema,
+    images: imageSchema
 })
 
 export default function SaleForm() {
     const [provinces, setProvinces] = useState([])
     const [selectedCity, setSelectedCity] = useState("")
     const [cityId, setCityId] = useState("")
-
 
     const buildYear = ["قبل از 1387", "1387", "1388", "1389", "1390", "1391", "1392", "1393", "1394", "1395", "1396", "1397", "1398", "1399", "1400", "1401", "1402"]
 
@@ -61,8 +61,7 @@ export default function SaleForm() {
     console.log(errors);
 
     const submitHandler = async (data) => {
-        console.log(data, cityId);
-
+        console.log(data);
     }
 
     const handleCityId = (e) => {
@@ -91,24 +90,42 @@ export default function SaleForm() {
 
     return (
         <form onSubmit={handleSubmit(submitHandler)} className='font-numerals w-full'>
+            {Object.keys(errors).length ? <p className='text-red mb-3'>لطفا فیلد های مشخص شده را پر کنید.</p> : null}
 
-            <div className="h-96 overflow-hidden w-full flex flex-col items-start mb-10 max-w-[60rem] rounded-lg">
+            <div className="h-96 overflow-hidden w-full flex flex-col items-start mb-10 max-w-[60rem] rounded-lg z-20">
                 <FieldLabel>موقعیت مکانی</FieldLabel>
                 <AddAdMap setValue={setValue} />
+                {errors.longitude || errors.latitude ? <p className='text-red mb-3 mt-4'>لطفا موقعیت ملک را انتخاب کنید</p> : null}
             </div>
 
-            <div className="w-full my-2 flex flex-col items-start mb-10">
-                <FieldLabel>عکس اصلی</FieldLabel>
-                <label for="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ">
-                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        <svg className="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                        </svg>
-                        <p className="mb-2 text-sm text-gray-500 ">عکس اصلی</p>
-                        <p className='text-gray-600 text-sm'></p>
-                    </div>
-                    <input {...register("main_image")} id="dropzone-file" type="file" className="hidden" />
-                </label>
+            <div className='flex md:gap-4 sm:flex-col md:flex-row'>
+                <div className="w-full flex flex-col items-start mb-10">
+                    <FieldLabel>عکس اصلی</FieldLabel>
+                    <label for="dropzone-file" className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ${errors.main_image ? "border-red" : " border-gray-300"}`}>
+                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                            <svg className="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                            </svg>
+                            <p className="mb-2 text-sm text-gray-500 ">عکس اصلی</p>
+                            <p className='text-gray-600 text-sm'></p>
+                        </div>
+                        <input {...register("main_image")} id="dropzone-file" type="file" className="hidden" />
+                    </label>
+                </div>
+
+                <div className="w-full flex flex-col items-start mb-10">
+                    <FieldLabel>تصاویر بیشتر </FieldLabel>
+                    <label for="dropzone-file1" className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ${errors.images ? "border-red" : " border-gray-300"}`}>
+                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                            <svg className="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                            </svg>
+                            <p className="mb-2 text-sm text-gray-500 ">تصاویر بیشتر</p>
+                            <p className='text-gray-600 text-sm'></p>
+                        </div>
+                        <input {...register("images")} multiple id="dropzone-file1" type="file" className="hidden" />
+                    </label>
+                </div>
             </div>
 
             <div className='flex sm:flex-col md:flex-row md:gap-3 w-full'>
@@ -123,17 +140,17 @@ export default function SaleForm() {
             <div className='flex sm:flex-col md:flex-row md:gap-3 w-full'>
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel>عنوان آگهی</FieldLabel>
-                    <input  {...register("title")} className="input input-bordered " placeholder=" عنوان آگهی را بنویسید" />
+                    <input  {...register("title")} className={`input input-bordered ${errors.title ? "input-error" : null}`} placeholder=" عنوان آگهی را بنویسید" />
                 </div>
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel> منطقه</FieldLabel>
-                    <input {...register("region")} className="input input-bordered " placeholder=" منطقه آگهی را بنویسید" />
+                    <input {...register("region")} className={`input input-bordered ${errors.region ? "input-error" : null}`} placeholder=" منطقه آگهی را بنویسید" />
                 </div>
             </div>
 
             <div className='w-full my-2 flex flex-col'>
                 <FieldLabel> شهر</FieldLabel>
-                <select onChange={handleCityId} {...register("city_id")} className="select select-bordered " >
+                <select onChange={handleCityId} {...register("city_id")} className={`select select-bordered ${errors.city_id ? "select-error" : null}`} >
                     <option selected disabled value="">انتخاب کنید</option>
                     {
                         provinces && provinces.map((province) => (
@@ -148,36 +165,36 @@ export default function SaleForm() {
             <div className='flex sm:flex-col md:flex-row md:gap-3 w-full'>
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel> پلاک</FieldLabel>
-                    <input {...register("plate")} className="input input-bordered " placeholder=" عنوان آگهی را بنویسید" />
+                    <input {...register("plate")} className={`input input-bordered ${errors.plate ? "input-error" : null}`} placeholder=" عنوان آگهی را بنویسید" />
                 </div>
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel> کوچه</FieldLabel>
-                    <input {...register("alley")} className="input input-bordered " placeholder=" منطقه آگهی را بنویسید" />
+                    <input {...register("alley")} className={`input input-bordered ${errors.alley ? "input-error" : null}`} placeholder=" منطقه آگهی را بنویسید" />
                 </div>
             </div>
 
             <div className='flex sm:flex-col md:flex-row md:gap-3 w-full'>
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel> خیابان</FieldLabel>
-                    <input {...register("street")} className="input input-bordered " placeholder=" عنوان آگهی را بنویسید" />
+                    <input {...register("street")} className={`input input-bordered ${errors.street ? "input-error" : null}`} placeholder=" عنوان آگهی را بنویسید" />
                 </div>
             </div>
 
             <div className='flex sm:flex-col md:flex-row md:gap-3 w-full items-center'>
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel> قیمت کل</FieldLabel>
-                    <input {...register("sale_price")} className="input input-bordered " placeholder=" قیمت به تومان" />
+                    <input {...register("sale_price")} className={`input input-bordered ${errors.sale_price ? "input-error" : null}`} placeholder=" قیمت به تومان" />
                 </div>
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel>متراژ</FieldLabel>
-                    <input {...register("size")} className="input input-bordered " placeholder="متر مربع" />
+                    <input {...register("size")} className={`input input-bordered ${errors.size ? "input-error" : null}`} placeholder="متر مربع" />
                 </div>
             </div>
 
             <div className='flex sm:flex-col md:flex-row md:gap-3 w-full'>
                 <div className='w-full my-2 flex flex-col'>
                     <FieldLabel>تعداد اتاق</FieldLabel>
-                    <select {...register("room_count")} className="select select-bordered " >
+                    <select {...register("room_count")} className={`select select-bordered ${errors.room_count ? "select-error" : null}`} >
                         <option selected disabled value="">انتخاب کنید</option>
                         {
                             [...Array(4).keys()].map((room, index) => {
@@ -188,14 +205,14 @@ export default function SaleForm() {
                 </div>
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel>طبقه</FieldLabel>
-                    <input {...register("floor")} className="input input-bordered " placeholder="طبقه واحد" />
+                    <input {...register("floor")} className={`select select-bordered ${errors.floor ? "select-error" : null}`} placeholder="طبقه واحد" />
                 </div>
             </div>
 
             <div className='flex sm:flex-col md:flex-row md:gap-3 w-full'>
                 <div className='w-full my-2 flex flex-col'>
                     <FieldLabel>سال ساخت </FieldLabel>
-                    <select {...register("year")} className="select select-bordered " >
+                    <select {...register("year")} className={`select select-bordered ${errors.year ? "select-error" : null}`} >
                         <option selected disabled value="">سال ساخت</option>
                         {
                             buildYear.map((item, index) => {
@@ -206,7 +223,7 @@ export default function SaleForm() {
                 </div>
                 <div className='w-full my-2 flex flex-col'>
                     <FieldLabel>انباری </FieldLabel>
-                    <select {...register("warehouse")} className="select select-bordered " >
+                    <select {...register("warehouse")} className={`select select-bordered ${errors.warehouse ? "select-error" : null}`} >
                         <option selected disabled value="">انتخاب کنید</option>
                         <option value="ندارد">ندارد</option>
                         <option value="دارد">دارد</option>                                </select>
@@ -216,14 +233,14 @@ export default function SaleForm() {
             <div className='flex sm:flex-col md:flex-row md:gap-3 w-full'>
                 <div className='w-full my-2 flex flex-col'>
                     <FieldLabel> آسانسور</FieldLabel>
-                    <select {...register("elevator")} className="select select-bordered " >
+                    <select {...register("elevator")} className={`select select-bordered ${errors.elevator ? "select-error" : null}`} >
                         <option selected disabled value="">انتخاب کنید</option>
                         <option value="ندارد">ندارد</option>
                         <option value="دارد">دارد</option>                                </select>
                 </div>
                 <div className='w-full my-2 flex flex-col'>
                     <FieldLabel>پارکینگ </FieldLabel>
-                    <select {...register("parking")} className="select select-bordered " >
+                    <select {...register("parking")} className={`select select-bordered ${errors.parking ? "select-error" : null}`} >
                         <option selected disabled value="">انتخاب کنید</option>
                         <option value="ندارد">ندارد</option>
                         <option value="دارد">دارد</option>                                </select>
@@ -232,7 +249,7 @@ export default function SaleForm() {
 
             <div className='w-full my-4 flex flex-col'>
                 <FieldLabel> نوع سند</FieldLabel>
-                <select {...register("document")} className="select select-bordered " >
+                <select {...register("document")} className={`select select-bordered ${errors.document ? "select-error" : null}`} >
                     <option selected disabled value="">انتخاب کنید</option>
                     <option value="promise">قول نامه</option>
                     <option value="single">تک برگ</option>
@@ -241,7 +258,7 @@ export default function SaleForm() {
 
             <div className='w-full my-4 flex flex-col'>
                 <FieldLabel>نوع آگهی </FieldLabel>
-                <select {...register("type")} className="select select-bordered " >
+                <select {...register("type")} className={`select select-bordered ${errors.type ? "select-error" : null}`} >
                     <option selected disabled value="">انتخاب کنید</option>
                     <option value="sale">فروش</option>
                     <option value="rental">اجاره</option>
@@ -250,12 +267,12 @@ export default function SaleForm() {
 
             <div className='w-full my-4 flex flex-col'>
                 <FieldLabel> آدرس</FieldLabel>
-                <textarea {...register("address")} rows={2} className="textarea textarea-bordered w-full" placeholder="آدرس را بنویسید" />
+                <textarea {...register("address")} rows={2} className={`textarea textarea-bordered w-full ${errors.address ? "textarea-error" : null}`} placeholder="آدرس را بنویسید" />
             </div>
 
             <div className='w-full my-2 flex flex-col'>
                 <FieldLabel> توضیحات</FieldLabel>
-                <textarea {...register("description")} rows={2} className="textarea textarea-bordered w-full" placeholder="توضیحات را بنویسید" />
+                <textarea {...register("description")} rows={2} className={`textarea textarea-bordered w-full ${errors.description ? "textarea-error" : null}`} placeholder="توضیحات را بنویسید" />
             </div>
 
             <div className='flex gap-2 mt-4 w-full'>

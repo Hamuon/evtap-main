@@ -6,11 +6,11 @@ import { useForm } from 'react-hook-form'
 import Map from '@/components/Map';
 import Label from '@/components/atoms/labels/Label'
 import { zodResolver } from '@hookform/resolvers/zod'
-import BackButton from '@/components/atoms/buttons/BackButton'
 import SubmitButton from '@/components/atoms/buttons/SubmitButton'
 import { expertRequest, getCities } from '@/services/authService';
 
 const schema = z.object({
+    state: z.string().min(1, { message: "لطفا استان را انتخاب کنید" }),
     city_id: z.string().min(1, { message: "لطفا شهر را انتخاب کنید" }),
     region: z.string().min(1, { message: "لطفا منطقه را وارد کنید" }).max(100, { message: "منطقه بیش از 100 کاراکتر" }),
     street: z.string().min(1, { message: "لطفا خیابان اصلی را وارد کنید" }).max(20, { message: "خیابان اصلی بیش از 20 کاراکتر" }),
@@ -32,6 +32,7 @@ export default function RequestModal({ nextStep, setReqData }) {
     const { setValue, register, handleSubmit, formState: { errors } } = useForm(
         {
             defaultValues: {
+                state: "",
                 city_id: "",
                 region: "",
                 street: "",
@@ -44,6 +45,7 @@ export default function RequestModal({ nextStep, setReqData }) {
             resolver: zodResolver(schema)
         }
     )
+    console.log(errors);
     async function getAllCities() {
         await getCities()
             .then((res) => {
@@ -116,7 +118,7 @@ export default function RequestModal({ nextStep, setReqData }) {
                 <div className='flex flex-col items-start w-full relative'>
                     <div className='flex w-full justify-between mb-3 items-center'>
                         <span className='md:text-3xl font-semibold '>درخواست کارشناسی ملک</span>
-                        <div className="tooltip tooltip-open md:tooltip-left sm:tooltip-right cursor-pointer" data-tip={mapOpen ? "بازگشت به فرم" : "انتخاب از روی نقشه"} onClick={() => setMapOpen(!mapOpen)}>
+                        <div className="tooltip tooltip-open md:tooltip-left sm:tooltip-top cursor-pointer" data-tip={mapOpen ? "بازگشت به فرم" : "انتخاب از روی نقشه"} onClick={() => setMapOpen(!mapOpen)}>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fillRule="evenodd" clipRule="evenodd" d="M11.2116 11.2119L10.1646 14.5589L13.5106 13.5109L14.5586 10.1639L11.2116 11.2119ZM9.02057 16.4519C8.82457 16.4519 8.63257 16.3749 8.48957 16.2329C8.29257 16.0349 8.22057 15.7439 8.30457 15.4789L9.89757 10.3899C9.97057 10.1539 10.1546 9.97089 10.3886 9.89789L15.4776 8.30489C15.7446 8.21989 16.0346 8.29289 16.2326 8.48989C16.4296 8.68789 16.5016 8.97889 16.4176 9.24389L14.8256 14.3329C14.7526 14.5679 14.5676 14.7519 14.3336 14.8249L9.24457 16.4179C9.17057 16.4409 9.09457 16.4519 9.02057 16.4519Z" fill="black" />
                                 <mask id="mask0_360_961" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="21">
@@ -132,16 +134,16 @@ export default function RequestModal({ nextStep, setReqData }) {
                         برای ثبت درخواست لطفا آدرس دقیق را وارد کنید
                     </Label>
                     <div className='flex gap-2 w-full'>
-                        <select defaultValue={"STATE"} {...register("state")} onChange={changeHandler} name='state' className="select select-sm select-bordered w-full my-2" >
-                            <option disabled value="STATE">استان</option>
+                        <select {...register("state")} onChange={changeHandler} name='state' className={`select select-sm select-bordered w-full my-2 ${errors.state ? "select-error" : null}`} >
+                            <option disabled selected>استان</option>
                             {
                                 provinces && provinces.map((province, index) => (
                                     <option id={province.id} key={index} value={province.name}>{province.name}</option>
                                 ))
                             }
                         </select>
-                        <select defaultValue={"CITY"} {...register("city_id")} onChange={handleCityId} name='city_id' className="select select-sm select-bordered w-full my-2" >
-                            <option disabled value="CITY">شهر</option>
+                        <select {...register("city_id")} onChange={handleCityId} name='city_id' className={`select select-sm select-bordered w-full my-2 ${errors.city_id ? "select-error" : null}`} >
+                            <option disabled selected>شهر</option>
                             {
                                 provinces && provinces.map((province) => (
                                     selectedProvince ?
@@ -154,20 +156,20 @@ export default function RequestModal({ nextStep, setReqData }) {
                                 ))
                             }
                         </select>
-                        <input {...register("region")} className="input input-sm input-bordered w-full my-2" placeholder="منطقه" />
+                        <input {...register("region")} className={`input input-sm input-bordered w-full my-2 ${errors.region ? "input-error" : null}`} placeholder="منطقه" />
                     </div>
                     <div className='flex gap-3 w-full items-center'>
-                        <input {...register("street")} className="input input-sm input-bordered w-full my-2" placeholder="خیابان اصلی" />
+                        <input {...register("street")} className={`input input-sm input-bordered w-full my-2 ${errors.street ? "input-error" : null}`} placeholder="خیابان اصلی" />
                     </div>
                     <div className='flex gap-3 w-full'>
-                        <input {...register("street_sec")} className="input input-sm input-bordered w-full my-2" placeholder="خیابان فرعی" />
-                        <input {...register("alley")} className="input input-sm input-bordered w-full my-2" placeholder="کوچه/مجتمع" />
+                        <input {...register("street_sec")} className={`input input-sm input-bordered w-full my-2 ${errors.street_sec ? "input-error" : null}`} placeholder="خیابان فرعی" />
+                        <input {...register("alley")} className={`input input-sm input-bordered w-full my-2 ${errors.alley ? "input-error" : null}`} placeholder="کوچه/مجتمع" />
                     </div>
                     <div className='flex gap-3 w-full'>
-                        <input {...register("plate")} className="input input-sm input-bordered w-full my-2" placeholder=" پلاک/بلوک" />
-                        <input {...register("floor")} className="input input-sm input-bordered w-full my-2" placeholder="طبقه/واحد" />
+                        <input {...register("plate")} className={`input input-sm input-bordered w-full my-2 ${errors.plate ? "input-error" : null}`} placeholder=" پلاک/بلوک" />
+                        <input {...register("floor")} className={`input input-sm input-bordered w-full my-2 ${errors.floor ? "input-error" : null}`} placeholder="طبقه/واحد" />
                     </div>
-                    <textarea {...register("address")} rows={2} className="textarea textarea-bordered w-full my-2" placeholder="استان، شهر، منطقه، محل، خیابان اصلی، خیابان فرعی، کوچه، پلاک، طبقه" />
+                    <textarea {...register("address")} rows={2} className={`textarea textarea-bordered w-full my-2 ${errors.address ? "textarea-error" : null}`} placeholder="استان، شهر، منطقه، محل، خیابان اصلی، خیابان فرعی، کوچه، پلاک، طبقه" />
 
                     <div className='flex gap-2 mt-2 w-full'>
                         <SubmitButton loading={loading} type="submit" text="ثبت درخواست" />

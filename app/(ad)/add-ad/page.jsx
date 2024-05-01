@@ -5,6 +5,7 @@ import FieldLabel from '@/components/atoms/labels/FieldLabel'
 import RentalForm from '@/components/organisms/forms/RentalForm'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
+import MortgageForm from '@/components/organisms/forms/MortgageForm'
 const AddAdMap = dynamic(() => import('@/components/AddAdMap'), { ssr: false })
 export default function AddAd() {
     // const [longitude, setLongitude] = useState(null)
@@ -25,7 +26,7 @@ export default function AddAd() {
                         </select>
                     </div>
                     {
-                        adType === "sale" ? <SaleForm adType={adType} /> : adType === "rental" ? <RentalForm adType={adType} /> : null
+                        adType === "sale" ? <SaleForm adType={adType} /> : adType === "rental" ? <RentalForm adType={adType} /> : adType === "mortgage" ? <MortgageForm adType={adType} /> : null
                     }
                 </div>
             </div >
