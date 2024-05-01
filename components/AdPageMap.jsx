@@ -8,8 +8,8 @@ function AdPageMap() {
 
     const [map, setMap] = useState(null);
     const [coords, setCoords] = useState({
-        latitude: 38.0777017,
-        longitude: 46.2196279
+        latitude: 38.074,
+        longitude: 46.296
     });
 
 
