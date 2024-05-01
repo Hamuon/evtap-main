@@ -6,8 +6,8 @@ import { useRouter } from 'next/navigation'
 export default function ProfileNavigation() {
     const router = useRouter()
     return (
-        <nav className='flex justify-center mx-auto relative z-50'>
-            <div className='flex w-full justify-between items-center md:px-10 sm:px-10 md:container h-32'>
+        <nav className='flex justify-center mx-auto relative z-50 w-full'>
+            <div className='flex w-full justify-between items-center md:px-10 sm:px-10 md:container mx-auto h-32'>
                 <Link href="/">
                     <Image src="/media/evtap-logo.png" alt="evtap logo" width={65} height={65} />
                 </Link>

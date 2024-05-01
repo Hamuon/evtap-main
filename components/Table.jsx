@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from 'react'
 import { getDashboard } from '@/services/authService'
 export default function Table() {
@@ -17,7 +18,7 @@ export default function Table() {
   }, [])
 
   return (
-    <div className="overflow-x-auto w-full shadow-lg rounded-lg h-96 overflow-y-scroll border border-gray-200">
+    <div dir="rtl" className="overflow-x-auto w-full shadow-lg rounded-lg h-96 overflow-y-scroll border border-gray-200">
       <table className="table " >
         {/* head */}
         <thead>
