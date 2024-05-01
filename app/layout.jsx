@@ -30,11 +30,9 @@ export default function RootLayout({ children }) {
             <ProtectRoute>
               <ToastContainer />
               <div
-<<<<<<< HEAD
-              className="h-full"
-=======
+
                 className="flex flex-col justify-between"
->>>>>>> 040dd6341d3f98d84e70c3288d23f3cdadc9d6a1
+
                 style={{
                   backgroundImage: `url(${
                     pathname === "/"
@@ -50,20 +48,14 @@ export default function RootLayout({ children }) {
                   backgroundSize: "cover"
                 }}
               >
-<<<<<<< HEAD
-                <ToastContainer />
+
                 {pathname === "/" ? (
                   <MainNavigation toggleMenu={toggleMenu} />
                 ) : null}
                 {open ? (
                   <MobileMenu open={open} toggleMenu={toggleMenu} />
                 ) : null}
-=======
-                {
-                  pathname === "/" ? <MainNavigation toggleMenu={toggleMenu} /> : null
-                }
-                {open ? <MobileMenu open={open} toggleMenu={toggleMenu} /> : null}
->>>>>>> 040dd6341d3f98d84e70c3288d23f3cdadc9d6a1
+
                 {children}
                 {pathname === "/" ? <MainFooter /> : null}
               </div>
