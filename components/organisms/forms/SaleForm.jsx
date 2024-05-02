@@ -155,10 +155,11 @@ export default function SaleForm() {
   const handleCityId = (e) => {
     provinces &&
       provinces.map((province) =>
-          province.cities.map((city) =>
+        selectedCity
+          ? province.cities.map((city) =>
               city.name === e.target.value ? setCityId(city.id) : null
             )
-          
+          : null
       );
   };
 
