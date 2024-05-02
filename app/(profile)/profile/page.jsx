@@ -7,12 +7,13 @@ export default function page() {
     return (
         <main className='flex justify-center mx-auto w-full h-full'>
             <div className='grid grid-cols-1 lg:grid-cols-4 md:px-10 sm:px-10 md:container lg:gap-6 w-full h-full'>
-                <ProfileMenu />
+            <ProfileIntro />
+                
                 <div className='col-span-2 w-full flex items-start flex-col sm:my-8' >
                     <span className="font-semibold mb-4">درخواست های من</span>
                     <Table />
                 </div>
-                <ProfileIntro />
+                <ProfileMenu />
             </div>
         </main>
     )

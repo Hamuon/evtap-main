@@ -11,7 +11,7 @@ export default function MainNavigation({ toggleMenu }) {
                     <Image src="/icons/mobile-menu.svg" alt="mobile menu" width={45} height={45} />
                 </div>
                 <div className='md:hidden'>
-                    <Image src="/media/evtap-logo.png" alt="evtap logo" width={65} height={65} />
+                    <Image src="/media/evtapN.svg" alt="evtap logo" width={65} height={65} />
                 </div>
                 {/* desktop visible navigation */}
                 <h1 className='font-semibold sm:hidden md:block'>
