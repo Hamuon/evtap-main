@@ -31,7 +31,6 @@ export function submitAd(data) {
   return http.post("/user/advertising", data, config);
 }
 
-
 export function getCities() {
   return http.get("/get-cities");
 }
