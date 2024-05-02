@@ -20,30 +20,34 @@ export default function RootLayout({ children }) {
   }, []);
 
   return (
-    <html lang="fa">
+    <html
+      lang="fa"
+      style={{
+        backgroundImage: `url(${pathname === "/"
+          ? "/media/bg.jpg"
+          : pathname === "/login"
+            ? "/media/bgotp.jpg"
+            : pathname === "/request"
+              ? "/media/reqbg.jpg"
+              : null
+          })`,
+        backgroundRepeat: "repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <head>
         <title>اوتاپ | کارشناسی تخصصی ملک</title>
       </head>
-      <body>
+      <body
+        className="h-screen"
+      >
         {mounted && (
           <AuthProvider>
             <ProtectRoute>
               <ToastContainer />
               <div
-                className="flex flex-col justify-between"
-                style={{
-                  backgroundImage: `url(${pathname === "/"
-                    ? "/media/bg.jpg"
-                    : pathname === "/login"
-                      ? "/media/bgotp.jpg"
-                      : pathname === "/request"
-                        ? "/media/reqbg.jpg"
-                        : null
-                    })`,
-                  height: "100vh",
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover"
-                }}
+                className="flex flex-col justify-between min-h-full"
               >
                 {pathname === "/" ? (
                   <MainNavigation toggleMenu={toggleMenu} />

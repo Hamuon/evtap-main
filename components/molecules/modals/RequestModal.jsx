@@ -93,8 +93,8 @@ export default function RequestModal({ nextStep, setReqData }) {
         selectedProvince
           ? selectedProvince === province.name
             ? province.cities.map((city) =>
-                city.name === e.target.value ? setCityId(city.id) : null
-              )
+              city.name === e.target.value ? setCityId(city.id) : null
+            )
             : null
           : null
       );
@@ -147,7 +147,7 @@ export default function RequestModal({ nextStep, setReqData }) {
         <div className="flex flex-col items-start w-full relative">
           <div className="flex w-full justify-between mb-3 items-center">
             <span className="md:text-3xl font-semibold ">
-              درخواست کارشناسی ملک
+              درخواست کارشناسی
             </span>
             <div
               className="tooltip tooltip-open md:tooltip-top sm:tooltip-right cursor-pointer z-50"
@@ -268,9 +268,8 @@ export default function RequestModal({ nextStep, setReqData }) {
               {...register("state")}
               onChange={changeHandler}
               name="state"
-              className={`select select-sm select-bordered w-full my-2 ${
-                errors.state ? "select-error" : null
-              }`}
+              className={`select select-sm select-bordered w-full my-2 ${errors.state ? "select-error" : null
+                }`}
             >
               <option value="" disabled selected>
                 استان
@@ -286,9 +285,8 @@ export default function RequestModal({ nextStep, setReqData }) {
               {...register("city_id")}
               onChange={handleCityId}
               name="city_id"
-              className={`select select-sm select-bordered w-full my-2 ${
-                errors.city_id ? "select-error" : null
-              }`}
+              className={`select select-sm select-bordered w-full my-2 ${errors.city_id ? "select-error" : null
+                }`}
             >
               <option value="" disabled selected>
                 شهر
@@ -298,10 +296,10 @@ export default function RequestModal({ nextStep, setReqData }) {
                   selectedProvince
                     ? selectedProvince === province.name
                       ? province.cities.map((city, index) => (
-                          <option id={city.id} key={index} value={city.name}>
-                            {city.name}
-                          </option>
-                        ))
+                        <option id={city.id} key={index} value={city.name}>
+                          {city.name}
+                        </option>
+                      ))
                       : null
                     : null
                 )}
@@ -311,18 +309,16 @@ export default function RequestModal({ nextStep, setReqData }) {
             <div className="w-full  items-center">
               <input
                 {...register("region")}
-                className={`input input-sm input-bordered w-full my-2 ${
-                  errors.region ? "input-error" : null
-                }`}
+                className={`input input-sm input-bordered w-full my-2 ${errors.region ? "input-error" : null
+                  }`}
                 placeholder="منطقه"
               />
             </div>
             <div className="w-full items-center">
               <input
                 {...register("street")}
-                className={`input input-sm input-bordered w-full my-2 ${
-                  errors.street ? "input-error" : null
-                }`}
+                className={`input input-sm input-bordered w-full my-2 ${errors.street ? "input-error" : null
+                  }`}
                 placeholder="خیابان اصلی"
               />
             </div>
@@ -331,41 +327,36 @@ export default function RequestModal({ nextStep, setReqData }) {
           <div className="flex gap-3 w-full">
             <input
               {...register("street_sec")}
-              className={`input input-sm input-bordered w-full my-2 ${
-                errors.street_sec ? "input-error" : null
-              }`}
+              className={`input input-sm input-bordered w-full my-2 ${errors.street_sec ? "input-error" : null
+                }`}
               placeholder="خیابان فرعی"
             />
             <input
               {...register("alley")}
-              className={`input input-sm input-bordered w-full my-2 ${
-                errors.alley ? "input-error" : null
-              }`}
+              className={`input input-sm input-bordered w-full my-2 ${errors.alley ? "input-error" : null
+                }`}
               placeholder="کوچه/مجتمع"
             />
           </div>
           <div className="flex gap-3 w-full">
             <input
               {...register("plate")}
-              className={`input input-sm input-bordered w-full my-2 ${
-                errors.plate ? "input-error" : null
-              }`}
+              className={`input input-sm input-bordered w-full my-2 ${errors.plate ? "input-error" : null
+                }`}
               placeholder=" پلاک/بلوک"
             />
             <input
               {...register("floor")}
-              className={`input input-sm input-bordered w-full my-2 ${
-                errors.floor ? "input-error" : null
-              }`}
+              className={`input input-sm input-bordered w-full my-2 ${errors.floor ? "input-error" : null
+                }`}
               placeholder="طبقه/واحد"
             />
           </div>
           <textarea
             {...register("address")}
             rows={2}
-            className={`textarea textarea-bordered w-full my-2 ${
-              errors.address ? "textarea-error" : null
-            }`}
+            className={`textarea textarea-bordered w-full my-2 ${errors.address ? "textarea-error" : null
+              }`}
             placeholder="استان، شهر، منطقه، محل، خیابان اصلی، خیابان فرعی، کوچه، پلاک، طبقه"
           />
 
@@ -374,7 +365,7 @@ export default function RequestModal({ nextStep, setReqData }) {
           </div>
           {mapOpen ? (
             <div className="w-full h-full flex absolute z-20 rounded-xl">
-              <Map  setValue={setValue} setMapOpen={setMapOpen} />
+              <Map setValue={setValue} setMapOpen={setMapOpen} />
             </div>
           ) : null}
         </div>
