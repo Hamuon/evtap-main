@@ -46,9 +46,9 @@ export default function MainFooter() {
           </li>
         </ul>
         {/* desktop visible navigation */}
-        <div className="block absolute sm:hidden md:block w-full z-50">
+        <div className="block pb-6 absolute sm:hidden md:block w-full z-50">
           <Image
-            src="/media/evtap-logo.png"
+            src="/media/evtapN.svg"
             alt="evtap logo"
             width={65}
             height={65}
