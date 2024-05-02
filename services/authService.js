@@ -27,6 +27,11 @@ export function expertRequest(data) {
   return http.post("/user/request", data, config);
 }
 
+export function submitAd(data) {
+  return http.post("/user/advertising", data, config);
+}
+
+
 export function getCities() {
   return http.get("/get-cities");
 }
