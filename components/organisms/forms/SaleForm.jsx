@@ -62,14 +62,16 @@ const schema = z.object({
   city_id: z.string(),
   longitude: z.number(),
   latitude: z.number(),
-  images: imageSchema,
 });
 
 export default function SaleForm() {
   const [loading, setLoading] = useState(false);
-  const [provinces, setProvinces] = useState([]);
-  const [selectedCity, setSelectedCity] = useState(null);
-  const [cityId, setCityId] = useState("");
+
+  const [provinces, setProvinces] = useState(null);
+  const [selectedProvince, setSelectedProvince] = useState(null);
+  const [cityId, setCityId] = useState(null);
+
+  console.log(cityId, selectedProvince, provinces);
 
   const buildYear = [
     "قبل از 1387",
@@ -101,6 +103,37 @@ export default function SaleForm() {
   });
 
   console.log(errors);
+
+  async function getAllCities() {
+    await getCities()
+      .then((res) => {
+        setProvinces(res.data.province);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  const changeHandler = (e) => {
+    setSelectedProvince(e.target.value);
+  };
+
+  useEffect(() => {
+    getAllCities();
+  }, []);
+
+  const handleCityId = (e) => {
+    provinces &&
+      provinces.map((province) =>
+        selectedProvince
+          ? selectedProvince === province.name
+            ? province.cities.map((city) =>
+                city.name === e.target.value ? setCityId(city.id) : null
+              )
+            : null
+          : null
+      );
+  };
 
   const submitHandler = async (data) => {
     const dataToSubmit = {
@@ -137,7 +170,6 @@ export default function SaleForm() {
             position: "top-center",
           });
           setLoading(false);
-          nextStep();
         } else {
           toast.error("درخواست شما ثبت نشد");
           setLoading(false);
@@ -151,31 +183,6 @@ export default function SaleForm() {
         });
       });
   };
-
-  const handleCityId = (e) => {
-    provinces &&
-      provinces.map((province) =>
-        selectedCity
-          ? province.cities.map((city) =>
-              city.name === e.target.value ? setCityId(city.id) : null
-            )
-          : null
-      );
-  };
-
-  async function getAllCities() {
-    await getCities()
-      .then((res) => {
-        setProvinces(res.data.province);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  useEffect(() => {
-    getAllCities();
-  }, []);
 
   return (
     <form
@@ -289,26 +296,55 @@ export default function SaleForm() {
         </div>
       </div>
 
-      <div className="w-full my-2 flex flex-col">
-        <FieldLabel> شهر</FieldLabel>
-        <select
-          onChange={handleCityId}
-          {...register("city_id")}
-          className={`select select-bordered ${
-            errors.city_id ? "select-error" : null
-          }`}
-        >
-          
-          {provinces &&
-            provinces.map((province) =>
-              province.cities.map((city, index) => (
-                
-                <option id={city.id} key={index} value={city.name}>
-                  {city.name}
+      <div className="flex sm:flex-col md:flex-row md:gap-3 w-full">
+        <div className="w-full my-2 flex flex-col">
+          <FieldLabel> استان</FieldLabel>
+          <select
+            {...register("state")}
+            onChange={changeHandler}
+            name="state"
+            className={`select select-bordered w-full ${
+              errors.state ? "select-error" : null
+            }`}
+          >
+            <option value="" disabled selected>
+              استان
+            </option>
+            {provinces &&
+              provinces.map((province, index) => (
+                <option id={province.id} key={index} value={province.name}>
+                  {province.name}
                 </option>
-              ))
-            )}
-        </select>
+              ))}
+          </select>
+        </div>
+        <div className="w-full my-2 flex flex-col">
+          <FieldLabel> شهر</FieldLabel>
+          <select
+            {...register("city_id")}
+            onChange={handleCityId}
+            name="city_id"
+            className={`select select-bordered w-full ${
+              errors.city_id ? "select-error" : null
+            }`}
+          >
+            <option value="" disabled selected>
+              شهر
+            </option>
+            {provinces &&
+              provinces.map((province) =>
+                selectedProvince
+                  ? selectedProvince === province.name
+                    ? province.cities.map((city, index) => (
+                        <option id={city.id} key={index} value={city.name}>
+                          {city.name}
+                        </option>
+                      ))
+                    : null
+                  : null
+              )}
+          </select>
+        </div>
       </div>
 
       <div className="flex sm:flex-col md:flex-row md:gap-3 w-full">
