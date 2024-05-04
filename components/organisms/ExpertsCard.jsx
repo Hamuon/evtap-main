@@ -1,15 +1,15 @@
 import React from "react";
 
 export default function ExpertsCard({
-  expert_ammount,
+  expert_amount,
   expert_img,
   city,
   co_op,
   expert_name,
 }) {
   return (
-    <div className="p-4">
-      <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="p-4 font-numerals">
+      <div class="w-full  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="flex justify-end px-4 pt-8"></div>
         <div class="flex flex-col items-center pb-10">
           <img
@@ -28,7 +28,7 @@ export default function ExpertsCard({
               {city}
             </div>
             <div class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 0">
-              {`تعداد کارشناسی ${expert_ammount}`}
+              {`تعداد کارشناسی ${expert_amount}`}
             </div>
           </div>
         </div>
