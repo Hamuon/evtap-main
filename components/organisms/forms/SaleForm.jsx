@@ -8,23 +8,8 @@ import FieldLabel from "@/components/atoms/labels/FieldLabel";
 import SubmitButton from "@/components/atoms/buttons/SubmitButton";
 import dynamic from "next/dynamic";
 import { submitAd, getCities } from "@/services/authService";
+import { useRouter } from "next/navigation";
 const AddAdMap = dynamic(() => import("@/components/AddAdMap"), { ssr: false });
-
-// const MAX_FILE_SIZE = 2000000;
-const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg"];
-
-const imageSchema = z
-  .any()
-  .refine((files) => files?.length >= 1, { message: "عکس آگهی الزامیست" })
-  .refine(
-    (file) =>
-      file.length == 1
-        ? ACCEPTED_IMAGE_TYPES.includes(file?.[0]?.type)
-          ? true
-          : false
-        : true,
-    "فرمت فایل نامعتبر است"
-  );
 
 const schema = z.object({
   title: z
@@ -51,27 +36,29 @@ const schema = z.object({
     .min(1, { message: "لطفا متراژ را وارد کنید" })
     .max(10, { message: " کد ملی بیش از 10 کاراکتر" }),
   room_count: z.string().min(1, { message: "لطفا تعداد اتاق را وارد کنید" }),
-  plate: z.string(),
-  elevator: z.string(),
-  parking: z.string(),
-  warehouse: z.string(),
-  alley: z.string(),
-  address: z.string(),
+  plate: z.string().min(1, { message: "لطفا پلاک را وارد کنید" }),
+  elevator: z.string().min(1, { message: "لطفا آسانسور را وارد کنید" }),
+  parking: z.string().min(1, { message: "لطفا پارکینگ را وارد کنید" }),
+  warehouse: z.string().min(1, { message: "لطفا انباری را وارد کنید" }),
+  alley: z.string().min(1, { message: "لطفا کوچه را وارد کنید" }),
+  address: z.string().min(1, { message: "لطفا آدرس را وارد کنید" }),
   type: z.string().min(1, { message: "لطفا نوع آگهی را وارد کنید" }),
   document: z.string().min(1, { message: "لطفا نوع سند را وارد کنید" }),
-  city_id: z.string(),
-  longitude: z.number(),
-  latitude: z.number(),
+  city_id: z.string().min(1, { message: "لطفا شهر را وارد کنید" }),
+  longitude: z.number().min(1, { message: "لطفا موقعیت را وارد کنید" }),
+  latitude: z.number().min(1, { message: "لطفا موقعیت را وارد کنید" }),
 });
 
 export default function SaleForm() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter()
 
   const [provinces, setProvinces] = useState(null);
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [cityId, setCityId] = useState(null);
 
-  console.log(cityId, selectedProvince, provinces);
+  const [selectedImages, setSelectedImages] = useState([]);
+  console.log(selectedImages);
 
   const buildYear = [
     "قبل از 1387",
@@ -114,6 +101,10 @@ export default function SaleForm() {
       });
   }
 
+  const imageHandler = (e) => {
+    setSelectedImages([...e.target.files]);
+  }
+
   const changeHandler = (e) => {
     setSelectedProvince(e.target.value);
   };
@@ -128,8 +119,8 @@ export default function SaleForm() {
         selectedProvince
           ? selectedProvince === province.name
             ? province.cities.map((city) =>
-                city.name === e.target.value ? setCityId(city.id) : null
-              )
+              city.name === e.target.value ? setCityId(city.id) : null
+            )
             : null
           : null
       );
@@ -139,7 +130,6 @@ export default function SaleForm() {
     const dataToSubmit = {
       title: data.title,
       description: data.description,
-      images: data.images,
       longitude: data.longitude,
       latitude: data.latitude,
       region: data.region,
@@ -170,6 +160,7 @@ export default function SaleForm() {
             position: "top-center",
           });
           setLoading(false);
+          router.push("/ads")
         } else {
           toast.error("درخواست شما ثبت نشد");
           setLoading(false);
@@ -203,12 +194,11 @@ export default function SaleForm() {
 
       <div className="flex md:gap-4 sm:flex-col md:flex-row">
         <div className="w-full flex flex-col items-start mb-10">
-          <FieldLabel>عکس اصلی</FieldLabel>
+          <FieldLabel>تصاویر</FieldLabel>
           <label
             for="dropzone-file"
-            className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ${
-              errors.images ? "border-red" : " border-gray-300"
-            }`}
+            className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ${errors.images ? "border-red" : " border-gray-300"
+              }`}
           >
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
               <svg
@@ -230,7 +220,7 @@ export default function SaleForm() {
               <p className="text-gray-600 text-sm"></p>
             </div>
             <input
-              {...register("images")}
+              onChange={imageHandler}
               multiple
               id="dropzone-file"
               type="file"
@@ -238,20 +228,6 @@ export default function SaleForm() {
             />
           </label>
         </div>
-
-        {/* <div className="w-full flex flex-col items-start mb-10">
-                    <FieldLabel>تصاویر بیشتر </FieldLabel>
-                    <label for="dropzone-file1" className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ${errors.images ? "border-red" : " border-gray-300"}`}>
-                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                            <svg className="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                            </svg>
-                            <p className="mb-2 text-sm text-gray-500 ">تصاویر بیشتر</p>
-                            <p className='text-gray-600 text-sm'></p>
-                        </div>
-                        <input {...register("images")} multiple id="dropzone-file1" type="file" className="hidden" />
-                    </label>
-                </div> */}
       </div>
 
       <div className="flex sm:flex-col md:flex-row md:gap-3 w-full">
@@ -278,9 +254,8 @@ export default function SaleForm() {
           <FieldLabel>عنوان آگهی</FieldLabel>
           <input
             {...register("title")}
-            className={`input input-bordered ${
-              errors.title ? "input-error" : null
-            }`}
+            className={`input input-bordered ${errors.title ? "input-error" : null
+              }`}
             placeholder=" عنوان آگهی را بنویسید"
           />
         </div>
@@ -288,9 +263,8 @@ export default function SaleForm() {
           <FieldLabel> منطقه</FieldLabel>
           <input
             {...register("region")}
-            className={`input input-bordered ${
-              errors.region ? "input-error" : null
-            }`}
+            className={`input input-bordered ${errors.region ? "input-error" : null
+              }`}
             placeholder=" منطقه"
           />
         </div>
@@ -303,9 +277,8 @@ export default function SaleForm() {
             {...register("state")}
             onChange={changeHandler}
             name="state"
-            className={`select select-bordered w-full ${
-              errors.state ? "select-error" : null
-            }`}
+            className={`select select-bordered w-full ${errors.state ? "select-error" : null
+              }`}
           >
             <option value="" disabled selected>
               استان
@@ -324,9 +297,8 @@ export default function SaleForm() {
             {...register("city_id")}
             onChange={handleCityId}
             name="city_id"
-            className={`select select-bordered w-full ${
-              errors.city_id ? "select-error" : null
-            }`}
+            className={`select select-bordered w-full ${errors.city_id ? "select-error" : null
+              }`}
           >
             <option value="" disabled selected>
               شهر
@@ -336,10 +308,10 @@ export default function SaleForm() {
                 selectedProvince
                   ? selectedProvince === province.name
                     ? province.cities.map((city, index) => (
-                        <option id={city.id} key={index} value={city.name}>
-                          {city.name}
-                        </option>
-                      ))
+                      <option id={city.id} key={index} value={city.name}>
+                        {city.name}
+                      </option>
+                    ))
                     : null
                   : null
               )}
@@ -352,9 +324,8 @@ export default function SaleForm() {
           <FieldLabel> پلاک</FieldLabel>
           <input
             {...register("plate")}
-            className={`input input-bordered ${
-              errors.plate ? "input-error" : null
-            }`}
+            className={`input input-bordered ${errors.plate ? "input-error" : null
+              }`}
             placeholder=" پلاک"
           />
         </div>
@@ -362,9 +333,8 @@ export default function SaleForm() {
           <FieldLabel> کوچه</FieldLabel>
           <input
             {...register("alley")}
-            className={`input input-bordered ${
-              errors.alley ? "input-error" : null
-            }`}
+            className={`input input-bordered ${errors.alley ? "input-error" : null
+              }`}
             placeholder="کوچه"
           />
         </div>
@@ -375,9 +345,8 @@ export default function SaleForm() {
           <FieldLabel> خیابان</FieldLabel>
           <input
             {...register("street")}
-            className={`input input-bordered ${
-              errors.street ? "input-error" : null
-            }`}
+            className={`input input-bordered ${errors.street ? "input-error" : null
+              }`}
             placeholder="خیابان"
           />
         </div>
@@ -388,9 +357,8 @@ export default function SaleForm() {
           <FieldLabel> قیمت کل</FieldLabel>
           <input
             {...register("sale_price")}
-            className={`input input-bordered ${
-              errors.sale_price ? "input-error" : null
-            }`}
+            className={`input input-bordered ${errors.sale_price ? "input-error" : null
+              }`}
             placeholder=" قیمت به تومان"
           />
         </div>
@@ -398,9 +366,8 @@ export default function SaleForm() {
           <FieldLabel>متراژ</FieldLabel>
           <input
             {...register("size")}
-            className={`input input-bordered ${
-              errors.size ? "input-error" : null
-            }`}
+            className={`input input-bordered ${errors.size ? "input-error" : null
+              }`}
             placeholder="متر مربع"
           />
         </div>
@@ -411,9 +378,8 @@ export default function SaleForm() {
           <FieldLabel>تعداد اتاق</FieldLabel>
           <select
             {...register("room_count")}
-            className={`select select-bordered ${
-              errors.room_count ? "select-error" : null
-            }`}
+            className={`select select-bordered ${errors.room_count ? "select-error" : null
+              }`}
           >
             <option selected disabled value="">
               انتخاب کنید
@@ -431,9 +397,8 @@ export default function SaleForm() {
           <FieldLabel>طبقه</FieldLabel>
           <input
             {...register("floor")}
-            className={`select select-bordered ${
-              errors.floor ? "select-error" : null
-            }`}
+            className={`select select-bordered ${errors.floor ? "select-error" : null
+              }`}
             placeholder="طبقه واحد"
           />
         </div>
@@ -444,9 +409,8 @@ export default function SaleForm() {
           <FieldLabel>سال ساخت </FieldLabel>
           <select
             {...register("year")}
-            className={`select select-bordered ${
-              errors.year ? "select-error" : null
-            }`}
+            className={`select select-bordered ${errors.year ? "select-error" : null
+              }`}
           >
             <option selected disabled value="">
               سال ساخت
@@ -464,9 +428,8 @@ export default function SaleForm() {
           <FieldLabel>انباری </FieldLabel>
           <select
             {...register("warehouse")}
-            className={`select select-bordered ${
-              errors.warehouse ? "select-error" : null
-            }`}
+            className={`select select-bordered ${errors.warehouse ? "select-error" : null
+              }`}
           >
             <option selected disabled value="">
               انتخاب کنید
@@ -482,9 +445,8 @@ export default function SaleForm() {
           <FieldLabel> آسانسور</FieldLabel>
           <select
             {...register("elevator")}
-            className={`select select-bordered ${
-              errors.elevator ? "select-error" : null
-            }`}
+            className={`select select-bordered ${errors.elevator ? "select-error" : null
+              }`}
           >
             <option selected disabled value="">
               انتخاب کنید
@@ -497,9 +459,8 @@ export default function SaleForm() {
           <FieldLabel>پارکینگ </FieldLabel>
           <select
             {...register("parking")}
-            className={`select select-bordered ${
-              errors.parking ? "select-error" : null
-            }`}
+            className={`select select-bordered ${errors.parking ? "select-error" : null
+              }`}
           >
             <option selected disabled value="">
               انتخاب کنید
@@ -514,9 +475,8 @@ export default function SaleForm() {
         <FieldLabel> نوع سند</FieldLabel>
         <select
           {...register("document")}
-          className={`select select-bordered ${
-            errors.document ? "select-error" : null
-          }`}
+          className={`select select-bordered ${errors.document ? "select-error" : null
+            }`}
         >
           <option selected disabled value="">
             انتخاب کنید
@@ -531,9 +491,8 @@ export default function SaleForm() {
         <FieldLabel>نوع آگهی </FieldLabel>
         <select
           {...register("type")}
-          className={`select select-bordered ${
-            errors.type ? "select-error" : null
-          }`}
+          className={`select select-bordered ${errors.type ? "select-error" : null
+            }`}
         >
           <option selected disabled value="">
             انتخاب کنید
@@ -549,9 +508,8 @@ export default function SaleForm() {
         <textarea
           {...register("address")}
           rows={2}
-          className={`textarea textarea-bordered w-full ${
-            errors.address ? "textarea-error" : null
-          }`}
+          className={`textarea textarea-bordered w-full ${errors.address ? "textarea-error" : null
+            }`}
           placeholder="آدرس را بنویسید"
         />
       </div>
@@ -561,9 +519,8 @@ export default function SaleForm() {
         <textarea
           {...register("description")}
           rows={2}
-          className={`textarea textarea-bordered w-full ${
-            errors.description ? "textarea-error" : null
-          }`}
+          className={`textarea textarea-bordered w-full ${errors.description ? "textarea-error" : null
+            }`}
           placeholder="توضیحات را بنویسید"
         />
       </div>

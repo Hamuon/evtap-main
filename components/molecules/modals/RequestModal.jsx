@@ -68,7 +68,6 @@ export default function RequestModal({ nextStep, setReqData }) {
     },
     resolver: zodResolver(schema),
   });
-  console.log(errors);
   async function getAllCities() {
     await getCities()
       .then((res) => {
@@ -93,8 +92,8 @@ export default function RequestModal({ nextStep, setReqData }) {
         selectedProvince
           ? selectedProvince === province.name
             ? province.cities.map((city) =>
-                city.name === e.target.value ? setCityId(city.id) : null
-              )
+              city.name === e.target.value ? setCityId(city.id) : null
+            )
             : null
           : null
       );
@@ -205,22 +204,22 @@ export default function RequestModal({ nextStep, setReqData }) {
                       <g id="Document">
                         <path
                           id="Fill 1"
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
                           d="M15.7158 16.9739H8.49585C8.08185 16.9739 7.74585 16.6379 7.74585 16.2239C7.74585 15.8099 8.08185 15.4739 8.49585 15.4739H15.7158C16.1298 15.4739 16.4658 15.8099 16.4658 16.2239C16.4658 16.6379 16.1298 16.9739 15.7158 16.9739Z"
                           fill="black"
                         />
                         <path
                           id="Fill 3"
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
                           d="M15.7158 12.7874H8.49585C8.08185 12.7874 7.74585 12.4514 7.74585 12.0374C7.74585 11.6234 8.08185 11.2874 8.49585 11.2874H15.7158C16.1298 11.2874 16.4658 11.6234 16.4658 12.0374C16.4658 12.4514 16.1298 12.7874 15.7158 12.7874Z"
                           fill="black"
                         />
                         <path
                           id="Fill 5"
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
                           d="M11.2506 8.6106H8.49561C8.08161 8.6106 7.74561 8.2746 7.74561 7.8606C7.74561 7.4466 8.08161 7.1106 8.49561 7.1106H11.2506C11.6646 7.1106 12.0006 7.4466 12.0006 7.8606C12.0006 8.2746 11.6646 8.6106 11.2506 8.6106Z"
                           fill="black"
                         />
@@ -235,8 +234,8 @@ export default function RequestModal({ nextStep, setReqData }) {
                           >
                             <path
                               id="Clip 8"
-                              fill-rule="evenodd"
-                              clip-rule="evenodd"
+                              fillRule="evenodd"
+                              clipRule="evenodd"
                               d="M3 2.00037H21.1647V21.9102H3V2.00037Z"
                               fill="white"
                             />
@@ -244,8 +243,8 @@ export default function RequestModal({ nextStep, setReqData }) {
                           <g mask="url(#mask0_33437_4997)">
                             <path
                               id="Fill 7"
-                              fill-rule="evenodd"
-                              clip-rule="evenodd"
+                              fillRule="evenodd"
+                              clipRule="evenodd"
                               d="M15.9088 3.50012L8.21976 3.50412C5.89176 3.51812 4.49976 4.95812 4.49976 7.35712V16.5531C4.49976 18.9681 5.90476 20.4101 8.25576 20.4101L15.9448 20.4071C18.2728 20.3931 19.6648 18.9511 19.6648 16.5531V7.35712C19.6648 4.94212 18.2608 3.50012 15.9088 3.50012ZM8.25676 21.9101C5.11276 21.9101 2.99976 19.7571 2.99976 16.5531V7.35712C2.99976 4.12412 5.04676 2.02312 8.21476 2.00412L15.9078 2.00012H15.9088C19.0528 2.00012 21.1648 4.15312 21.1648 7.35712V16.5531C21.1648 19.7851 19.1178 21.8871 15.9498 21.9071L8.25676 21.9101Z"
                               fill="black"
                             />
@@ -266,9 +265,8 @@ export default function RequestModal({ nextStep, setReqData }) {
               {...register("state")}
               onChange={changeHandler}
               name="state"
-              className={`select select-sm select-bordered w-full my-2 ${
-                errors.state ? "select-error" : null
-              }`}
+              className={`select select-sm select-bordered w-full my-2 ${errors.state ? "select-error" : null
+                }`}
             >
               <option value="" disabled selected>
                 استان
@@ -284,9 +282,8 @@ export default function RequestModal({ nextStep, setReqData }) {
               {...register("city_id")}
               onChange={handleCityId}
               name="city_id"
-              className={`select select-sm select-bordered w-full my-2 ${
-                errors.city_id ? "select-error" : null
-              }`}
+              className={`select select-sm select-bordered w-full my-2 ${errors.city_id ? "select-error" : null
+                }`}
             >
               <option value="" disabled selected>
                 شهر
@@ -296,10 +293,10 @@ export default function RequestModal({ nextStep, setReqData }) {
                   selectedProvince
                     ? selectedProvince === province.name
                       ? province.cities.map((city, index) => (
-                          <option id={city.id} key={index} value={city.name}>
-                            {city.name}
-                          </option>
-                        ))
+                        <option id={city.id} key={index} value={city.name}>
+                          {city.name}
+                        </option>
+                      ))
                       : null
                     : null
                 )}
@@ -309,18 +306,16 @@ export default function RequestModal({ nextStep, setReqData }) {
             <div className="w-full  items-center">
               <input
                 {...register("region")}
-                className={`input input-sm input-bordered w-full my-2 ${
-                  errors.region ? "input-error" : null
-                }`}
+                className={`input input-sm input-bordered w-full my-2 ${errors.region ? "input-error" : null
+                  }`}
                 placeholder="منطقه"
               />
             </div>
             <div className="w-full items-center">
               <input
                 {...register("street")}
-                className={`input input-sm input-bordered w-full my-2 ${
-                  errors.street ? "input-error" : null
-                }`}
+                className={`input input-sm input-bordered w-full my-2 ${errors.street ? "input-error" : null
+                  }`}
                 placeholder="خیابان اصلی"
               />
             </div>
@@ -329,41 +324,36 @@ export default function RequestModal({ nextStep, setReqData }) {
           <div className="flex gap-3 w-full">
             <input
               {...register("street_sec")}
-              className={`input input-sm input-bordered w-full my-2 ${
-                errors.street_sec ? "input-error" : null
-              }`}
+              className={`input input-sm input-bordered w-full my-2 ${errors.street_sec ? "input-error" : null
+                }`}
               placeholder="خیابان فرعی"
             />
             <input
               {...register("alley")}
-              className={`input input-sm input-bordered w-full my-2 ${
-                errors.alley ? "input-error" : null
-              }`}
+              className={`input input-sm input-bordered w-full my-2 ${errors.alley ? "input-error" : null
+                }`}
               placeholder="کوچه/مجتمع"
             />
           </div>
           <div className="flex gap-3 w-full">
             <input
               {...register("plate")}
-              className={`input input-sm input-bordered w-full my-2 ${
-                errors.plate ? "input-error" : null
-              }`}
+              className={`input input-sm input-bordered w-full my-2 ${errors.plate ? "input-error" : null
+                }`}
               placeholder=" پلاک/بلوک"
             />
             <input
               {...register("floor")}
-              className={`input input-sm input-bordered w-full my-2 ${
-                errors.floor ? "input-error" : null
-              }`}
+              className={`input input-sm input-bordered w-full my-2 ${errors.floor ? "input-error" : null
+                }`}
               placeholder="طبقه/واحد"
             />
           </div>
           <textarea
             {...register("address")}
             rows={2}
-            className={`textarea textarea-bordered w-full my-2 ${
-              errors.address ? "textarea-error" : null
-            }`}
+            className={`textarea textarea-bordered w-full my-2 ${errors.address ? "textarea-error" : null
+              }`}
             placeholder="استان، شهر، منطقه، محل، خیابان اصلی، خیابان فرعی، کوچه، پلاک، طبقه"
           />
 
