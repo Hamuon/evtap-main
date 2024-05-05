@@ -109,27 +109,27 @@ export default function page({ params: { id } }) {
               </div>
             </div>
           </div>
-          <div className="flex justify-start w-full items-center px-4 mb-6 sm:order-1 md:order-2">
-            <CallButton
-              phoneNumber="+1234567890"
-              text="تماس با ثبت کننده آگهی"
-            />
+          <div className="flex justify-start w-full items-center mb-6 sm:order-1 md:order-2">
+            <CallButton phoneNumber="+1234567890" text="تماس با ثبت کننده آگهی" />
             <ShareButton text="انتشار" />
           </div>
           <div className="font-semibold">
             <div className="flex justify-between w-full border-b-2 border-gray-400 sm:px-0 md:px-6 py-2">
               <span>توضیحات</span>
             </div>
-            <p className="sm:px-0 md:px-6 py-2 w-full">
+            <p className="sm:px-0 py-6 w-full text-justify">
               تمامی توضیحات این آگهی که در قسمت ثبت آگهی توسط کاربر ثبت شده است
-              در این قسمت نشان داده می شود.
+              تمامی توضیحات این آگهی که در قسمت ثبت آگهی توسط کاربر ثبت شده است
+              تمامی توضیحات این آگهی که در قسمت ثبت آگهی توسط کاربر ثبت شده است
+              تمامی توضیحات این آگهی که در قسمت ثبت آگهی توسط کاربر ثبت شده است
+              .در این قسمت نشان داده می شود.
             </p>
           </div>
-        </div>
-        <div className="col-span-1 aspect-square flex flex-col gap-6">
           <div className="h-96 overflow-hidden w-full md:block sm:hidden">
             <AdPageMap />
           </div>
+        </div>
+        <div className="col-span-1 aspect-square flex flex-col gap-6">
           <MyGallery {...defaultProps} />
         </div>
         <div className="h-96 order-3 overflow-hidden w-full sm:flex justify-center md:hidden sm:mb-10 px-6">
