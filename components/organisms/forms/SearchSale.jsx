@@ -111,6 +111,7 @@ export default function SearchSale({ setSearch }) {
             to_size: data.to_size,
             elevator: data.elevator,
             parking: data.parking,
+            have_image: data.have_image,
         };
 
         await filterAds(dataToSubmit).then((res) => {
@@ -280,6 +281,7 @@ export default function SearchSale({ setSearch }) {
                         onChange={convertFrom}
                         name="from"
                         placeholder="از تاریخ"
+                        className="w-full"
                         style={{
                             flexShrink: 1,
                             fontSize: "14px",
@@ -298,6 +300,7 @@ export default function SearchSale({ setSearch }) {
                         onChange={convertTo}
                         name="to"
                         placeholder="تا تاریخ"
+                        className="w-full"
                         style={{
                             flexShrink: 1,
                             fontSize: "14px",
