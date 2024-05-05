@@ -110,9 +110,11 @@ export default function page({ params: { id } }) {
             </div>
           </div>
           <div className="flex justify-start w-full items-center px-4 mb-6 sm:order-1 md:order-2">
-            <CallButton phoneNumber="+1234567890" text="تماس با ثبت کننده آگهی"/>
+            <CallButton
+              phoneNumber="+1234567890"
+              text="تماس با ثبت کننده آگهی"
+            />
             <ShareButton text="انتشار" />
-
           </div>
           <div className="font-semibold">
             <div className="flex justify-between w-full border-b-2 border-gray-400 sm:px-0 md:px-6 py-2">
