@@ -15,8 +15,6 @@ import FilteredAdsContext from "@/context/FilteredAdsProvider";
 
 const schema = z.object({
     title: z.string(),
-    from: z.string(),
-    to: z.string(),
     city_id: z.string(),
     have_image: z.string(),
     type: z.string(),
@@ -29,7 +27,7 @@ const schema = z.object({
     parking: z.string(),
 });
 
-export default function SearchSale({ setSearch }) {
+export default function SearchSale() {
 
     const [ads, setAds] = useState(null);
     const { setFilteredAds } = useContext(FilteredAdsContext);
@@ -42,13 +40,14 @@ export default function SearchSale({ setSearch }) {
     const [toDate, setToDate] = useState(null);
 
     const {
-        setValue,
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({
         resolver: zodResolver(schema),
     });
+
+    console.log(errors);
 
     const convertFrom = (date, format = "YYYY/MM/DD") => {
         let object = { date, format }
@@ -98,7 +97,7 @@ export default function SearchSale({ setSearch }) {
                     : null
             );
     };
-    const submitHandler = async (data) => {
+    const handleClick = async (data) => {
         const dataToSubmit = {
             city_id: cityId,
             from: fromDate?.gregorian,
@@ -113,7 +112,10 @@ export default function SearchSale({ setSearch }) {
             parking: data.parking,
         };
 
+        console.log(dataToSubmit)
+
         await filterAds(dataToSubmit).then((res) => {
+            console.log(res)
             setFilteredAds(res.data.ads);
         }).catch((error) => {
             console.log(error);
@@ -121,202 +123,193 @@ export default function SearchSale({ setSearch }) {
     };
 
     return (
-        <form
-            onSubmit={handleSubmit(submitHandler)}
-        >
-            <div className="flex flex-col items-start w-full relative">
-                <div className="flex gap-2 w-full items-center">
-                    <input
-                        {...register("title")}
-                        className="input input-sm input-bordered w-full my-2"
-                        placeholder="عنوان"
-                    />
-                    <select
-                        {...register("parking")}
-                        name="parking"
-                        className="select select-sm select-bordered w-full my-2"
-                    >
-                        <option selected disabled value="">
-                            پارکینگ
-                        </option>
-                        <option value="1">دارد</option>
-                        <option value="0">ندارد</option>
-                    </select>
-                </div>
+        <div>
+            <form
+                onSubmit={handleSubmit(handleClick)}
+            >
+                <div className="flex flex-col items-start w-full relative">
+                    <div className="flex gap-2 w-full items-center">
+                        <input
+                            {...register("title")}
+                            className="input input-sm input-bordered w-full my-2"
+                            placeholder="عنوان"
+                        />
+                        <select
+                            {...register("parking")}
+                            name="parking"
+                            className="select select-sm select-bordered w-full my-2"
+                        >
+                            <option selected disabled value="">
+                                پارکینگ
+                            </option>
+                            <option value="1">دارد</option>
+                            <option value="0">ندارد</option>
+                        </select>
+                    </div>
 
-                <div className="flex gap-2 w-full">
-                    {/* <select onChange={(e) => setValue("status", e.target.value)} {...register("status")} name='status' className="select select-sm select-bordered w-full my-2" >
-                            <option selected disabled value="">وضعیت</option>
-                            <option value="active">فعال</option>
-                            <option value="inactive">غیر فعال</option>
-                            <option value="pending">پرداخت شده</option>
-                            <option value="pending">در انتظار</option>
-                            <option value="complete">تکمیل شده</option>
-                            <option value="saved">ذخیره شده</option>
-                        </select> */}
-                    <select
-                        onChange={changeHandler}
-                        name="state"
-                        className={`select select-sm select-bordered w-full my-2`}
-                    >
-                        <option value="" disabled selected>
-                            استان
-                        </option>
-                        {provinces &&
-                            provinces.map((province, index) => (
-                                <option id={province.id} key={index} value={province.name}>
-                                    {province.name}
-                                </option>
-                            ))}
-                    </select>
-                    <select
-                        {...register("city_id")}
-                        onChange={handleCityId}
-                        name="city_id"
-                        className={`select select-sm select-bordered w-full my-2`}
-                    >
-                        <option value="" disabled selected>
-                            شهر
-                        </option>
-                        {provinces &&
-                            provinces.map((province) =>
-                                selectedProvince
-                                    ? selectedProvince === province.name
-                                        ? province.cities.map((city, index) => (
-                                            <option id={city.id} key={index} value={city.name}>
-                                                {city.name}
-                                            </option>
-                                        ))
+                    <div className="flex gap-2 w-full">
+                        <select
+                            onChange={changeHandler}
+                            name="state"
+                            className={`select select-sm select-bordered w-full my-2`}
+                        >
+                            <option value="" disabled selected>
+                                استان
+                            </option>
+                            {provinces &&
+                                provinces.map((province, index) => (
+                                    <option id={province.id} key={index} value={province.name}>
+                                        {province.name}
+                                    </option>
+                                ))}
+                        </select>
+                        <select
+                            {...register("city_id")}
+                            onChange={handleCityId}
+                            name="city_id"
+                            className={`select select-sm select-bordered w-full my-2`}
+                        >
+                            <option value="" disabled selected>
+                                شهر
+                            </option>
+                            {provinces &&
+                                provinces.map((province) =>
+                                    selectedProvince
+                                        ? selectedProvince === province.name
+                                            ? province.cities.map((city, index) => (
+                                                <option id={city.id} key={index} value={city.name}>
+                                                    {city.name}
+                                                </option>
+                                            ))
+                                            : null
                                         : null
-                                    : null
-                            )}
-                    </select>
-                </div>
+                                )}
+                        </select>
+                    </div>
 
-                <div className="flex gap-2 w-full">
-                    <select
-                        onChange={(e) => setValue("have_image", e.target.value)}
-                        {...register("have_image")}
-                        name="have_image"
-                        className="select select-sm select-bordered w-full my-2"
-                    >
-                        <option selected disabled value="">
-                            عکس
-                        </option>
-                        <option value="1">دارد</option>
-                        <option value="0">ندارد</option>
-                    </select>
-                    <select
-                        onChange={(e) => setValue("type", e.target.value)}
-                        {...register("type")}
-                        name="type"
-                        className="select select-sm select-bordered w-full my-2"
-                    >
-                        <option selected disabled value="">
-                            نوع
-                        </option>
-                        <option value="sale">فروش</option>
-                        <option value="rent">اجاره</option>
-                        <option value="mortgage">رهن</option>
-                    </select>
-                </div>
+                    <div className="flex gap-2 w-full">
+                        <select
+                            onChange={(e) => setValue("have_image", e.target.value)}
+                            {...register("have_image")}
+                            name="have_image"
+                            className="select select-sm select-bordered w-full my-2"
+                        >
+                            <option selected disabled value="">
+                                عکس
+                            </option>
+                            <option value="1">دارد</option>
+                            <option value="0">ندارد</option>
+                        </select>
+                        <select
+                            onChange={(e) => setValue("type", e.target.value)}
+                            {...register("type")}
+                            name="type"
+                            className="select select-sm select-bordered w-full my-2"
+                        >
+                            <option selected disabled value="">
+                                نوع
+                            </option>
+                            <option value="sale">فروش</option>
+                            <option value="rent">اجاره</option>
+                            <option value="mortgage">رهن</option>
+                        </select>
+                    </div>
 
-                <div className="flex gap-2 w-full">
-                    <select
-                        {...register("document")}
-                        name="document"
-                        className="select select-sm select-bordered w-full my-2"
-                    >
-                        <option selected disabled value="">
-                            سند
-                        </option>
-                        <option value="promise">قول نامه</option>
-                        <option value="endowment">وقف</option>
-                        <option value="single">تک برگ</option>
-                    </select>
-                    <select
-                        {...register("elevator")}
-                        name="elevator"
-                        className="select select-sm select-bordered w-full my-2"
-                    >
-                        <option selected disabled value="">
-                            آسانسور
-                        </option>
-                        <option value="1">دارد</option>
-                        <option value="0">ندارد</option>
-                    </select>
-                </div>
-
+                    <div className="flex gap-2 w-full">
+                        <select
+                            {...register("document")}
+                            name="document"
+                            className="select select-sm select-bordered w-full my-2"
+                        >
+                            <option selected disabled value="">
+                                سند
+                            </option>
+                            <option value="promise">قول نامه</option>
+                            <option value="endowment">وقف</option>
+                            <option value="single">تک برگ</option>
+                        </select>
+                        <select
+                            {...register("elevator")}
+                            name="elevator"
+                            className="select select-sm select-bordered w-full my-2"
+                        >
+                            <option selected disabled value="">
+                                آسانسور
+                            </option>
+                            <option value="1">دارد</option>
+                            <option value="0">ندارد</option>
+                        </select>
+                    </div>
 
 
-                <div className="flex gap-2 w-full items-center">
-                    <input
-                        {...register("from_sale_price")}
-                        className="input input-sm input-bordered w-full my-2"
-                        placeholder="قیمت از"
-                    />
-                    <input
-                        {...register("to_sale_price")}
-                        className="input input-sm input-bordered w-full my-2"
-                        placeholder="قیمت تا"
-                    />
-                </div>
 
-                <div className="flex gap-2 w-full items-center">
-                    <input
-                        {...register("from_size")}
-                        className="input input-sm input-bordered w-full my-2"
-                        placeholder="از متراژ"
-                    />
-                    <input
-                        {...register("to_size")}
-                        className="input input-sm input-bordered w-full my-2"
-                        placeholder="تا متراژ"
-                    />
-                </div>
-                <div className="flex gap-2 w-full my-2 items-center">
-                    <DatePicker
-                        value={fromDate?.persian}
-                        onChange={convertFrom}
-                        name="from"
-                        placeholder="از تاریخ"
-                        style={{
-                            flexShrink: 1,
-                            fontSize: "14px",
-                            paddingTop: "15px",
-                            paddingRight: "15px",
-                            paddingBottom: "15px",
-                            borderRadius: "8px",
-                            width: "100%",
-                        }}
-                        calendar={persian}
-                        format="YYYY/MM/DD"
-                        locale={persian_fa}
-                    />
-                    <DatePicker
-                        value={toDate?.persian}
-                        onChange={convertTo}
-                        name="to"
-                        placeholder="تا تاریخ"
-                        style={{
-                            flexShrink: 1,
-                            fontSize: "14px",
-                            paddingTop: "15px",
-                            paddingRight: "15px",
-                            paddingBottom: "15px",
-                            borderRadius: "8px",
-                            width: "100%",
-                        }}
-                        calendar={persian}
-                        format="YYYY/MM/DD"
-                        locale={persian_fa}
-                    />
-                </div>
+                    <div className="flex gap-2 w-full items-center">
+                        <input
+                            {...register("from_sale_price")}
+                            className="input input-sm input-bordered w-full my-2"
+                            placeholder="قیمت از"
+                        />
+                        <input
+                            {...register("to_sale_price")}
+                            className="input input-sm input-bordered w-full my-2"
+                            placeholder="قیمت تا"
+                        />
+                    </div>
 
-                <div className="flex gap-2 mt-2 w-full">
-                    <SubmitButton type="submit" className="w-full" text="جستجو" />
+                    <div className="flex gap-2 w-full items-center">
+                        <input
+                            {...register("from_size")}
+                            className="input input-sm input-bordered w-full my-2"
+                            placeholder="از متراژ"
+                        />
+                        <input
+                            {...register("to_size")}
+                            className="input input-sm input-bordered w-full my-2"
+                            placeholder="تا متراژ"
+                        />
+                    </div>
+                    <div className="flex gap-2 w-full my-2 items-center">
+                        <DatePicker
+                            value={fromDate?.persian}
+                            onChange={convertFrom}
+                            name="from"
+                            placeholder="از تاریخ"
+                            style={{
+                                flexShrink: 1,
+                                fontSize: "14px",
+                                paddingTop: "15px",
+                                paddingRight: "15px",
+                                paddingBottom: "15px",
+                                borderRadius: "8px",
+                                width: "100%",
+                            }}
+                            calendar={persian}
+                            format="YYYY/MM/DD"
+                            locale={persian_fa}
+                        />
+                        <DatePicker
+                            value={toDate?.persian}
+                            onChange={convertTo}
+                            name="to"
+                            placeholder="تا تاریخ"
+                            style={{
+                                flexShrink: 1,
+                                fontSize: "14px",
+                                paddingTop: "15px",
+                                paddingRight: "15px",
+                                paddingBottom: "15px",
+                                borderRadius: "8px",
+                                width: "100%",
+                            }}
+                            calendar={persian}
+                            format="YYYY/MM/DD"
+                            locale={persian_fa}
+                        />
+                    </div>
+
+                    <SubmitButton type="submit" className="w-full mt-4" text="جستجو" />
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     );
 }
