@@ -76,7 +76,7 @@ export default function Home() {
                 <path fillRule="evenodd" clipRule="evenodd" d="M1.99998 5.90271L1.99998 33.0975C1.99998 36.0887 5.23318 37.9663 7.83109 36.4801L31.5885 22.8931C34.2034 21.3975 34.2053 17.6273 31.5904 16.1298L7.83298 2.52013C5.23507 1.03399 1.99998 2.90963 1.99998 5.90271Z" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
-            <Link href="/login" className="bg-black shadow-lg rounded-full mr-2 flex justify-center items-center aspect-square">
+            <Link href="/profile" className="bg-black shadow-lg rounded-full mr-2 flex justify-center items-center aspect-square">
               <svg width="34" height="42" viewBox="0 0 34 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" clipRule="evenodd" d="M28.0292 11.1897C28.0292 17.3085 23.1232 22.2148 17 22.2148C10.879 22.2148 5.97091 17.3085 5.97091 11.1897C5.97091 5.07087 10.879 0.166656 17 0.166656C23.1232 0.166656 28.0292 5.07087 28.0292 11.1897ZM17 41.8333C7.96332 41.8333 0.333374 40.3646 0.333374 34.6978C0.333374 29.029 8.01125 27.6123 17 27.6123C26.0388 27.6123 33.6667 29.0811 33.6667 34.7478C33.6667 40.4166 25.9888 41.8333 17 41.8333Z" fill="white" />
               </svg>
