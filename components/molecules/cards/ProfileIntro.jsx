@@ -1,6 +1,11 @@
 import React from "react";
 
-export default function ProfileIntro({ name, phone, request_ammount, ads_ammount }) {
+export default function ProfileIntro({
+  name,
+  phone,
+  request_ammount,
+  ads_ammount,
+}) {
   const introItems = [
     {
       tag: "",
@@ -347,9 +352,7 @@ export default function ProfileIntro({ name, phone, request_ammount, ads_ammount
           fill="white"
         />
       </svg> */}
-      <div className="mb-3 sm:text-base md:text-lg font-semibold">
-        {name}
-      </div>
+      <div className="mb-3 sm:text-base md:text-lg font-semibold">{name}</div>
       <div className="flex flex-col overflow-hidden text-sm text-gray-400 font-numerals">
         {introItems.map((item, index) => (
           <div key={index} className="flex items-center w-full p-3 ">

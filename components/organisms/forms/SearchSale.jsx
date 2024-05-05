@@ -110,6 +110,7 @@ export default function SearchSale() {
             to_size: data.to_size,
             elevator: data.elevator,
             parking: data.parking,
+            have_image: data.have_image,
         };
 
         console.log(dataToSubmit)
