@@ -39,6 +39,10 @@ export function getDashboard() {
   return http.get("/user/dashboard", config);
 }
 
+export function getAds() {
+  return http.get("/user/advertising", config);
+}
+
 export function getExperts() {
   return http.get("/home");
 }

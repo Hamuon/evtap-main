@@ -4,9 +4,9 @@ import ProfileNavigation from '@/components/organisms/navigation/ProfileNavigati
 export default function profileLayout({ children }) {
 
     return (
-        <>
+        <div className=''>
             <ProfileNavigation />
             {children}
-        </>
+        </div>
     )
 }

@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import { getDashboard } from '@/services/authService'
-export default function Table() {
+export default function ReqTable() {
 
   const [user, setUser] = useState(null)
 
@@ -18,15 +18,16 @@ export default function Table() {
   }, [])
 
   return (
-    <div dir="rtl" className="overflow-x-auto w-full shadow-lg rounded-lg h-96 overflow-y-scroll border border-gray-200">
-      <table className="table " >
+    <div dir="rtl" className="overflow-x-auto w-full shadow-lg rounded-lg h-96 overflow-y-scroll border border-gray-200 py-4">
+    <span className="font-black text-gray-600 px-4">درخواست های من</span>
+
+      <table className="table mt-4" >
         {/* head */}
         <thead>
           <tr>
             <th>آدرس</th>
             <th>وضعیت</th>
             <th>شهر</th>
-            <th>عملیات</th>
           </tr>
         </thead>
         <tbody>
@@ -36,7 +37,6 @@ export default function Table() {
                 <td>{request.address}</td>
                 <td>{request.status_title}</td>
                 <td>{request.city.name}</td>
-                <td className="text-gray-400">مشاهده</td>
               </tr>
             ))
           }

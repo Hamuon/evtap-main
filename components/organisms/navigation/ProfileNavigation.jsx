@@ -9,7 +9,7 @@ export default function ProfileNavigation() {
         <nav className='flex justify-center mx-auto relative z-50 w-full'>
             <div className='flex w-full justify-between items-center md:px-10 sm:px-10 md:container mx-auto h-32'>
                 <Link href="/">
-                    <Image src="/media/evtap-logo.png" alt="evtap logo" width={65} height={65} />
+                    <Image src="/media/evtapN.svg" alt="evtap logo" width={65} height={65} />
                 </Link>
 
                 <div className=' items-center sm:hidden lg:flex'>
