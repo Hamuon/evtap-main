@@ -7,7 +7,7 @@ import Label from '@/components/atoms/labels/Label'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { completeProfile } from '@/services/authService'
 import SubmitButton from '@/components/atoms/buttons/SubmitButton'
-
+import { useRouter } from 'next/navigation'
 const schema = z.object({
     first_name: z.string().min(1, { message: "لطفا نام خود را وارد کنید" }).max(20, { message: "نام بیش از 100 کاراکتر" }),
     last_name: z.string().min(1, { message: "لطفا نام خانوادگی خود را وارد کنید" }).max(20, { message: "نام خانوادگی بیش از 100 کاراکتر" }),
@@ -20,6 +20,7 @@ export default function CompleteModal() {
             resolver: zodResolver(schema)
         }
     )
+    const router = useRouter()
     const submitHandler = async (data) => {
         if (!token) {
             toast.error("توکن نامعتبر", { position: "top-center" })
@@ -32,6 +33,7 @@ export default function CompleteModal() {
                     toast.success("اطلاعات شما تکمیل شد", {
                         position: "top-center"
                     })
+                    router.push('/')
                 } else {
                     toast.error(res.data.message, {
                         position: "top-center"

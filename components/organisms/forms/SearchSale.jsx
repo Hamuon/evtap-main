@@ -1,6 +1,6 @@
 "use client";
 import { z } from "zod";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import SubmitButton from "@/components/atoms/buttons/SubmitButton";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
@@ -10,6 +10,8 @@ import gregorian_fa from "react-date-object/locales/gregorian_fa";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { getCities } from "@/services/authService";
+import { filterAds } from "@/services/authService";
+import FilteredAdsContext from "@/context/FilteredAdsProvider";
 
 const schema = z.object({
     title: z.string(),
@@ -28,6 +30,10 @@ const schema = z.object({
 });
 
 export default function SearchSale({ setSearch }) {
+
+    const [ads, setAds] = useState(null);
+    const { setFilteredAds } = useContext(FilteredAdsContext);
+
     const [provinces, setProvinces] = useState(null);
     const [selectedProvince, setSelectedProvince] = useState(null);
     const [cityId, setCityId] = useState("");
@@ -92,8 +98,7 @@ export default function SearchSale({ setSearch }) {
                     : null
             );
     };
-
-    const submitHandler = (data) => {
+    const submitHandler = async (data) => {
         const dataToSubmit = {
             city_id: cityId,
             from: fromDate?.gregorian,
@@ -107,7 +112,12 @@ export default function SearchSale({ setSearch }) {
             elevator: data.elevator,
             parking: data.parking,
         };
-        console.log(dataToSubmit, data);
+
+        await filterAds(dataToSubmit).then((res) => {
+            setFilteredAds(res.data.ads);
+        }).catch((error) => {
+            console.log(error);
+        });
     };
 
     return (

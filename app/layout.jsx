@@ -10,8 +10,10 @@ import ProtectRoute from "@/components/ProtectRoute";
 import AuthProvider from "@/context/AuthProvider";
 import MobileMenu from "@/components/organisms/menu/MobileMenu";
 import useMenu from "@/hooks/useMenu";
+import { FilteredAdsProvider } from "@/context/FilteredAdsProvider";
 export default function RootLayout({ children }) {
   const pathname = usePathname();
+
   const [mounted, setMounted] = useState(false);
   const { open, toggleMenu } = useMenu();
 
@@ -44,21 +46,23 @@ export default function RootLayout({ children }) {
       >
         {mounted && (
           <AuthProvider>
-            <ProtectRoute>
-              <ToastContainer />
-              <div
-                className="flex flex-col justify-between min-h-full"
-              >
-                {pathname === "/" ? (
-                  <MainNavigation toggleMenu={toggleMenu} />
-                ) : null}
-                {open ? (
-                  <MobileMenu open={open} toggleMenu={toggleMenu} />
-                ) : null}
-                {children}
-                {pathname === "/" ? <MainFooter /> : null}
-              </div>
-            </ProtectRoute>
+            <FilteredAdsProvider>
+              <ProtectRoute>
+                <ToastContainer />
+                <div
+                  className="flex flex-col justify-between min-h-full"
+                >
+                  {pathname === "/" ? (
+                    <MainNavigation toggleMenu={toggleMenu} />
+                  ) : null}
+                  {open ? (
+                    <MobileMenu open={open} toggleMenu={toggleMenu} />
+                  ) : null}
+                  {children}
+                  {pathname === "/" ? <MainFooter /> : null}
+                </div>
+              </ProtectRoute>
+            </FilteredAdsProvider>
           </AuthProvider>
         )}
       </body>

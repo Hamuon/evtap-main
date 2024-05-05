@@ -17,7 +17,6 @@ export default function AuthNavigation({ setSearch, search, toggleMenu }) {
                 <div className=' items-center flex sm:gap-2 md:gap-0'>
 
                     <ul className='sm:hidden md:flex ml-3'>
-                        <li className='mr-12 font-semibold'>تبریز</li>
                         <Link href="/request">
                             <li className='mr-12 font-semibold'>درخواست کارشناسی</li>
                         </Link>

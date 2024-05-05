@@ -31,6 +31,14 @@ export function submitAd(data) {
   return http.post("/user/advertising", data, config);
 }
 
+// export function getAds() {
+//   return http.get("/user/advertising", data, config);
+// }
+
+export function filterAds(data) {
+  return http.post("/advertising", data, config);
+}
+
 export function getCities() {
   return http.get("/get-cities");
 }
