@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["evtap.ir"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "evtap.ir",
+        pathname: "/**",
+      },
+    ],
   },
 };
 

@@ -8,7 +8,7 @@ export default function Ads() {
 
     return (
         <main className='w-full mx-auto flex justify-center'>
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 w-full md:container z-0 sm:px-4 md:px-0 pb-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 w-full md:container z-0 sm:px-4 md:px-0 pb-10 pb-10">
                 <AdCard />
                 <AdCard />
                 <AdCard />
