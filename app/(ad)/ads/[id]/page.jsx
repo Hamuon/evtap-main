@@ -53,7 +53,7 @@ export default function page({ params: { id } }) {
           </div>
           <div className="mb-8">
             <div className="flex gap-1">
-              <span>{time}</span>
+              <span>{ad?.time}</span>
               
             </div>
           </div>
