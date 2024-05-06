@@ -47,6 +47,7 @@ const schema = z.object({
   city_id: z.number().min(1, { message: "لطفا شهر را وارد کنید" }),
   longitude: z.number().min(1, { message: "لطفا موقعیت را وارد کنید" }),
   latitude: z.number().min(1, { message: "لطفا موقعیت را وارد کنید" }),
+  images: z.any(),
 });
 
 export default function SaleForm() {
@@ -99,7 +100,7 @@ export default function SaleForm() {
   }
 
   const imageHandler = (e) => {
-    setValue("images", e.target.files);
+    setValue("images", Object.entries(e.target.files).map(([key, value]) => value));
   }
 
   const changeHandler = (e) => {
@@ -135,7 +136,7 @@ export default function SaleForm() {
         formDataToSend.append(key, value);
       }
     });
-    console.log(formDataToSend);
+    console.log(formDataToSend, data);
     setLoading(true);
 
     await submitAd(formDataToSend)

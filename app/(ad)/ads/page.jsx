@@ -10,7 +10,7 @@ export default function Ads() {
     const [ads, setAds] = useState([])
     const [page, setPage] = useState(1)
     const [pageLength, setPageLength] = useState()
-
+    console.log(ads);
     const getAllAds = async () => {
         await getAds().then(response => {
             console.log(response.data);
