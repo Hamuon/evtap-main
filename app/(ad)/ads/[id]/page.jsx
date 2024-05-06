@@ -15,15 +15,7 @@ export default function page({ params: { id } }) {
   const defaultProps = {
     autoPlay: false,
     showPlayButton: false,
-    items: [
-      {
-        sizes: "767px, 767px",
-        original:
-          `/media/imgHolder.jpg`,
-        thumbnail:
-          `/media/imgHolder.jpg`,
-      }
-    ],
+    items: [],
   };
   console.log(ad)
 
@@ -38,14 +30,26 @@ export default function page({ params: { id } }) {
   }, []);
 
   useEffect(() => {
-    ad?.images?.map(image => defaultProps.items.push({
-      sizes: "767px, 767px",
-      original:
-        `https://evtap.ir/uploads/${image}`,
-      thumbnail:
-        `https://evtap.ir/uploads/${image}`,
-    }))
-    console.log(defaultProps.items);
+    if (ad?.images?.length > 0) {
+      ad?.images?.map(image => defaultProps.items.push({
+        sizes: "767px, 767px",
+        original:
+          `https://evtap.ir/uploads/${image}`,
+        thumbnail:
+          `https://evtap.ir/uploads/${image}`,
+      }))
+    } else {
+      defaultProps.items.push(
+        {
+          sizes: "767px, 767px",
+          original:
+            `/media/imgHolder.jpg`,
+          thumbnail:
+            `/media/imgHolder.jpg`,
+        }
+      )
+    }
+    console.log(ad?.images);
   }, [ad]);
 
 
