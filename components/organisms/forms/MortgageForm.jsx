@@ -103,7 +103,7 @@ export default function SaleForm() {
 
     const imageHandler = (e) => {
         setValue("images", Object.entries(e.target.files).map(([key, value]) => value));
-      }
+    }
 
     const changeHandler = (e) => {
         setSelectedProvince(e.target.value);
@@ -283,7 +283,6 @@ export default function SaleForm() {
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel> شهر</FieldLabel>
                     <select
-                        {...register("city_id")}
                         onChange={handleCityId}
                         name="city_id"
                         className={`select select-bordered w-full ${errors.city_id ? "select-error" : null

@@ -284,7 +284,6 @@ export default function SaleForm() {
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel> شهر</FieldLabel>
                     <select
-                        {...register("city_id")}
                         onChange={handleCityId}
                         name="city_id"
                         className={`select select-bordered w-full ${errors.city_id ? "select-error" : null
