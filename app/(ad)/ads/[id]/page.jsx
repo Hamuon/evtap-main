@@ -21,7 +21,7 @@ export default function page({ params: { id } }) {
         original:
           `/media/imgHolder.jpg`,
         thumbnail:
-        `/media/imgHolder.jpg`,
+          `/media/imgHolder.jpg`,
       }
     ],
   };
@@ -62,7 +62,7 @@ export default function page({ params: { id } }) {
           <div className="mb-8">
             <div className="flex gap-1">
               <span>{ad?.time}</span>
-              
+
             </div>
           </div>
           <div className="flex gap-1 md:text-2xl sm:text-base font-semibold mb-8">
