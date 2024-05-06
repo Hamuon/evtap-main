@@ -4,11 +4,11 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import icon from "../constants";
 
-function AdPageMap() {
+function AdPageMap({lat, lon}) {
   const [map, setMap] = useState(null);
   const [coords, setCoords] = useState({
-    latitude: 38.074,
-    longitude: 46.296,
+    latitude: lat? lat : 38.074,
+    longitude: lon? lon : 46.296,
   });
 
   return (
