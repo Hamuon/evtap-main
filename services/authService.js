@@ -58,3 +58,7 @@ export function getExperts() {
 export function getAllExperts() {
   return http.get("/experts");
 }
+
+export function adPerPage(page) {
+  return http.get(`/advertising?page=${page}`);
+}

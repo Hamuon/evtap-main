@@ -44,7 +44,7 @@ const schema = z.object({
   address: z.string().min(1, { message: "لطفا آدرس را وارد کنید" }),
   type: z.string().min(1, { message: "لطفا نوع آگهی را وارد کنید" }),
   document: z.string().min(1, { message: "لطفا نوع سند را وارد کنید" }),
-  city_id: z.string().min(1, { message: "لطفا شهر را وارد کنید" }),
+  city_id: z.number().min(1, { message: "لطفا شهر را وارد کنید" }),
   longitude: z.number().min(1, { message: "لطفا موقعیت را وارد کنید" }),
   latitude: z.number().min(1, { message: "لطفا موقعیت را وارد کنید" }),
 });
@@ -116,7 +116,7 @@ export default function SaleForm() {
         selectedProvince
           ? selectedProvince === province.name
             ? province.cities.map((city) =>
-              city.name === e.target.value ? setCityId(city.id) : null
+              city.name === e.target.value ? setValue("city_id", city.id) : null,
             )
             : null
           : null
@@ -280,7 +280,6 @@ export default function SaleForm() {
         <div className="w-full my-2 flex flex-col">
           <FieldLabel> شهر</FieldLabel>
           <select
-            {...register("city_id")}
             onChange={handleCityId}
             name="city_id"
             className={`select select-bordered w-full ${errors.city_id ? "select-error" : null

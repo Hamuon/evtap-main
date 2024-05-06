@@ -18,7 +18,7 @@ export default function AdCard({ type, title, region, price, time, ad_img, id })
           <div className="text-gray-500 text-sm ">{time}</div>
         </div>
         <div className="relative bg-gray-200 w-44 h-full">
-          <Image src={`https://evtap.ir/uploads/${ad_img}`} fill style={{ objectFit: "cover" }} alt={title} />
+          <Image src={ad_img} fill style={{ objectFit: "cover" }} alt={title} />
         </div>
       </div>
     </Link>

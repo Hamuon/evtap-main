@@ -11,11 +11,19 @@ const AdPageMap = dynamic(() => import("@/components/AdPageMap"), {
 
 export default function page({ params: { id } }) {
   const [ad, setAd] = React.useState(null);
-  console.log(ad);
+  console.log(ad)
   const defaultProps = {
     autoPlay: false,
     showPlayButton: false,
-    items: [],
+    items: [
+      {
+        sizes: "767px, 767px",
+        original:
+          `/media/imgHolder.jpg`,
+        thumbnail:
+        `/media/imgHolder.jpg`,
+      }
+    ],
   };
   console.log(ad)
 
@@ -30,7 +38,7 @@ export default function page({ params: { id } }) {
   }, []);
 
   useEffect(() => {
-    ad?.images.map(image => defaultProps.items.push({
+    ad?.images?.map(image => defaultProps.items.push({
       sizes: "767px, 767px",
       original:
         `https://evtap.ir/uploads/${image}`,
