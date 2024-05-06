@@ -1,6 +1,6 @@
 "use client";
 import { z } from "zod";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import SubmitButton from "@/components/atoms/buttons/SubmitButton";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
@@ -9,12 +9,11 @@ import gregorian from "react-date-object/calendars/gregorian";
 import gregorian_fa from "react-date-object/locales/gregorian_fa";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { getCities } from "@/services/authService";
+import { filterAds, getCities } from "@/services/authService";
+import FilteredAdsContext from "@/context/FilteredAdsProvider";
 
 const schema = z.object({
     title: z.string(),
-    from: z.string(),
-    to: z.string(),
     city_id: z.string(),
     have_image: z.string(),
     type: z.string(),
@@ -30,6 +29,8 @@ const schema = z.object({
 });
 
 export default function SearchRent({ setSearch }) {
+    const { setFilteredAds } = useContext(FilteredAdsContext);
+
     const [provinces, setProvinces] = useState(null);
     const [selectedProvince, setSelectedProvince] = useState(null);
     const [cityId, setCityId] = useState("");
@@ -95,7 +96,7 @@ export default function SearchRent({ setSearch }) {
             );
     };
 
-    const submitHandler = (data) => {
+    const submitHandler = async (data) => {
         const dataToSubmit = {
             city_id: cityId,
             from: fromDate?.gregorian,
@@ -111,7 +112,15 @@ export default function SearchRent({ setSearch }) {
             elevator: data.elevator,
             parking: data.parking,
         };
+
         console.log(dataToSubmit, data);
+
+        await filterAds(dataToSubmit).then((res) => {
+            console.log(res)
+            setFilteredAds(res.data.ads);
+        }).catch((error) => {
+            console.log(error);
+        });
     };
 
     return (
@@ -320,9 +329,7 @@ export default function SearchRent({ setSearch }) {
                     />
                 </div>
 
-                <div className="flex gap-2 mt-2 w-full">
-                    <SubmitButton type="submit" className="w-full" text="جستجو" />
-                </div>
+                <SubmitButton type="submit" className="w-full mt-4" text="جستجو" />
             </div>
         </form>
     );
