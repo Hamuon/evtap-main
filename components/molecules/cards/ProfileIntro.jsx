@@ -1,10 +1,12 @@
 import React from "react";
+import UserLoading from "../loadings/UserLoading";
 
 export default function ProfileIntro({
   name,
   phone,
   request_ammount,
   ads_ammount,
+  user
 }) {
   const introItems = [
     {
@@ -27,7 +29,7 @@ export default function ProfileIntro({
           />
         </svg>
       ),
-      onClick: () => {},
+      onClick: () => { },
       additionalStyle: "",
     },
     {
@@ -85,7 +87,7 @@ export default function ProfileIntro({
           </g>
         </svg>
       ),
-      onClick: () => {},
+      onClick: () => { },
       additionalStyle: "",
     },
     {
@@ -125,7 +127,7 @@ export default function ProfileIntro({
           </g>
         </svg>
       ),
-      onClick: () => {},
+      onClick: () => { },
       additionalStyle: "",
     },
     {
@@ -184,7 +186,7 @@ export default function ProfileIntro({
         </svg>
       ),
 
-      onClick: () => {},
+      onClick: () => { },
       additionalStyle: "",
     },
     // {
@@ -325,45 +327,25 @@ export default function ProfileIntro({
   ];
   return (
     <div className="col-span-1 flex flex-col items-center py-6 h-fit w-full rounded-xl shadow-lg border-2 border-gray-200">
-      {/* <svg
-        className="mb-3"
-        width="60"
-        height="69"
-        viewBox="0 0 60 69"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect width="60" height="60" rx="12" fill="#D9D9D9" />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M29.8335 30.9281H29.8815C34.2735 30.9281 37.845 27.3566 37.845 22.9646C37.845 18.5726 34.2735 14.9996 29.8815 14.9996C25.488 14.9996 21.915 18.5726 21.915 22.9601C21.9 27.3401 25.4505 30.9146 29.8335 30.9281ZM24.057 22.9646C24.057 19.7531 26.67 17.1416 29.8815 17.1416C33.0915 17.1416 35.703 19.7531 35.703 22.9646C35.703 26.1746 33.0915 28.7876 29.8815 28.7876H29.838C26.64 28.7756 24.0465 26.1656 24.057 22.9646Z"
-          fill="#A6A6A6"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M18 39.2596C18 44.8051 26.943 44.8051 29.8815 44.8051C34.98 44.8051 41.76 44.2336 41.76 39.2896C41.76 33.7441 32.82 33.7441 29.8815 33.7441C24.7815 33.7441 18 34.3156 18 39.2596ZM20.25 39.2596C20.25 37.0921 23.49 35.9941 29.8815 35.9941C36.2715 35.9941 39.51 37.1026 39.51 39.2896C39.51 41.4571 36.2715 42.5551 29.8815 42.5551C23.49 42.5551 20.25 41.4466 20.25 39.2596Z"
-          fill="#A6A6A6"
-        />
-        <rect x="20" y="50" width="19" height="19" rx="9.5" fill="black" />
-        <path
-          d="M28.8432 60.214H26.3932V58.744H28.8432V56.294H30.3132V58.744H32.7912V60.214H30.3132V62.706H28.8432V60.214Z"
-          fill="white"
-        />
-      </svg> */}
-      <div className="mb-3 sm:text-base md:text-lg font-semibold">{name}</div>
-      <div className="flex flex-col overflow-hidden text-sm text-gray-400 font-numerals">
-        {introItems.map((item, index) => (
-          <div key={index} className="flex items-center w-full p-3 ">
-            {item.icon}
-            <div className="flex gap-1">
-              <span>{item.value}</span>
-              <span>{item.tag}</span>
+      {
+        user ?
+          <>
+            <div className="mb-3 sm:text-base md:text-lg font-semibold">{name}</div>
+            <div className="flex flex-col overflow-hidden text-sm text-gray-400 font-numerals">
+              {introItems.map((item, index) => (
+                <div key={index} className="flex items-center w-full p-3 ">
+                  {item.icon}
+                  <div className="flex gap-1">
+                    <span>{item.value}</span>
+                    <span>{item.tag}</span>
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-        ))}
-      </div>
+          </>
+          :
+          <UserLoading />
+      }
     </div>
   );
 }
