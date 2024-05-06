@@ -47,6 +47,7 @@ export default function ProfilePage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 md:px-10 sm:px-10 md:container lg:gap-6 w-full h-full">
         {user && userAd && (
           <ProfileIntro
+            user={user}
             name={user.first_name}
             phone={user.phone}
             request_ammount={user.requests.length}
