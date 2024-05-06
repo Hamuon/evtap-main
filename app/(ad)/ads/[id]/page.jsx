@@ -1,51 +1,55 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MyGallery from "@/components/ImageGallery";
 import CallButton from "@/components/atoms/buttons/CallButton";
 import ShareButton from "@/components/atoms/buttons/ShareButton";
 import dynamic from "next/dynamic";
+import { getSingleAd } from "@/services/authService";
 const AdPageMap = dynamic(() => import("@/components/AdPageMap"), {
   ssr: false,
 });
 
-export default function page({ type, title, time, price, size, room, floor, year, parking, elevator, warehouse, description, longitude, latitude }) {
+export default function page({ params: { id } }) {
+  const [ad, setAd] = React.useState(null);
+  console.log(ad);
   const defaultProps = {
     autoPlay: false,
     showPlayButton: false,
-    items: [
-      {
-        sizes: "767px, 767px",
-        original:
-          "https://www.kingscross.co.uk/media/P_KXC_B5_DEV_001_N96_kxweb.jpg",
-        thumbnail:
-          "https://www.kingscross.co.uk/media/P_KXC_B5_DEV_001_N96_kxweb.jpg",
-      },
-      {
-        originalHeight: "100%",
-        original:
-          "https://www.kingscross.co.uk/media/P_KXC_B5_DEV_001_N96_kxweb.jpg",
-        thumbnail:
-          "https://www.kingscross.co.uk/media/P_KXC_B5_DEV_001_N96_kxweb.jpg",
-      },
-      {
-        originalHeight: "100%",
-        original:
-          "https://www.kingscross.co.uk/media/P_KXC_B5_DEV_001_N96_kxweb.jpg",
-        thumbnail:
-          "https://www.kingscross.co.uk/media/P_KXC_B5_DEV_001_N96_kxweb.jpg",
-      },
-    ],
+    items: [],
   };
+  console.log(ad)
+
+  useEffect(() => {
+    getSingleAd(id)
+      .then((response) => {
+        setAd(response.data.advertising)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    ad?.images.map(image => defaultProps.items.push({
+      sizes: "767px, 767px",
+      original:
+        `https://evtap.ir/uploads/${image}`,
+      thumbnail:
+        `https://evtap.ir/uploads/${image}`,
+    }))
+    console.log(defaultProps.items);
+  }, [ad]);
+
 
   return (
     <main className="w-full mx-auto flex justify-center">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:py-10 w-full lg:container z-0 gap-14">
         <div className="col-span-1 font-numerals sm:order-2 md:order-1 sm:px-6 sm:mb-3 md:mb-0">
           <div className="flex gap-1 font-semibold md:text-xl sm:text-base text-gray-400 mb-2">
-            <span>آگهی ها</span>/<span>{type}</span>
+            <span>آگهی ها</span>/<span>{ad?.type === "mortgage" ? "رهن" : ad?.type === "sale" ? "فروش" : ad?.type === "rent" ? "اجاره" : null}</span>
           </div>
           <div className="md:text-3xl sm:text-xl font-semibold mb-2">
-            {title}
+            {ad?.title}
           </div>
           <div className="mb-8">
             <div className="flex gap-1">
@@ -54,14 +58,14 @@ export default function page({ type, title, time, price, size, room, floor, year
             </div>
           </div>
           <div className="flex gap-1 md:text-2xl sm:text-base font-semibold mb-8">
-            <span>{price}</span>
+            <span>{ad?.type === "mortgage" ? ad.rent : ad?.type === "sale" ? ad.sale_price : ad?.type === "rent" ? ad.rent : null}</span>
             <span>تومان</span>
           </div>
           <div className="w-full  font-semibold mb-6">
             <div className="flex justify-between w-full border-b-2 border-gray-400 md:px-6 py-2">
               <span>متراژ</span>
               <div className="flex gap-1 text-gray-500">
-                <span>{size}</span>
+                <span>{ad?.size}</span>
                 <span>متر مربع</span>
               </div>
             </div>
@@ -69,13 +73,13 @@ export default function page({ type, title, time, price, size, room, floor, year
               <div className="flex justify-between w-full">
                 <span>تعداد اتاق</span>
                 <div className="flex gap-1 text-gray-500">
-                  <span>{room}</span>
+                  <span>{ad?.room_count}</span>
                 </div>
               </div>
               <div className="flex justify-between w-full">
                 <span>طبقه</span>
                 <div className="flex gap-1 text-gray-500">
-                  <span>{floor}</span>
+                  <span>{ad?.floor}</span>
                 </div>
               </div>
             </div>
@@ -83,13 +87,13 @@ export default function page({ type, title, time, price, size, room, floor, year
               <div className="flex justify-between w-full">
                 <span>سال ساخت</span>
                 <div className="flex gap-1 text-gray-500">
-                  <span>{year}</span>
+                  <span>{ad?.year}</span>
                 </div>
               </div>
               <div className="flex justify-between w-full">
                 <span>پارکینگ</span>
                 <div className="flex gap-1 text-gray-500">
-                  <span>{parking}</span>
+                  <span>{ad?.parking === "0" ? "ندارد" : "دارد"}</span>
                 </div>
               </div>
             </div>
@@ -97,19 +101,19 @@ export default function page({ type, title, time, price, size, room, floor, year
               <div className="flex justify-between w-full">
                 <span>آسانسور</span>
                 <div className="flex gap-1 text-gray-500">
-                  <span>{elevator}</span>
+                  <span>{ad?.elevator === "0" ? "ندارد" : "دارد"}</span>
                 </div>
               </div>
               <div className="flex justify-between w-full">
                 <span>انباری</span>
                 <div className="flex gap-1 text-gray-500">
-                  <span>{warehouse}</span>
+                  <span>{ad?.warehouse === "0" ? "ندارد" : "دارد"}</span>
                 </div>
               </div>
             </div>
           </div>
           <div className="flex justify-start w-full items-center mb-6 sm:order-1 md:order-2">
-            <CallButton phoneNumber="+1234567890" text="تماس با ثبت کننده آگهی" />
+            <CallButton phoneNumber={"09388560310"} text="تماس با ثبت کننده آگهی" />
             <ShareButton text="انتشار" />
           </div>
           <div className="font-semibold">
@@ -117,18 +121,18 @@ export default function page({ type, title, time, price, size, room, floor, year
               <span>توضیحات</span>
             </div>
             <p className="sm:px-0 py-6 w-full text-justify">
-              {description}
+              {ad?.description}
             </p>
           </div>
           <div className="h-96 overflow-hidden w-full md:block sm:hidden">
-            <AdPageMap lat={latitude} lon={longitude} />
+            <AdPageMap lat={ad?.latitude} long={ad?.longitude} />
           </div>
         </div>
         <div className="col-span-1 aspect-square flex flex-col gap-6">
           <MyGallery {...defaultProps} />
         </div>
         <div className="h-96 order-3 overflow-hidden w-full sm:flex justify-center md:hidden sm:mb-10 px-6">
-          <AdPageMap />
+          <AdPageMap lat={ad?.latitude} long={ad?.longitude} />
         </div>
       </div>
     </main>

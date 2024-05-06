@@ -10,7 +10,7 @@ export default function AdLayout({ children }) {
     const [search, setSearch] = useState(false)
 
     return (
-        <>
+        <div>
             <AdNavigation toggleMenu={toggleMenu} setSearch={setSearch} search={search} />
             {open ? <AdsMenu open={open} toggleMenu={toggleMenu} /> : null}
             {
@@ -18,6 +18,6 @@ export default function AdLayout({ children }) {
             }
             {children}
             <AdFooter />
-        </>
+        </div>
     )
 }

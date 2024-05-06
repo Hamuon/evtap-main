@@ -21,7 +21,7 @@ export default function ExpertsPage() {
 
   return (
     <main className="w-full mx-auto flex justify-center ">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 w-full md:container z-0 sm:px-4 md:px-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 w-full md:container z-0 sm:px-4 md:px-0 pb-10">
         {experts.map((expert, index) => (
           <ExpertsCard
             key={index}

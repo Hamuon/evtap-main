@@ -31,9 +31,9 @@ export function submitAd(data) {
   return http.post("/user/advertising", data, config);
 }
 
-// export function getAds() {
-//   return http.get("/user/advertising", data, config);
-// }
+export function getSingleAd(id) {
+  return http.get("/advertising/" + id);
+}
 
 export function filterAds(data) {
   return http.get("/advertising", data, config);
@@ -48,7 +48,7 @@ export function getDashboard() {
 }
 
 export function getAds() {
-  return http.get("/user/advertising", config);
+  return http.get("/advertising");
 }
 
 export function getExperts() {
