@@ -101,7 +101,7 @@ export default function SaleForm() {
     }
 
     const imageHandler = (e) => {
-        setSelectedImages([...e.target.files]);
+        setValue("images", e.target.files);
     }
 
     const changeHandler = (e) => {
@@ -126,32 +126,21 @@ export default function SaleForm() {
     };
 
     const submitHandler = async (data) => {
-        const dataToSubmit = {
-            title: data.title,
-            description: data.description,
-            longitude: data.longitude,
-            latitude: data.latitude,
-            region: data.region,
-            floor: data.floor,
-            street: data.street,
-            pre_rent: data.pre_rent,
-            year: data.year,
-            size: data.size,
-            room_count: data.room_count,
-            plate: data.plate,
-            elevator: data.elevator,
-            parking: data.parking,
-            warehouse: data.warehouse,
-            alley: data.alley,
-            address: data.address,
-            type: data.type,
-            document: data.document,
-            city_id: cityId,
-        };
-        console.log(dataToSubmit);
+        const formDataToSend = new FormData();
+
+        Object.entries(data).forEach(([key, value]) => {
+            if (Array.isArray(value)) {
+                value.forEach((item, index) => {
+                    formDataToSend.append(`${key}[${index}]`, item);
+                });
+            } else {
+                formDataToSend.append(key, value);
+            }
+        });
+        console.log(formDataToSend);
         setLoading(true);
 
-        await submitAd(dataToSubmit)
+        await submitAd(formDataToSend)
             .then((res) => {
                 if (res.status === 200) {
                     console.log(res);
