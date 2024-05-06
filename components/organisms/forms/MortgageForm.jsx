@@ -29,7 +29,7 @@ const schema = z.object({
         .string()
         .min(1, { message: "لطفا  خیابان را وارد کنید" })
         .max(150, { message: " کد ملی بیش از 10 کاراکتر" }),
-    pre_rent: z.string().min(1, { message: "لطفا رهن را وارد کنید" }),
+    sale_price: z.string().min(1, { message: "لطفا رهن را وارد کنید" }),
     year: z.string().min(1, { message: "لطفا سال ساخت را وارد کنید" }),
     size: z
         .string()
@@ -344,8 +344,8 @@ export default function SaleForm() {
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel>  رهن</FieldLabel>
                     <input
-                        {...register("pre_rent")}
-                        className={`input input-bordered ${errors.pre_rent ? "input-error" : null
+                        {...register("sale_price")}
+                        className={`input input-bordered ${errors.sale_price ? "input-error" : null
                             }`}
                         placeholder=" رهن به تومان"
                     />

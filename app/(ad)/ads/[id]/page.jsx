@@ -53,9 +53,8 @@ export default function page({ params: { id } }) {
           </div>
           <div className="mb-8">
             <div className="flex gap-1">
-              <span>2</span>
-              <span>روز پیش در</span>
-              <span>تبریز</span>
+              <span>{ad?.time}</span>
+              
             </div>
           </div>
           <div className="flex gap-1 md:text-2xl sm:text-base font-semibold mb-8">
