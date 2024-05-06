@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import SubmitButton from '@/components/atoms/buttons/SubmitButton'
 
 const schema = z.object({
-    phone: z.string().min(1, { message: "لطفا شماره تلفن خود را وارد کنید" }).max(11, { message: "شماره تلفن بیش از 11 کاراکتر" }).regex(/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/, { message: "شماره تلفن صحیح نیست" }),
+    phone: z.string().min(1, { message: "لطفا شماره تلفن خود را وارد کنید" }).max(11, { message: "شماره تلفن بیش از 11 کاراکتر" }).regex(/^09[0-9][0-9]-?[0-9]{3}-?[0-9]{4}$/, { message: "شماره تلفن صحیح نیست" }),
 })
 
 export default function LoginModal({ nextStep, setPhone }) {

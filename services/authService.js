@@ -7,6 +7,8 @@ if (typeof window !== "undefined") {
   token = localStorage.getItem("token");
 }
 
+console.log(token);
+
 const config = {
   headers: { Authorization: `Bearer ${token ? JSON.parse(token) : null}` },
 };

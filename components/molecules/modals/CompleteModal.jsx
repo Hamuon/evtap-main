@@ -22,10 +22,6 @@ export default function CompleteModal() {
     )
     const router = useRouter()
     const submitHandler = async (data) => {
-        if (!token) {
-            toast.error("توکن نامعتبر", { position: "top-center" })
-            return
-        }
         await completeProfile(data)
             .then((res) => {
                 if (res.data.success) {
