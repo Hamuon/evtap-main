@@ -4,14 +4,12 @@ import UserLoading from "../loadings/UserLoading";
 export default function ProfileIntro({
   name,
   phone,
-  request_ammount,
-  ads_ammount,
   user
 }) {
   const introItems = [
     {
       tag: "",
-      value: phone,
+      value: user?.phone,
       icon: (
         <svg
           className="ml-4"
@@ -92,7 +90,7 @@ export default function ProfileIntro({
     },
     {
       tag: "درخواست",
-      value: request_ammount,
+      value: user?.requests.length,
       icon: (
         <svg
           className="ml-4"
@@ -132,7 +130,7 @@ export default function ProfileIntro({
     },
     {
       tag: "آگهی",
-      value: ads_ammount,
+      value: user?.advertisings.length,
       icon: (
         <svg
           className="ml-4"

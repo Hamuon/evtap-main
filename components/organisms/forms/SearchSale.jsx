@@ -30,8 +30,8 @@ const schema = z.object({
 export default function SearchSale() {
 
     const [ads, setAds] = useState(null);
-    const { setFilteredAds } = useContext(FilteredAdsContext);
-
+    const { setFilteredAds, filteredAds } = useContext(FilteredAdsContext);
+    
     const [provinces, setProvinces] = useState(null);
     const [selectedProvince, setSelectedProvince] = useState(null);
     const [cityId, setCityId] = useState("");
@@ -116,8 +116,7 @@ export default function SearchSale() {
         console.log(dataToSubmit)
 
         await filterAds(dataToSubmit).then((res) => {
-            console.log(res)
-            setFilteredAds(res.data.ads);
+            setFilteredAds(res.data.advertising.data);
         }).catch((error) => {
             console.log(error);
         });
