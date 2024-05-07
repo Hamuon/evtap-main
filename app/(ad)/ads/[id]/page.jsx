@@ -5,11 +5,14 @@ import CallButton from "@/components/atoms/buttons/CallButton";
 import ShareButton from "@/components/atoms/buttons/ShareButton";
 import dynamic from "next/dynamic";
 import { getSingleAd } from "@/services/authService";
+import SubmitButton from "@/components/atoms/buttons/SubmitButton";
+import { useRouter } from "next/navigation";
 const AdPageMap = dynamic(() => import("@/components/AdPageMap"), {
   ssr: false,
 });
 
 export default function page({ params: { id } }) {
+  const router = useRouter();
   const [ad, setAd] = React.useState(null);
   console.log(ad)
   const defaultProps = {
@@ -66,8 +69,8 @@ export default function page({ params: { id } }) {
           <div className="mb-8">
             <div className="flex gap-1">
               <span>{ad?.time}</span>
-
             </div>
+            <p className="cursor-pointer text-button-primary-color font-semibold" onClick={() => router.push(`/request?address=${ad.address}`)}>درخواست کارشناسی </p>
           </div>
           <div className="flex gap-1 md:text-2xl sm:text-base font-semibold mb-8">
             <span>{ad?.type === "mortgage" ? ad.rent : ad?.type === "sale" ? ad.sale_price : ad?.type === "rent" ? ad.rent : null}</span>
@@ -128,6 +131,7 @@ export default function page({ params: { id } }) {
             <CallButton phoneNumber={"09388560310"} text="تماس با ثبت کننده آگهی" />
             <ShareButton text="انتشار" />
           </div>
+
           <div className="font-semibold">
             <div className="flex justify-between w-full border-b-2 border-gray-400 sm:px-0 md:px-6 py-2">
               <span>توضیحات</span>

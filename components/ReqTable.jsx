@@ -2,21 +2,8 @@
 import React, { useState, useEffect } from 'react'
 import { getDashboard } from '@/services/authService'
 import TableLoading from './molecules/loadings/TableLoading'
-export default function ReqTable() {
+export default function ReqTable({user}) {
 
-  const [user, setUser] = useState(null)
-
-  async function getUser() {
-    await getDashboard().then(response => {
-      setUser(response.data.user[0].requests)
-    }).catch(error => {
-      console.log(error)
-    })
-  }
-
-  useEffect(() => {
-    getUser()
-  }, [])
 
   return (
     <div dir="rtl" className="overflow-x-auto w-full shadow-lg rounded-lg h-96 overflow-y-scroll border border-gray-200 py-4">
@@ -35,7 +22,7 @@ export default function ReqTable() {
             </thead>
             <tbody>
               {
-                user?.map((request, index) => (
+                user?.requests.map((request, index) => (
                   <tr key={index} className="">
                     <td>{request.address}</td>
                     <td>{request.status_title}</td>

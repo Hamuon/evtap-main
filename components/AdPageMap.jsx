@@ -25,7 +25,6 @@ function AdPageMap({ lat, long }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker position={[lat ? lat : coords.latitude, long ? long : coords.longitude]} icon={icon}>
-        <Popup>محل کارشناسی</Popup>
       </Marker>
     </MapContainer>
   );

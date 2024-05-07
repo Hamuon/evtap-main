@@ -18,8 +18,7 @@ const schema = z.object({
     .max(150, { message: "نام بیش از 100 کاراکتر" }),
   description: z
     .string()
-    .min(1, { message: "لطفا توضیحات را وارد کنید" })
-    .max(150, { message: "نام خانوادگی بیش از 100 کاراکتر" }),
+    .min(1, { message: "لطفا توضیحات را وارد کنید" }),
   region: z
     .string()
     .min(1, { message: "لطفا  منطقه را وارد کنید" })

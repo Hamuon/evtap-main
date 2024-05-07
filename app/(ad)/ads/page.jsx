@@ -3,28 +3,28 @@ import React, { useContext, useEffect, useState } from 'react'
 import AdCard from '@/components/molecules/cards/AdCard'
 import FilteredAdsContext from '@/context/FilteredAdsProvider'
 import { getAds } from '@/services/authService'
-import { adPerPage } from '@/services/authService'
+import { adsPerPage } from '@/services/authService'
 import PageSpinner from '@/components/atoms/spinner/PageSpinner'
 export default function Ads() {
     const { filteredAds } = useContext(FilteredAdsContext)
+
     const [loading, setLoading] = useState(false)
-    const [ads, setAds] = useState([])
+    const [ads, setAds] = useState(filteredAds ? filteredAds : [])
     const [page, setPage] = useState(1)
     const [pageLength, setPageLength] = useState()
-    console.log(ads);
+    console.log(page);
+
     const getAllAds = async () => {
         await getAds().then(response => {
-            console.log(response.data);
-            setAds(response.data.advertising.data)
             setPageLength(response.data.advertising.links.length)
         }).catch(error => {
             console.log(error)
         })
     }
 
-    const getAdsPerPage = async (page) => {
+    const getAdsPerPage = async () => {
         setLoading(true)
-        await adPerPage(page)
+        await adsPerPage(page)
             .then(response => {
                 console.log(response);
                 setAds(response.data.advertising.data)
@@ -50,13 +50,11 @@ export default function Ads() {
         return [year, month, day].join('-');
     }
 
-    useEffect(() => {
-        getAdsPerPage()
-    }, [page])
 
     useEffect(() => {
         getAllAds()
-    }, [])
+        getAdsPerPage()
+    }, [page])
 
     return (
         <main className='w-full h-screen mx-auto flex flex-col items-center justify-between'>

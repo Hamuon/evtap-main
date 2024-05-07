@@ -8,7 +8,7 @@ import Label from "@/components/atoms/labels/Label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import SubmitButton from "@/components/atoms/buttons/SubmitButton";
 import { expertRequest, getCities } from "@/services/authService";
-
+import { useSearchParams } from "next/navigation";
 const schema = z.object({
   state: z.string().min(1, { message: "لطفا استان را انتخاب کنید" }),
   city_id: z.string().min(1, { message: "لطفا شهر را انتخاب کنید" }),
@@ -46,9 +46,12 @@ export default function RequestModal({ nextStep, setReqData }) {
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [cityId, setCityId] = useState("");
 
-  const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams()
+  const address = searchParams.get("address");
 
+  const [loading, setLoading] = useState(false);
   const [mapOpen, setMapOpen] = useState(false);
+
   const {
     setValue,
     register,
@@ -80,6 +83,7 @@ export default function RequestModal({ nextStep, setReqData }) {
 
   useEffect(() => {
     getAllCities();
+    address ? setValue("address", address) : null
   }, []);
 
   const changeHandler = (e) => {

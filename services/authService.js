@@ -7,8 +7,6 @@ if (typeof window !== "undefined") {
   token = localStorage.getItem("token");
 }
 
-console.log(token);
-
 const config = {
   headers: { Authorization: `Bearer ${token ? JSON.parse(token) : null}` },
 };
@@ -62,6 +60,10 @@ export function getAllExperts() {
 }
 
 export function adPerPage(page) {
+  return http.get(`/user/advertising?page=${page}`, config);
+}
+
+export function adsPerPage(page) {
   return http.get(`/advertising?page=${page}`);
 }
 
