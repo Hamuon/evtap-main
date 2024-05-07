@@ -5,7 +5,7 @@ import CallButton from "@/components/atoms/buttons/CallButton";
 import ShareButton from "@/components/atoms/buttons/ShareButton";
 import dynamic from "next/dynamic";
 import { getSingleAd } from "@/services/authService";
-import SubmitButton from "@/components/atoms/buttons/SubmitButton";
+import moment from "jalali-moment";
 import { useRouter } from "next/navigation";
 const AdPageMap = dynamic(() => import("@/components/AdPageMap"), {
   ssr: false,
@@ -55,6 +55,25 @@ export default function page({ params: { id } }) {
     console.log(ad?.images);
   }, [ad]);
 
+  function convertToInternationalCurrencySystem(labelValue) {
+
+    // Nine Zeroes for Billions
+    return Math.abs(Number(labelValue)) >= 1.0e+9
+
+      ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + " " + "میلیارد"
+      // Six Zeroes for Millions 
+      : Math.abs(Number(labelValue)) >= 1.0e+6
+
+        ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + " " + "میلیون"
+        // Three Zeroes for Thousands
+        : Math.abs(Number(labelValue)) >= 1.0e+3
+
+          ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + " " + "هزار"
+
+          : Math.abs(Number(labelValue));
+
+  }
+
 
   return (
     <main className="w-full mx-auto flex justify-center">
@@ -67,13 +86,13 @@ export default function page({ params: { id } }) {
             {ad?.title}
           </div>
           <div className="mb-8">
-            <div className="flex gap-1">
-              <span>{ad?.time}</span>
-            </div>
+            {/* <div className="flex gap-1">
+              <span>{moment(new Date(ad?.updated_at)).fromNow()}</span>
+            </div> */}
             <p className="cursor-pointer text-button-primary-color font-semibold" onClick={() => router.push(`/request?address=${ad.address}`)}>درخواست کارشناسی </p>
           </div>
           <div className="flex gap-1 md:text-2xl sm:text-base font-semibold mb-8">
-            <span>{ad?.type === "mortgage" ? ad.rent : ad?.type === "sale" ? ad.sale_price : ad?.type === "rent" ? ad.rent : null}</span>
+            <span>{ad?.type === "mortgage" ? convertToInternationalCurrencySystem(ad.rent) : ad?.type === "sale" ? convertToInternationalCurrencySystem(ad.sale_price) : ad?.type === "rent" ? convertToInternationalCurrencySystem(ad.rent) : null}</span>
             <span>تومان</span>
           </div>
           <div className="w-full  font-semibold mb-6">
