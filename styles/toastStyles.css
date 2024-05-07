@@ -1,0 +1,14 @@
+/* toastStyles.css */
+@font-face {
+    font-family: PeydaWeb;
+    font-style: normal;
+    font-weight: 100;
+    src: url("./fonts/woff2/PeydaWeb-Thin.woff2") format("woff2"),
+      /* FF39+,Chrome36+, Opera24+*/ url("./fonts/woff/PeydaWeb-Thin.woff")
+        format("woff"); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+  }
+
+.Toastify__toast-body {
+    font-family: 'PeydaWeb'; /* Replace 'YourFont' with the desired font family */
+  }
+  
