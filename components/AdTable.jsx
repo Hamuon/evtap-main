@@ -1,14 +1,14 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import { getAds } from '@/services/authService'
 import TableLoading from './molecules/loadings/TableLoading'
+import { getUserAdvertising } from '@/services/authService'
 export default function AdTable() {
 
   const [user, setUser] = useState(null)
   console.log(user)
 
   async function getUserAds() {
-    await getAds().then(response => {
+    await getUserAdvertising().then(response => {
       console.log(response)
       setUser(response.data.advertising.data)
     }).catch(error => {

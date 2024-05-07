@@ -64,3 +64,7 @@ export function getAllExperts() {
 export function adPerPage(page) {
   return http.get(`/advertising?page=${page}`);
 }
+
+export function getUserAdvertising() {
+  return http.get("/user/advertising", config);
+}
