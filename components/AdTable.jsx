@@ -46,8 +46,8 @@ export default function AdTable({ user }) {
             {/* head */}
             <thead>
               <tr>
-                <th>آدرس</th>
-                <th>وضعیت</th>
+                <th>عنوان</th>
+                <th>نوع آگهی</th>
                 <th>شهر</th>
               </tr>
             </thead>
