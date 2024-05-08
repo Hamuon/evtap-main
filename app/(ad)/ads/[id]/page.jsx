@@ -89,10 +89,19 @@ export default function page({ params: { id } }) {
             </div> */}
             <p className="cursor-pointer text-button-primary-color font-semibold" onClick={() => router.push(`/request?address=${ad.address}`)}>درخواست کارشناسی </p>
           </div>
-          <div className="flex gap-1 md:text-2xl sm:text-base font-semibold mb-8">
-            <span>{ad?.type === "mortgage" ? convertToInternationalCurrencySystem(ad.rent) : ad?.type === "sale" ? convertToInternationalCurrencySystem(ad.sale_price) : ad?.type === "rent" ? convertToInternationalCurrencySystem(ad.rent) : null}</span>
+          <div className="flex gap-1 md:text-2xl sm:text-base font-semibold mb-4">
+            <span>{ad?.type === "mortgage" ? convertToInternationalCurrencySystem(ad.sale_price) : ad?.type === "sale" ? convertToInternationalCurrencySystem(ad.sale_price) : ad?.type === "rent" ? convertToInternationalCurrencySystem(ad.rent) : null}</span>
             <span>تومان</span>
           </div>
+          {
+            ad?.type === "rent" ?
+              <div className="flex gap-1 md:text-lg sm:text-base font-semibold mb-8">
+                <span>{ad?.pre_rent}</span>
+                <span>تومان پیش</span>
+              </div>
+              :
+              null
+          }
           <div className="w-full  font-semibold mb-6">
             <div className="flex justify-between w-full border-b-2 border-gray-400 md:px-6 py-2">
               <span>متراژ</span>
