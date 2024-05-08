@@ -40,7 +40,7 @@ export default function InvoiceModal({ reqData, prevStep }) {
                         </div>
                     </div>
                 </div>
-                <p className="text-sm text-gray-500 mb-4">
+                <p className="text-sm text-gray-500 mb-4 text-justify">
                     کارشناس مربوطه در سریع ترین زمان ممکن با شما تماس خواهد گرفت، در صورت تاخیر در پیگیری کارشناس با شماره 04133356848 تماس حاصل فرمائید.
                 </p>
                 <div className='flex gap-2 mt-2 w-full'>

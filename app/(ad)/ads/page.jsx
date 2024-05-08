@@ -12,7 +12,6 @@ export default function Ads() {
     const [ads, setAds] = useState(filteredAds ? filteredAds : [])
     const [page, setPage] = useState(1)
     const [pageLength, setPageLength] = useState()
-
     const getAllAds = async () => {
         await getAds().then(response => {
             setPageLength(response.data.advertising.links.length)
