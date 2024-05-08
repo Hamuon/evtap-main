@@ -14,13 +14,12 @@ const AdPageMap = dynamic(() => import("@/components/AdPageMap"), {
 export default function page({ params: { id } }) {
   const router = useRouter();
   const [ad, setAd] = React.useState(null);
-  console.log(ad)
+
   const defaultProps = {
     autoPlay: false,
     showPlayButton: false,
     items: [],
   };
-  console.log(ad)
 
   useEffect(() => {
     getSingleAd(id)
@@ -52,7 +51,6 @@ export default function page({ params: { id } }) {
         }
       )
     }
-    console.log(ad?.images);
   }, [ad]);
 
   function convertToInternationalCurrencySystem(labelValue) {

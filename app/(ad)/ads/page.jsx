@@ -12,7 +12,6 @@ export default function Ads() {
     const [ads, setAds] = useState(filteredAds ? filteredAds : [])
     const [page, setPage] = useState(1)
     const [pageLength, setPageLength] = useState()
-    console.log(page);
 
     const getAllAds = async () => {
         await getAds().then(response => {
@@ -26,7 +25,6 @@ export default function Ads() {
         setLoading(true)
         await adsPerPage(page)
             .then(response => {
-                console.log(response);
                 setAds(response.data.advertising.data)
                 setLoading(false)
             })

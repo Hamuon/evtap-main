@@ -11,7 +11,6 @@ function AdPageMap({ lat, long }) {
     longitude: 46.296,
   });
 
-  console.log(lat, long)
   return (
     <MapContainer
       className="w-full h-full"

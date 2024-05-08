@@ -9,7 +9,6 @@ export default function Home() {
 
   async function getAllExperts() {
     await getExperts().then(response => {
-      console.log(response);
       setExperts(response.data.experts)
     }).catch(error => {
       console.log(error)

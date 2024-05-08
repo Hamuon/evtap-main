@@ -38,8 +38,8 @@ export default function LoginModal({ nextStep, setPhone }) {
                     })
                     setLoading(false)
                 }
-            }).catch((err) => {
-                console.log(err);
+            }).catch((error) => {
+                console.log(error);
                 setLoading(false)
                 toast.error("مشکل در برقراری ارتباط", {
                     position: "top-center"

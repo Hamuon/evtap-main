@@ -138,13 +138,11 @@ export default function SaleForm() {
                 formDataToSend.append(key, value);
             }
         });
-        console.log(formDataToSend);
         setLoading(true);
 
         await submitAd(formDataToSend)
             .then((res) => {
                 if (res.status === 200) {
-                    console.log(res);
                     toast.success("آگهی شما ثبت شد", {
                         position: "top-center",
                     });
@@ -155,8 +153,8 @@ export default function SaleForm() {
                     setLoading(false);
                 }
             })
-            .catch((err) => {
-                console.log(err);
+            .catch((error) => {
+                console.log(error);
                 setLoading(false);
                 toast.error("مشکل در برقراری ارتباط", {
                     position: "top-center",

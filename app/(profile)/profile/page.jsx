@@ -16,7 +16,7 @@ export default function ProfilePage() {
       const response = await getDashboard();
       setUser(response.data.user[0]);
     } catch (error) {
-      console.log("Error fetching user:", error);
+      console.log(error);
     }
   }
 

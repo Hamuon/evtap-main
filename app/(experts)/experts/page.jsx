@@ -11,7 +11,7 @@ export default function ExpertsPage() {
       const response = await getAllExperts();
       setExperts(response.data.experts);
     } catch (error) {
-      console.log("Error fetching experts:", error);
+      console.log(error);
     }
   }
 

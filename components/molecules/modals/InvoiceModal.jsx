@@ -3,7 +3,6 @@ import SubmitButton from '@/components/atoms/buttons/SubmitButton';
 import React from 'react'
 import { useRouter } from 'next/navigation';
 export default function InvoiceModal({ reqData, prevStep }) {
-    console.log(reqData);
     const router = useRouter()
 
     return (

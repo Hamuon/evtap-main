@@ -40,7 +40,6 @@ function Map({ setValue, setMapOpen }) {
       )
       .then((res) => {
         if (res.status === 200) {
-          console.log(res);
           setValue("address", res.data.address_compact);
         }
       })
