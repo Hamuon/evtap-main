@@ -34,8 +34,7 @@ function Map({ setValue, setMapOpen }) {
     };
     axios
       .get(
-        `https://map.ir/reverse/no?lat=${
-          coords ? coords.latitude : latitude
+        `https://map.ir/reverse/no?lat=${coords ? coords.latitude : latitude
         }&lon=${coords ? coords.longitude : longitude}`,
         config
       )
@@ -66,7 +65,7 @@ function Map({ setValue, setMapOpen }) {
       zoomControl={false} // Disable default zoom control
     >
       <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        attribution='<a href="http://evtap.ir">Evtap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker

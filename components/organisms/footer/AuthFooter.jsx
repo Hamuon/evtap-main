@@ -13,9 +13,9 @@ export default function AuthFooter() {
                         مجموعه کارشناسی املاک اوتاپ
                     </h1>
                 </div>
-                <div>
+                <a href='tel:09388560310'>
                     تماس با پشتیبانی
-                </div>
+                </a>
                 {/* desktop visible navigation */}
             </div>
         </footer>

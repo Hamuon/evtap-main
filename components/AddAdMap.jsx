@@ -35,7 +35,7 @@ function AddAdMap({ setValue }) {
       ref={setMap}
     >
       <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        attribution='<a href="http://evtap.ir">Evtap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker
