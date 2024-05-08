@@ -35,8 +35,8 @@ export default function CompleteModal() {
                         position: "top-center"
                     })
                 }
-            }).catch((err) => {
-                console.log(err);
+            }).catch((error) => {
+                console.log(error);
                 toast.error("مشکل در برقراری ارتباط", {
                     position: "top-center"
                 })

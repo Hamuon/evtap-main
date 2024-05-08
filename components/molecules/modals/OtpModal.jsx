@@ -65,8 +65,8 @@ export default function OtpModal({ nextStep, prevStep, phone, setPhone }) {
                 } else {
                     toast.error(res.errors.phone[0])
                 }
-            }).catch((err) => {
-                console.log(err);
+            }).catch((error) => {
+                console.log(error);
             })
     };
 
@@ -75,7 +75,6 @@ export default function OtpModal({ nextStep, prevStep, phone, setPhone }) {
         const verifyData = { ...data, ...phone }
         await checkOtp(verifyData)
             .then((res) => {
-                console.log(res);
                 if (res.data.success) {
                     localStorage.setItem("user", JSON.stringify(res.data.user))
                     localStorage.setItem("token", JSON.stringify(res.data.token))
@@ -97,8 +96,8 @@ export default function OtpModal({ nextStep, prevStep, phone, setPhone }) {
                     })
                     setLoading(false)
                 }
-            }).catch((err) => {
-                console.log(err);
+            }).catch((error) => {
+                console.log(error);
                 toast.error("مشکل در برقراری ارتباط", {
                     position: "top-center"
                 })

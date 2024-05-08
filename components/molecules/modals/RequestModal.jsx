@@ -131,8 +131,8 @@ export default function RequestModal({ nextStep, setReqData }) {
           setLoading(false);
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log(error);
         setLoading(false);
         toast.error("مشکل در برقراری ارتباط", {
           position: "top-center",

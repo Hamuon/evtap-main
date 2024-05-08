@@ -4,9 +4,8 @@ const ShareButton = ({ text }) => {
   const handleClick = async () => {
     try {
       await navigator.share({ url: window.location.href });
-      console.log("Page shared successfully!");
     } catch (error) {
-      console.error("Error sharing page:", error);
+      console.error(error);
     }
   };
 

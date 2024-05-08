@@ -113,8 +113,6 @@ export default function SearchSale() {
             have_image: data.have_image,
         };
 
-        console.log(dataToSubmit)
-
         await filterAds(dataToSubmit).then((res) => {
             setFilteredAds(res.data.advertising.data);
         }).catch((error) => {

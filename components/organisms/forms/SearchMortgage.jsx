@@ -109,10 +109,8 @@ export default function SearchMortgage({ setSearch }) {
             elevator: data.elevator,
             parking: data.parking,
         };
-        console.log(dataToSubmit, data);
 
         await filterAds(dataToSubmit).then((res) => {
-            console.log(res)
             setFilteredAds(res.data.ads);
         }).catch((error) => {
             console.log(error);
