@@ -106,9 +106,11 @@ export default function Home() {
               <img src={`https://evtap.ir/uploads/${experts[4]?.avatar}`} alt="expert" />
             </div>
             <div className='h-full bg-white rounded-full absolute right-0 flex justify-center items-center font-numerals aspect-square '>
-              <span className='text-4xl font-bold flex justify-center items-center'>
-                20+
-              </span>
+              <Link href="/experts">
+                <span className='text-4xl font-bold flex justify-center items-center'>
+                  20+
+                </span>
+              </Link>
             </div>
           </div>
         </div>

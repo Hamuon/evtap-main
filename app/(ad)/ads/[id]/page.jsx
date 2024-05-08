@@ -155,7 +155,7 @@ export default function page({ params: { id } }) {
           </div>
           <div className="flex justify-start w-full items-center mb-6 sm:order-1 md:order-2">
             <CallButton phoneNumber={"09388560310"} text="تماس با ثبت کننده آگهی" />
-            <ShareButton text="انتشار" />
+            <ShareButton text="اشتراک گذاری" />
           </div>
 
           <div className="font-semibold">
