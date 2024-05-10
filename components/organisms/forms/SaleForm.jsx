@@ -178,7 +178,7 @@ export default function SaleForm() {
 
       <div className="flex md:gap-4 sm:flex-col md:flex-row">
         <div className="w-full flex flex-col items-start mb-10">
-          <FieldLabel>تصاویر</FieldLabel>
+          <FieldLabel>تصاویر (JPG, JPEG, PNG)</FieldLabel>
           <label
             for="dropzone-file"
             className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ${errors.images ? "border-red" : " border-gray-300"
