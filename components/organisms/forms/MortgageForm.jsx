@@ -57,7 +57,8 @@ export default function SaleForm() {
     const [selectedProvince, setSelectedProvince] = useState(null);
     const [cityId, setCityId] = useState(null);
 
-    const [selectedImages, setSelectedImages] = useState([]);
+    const [uploadedImages, setUploadedImages] = useState([]);
+
 
     const buildYear = [
         "قبل از 1387",
@@ -100,7 +101,12 @@ export default function SaleForm() {
     }
 
     const imageHandler = (e) => {
+        const images = []
         setValue("images", Object.entries(e.target.files).map(([key, value]) => value));
+        Object.entries(e.target.files).forEach(([key, value]) => {
+            images.push(value.name);
+            setUploadedImages(images);
+        });
     }
 
     const changeHandler = (e) => {
@@ -212,6 +218,13 @@ export default function SaleForm() {
                             className="hidden"
                         />
                     </label>
+                    <div className="flex flex-wrap gap-1 my-2">
+                        {
+                            uploadedImages?.map((image, index) => (
+                                <p className="text-gray-500" key={index}>{image}/</p>
+                            ))
+                        }
+                    </div>
                 </div>
             </div>
 

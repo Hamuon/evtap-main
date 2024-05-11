@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { z } from "zod";
+import { set, z } from "zod";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -57,6 +57,8 @@ export default function SaleForm() {
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [cityId, setCityId] = useState(null);
 
+  const [uploadedImages, setUploadedImages] = useState([]);
+
   const buildYear = [
     "قبل از 1387",
     "1387",
@@ -99,7 +101,12 @@ export default function SaleForm() {
   }
 
   const imageHandler = (e) => {
+    const images = []
     setValue("images", Object.entries(e.target.files).map(([key, value]) => value));
+    Object.entries(e.target.files).forEach(([key, value]) => {
+      images.push(value.name);
+      setUploadedImages(images);
+    });
   }
 
   const changeHandler = (e) => {
@@ -211,6 +218,13 @@ export default function SaleForm() {
               className="hidden"
             />
           </label>
+          <div className="flex flex-wrap gap-1 my-2">
+            {
+              uploadedImages?.map((image, index) => (
+                <p className="text-gray-500" key={index}>{image}/</p>
+              ))
+            }
+          </div>
         </div>
       </div>
 
