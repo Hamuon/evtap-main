@@ -15,7 +15,7 @@ function AdPageMap({ lat, long }) {
     <MapContainer
       className="w-full h-full"
       center={[lat ? lat : coords.latitude, long ? long : coords.longitude]}
-      zoom={13}
+      zoom={11}
       scrollWheelZoom={true}
       ref={setMap}
     >
