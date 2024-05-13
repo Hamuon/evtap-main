@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { z } from "zod";
+import { set, z } from "zod";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -57,6 +57,8 @@ export default function SaleForm() {
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [cityId, setCityId] = useState(null);
 
+  const [uploadedImages, setUploadedImages] = useState([]);
+
   const buildYear = [
     "قبل از 1387",
     "1387",
@@ -86,8 +88,6 @@ export default function SaleForm() {
     resolver: zodResolver(schema),
   });
 
-  console.log(errors);
-
   async function getAllCities() {
     await getCities()
       .then((res) => {
@@ -99,7 +99,15 @@ export default function SaleForm() {
   }
 
   const imageHandler = (e) => {
+    const images = []
     setValue("images", Object.entries(e.target.files).map(([key, value]) => value));
+    Object.entries(e.target.files).forEach(([key, value]) => {
+      images.push(value.name);
+      setUploadedImages(images);
+    });
+    toast.success("تصویر با موفقیت آپلود شد", {
+      position: "top-center",
+    });
   }
 
   const changeHandler = (e) => {
@@ -107,8 +115,17 @@ export default function SaleForm() {
   };
 
   useEffect(() => {
+    if (!Object.keys(errors).length === 0) {
+      toast.error("لطفا تمام فیلد ها را پر کنید", {
+        position: "top-center",
+      })
+    } else return
+  }, [errors])
+
+  useEffect(() => {
     getAllCities();
   }, []);
+
 
   const handleCityId = (e) => {
     provinces &&
@@ -178,28 +195,41 @@ export default function SaleForm() {
 
       <div className="flex md:gap-4 sm:flex-col md:flex-row">
         <div className="w-full flex flex-col items-start mb-10">
-          <FieldLabel>تصاویر</FieldLabel>
+          <FieldLabel>تصاویر (JPG, JPEG, PNG)</FieldLabel>
           <label
             for="dropzone-file"
             className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ${errors.images ? "border-red" : " border-gray-300"
               }`}
           >
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              <svg
-                className="w-8 h-8 mb-4 text-gray-500 "
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 16"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                />
-              </svg>
+              {
+                uploadedImages.length > 0 ?
+
+                  <svg className="mb-2" xmlns="http://www.w3.org/2000/svg" viewBox="0,0,256,256" width="40px" height="40px">
+                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none">
+                      <g transform="scale(5.33333,5.33333)">
+                        <path d="M44,24c0,11.045 -8.955,20 -20,20c-11.045,0 -20,-8.955 -20,-20c0,-11.045 8.955,-20 20,-20c11.045,0 20,8.955 20,20z" fill="#d0d0d0"></path>
+                        <path d="M34.586,14.586l-13.57,13.586l-5.602,-5.586l-2.828,2.828l8.434,8.414l16.395,-16.414z" fill="#959595"></path>
+                      </g>
+                    </g>
+                  </svg>
+                  :
+                  <svg
+                    className="w-8 h-8 mb-4 text-gray-500 "
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 16"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                    />
+                  </svg>
+              }
               <p className="mb-2 text-sm text-gray-500 ">تصاویر </p>
               <p className="text-gray-600 text-sm"></p>
             </div>
@@ -211,6 +241,13 @@ export default function SaleForm() {
               className="hidden"
             />
           </label>
+          <div className="flex flex-wrap gap-1 my-2">
+            {
+              uploadedImages?.map((image, index) => (
+                <p className="text-gray-500" key={index}>{image}/</p>
+              ))
+            }
+          </div>
         </div>
       </div>
 

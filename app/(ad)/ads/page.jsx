@@ -55,16 +55,18 @@ export default function Ads() {
 
     return (
         <main className='w-full h-screen mx-auto flex flex-col items-center justify-between'>
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 w-full md:container z-0 sm:px-4 md:px-0 pb-10">
-                {
-                    ads ?
-                        ads?.map((ad, index) => (
-                            <AdCard id={ad.id} type={ad.type === "mortgage" ? "رهن" : ad.type === "sale" ? "فروش" : ad.type === "rent" ? "اجاره" : null} title={ad.title} region={ad.region} price={ad.sale_price} time={formatDate(ad.updated_at)} ad_img={ad?.images ? `https://evtap.ir/uploads/${ad.images[0]}` : "/media/imgHolder.jpg"} />
-                        ))
-                        :
-                        <PageSpinner />
-                }
-            </div>
+            {
+                ads && ads.length > 0 ?
+                    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 w-full md:container z-0 sm:px-4 md:px-0 pb-10">
+                        {
+                            ads?.map((ad, index) => (
+                                <AdCard id={ad.id} type={ad.type === "mortgage" ? "رهن" : ad.type === "sale" ? "فروش" : ad.type === "rent" ? "اجاره" : null} title={ad.title} region={ad.region} price={ad.sale_price} time={formatDate(ad.updated_at)} ad_img={ad?.images ? `https://evtap.ir/uploads/${ad.images[0]}` : "/media/imgHolder.jpg"} />
+                            ))
+                        }
+                    </div>
+                    :
+                    <PageSpinner />
+            }
             <div className="join pb-10 font-numerals">
                 <button disabled={page >= pageLength || loading} onClick={() => setPage(prevState => prevState + 1)} className="join-item btn">«</button>
                 <button className="join-item btn"><span className='ml-1'>صفحه</span> {page}</button>

@@ -32,8 +32,7 @@ export default function AdCard({ type, title, region, price, time, ad_img, id })
           <span className="w-fit mb-4 p-1 rounded-lg text-xs bg-gray-200">
             {type}
           </span>
-          <p className="sm:text-lg md:text-2xl font-semibold mb-2">{title}</p>
-          <p className="text-xl font-semibold mb-4"><span className="ml-1">منطقه</span>{region}</p>
+          <p className="sm:text-lg md:text-2xl font-semibold mb-6">{title}</p>
           <div className="flex gap-1 items-center text-gray-500 mb-2">
             <span className="">{convertToInternationalCurrencySystem(price)}</span>
             <span>تومان</span>

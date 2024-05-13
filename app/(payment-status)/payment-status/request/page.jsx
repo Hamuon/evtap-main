@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 export default function PaymentStatus() {
     return (
-        <main className='flex justify-center mx-auto w-full h-full'>
+        <main className='flex justify-center mx-auto w-full h-screen'>
             <div className='flex justify-center items-center md:px-10 sm:px-10 md:container w-full h-full'>
                 <div className='flex flex-col gap-8 items-center'>
                     <div>
