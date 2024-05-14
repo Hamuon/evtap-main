@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { getSingleAd } from "@/services/authService";
 import moment from "jalali-moment";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 const AdPageMap = dynamic(() => import("@/components/AdPageMap"), {
   ssr: false,
 });
@@ -70,6 +71,13 @@ export default function page({ params: { id } }) {
 
           : Math.abs(Number(labelValue));
 
+  }
+
+  const copyToClipboard = e => {
+    navigator.clipboard.writeText(window.location.toString())
+    toast.success("لینک آگهی کپی شد", {
+      position: "top-center",
+    });
   }
 
 
@@ -154,8 +162,8 @@ export default function page({ params: { id } }) {
             </div>
           </div>
           <div className="flex justify-start w-full items-center mb-6 sm:order-1 md:order-2">
-            <CallButton phoneNumber={"09388560310"} text="تماس با ثبت کننده آگهی" />
-            <ShareButton text="اشتراک گذاری" />
+            <CallButton phoneNumber={"09140963009"} text="تماس با ثبت کننده آگهی" />
+            <ShareButton handleClick={copyToClipboard} text="اشتراک گذاری" />
           </div>
 
           <div className="font-semibold">
