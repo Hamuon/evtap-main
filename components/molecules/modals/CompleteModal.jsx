@@ -57,6 +57,7 @@ export default function CompleteModal() {
                         <input {...register("last_name")} name="last_name" type="text" placeholder="نام خانوادگی" className="input input-bordered w-full my-2" />
                     </div>
                     <input {...register("national_code")} className="input input-bordered w-full my-1" name="national_code" type="text" placeholder="کد ملی" />
+                    <input name="invitation_code" type="text" placeholder="کد دعوت" className="input input-bordered w-full my-2" />
                     <SubmitButton type="submit" className="mt-2 sm-w-full md:w-auto" text="ثبت" />
                 </div>
             </form>
