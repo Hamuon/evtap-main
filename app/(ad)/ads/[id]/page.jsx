@@ -59,15 +59,15 @@ export default function page({ params: { id } }) {
     // Nine Zeroes for Billions
     return Math.abs(Number(labelValue)) >= 1.0e+9
 
-      ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + " " + "میلیارد"
+      ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(3) + " " + "میلیارد"
       // Six Zeroes for Millions 
       : Math.abs(Number(labelValue)) >= 1.0e+6
 
-        ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + " " + "میلیون"
+        ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(3) + " " + "میلیون"
         // Three Zeroes for Thousands
         : Math.abs(Number(labelValue)) >= 1.0e+3
 
-          ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + " " + "هزار"
+          ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(3) + " " + "هزار"
 
           : Math.abs(Number(labelValue));
 
@@ -97,10 +97,6 @@ export default function page({ params: { id } }) {
             </div> */}
             <p className="cursor-pointer text-button-primary-color font-semibold" onClick={() => router.push(`/request?address=${ad.address}`)}>درخواست کارشناسی </p>
           </div>
-          <div className="flex gap-1 md:text-2xl sm:text-base font-semibold mb-2">
-            <span>{ad?.type === "mortgage" ? convertToInternationalCurrencySystem(ad.sale_price) : ad?.type === "sale" ? convertToInternationalCurrencySystem(ad.sale_price) : ad?.type === "rent" ? convertToInternationalCurrencySystem(ad.rent) : null}</span>
-            <span>تومان</span>
-          </div>
           {
             ad?.type === "rent" ?
               <div className="flex gap-1 md:text-base sm:text-base font-semibold mb-8 text-gray-400">
@@ -111,11 +107,18 @@ export default function page({ params: { id } }) {
               null
           }
           <div className="w-full  font-semibold mb-6">
-            <div className="flex justify-between w-full border-b-2 border-gray-400 md:px-6 py-2">
-              <span>متراژ</span>
-              <div className="flex gap-1 text-gray-500">
-                <span>{ad?.size}</span>
-                <span>متر مربع</span>
+            <div className="flex sm:flex-col md:flex-row md:gap-10 border-b-2 border-gray-400 md:px-6 py-2">
+              <div className="flex justify-between w-full">
+                <span>قیمت</span>
+                <div className="flex gap-1 text-gray-500">
+                  <span>{ad?.type === "mortgage" ? convertToInternationalCurrencySystem(ad.sale_price) : ad?.type === "sale" ? convertToInternationalCurrencySystem(ad.sale_price) : ad?.type === "rent" ? convertToInternationalCurrencySystem(ad.rent) : null}</span>
+                </div>
+              </div>
+              <div className="flex justify-between w-full">
+                <span>متراژ</span>
+                <div className="flex gap-1 text-gray-500">
+                  <span>{ad?.size}</span>
+                </div>
               </div>
             </div>
             <div className="flex sm:flex-col md:flex-row md:gap-10 border-b-2 border-gray-400 md:px-6 py-2">
@@ -160,6 +163,19 @@ export default function page({ params: { id } }) {
                 </div>
               </div>
             </div>
+            {
+              ad?.type === "rent" ?
+                <div className="flex sm:flex-col md:flex-row md:gap-10 border-b-2 border-gray-400 md:px-6 py-2">
+                  <div className="flex justify-between w-full">
+                    <span>پیش</span>
+                    <div className="flex gap-1 text-gray-500">
+                      <span>{ad?.pre_rent}</span>
+                    </div>
+                  </div>
+                </div>
+                :
+                null
+            }
           </div>
           <div className="flex justify-start w-full items-center mb-6 sm:order-1 md:order-2">
             <CallButton phoneNumber={"09140963009"} text="تماس با ثبت کننده آگهی" />

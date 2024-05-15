@@ -19,8 +19,10 @@ export function checkOtp(data) {
   return http.post("/verify", data);
 }
 
-export function completeProfile(data) {
-  return http.post("/user/complete", data, config);
+export function completeProfile(data, token) {
+  return http.post("/user/complete", data, {
+    headers: { Authorization: `Bearer ${JSON.parse(token)}` },
+  });
 }
 
 export function expertRequest(data) {

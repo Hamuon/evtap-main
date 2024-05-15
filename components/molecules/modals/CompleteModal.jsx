@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { completeProfile } from '@/services/authService'
 import SubmitButton from '@/components/atoms/buttons/SubmitButton'
 import { useRouter } from 'next/navigation'
+
 const schema = z.object({
     first_name: z.string().min(1, { message: "لطفا نام خود را وارد کنید" }).max(20, { message: "نام بیش از 100 کاراکتر" }),
     last_name: z.string().min(1, { message: "لطفا نام خانوادگی خود را وارد کنید" }).max(20, { message: "نام خانوادگی بیش از 100 کاراکتر" }),
@@ -15,6 +16,12 @@ const schema = z.object({
 
 })
 export default function CompleteModal() {
+
+    let token
+    if (typeof window !== "undefined") {
+        token = localStorage.getItem("token");
+    }
+
     const { register, handleSubmit, formState: { errors } } = useForm(
         {
             resolver: zodResolver(schema)
@@ -22,7 +29,7 @@ export default function CompleteModal() {
     )
     const router = useRouter()
     const submitHandler = async (data) => {
-        await completeProfile(data)
+        await completeProfile(data, token)
             .then((res) => {
                 if (res.data.success) {
                     localStorage.setItem('user', JSON.stringify(res.data.user));
