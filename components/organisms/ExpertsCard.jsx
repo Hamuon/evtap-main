@@ -23,11 +23,11 @@ export default function ExpertsCard({
           <span class="text-sm text-gray-500 dark:text-gray-400">
             {`${co_op}  سابقه فعالیت`}
           </span>
-          <div class="py-2 px-4 ms-2 text-sm font-medium text-gray-900">
-            {` ${expert_amount}`}
-          </div>
+          {/* <div class="py-2 px-4 ms-2 text-sm font-medium text-gray-900">
+            
+          </div> */}
           <div class="inline-flex items-center px-4 py-2 text-sm font-medium text-center mt-3 text-white bg-primary rounded-lg">
-            {city}
+          {` ${expert_amount}`}
           </div>
         </div>
       </div>

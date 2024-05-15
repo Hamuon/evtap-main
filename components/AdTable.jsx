@@ -22,9 +22,9 @@ export default function AdTable({ user }) {
               {
                 user?.advertisings.map((ad, index) => (
                   <tr key={index} className="">
-                    <td>{ad.title}</td>
-                    <td>{ad.type}</td>
-                    <td>{ad.city.name}</td>
+                    <td>{ad?.title}</td>
+                    <td>{ad?.type}</td>
+                    <td>{ad?.city?.name}</td>
                   </tr>
                 ))
               }

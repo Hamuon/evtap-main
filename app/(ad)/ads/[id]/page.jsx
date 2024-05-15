@@ -184,7 +184,7 @@ export default function page({ params: { id } }) {
 
           <div className="font-semibold">
             <div className="flex justify-between w-full border-b-2 border-gray-400 sm:px-0 md:px-6 py-2">
-              <span>توضیحات</span>
+              <span>توضیحات </span>
             </div>
             <p className="sm:px-0 py-6 w-full text-justify">
               {ad?.description}
