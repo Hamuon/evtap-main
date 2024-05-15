@@ -21,7 +21,9 @@ export default function MainNavigation({ toggleMenu }) {
                     <Link href="/experts">
                         <li className='mr-12 font-semibold'>کارشناسان</li>
                     </Link>
-                    <li className='mr-12 font-semibold'>درباره ما</li>
+                    <Link href="https://evtap.ir/local/about">
+                        <li className='mr-12 font-semibold'>درباره ما</li>
+                    </Link>
                 </ul>
             </div>
         </nav>
