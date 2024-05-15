@@ -533,6 +533,7 @@ export default function SaleForm() {
                         }`}
                     placeholder="آدرس را بنویسید"
                 />
+                <p className="text-xs my-2">آدرس شما در آگهی نمایش داده نمیشود.</p>
             </div>
 
             <div className="w-full my-2 flex flex-col">

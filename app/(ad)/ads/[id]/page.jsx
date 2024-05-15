@@ -83,7 +83,7 @@ export default function page({ params: { id } }) {
 
   return (
     <main className="w-full mx-auto flex justify-center">
-      <div className="grid grid-cols-1 lg:grid-cols-2 lg:py-10 w-full lg:container z-0 gap-14">
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:pb-10 w-full lg:container z-0 gap-14">
         <div className="col-span-1 font-numerals sm:order-2 md:order-1 sm:px-6 sm:mb-3 md:mb-0">
           <div className="flex gap-1 font-semibold md:text-xl sm:text-base text-gray-400 mb-2">
             <span>آگهی ها</span>/<span>{ad?.type === "mortgage" ? "رهن" : ad?.type === "sale" ? "فروش" : ad?.type === "rent" ? "اجاره" : null}</span>

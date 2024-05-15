@@ -7,7 +7,7 @@ export default function AuthFooter() {
                 {/* mobile visible footer */}
                 <div className='flex items-center'>
                     <div className=''>
-                        <Image src="/media/evtapN.svg" alt="evtap logo" width={65} height={65} />
+                        <Image src="/media/evtap-logo.svg" alt="evtap logo" width={50} height={50} />
                     </div>
                     <h1 className='sm:hidden md:block mx-4'>
                         مجموعه کارشناسی املاک اوتاپ

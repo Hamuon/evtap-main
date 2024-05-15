@@ -8,8 +8,8 @@ export default function MainFooter() {
         <ul className="sm:flex md:hidden">
           <li
             onClick={() =>
-              (window.location.href =
-                "https://www.instagram.com/evtap.ir?igsh=b2lmcGRjbzRrOGF5")
+            (window.location.href =
+              "https://www.instagram.com/evtap.ir?igsh=b2lmcGRjbzRrOGF5")
             }
             className="border-2 border-black py-2 px-3 rounded-full font-semibold"
           >
@@ -48,17 +48,17 @@ export default function MainFooter() {
         {/* desktop visible navigation */}
         <div className="block pb-6 absolute sm:hidden md:block w-full z-50">
           <Image
-            src="/media/evtapN.svg"
+            src="/media/evtap-logo.svg"
             alt="evtap logo"
-            width={65}
-            height={65}
+            width={50}
+            height={50}
           />
         </div>
         <ul className="sm:hidden md:flex z-50 cursor-pointer">
           <li
             onClick={() =>
-              (window.location.href =
-                "https://www.instagram.com/evtap.ir?igsh=b2lmcGRjbzRrOGF5")
+            (window.location.href =
+              "https://www.instagram.com/evtap.ir?igsh=b2lmcGRjbzRrOGF5")
             }
             className="px-6 py-1 border-2 border-black font-semibold rounded-full"
           >
