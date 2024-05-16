@@ -61,6 +61,10 @@ export function getAllExperts() {
   return http.get("/experts");
 }
 
+export function deleteUserAd(id) {
+  return http.get("/user/advertising/" + id, config);
+}
+
 export function userAdsPerPage(page) {
   return http.get(`/user/advertising?page=${page}`, config);
 }

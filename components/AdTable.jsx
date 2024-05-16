@@ -1,9 +1,13 @@
 "use client"
 import React, { useEffect } from 'react'
 import TableLoading from './molecules/loadings/TableLoading'
-import { userAdsPerPage } from '@/services/authService'
+import { userAdsPerPage, deleteUserAd } from '@/services/authService'
+import Image from 'next/image'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 export default function AdTable({ loading, setLoading, pageLength, setUserAds, userAds, page, setPage }) {
-
+  const router = useRouter()
+  console.log(userAds);
   const getUserAdsPerPage = async () => {
     setLoading(true)
 
@@ -22,6 +26,23 @@ export default function AdTable({ loading, setLoading, pageLength, setUserAds, u
     getUserAdsPerPage()
   }, [page])
 
+  const handleDelete = async (e) => {
+    await deleteUserAd(e.target.id).then((res) => {
+      if (res.status === 200) {
+        toast.success('آگهی حذف شد', {
+          position: "top-center"
+        })
+        router.refresh()
+      } else {
+        toast.error('درخواست انجام نشد', {
+          position: "top-center"
+        })
+      }
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
   return (
     <div dir="rtl" className="overflow-x-auto w-full shadow-lg rounded-lg h-96 overflow-y-scroll border border-gray-200 py-4">
       <span className="font-black text-gray-600 px-4">آگهی های من</span>
@@ -34,6 +55,7 @@ export default function AdTable({ loading, setLoading, pageLength, setUserAds, u
                 <th>عنوان</th>
                 <th>نوع آگهی</th>
                 <th>شهر</th>
+                <th>عملیات</th>
               </tr>
             </thead>
             <tbody>
@@ -43,6 +65,11 @@ export default function AdTable({ loading, setLoading, pageLength, setUserAds, u
                     <td>{ad?.title}</td>
                     <td>{ad?.type}</td>
                     <td>{ad?.city?.name}</td>
+                    <td>
+                      <div className='cursor-pointer' onClick={handleDelete}>
+                        <Image src="/icons/trash.svg" id={ad.id} width={20} height={20} alt="trash" />
+                      </div>
+                    </td>
                   </tr>
                 ))
               }
