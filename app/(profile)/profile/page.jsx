@@ -5,10 +5,16 @@ import AdTable from "@/components/AdTable";
 import ProfileIntro from "@/components/molecules/cards/ProfileIntro";
 import ProfileMenu from "@/components/molecules/cards/ProfileMenu";
 import { getDashboard } from "@/services/authService";
+import { getUserAdvertising } from '@/services/authService'
 
 export default function ProfilePage() {
   const [showReqTable, setShowReqTable] = useState(true);
   const [user, setUser] = useState(null);
+  const [pageLength, setPageLength] = useState()
+  const [userAds, setUserAds] = useState(null)
+  const [page, setPage] = useState(1)
+  const [loading, setLoading] = useState(false)
+  const [adsCount, setAdsCount] = useState(0)
 
 
   async function getUser() {
@@ -20,9 +26,20 @@ export default function ProfilePage() {
     }
   }
 
+  async function getUserAds() {
+    await getUserAdvertising().then((res) => {
+      setAdsCount(res.data.advertising.data.length)
+      setPageLength(res.data.advertising.links.length)
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
   useEffect(() => {
     getUser();
+    getUserAds()
   }, []);
+
 
   const handleReqClick = () => {
     setShowReqTable(true);
@@ -40,10 +57,11 @@ export default function ProfilePage() {
             user={user}
             name={user.full_name}
             phone={user.phone}
+            adsCount={adsCount}
           />
         )}
         <div className="col-span-2 w-full flex items-start flex-col my-8 md:my-0 lg:my-0">
-          {showReqTable ? <ReqTable user={user} /> : <AdTable user={user} />}
+          {showReqTable ? <ReqTable user={user} /> : <AdTable setLoading={setLoading} loading={loading} pageLength={pageLength} setUserAds={setUserAds} userAds={userAds} user={user} page={page} setPage={setPage} />}
         </div>
         <ProfileMenu reqClick={handleReqClick} adClick={handleAdClick} />
       </div>

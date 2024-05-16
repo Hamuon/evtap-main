@@ -61,7 +61,7 @@ export function getAllExperts() {
   return http.get("/experts");
 }
 
-export function adPerPage(page) {
+export function userAdsPerPage(page) {
   return http.get(`/user/advertising?page=${page}`, config);
 }
 
