@@ -130,7 +130,7 @@ export default function ProfileIntro({
     },
     {
       tag: "آگهی",
-      value: user?.advertisings.length,
+      // value: user?.advertisings.length,
       icon: (
         <svg
           className="ml-4"
