@@ -67,7 +67,7 @@ export default function AdTable({ loading, setLoading, pageLength, setUserAds, u
                     <td>{ad?.city?.name}</td>
                     <td>
                       <div className='cursor-pointer' onClick={handleDelete}>
-                        <Image src="/icons/trash.svg" id={ad.id} width={20} height={20} alt="trash" />
+                        <Image src="/icons/trash.png" id={ad.id} width={20} height={20} alt="trash" />
                       </div>
                     </td>
                   </tr>

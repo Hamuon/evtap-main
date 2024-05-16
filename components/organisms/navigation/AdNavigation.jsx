@@ -11,7 +11,7 @@ export default function AuthNavigation({ setSearch, search, toggleMenu }) {
         <nav className='flex justify-between mx-auto relative z-50 w-full'>
             <div className='flex w-full justify-between items-center md:px-6 sm:px-6 md:container h-32 mx-auto'>
                 <Link href="/">
-                    <Image src="/media/evtap-logo.svg" alt="evtap logo" width={50} height={50} />
+                    <Image src="/media/evtap-logo.png" alt="evtap logo" width={50} height={50} />
                 </Link>
 
                 <div className=' items-center flex sm:gap-2 md:gap-0'>
