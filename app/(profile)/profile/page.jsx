@@ -38,7 +38,7 @@ export default function ProfilePage() {
         {user && (
           <ProfileIntro
             user={user}
-            name={user.first_name}
+            name={user.full_name}
             phone={user.phone}
           />
         )}

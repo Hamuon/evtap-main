@@ -25,7 +25,7 @@ export default function page({ params: { id } }) {
   useEffect(() => {
     getSingleAd(id)
       .then((response) => {
-        setAd(response.data.advertising)
+        setAd(response.data.advertising);
       })
       .catch((error) => {
         console.log(error);
@@ -34,59 +34,57 @@ export default function page({ params: { id } }) {
 
   useEffect(() => {
     if (ad?.images?.length > 0) {
-      ad?.images?.map(image => defaultProps.items.push({
-        sizes: "767px, 767px",
-        original:
-          `https://evtap.ir/uploads/${image}`,
-        thumbnail:
-          `https://evtap.ir/uploads/${image}`,
-      }))
-    } else {
-      defaultProps.items.push(
-        {
+      ad?.images?.map((image) =>
+        defaultProps.items.push({
           sizes: "767px, 767px",
-          original:
-            `/media/imgHolder.jpg`,
-          thumbnail:
-            `/media/imgHolder.jpg`,
-        }
-      )
+          original: `https://evtap.ir/uploads/${image}`,
+          thumbnail: `https://evtap.ir/uploads/${image}`,
+        })
+      );
+    } else {
+      defaultProps.items.push({
+        sizes: "767px, 767px",
+        original: `/media/imgHolder.jpg`,
+        thumbnail: `/media/imgHolder.jpg`,
+      });
     }
   }, [ad]);
 
   function convertToInternationalCurrencySystem(labelValue) {
-
     // Nine Zeroes for Billions
-    return Math.abs(Number(labelValue)) >= 1.0e+9
-
-      ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(3) + " " + "میلیارد"
-      // Six Zeroes for Millions 
-      : Math.abs(Number(labelValue)) >= 1.0e+6
-
-        ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(3) + " " + "میلیون"
-        // Three Zeroes for Thousands
-        : Math.abs(Number(labelValue)) >= 1.0e+3
-
-          ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(3) + " " + "هزار"
-
-          : Math.abs(Number(labelValue));
-
+    return Math.abs(Number(labelValue)) >= 1.0e9
+      ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(3) + " " + "میلیارد"
+      : // Six Zeroes for Millions
+      Math.abs(Number(labelValue)) >= 1.0e6
+      ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(3) + " " + "میلیون"
+      : // Three Zeroes for Thousands
+      Math.abs(Number(labelValue)) >= 1.0e3
+      ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(3) + " " + "هزار"
+      : Math.abs(Number(labelValue));
   }
 
-  const copyToClipboard = e => {
-    navigator.clipboard.writeText(window.location.toString())
+  const copyToClipboard = (e) => {
+    navigator.clipboard.writeText(window.location.toString());
     toast.success("لینک آگهی کپی شد", {
       position: "top-center",
     });
-  }
-
+  };
 
   return (
     <main className="w-full mx-auto flex justify-center">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:pb-10 w-full lg:container z-0 gap-14">
         <div className="col-span-1 font-numerals sm:order-2 md:order-1 sm:px-6 sm:mb-3 md:mb-0">
           <div className="flex gap-1 font-semibold md:text-xl sm:text-base text-gray-400 mb-2">
-            <span>آگهی ها</span>/<span>{ad?.type === "mortgage" ? "رهن" : ad?.type === "sale" ? "فروش" : ad?.type === "rent" ? "اجاره" : null}</span>
+            <span>آگهی ها</span>/
+            <span>
+              {ad?.type === "mortgage"
+                ? "رهن"
+                : ad?.type === "sale"
+                ? "فروش"
+                : ad?.type === "rent"
+                ? "اجاره"
+                : null}
+            </span>
           </div>
           <div className="md:text-3xl sm:text-xl font-semibold mb-2">
             {ad?.title}
@@ -95,23 +93,33 @@ export default function page({ params: { id } }) {
             {/* <div className="flex gap-1">
               <span>{moment(new Date(ad?.updated_at)).fromNow()}</span>
             </div> */}
-            <p className="cursor-pointer text-button-primary-color font-semibold" onClick={() => router.push(`/request?address=${ad.address}`)}>درخواست کارشناسی </p>
+            <p
+              className="cursor-pointer text-button-primary-color font-semibold"
+              onClick={() => router.push(`/request?address=${ad.address}`)}
+            >
+              درخواست کارشناسی{" "}
+            </p>
           </div>
-          {
-            ad?.type === "rent" ?
-              <div className="flex gap-1 md:text-base sm:text-base font-semibold mb-8 text-gray-400">
-                <span>{ad?.pre_rent}</span>
-                <span>تومان پیش</span>
-              </div>
-              :
-              null
-          }
+          {ad?.type === "rent" ? (
+            <div className="flex gap-1 md:text-base sm:text-base font-semibold mb-8 text-gray-400">
+              <span>{ad?.pre_rent}</span>
+              <span>تومان پیش</span>
+            </div>
+          ) : null}
           <div className="w-full  font-semibold mb-6">
             <div className="flex sm:flex-col md:flex-row md:gap-10 border-b-2 border-gray-400 md:px-6 py-2">
               <div className="flex justify-between w-full">
                 <span>قیمت</span>
                 <div className="flex gap-1 text-gray-500">
-                  <span>{ad?.type === "mortgage" ? convertToInternationalCurrencySystem(ad.sale_price) : ad?.type === "sale" ? convertToInternationalCurrencySystem(ad.sale_price) : ad?.type === "rent" ? convertToInternationalCurrencySystem(ad.rent) : null}</span>
+                  <span>
+                    {ad?.type === "mortgage"
+                      ? convertToInternationalCurrencySystem(ad.sale_price)
+                      : ad?.type === "sale"
+                      ? convertToInternationalCurrencySystem(ad.sale_price)
+                      : ad?.type === "rent"
+                      ? convertToInternationalCurrencySystem(ad.rent)
+                      : null}
+                  </span>
                 </div>
               </div>
               <div className="flex justify-between w-full">
@@ -163,22 +171,22 @@ export default function page({ params: { id } }) {
                 </div>
               </div>
             </div>
-            {
-              ad?.type === "rent" ?
-                <div className="flex sm:flex-col md:flex-row md:gap-10 border-b-2 border-gray-400 md:px-6 py-2">
-                  <div className="flex justify-between w-full">
-                    <span>پیش</span>
-                    <div className="flex gap-1 text-gray-500">
-                      <span>{ad?.pre_rent}</span>
-                    </div>
+            {ad?.type === "rent" ? (
+              <div className="flex sm:flex-col md:flex-row md:gap-10 border-b-2 border-gray-400 md:px-6 py-2">
+                <div className="flex justify-between w-full">
+                  <span>پیش</span>
+                  <div className="flex gap-1 text-gray-500">
+                    <span>{ad?.pre_rent}</span>
                   </div>
                 </div>
-                :
-                null
-            }
+              </div>
+            ) : null}
           </div>
           <div className="flex justify-start w-full items-center mb-6 sm:order-1 md:order-2">
-            <CallButton phoneNumber={"09140963009"} text="تماس با ثبت کننده آگهی" />
+            <CallButton
+              phoneNumber={ad?.user?.phone || "09140963009"}
+              text="تماس با ثبت کننده آگهی"
+            />
             <ShareButton handleClick={copyToClipboard} text="اشتراک گذاری" />
           </div>
 
