@@ -291,8 +291,8 @@ export default function ProfileMenu({ reqClick, adClick }) {
   ];
 
   return (
-    <div className="col-span-1 h-full w-full ">
-      <div className="text-lg flex flex-col rounded-xl shadow-lg overflow-hidden mb-5 lg:mt-0 md:mt-0 border-2 border-gray-200">
+    <div className="col-span-1 h-full w-full sm:mb-10 lg:mb-0">
+      <div className="text-lg flex flex-col sm:h-fit lg:h-full rounded-xl shadow-lg overflow-hidden border-2 border-gray-200">
         {menuItems.map((item, index) => (
           <div
             onClick={item.onClick}
@@ -301,9 +301,8 @@ export default function ProfileMenu({ reqClick, adClick }) {
           >
             {item.icon}
             <span
-              className={`${
-                item.additionalStyle ? item.additionalStyle : null
-              }`}
+              className={`${item.additionalStyle ? item.additionalStyle : null
+                }`}
             >
               {item.title}
             </span>

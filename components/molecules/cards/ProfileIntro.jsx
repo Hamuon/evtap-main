@@ -325,7 +325,7 @@ export default function ProfileIntro({
     },
   ];
   return (
-    <div className="col-span-1 flex flex-col items-center py-6 h-fit w-full rounded-xl shadow-lg border-2 border-gray-200">
+    <div className="col-span-1 flex flex-col items-center py-6 h-full w-full rounded-xl shadow-lg border-2 border-gray-200">
       {
         user ?
           <>
