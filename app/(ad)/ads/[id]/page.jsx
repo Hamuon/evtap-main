@@ -37,8 +37,8 @@ export default function page({ params: { id } }) {
       ad?.images?.map((image) =>
         defaultProps.items.push({
           sizes: "767px, 767px",
-          original: `https://evtap.ir/uploads/${image}`,
-          thumbnail: `https://evtap.ir/uploads/${image}`,
+          original: `https://new.evtap.ir/uploads/${image}`,
+          thumbnail: `https://new.evtap.ir/uploads/${image}`,
         })
       );
     } else {
@@ -56,11 +56,11 @@ export default function page({ params: { id } }) {
       ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(3) + " " + "میلیارد"
       : // Six Zeroes for Millions
       Math.abs(Number(labelValue)) >= 1.0e6
-      ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(3) + " " + "میلیون"
-      : // Three Zeroes for Thousands
-      Math.abs(Number(labelValue)) >= 1.0e3
-      ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(3) + " " + "هزار"
-      : Math.abs(Number(labelValue));
+        ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(3) + " " + "میلیون"
+        : // Three Zeroes for Thousands
+        Math.abs(Number(labelValue)) >= 1.0e3
+          ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(3) + " " + "هزار"
+          : Math.abs(Number(labelValue));
   }
 
   const copyToClipboard = (e) => {
@@ -80,10 +80,10 @@ export default function page({ params: { id } }) {
               {ad?.type === "mortgage"
                 ? "رهن"
                 : ad?.type === "sale"
-                ? "فروش"
-                : ad?.type === "rent"
-                ? "اجاره"
-                : null}
+                  ? "فروش"
+                  : ad?.type === "rent"
+                    ? "اجاره"
+                    : null}
             </span>
           </div>
           <div className="md:text-3xl sm:text-xl font-semibold mb-2">
@@ -115,10 +115,10 @@ export default function page({ params: { id } }) {
                     {ad?.type === "mortgage"
                       ? convertToInternationalCurrencySystem(ad.sale_price)
                       : ad?.type === "sale"
-                      ? convertToInternationalCurrencySystem(ad.sale_price)
-                      : ad?.type === "rent"
-                      ? convertToInternationalCurrencySystem(ad.rent)
-                      : null}
+                        ? convertToInternationalCurrencySystem(ad.sale_price)
+                        : ad?.type === "rent"
+                          ? convertToInternationalCurrencySystem(ad.rent)
+                          : null}
                   </span>
                 </div>
               </div>

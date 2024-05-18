@@ -60,7 +60,7 @@ export default function Ads() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 w-full md:container z-0 sm:px-4 md:px-0 pb-10">
                         {
                             ads?.map((ad, index) => (
-                                <AdCard id={ad.id} type={ad.type === "mortgage" ? "رهن" : ad.type === "sale" ? "فروش" : ad.type === "rent" ? "اجاره" : null} title={ad.title} region={ad.region} price={ad.sale_price} time={formatDate(ad.updated_at)} ad_img={ad?.images ? `https://evtap.ir/uploads/${ad.images[0]}` : "/media/imgHolder.jpg"} />
+                                <AdCard id={ad.id} type={ad.type === "mortgage" ? "رهن" : ad.type === "sale" ? "فروش" : ad.type === "rent" ? "اجاره" : null} title={ad.title} region={ad.region} price={ad.sale_price} time={formatDate(ad.updated_at)} ad_img={ad?.images ? `https://new.evtap.ir/uploads/${ad.images[0]}` : "/media/imgHolder.jpg"} />
                             ))
                         }
                     </div>
