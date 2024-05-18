@@ -12,6 +12,8 @@ export default function Ads() {
     const [ads, setAds] = useState(filteredAds ? filteredAds : [])
     const [page, setPage] = useState(1)
     const [pageLength, setPageLength] = useState()
+
+    console.log(ads);
     const getAllAds = async () => {
         await getAds().then(response => {
             setPageLength(response.data.advertising.links.length)
@@ -60,7 +62,7 @@ export default function Ads() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 w-full md:container z-0 sm:px-4 md:px-0 pb-10">
                         {
                             ads?.map((ad, index) => (
-                                <AdCard id={ad.id} type={ad.type === "mortgage" ? "رهن" : ad.type === "sale" ? "فروش" : ad.type === "rent" ? "اجاره" : null} title={ad.title} region={ad.region} price={ad.sale_price} time={formatDate(ad.updated_at)} ad_img={ad?.images ? `https://new.evtap.ir/uploads/${ad.images[0]}` : "/media/imgHolder.jpg"} />
+                                <AdCard id={ad.id} type={ad.type === "mortgage" ? "رهن" : ad.type === "sale" ? "فروش" : ad.type === "rent" ? "اجاره" : null} title={ad.title} region={ad.region} price={ad.sale_price} time={formatDate(ad.updated_at)} ad_img={ad.images ? `https://new.evtap.ir/uploads/${ad.images[0]}` : "/media/imgHolder.jpg"} />
                             ))
                         }
                     </div>
