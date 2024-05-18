@@ -40,7 +40,6 @@ export default function RootLayout({ children }) {
     >
       <head>
         <title>اوتاپ | کارشناسی تخصصی ملک</title>
-        <link rel="icon" href="/media/evtap-logo.png"></link>
       </head>
       <body
         className="h-screen"
