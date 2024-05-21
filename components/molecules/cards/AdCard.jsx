@@ -39,7 +39,7 @@ export default function AdCard({ type, title, region, price, time, ad_img, id })
           <div className="text-gray-500 text-sm ">{moment(time, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</div>
         </div>
         <div className="relative bg-gray-200 w-44 h-full">
-          <Image src={ad_img} fill style={{ objectFit: "cover" }} alt={title} />
+          <img src={ad_img} fill style={{ objectFit: "cover" }} alt={title} />
         </div>
       </div>
     </Link>
