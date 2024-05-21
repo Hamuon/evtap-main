@@ -9,15 +9,15 @@ export default function AdCard({ type, title, region, price, time, ad_img, id })
     // Nine Zeroes for Billions
     return Math.abs(Number(labelValue)) >= 1.0e+9
 
-      ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + " " + "میلیارد"
+      ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(3) + " " + "میلیارد تومان"
       // Six Zeroes for Millions 
       : Math.abs(Number(labelValue)) >= 1.0e+6
 
-        ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + " " + "میلیون"
+        ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(3) + " " + "میلیون تومان"
         // Three Zeroes for Thousands
         : Math.abs(Number(labelValue)) >= 1.0e+3
 
-          ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + " " + "هزار"
+          ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(3) + " " + "هزار تومان"
 
           : Math.abs(Number(labelValue));
 
@@ -34,8 +34,7 @@ export default function AdCard({ type, title, region, price, time, ad_img, id })
           </span>
           <p className="sm:text-lg md:text-2xl font-semibold mb-6">{title}</p>
           <div className="flex gap-1 items-center text-gray-500 mb-2">
-            <span className="">{convertToInternationalCurrencySystem(price)}</span>
-            <span>تومان</span>
+            <span className="">{price == "0" ? "توافقی" : convertToInternationalCurrencySystem(price)}</span>
           </div>
           <div className="text-gray-500 text-sm ">{moment(time, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</div>
         </div>

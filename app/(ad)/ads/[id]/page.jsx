@@ -53,13 +53,13 @@ export default function page({ params: { id } }) {
   function convertToInternationalCurrencySystem(labelValue) {
     // Nine Zeroes for Billions
     return Math.abs(Number(labelValue)) >= 1.0e9
-      ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(3) + " " + "میلیارد"
+      ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(3) + " " + "میلیارد تومان"
       : // Six Zeroes for Millions
       Math.abs(Number(labelValue)) >= 1.0e6
-        ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(3) + " " + "میلیون"
+        ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(3) + " " + "میلیون تومان"
         : // Three Zeroes for Thousands
         Math.abs(Number(labelValue)) >= 1.0e3
-          ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(3) + " " + "هزار"
+          ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(3) + " " + "هزار تومان"
           : Math.abs(Number(labelValue));
   }
 
@@ -102,7 +102,7 @@ export default function page({ params: { id } }) {
           </div>
           {ad?.type === "rent" ? (
             <div className="flex gap-1 md:text-base sm:text-base font-semibold mb-8 text-gray-400">
-              <span>{ad?.pre_rent}</span>
+              <span>{convertToInternationalCurrencySystem(ad.pre_rent)}</span>
               <span>تومان پیش</span>
             </div>
           ) : null}
