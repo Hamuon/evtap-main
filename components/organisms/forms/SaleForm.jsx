@@ -97,9 +97,9 @@ export default function SaleForm() {
       });
   }
 
-  useEffect(() => {
-    console.log(parseInt(getValues("sale_price")).toLocaleString());
-  }, [errors])
+  // useEffect(() => {
+  //   console.log(parseInt(getValues("sale_price")).toLocaleString);
+  // }, [errors])
 
   const imageHandler = (e) => {
     const images = []
