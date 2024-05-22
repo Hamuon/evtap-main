@@ -55,6 +55,7 @@ export default function SaleForm() {
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [cityId, setCityId] = useState(null);
   const [price, setPrice] = useState("0")
+  const [fullSize, setFullSize] = useState(null)
 
 
   const [uploadedImages, setUploadedImages] = useState([]);
@@ -77,6 +78,7 @@ export default function SaleForm() {
     "1400",
     "1401",
     "1402",
+    "1403",
   ];
 
   const {
@@ -396,9 +398,9 @@ export default function SaleForm() {
             className={`input input-bordered ${errors.size ? "input-error" : null
               }`}
             placeholder="متراژ"
+            onChange={(e) => setFullSize(e.target.value)}
           />
-          <p className="mt-1 pt-1 text-gray-500">{"متر مربع"}</p>
-
+          <p className="mt-1 pt-1 text-gray-500">{fullSize ? parseInt(price / fullSize).toLocaleString() : 0} تومان (هر متر مربع) </p>
         </div>
       </div>
 
