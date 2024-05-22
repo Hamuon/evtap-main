@@ -54,6 +54,7 @@ export default function SaleForm() {
     const [provinces, setProvinces] = useState(null);
     const [selectedProvince, setSelectedProvince] = useState(null);
     const [cityId, setCityId] = useState(null);
+    const [price, setPrice] = useState("0")
 
     const [uploadedImages, setUploadedImages] = useState([]);
 
@@ -379,7 +380,10 @@ export default function SaleForm() {
                         className={`input input-bordered ${errors.sale_price ? "input-error" : null
                             }`}
                         placeholder=" رهن به تومان"
+                        onChange={(e) => setPrice(e.target.value)}
                     />
+                    <p className="mt-1 pt-1 text-gray-500">{price ? parseInt(price).toLocaleString() : 0} تومان</p>
+
                 </div>
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel>متراژ</FieldLabel>
@@ -387,8 +391,10 @@ export default function SaleForm() {
                         {...register("size")}
                         className={`input input-bordered ${errors.size ? "input-error" : null
                             }`}
-                        placeholder="متر مربع"
+                        placeholder="متراژ"
                     />
+                    <p className="mt-1 pt-1 text-gray-500">{"متر مربع"}</p>
+
                 </div>
             </div>
 

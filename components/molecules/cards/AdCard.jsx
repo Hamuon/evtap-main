@@ -23,6 +23,23 @@ export default function AdCard({ type, title, region, price, time, ad_img, id })
 
   }
 
+  const persianToArabicMap = {
+    '۰': '0',
+    '۱': '1',
+    '۲': '2',
+    '۳': '3',
+    '۴': '4',
+    '۵': '5',
+    '۶': '6',
+    '۷': '7',
+    '۸': '8',
+    '۹': '9'
+  };
+
+  function convertPersianToArabic(input) {
+    return input.split('').map(char => persianToArabicMap[char] || char).join('');
+  }
+
 
 
   return (
@@ -34,7 +51,7 @@ export default function AdCard({ type, title, region, price, time, ad_img, id })
           </span>
           <p className="sm:text-lg md:text-2xl font-semibold mb-6">{title}</p>
           <div className="flex gap-1 items-center text-gray-500 mb-2">
-            <span className="">{price == "0" ? "توافقی" : convertToInternationalCurrencySystem(price)}</span>
+            <span className="">{price == "0" ? "توافقی" : convertToInternationalCurrencySystem(convertPersianToArabic(price))}</span>
           </div>
           <div className="text-gray-500 text-sm ">{moment(time, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</div>
         </div>

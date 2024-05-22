@@ -34,7 +34,7 @@ const schema = z.object({
         .min(1, { message: "لطفا متراژ را وارد کنید" })
         .max(10, { message: " کد ملی بیش از 10 کاراکتر" }),
     room_count: z.string().min(1, { message: "لطفا تعداد اتاق را وارد کنید" }),
-    plate: z.string().min(1, { message: "لطفا پلاک را وارد کنید" }),
+    plate: z.string(),
     elevator: z.string().min(1, { message: "لطفا آسانسور را وارد کنید" }),
     parking: z.string().min(1, { message: "لطفا پارکینگ را وارد کنید" }),
     warehouse: z.string().min(1, { message: "لطفا انباری را وارد کنید" }),
@@ -55,6 +55,9 @@ export default function SaleForm() {
     const [provinces, setProvinces] = useState(null);
     const [selectedProvince, setSelectedProvince] = useState(null);
     const [cityId, setCityId] = useState(null);
+    const [price, setPrice] = useState("0")
+    const [pre, setPre] = useState("0")
+
 
     const [uploadedImages, setUploadedImages] = useState([]);
 
@@ -389,7 +392,10 @@ export default function SaleForm() {
                         className={`input input-bordered ${errors.pre_rent ? "input-error" : null
                             }`}
                         placeholder=" پیش اجاره به تومان"
+                        onChange={(e) => setPre(e.target.value)}
                     />
+                    <p className="mt-1 pt-1 text-gray-500">{pre ? parseInt(pre).toLocaleString() : 0} تومان</p>
+
                 </div>
                 <div className="w-full my-2 flex flex-col">
                     <FieldLabel>اجاره</FieldLabel>
@@ -398,7 +404,9 @@ export default function SaleForm() {
                         className={`input input-bordered ${errors.rent ? "input-error" : null
                             }`}
                         placeholder="اجاره به تومان"
+                        onChange={(e) => setPrice(e.target.value)}
                     />
+                    <p className="mt-1 pt-1 text-gray-500">{price ? parseInt(price).toLocaleString() : 0} تومان</p>
                 </div>
             </div>
 

@@ -70,6 +70,23 @@ export default function page({ params: { id } }) {
     });
   };
 
+  const persianToArabicMap = {
+    '۰': '0',
+    '۱': '1',
+    '۲': '2',
+    '۳': '3',
+    '۴': '4',
+    '۵': '5',
+    '۶': '6',
+    '۷': '7',
+    '۸': '8',
+    '۹': '9'
+  };
+
+  function convertPersianToArabic(input) {
+    return input.split('').map(char => persianToArabicMap[char] || char).join('');
+  }
+
   return (
     <main className="w-full mx-auto flex justify-center">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:pb-10 w-full lg:container z-0 gap-14">
@@ -102,7 +119,7 @@ export default function page({ params: { id } }) {
           </div>
           {ad?.type === "rent" ? (
             <div className="flex gap-1 md:text-base sm:text-base font-semibold mb-8 text-gray-400">
-              <span>{convertToInternationalCurrencySystem(ad.pre_rent)}</span>
+              <span>{convertToInternationalCurrencySystem(convertPersianToArabic(ad.pre_rent))}</span>
               <span>تومان پیش</span>
             </div>
           ) : null}
@@ -113,11 +130,11 @@ export default function page({ params: { id } }) {
                 <div className="flex gap-1 text-gray-500">
                   <span>
                     {ad?.type === "mortgage"
-                      ? convertToInternationalCurrencySystem(ad.sale_price)
+                      ? convertToInternationalCurrencySystem(convertPersianToArabic(ad.sale_price))
                       : ad?.type === "sale"
-                        ? convertToInternationalCurrencySystem(ad.sale_price)
+                        ? convertToInternationalCurrencySystem(convertPersianToArabic(ad.sale_price))
                         : ad?.type === "rent"
-                          ? convertToInternationalCurrencySystem(ad.rent)
+                          ? convertToInternationalCurrencySystem(convertPersianToArabic(ad.rent))
                           : null}
                   </span>
                 </div>
