@@ -28,7 +28,7 @@ export default function AdCard({ type, title, region, price, time, ad_img, id })
   return (
     <Link href={`/ads/${id}`}>
       <div className="flex 2xl:w-auto font-numerals m-3 h-56 z-50 justify-between rounded-xl shadow-lg overflow-hidden border border-gray-300 bg-white">
-        <div className="p-4 flex flex-col justify-center ">
+        <div className="p-4 flex flex-col justify-center w-44">
           <span className="w-fit mb-4 p-1 rounded-lg text-xs bg-gray-200">
             {type}
           </span>
@@ -38,8 +38,8 @@ export default function AdCard({ type, title, region, price, time, ad_img, id })
           </div>
           <div className="text-gray-500 text-sm ">{moment(time, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</div>
         </div>
-        <div className="relative bg-gray-200 w-44 h-full">
-          <img src={ad_img} className="w-full h-full object-cover" alt={title} />
+        <div className="relative bg-gray-200 w-40 h-full">
+          <img src={ad_img} className="w-40 h-full object-cover" alt={title} />
         </div>
       </div>
     </Link>
