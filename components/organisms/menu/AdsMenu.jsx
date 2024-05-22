@@ -9,6 +9,9 @@ export default function AdsMenu({ toggleMenu, open }) {
                 <Link href="/">
                     <li>صفحه اصلی</li>
                 </Link>
+                <Link href="https://new.evtap.ir/admin/login">
+                    <li>پنل کارشناس</li>
+                </Link>
                 <Link href="/add-ad">
                     <li>ثبت آگهی</li>
                 </Link>
