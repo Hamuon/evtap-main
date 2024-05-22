@@ -21,12 +21,10 @@ const schema = z.object({
         .min(1, { message: "لطفا توضیحات را وارد کنید" }),
     region: z
         .string()
-        .min(1, { message: "لطفا  منطقه را وارد کنید" })
         .max(150, { message: " کد ملی بیش از 10 کاراکتر" }),
-    floor: z.string().min(1, { message: "لطفا  طبقه را وارد کنید" }),
+    floor: z.string(),
     street: z
         .string()
-        .min(1, { message: "لطفا  خیابان را وارد کنید" })
         .max(150, { message: " کد ملی بیش از 10 کاراکتر" }),
     sale_price: z.string().min(1, { message: "لطفا رهن را وارد کنید" }),
     year: z.string().min(1, { message: "لطفا سال ساخت را وارد کنید" }),
@@ -35,12 +33,12 @@ const schema = z.object({
         .min(1, { message: "لطفا متراژ را وارد کنید" })
         .max(10, { message: " کد ملی بیش از 10 کاراکتر" }),
     room_count: z.string().min(1, { message: "لطفا تعداد اتاق را وارد کنید" }),
-    plate: z.string().min(1, { message: "لطفا پلاک را وارد کنید" }),
+    plate: z.string(),
     elevator: z.string().min(1, { message: "لطفا آسانسور را وارد کنید" }),
     parking: z.string().min(1, { message: "لطفا پارکینگ را وارد کنید" }),
     warehouse: z.string().min(1, { message: "لطفا انباری را وارد کنید" }),
-    alley: z.string().min(1, { message: "لطفا کوچه را وارد کنید" }),
-    address: z.string().min(1, { message: "لطفا آدرس را وارد کنید" }),
+    alley: z.string(),
+    address: z.string(),
     type: z.string().min(1, { message: "لطفا نوع آگهی را وارد کنید" }),
     document: z.string().min(1, { message: "لطفا نوع سند را وارد کنید" }),
     city_id: z.number().min(1, { message: "لطفا شهر را وارد کنید" }),

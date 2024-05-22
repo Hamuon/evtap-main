@@ -14,31 +14,24 @@ const schema = z.object({
   city_id: z.string().min(1, { message: "لطفا شهر را انتخاب کنید" }),
   region: z
     .string()
-    .min(1, { message: "لطفا منطقه را وارد کنید" })
     .max(100, { message: "منطقه بیش از 100 کاراکتر" }),
   street: z
     .string()
-    .min(1, { message: "لطفا خیابان اصلی را وارد کنید" })
     .max(20, { message: "خیابان اصلی بیش از 20 کاراکتر" }),
   street_sec: z
     .string()
-    .min(1, { message: "لطفا خیابان فرعی را وارد کنید" })
     .max(20, { message: "خیابان فرعی بیش از 20 کاراکتر" }),
   alley: z
     .string()
-    .min(1, { message: "لطفا کوچه را وارد کنید" })
     .max(100, { message: " کوچه بیش از 100 کاراکتر" }),
   plate: z
     .string()
-    .min(1, { message: "لطفا بلوک یا پلاک را وارد کنید" })
     .max(10, { message: " بلوک/پلاک بیش از 10 کاراکتر" }),
   floor: z
     .string()
-    .min(1, { message: "لطفا طبقه یا واحد را وارد کنید" })
     .max(10, { message: " طبقه/واحد بیش از 10 کاراکتر" }),
   address: z
     .string()
-    .min(1, { message: "لطفا آدرس دقیق را وارد کنید" })
     .max(150, { message: " آدرس بیش از 150 کاراکتر" }),
 });
 export default function RequestModal({ nextStep, setReqData }) {
@@ -312,7 +305,7 @@ export default function RequestModal({ nextStep, setReqData }) {
                 {...register("region")}
                 className={`input input-sm input-bordered w-full my-2 ${errors.region ? "input-error" : null
                   }`}
-                placeholder="منطقه"
+                placeholder="محدوده؛ ولیعصر"
               />
             </div>
             <div className="w-full items-center">
@@ -330,7 +323,7 @@ export default function RequestModal({ nextStep, setReqData }) {
               {...register("street_sec")}
               className={`input input-sm input-bordered w-full my-2 ${errors.street_sec ? "input-error" : null
                 }`}
-              placeholder="خیابان فرعی"
+              placeholder="خیابان فرعی (اختیاری)"
             />
             <input
               {...register("alley")}
