@@ -7,7 +7,6 @@ import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
 export default function AdTable({ loading, setLoading, pageLength, setUserAds, userAds, page, setPage }) {
   const router = useRouter()
-  console.log(userAds);
   const getUserAdsPerPage = async () => {
     setLoading(true)
 

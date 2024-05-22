@@ -36,9 +36,8 @@ export default function InvoiceModal({ reqData, prevStep }) {
                     <div className='flex w-full border-b border-gray-300 md:px-6 py-2'>
                         <span className='ml-7 w-10'>هزینه</span>
                         <div className='flex gap-1 text-gray-500'>
-                            {/* <span>{reqData?.data.setting?.request_amount}</span> */}
-                            <span>رایگان</span>
-                            {/* <span className="ml-2"> ریال</span> */}
+                            <span>{reqData?.data.setting?.request_amount}</span>
+                            <span className="ml-2"> ریال</span>
                             <span className='bg-green text-white px-3 py-1 text-xs rounded-lg'>{reqData?.data.request?.status_title}</span>
                         </div>
                     </div>
@@ -47,7 +46,7 @@ export default function InvoiceModal({ reqData, prevStep }) {
                     کارشناس مربوطه در سریع ترین زمان ممکن با شما تماس خواهد گرفت، در صورت تاخیر در پیگیری کارشناس با شماره 04133356848 تماس حاصل فرمائید.
                 </p>
                 <div className='flex gap-2 mt-2 w-full'>
-                    <SubmitButton handleClick={() => router.push("/payment-status/request")} type="button" text="پرداخت" />
+                    <SubmitButton handleClick={() => router.push(reqData?.data.url)} type="button" text="پرداخت" />
                 </div>
             </div>
         </div >
