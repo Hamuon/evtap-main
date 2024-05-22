@@ -1,5 +1,5 @@
 "use client"
-import { z } from 'zod'
+import { set, z } from 'zod'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import React, { useEffect } from 'react'
@@ -54,19 +54,22 @@ export default function OtpModal({ nextStep, prevStep, phone, setPhone }) {
     }, [seconds, minutes]);
 
     const resendOTP = async () => {
+        setLoading(true)
         await getOtp(phone)
             .then((res) => {
                 if (res.status === 200) {
-                    toast.success('کد ارسال شد', {
+                    toast.success('کد مجددا ارسال شد', {
                         position: "top-right",
                     });
                     setMinutes(2);
                     setSeconds(0o0);
+                    setLoading(false)
                 } else {
                     toast.error(res.errors.phone[0])
                 }
             }).catch((error) => {
                 console.log(error);
+                setLoading(false)
             })
     };
 
@@ -108,12 +111,11 @@ export default function OtpModal({ nextStep, prevStep, phone, setPhone }) {
     return (
         <div className='modal-container'>
             <form onSubmit={handleSubmit(submitHandler)} className='modal-form relative'>
-                {errors.verify_code && <span className="modal-error">{errors.verify_code.message}</span>}
                 <div className='flex flex-col w-full items-start'>
                     <span className='text-3xl font-semibold mb-3'>احراز هویت</span>
                     <Label htmlFor="otp">کد ارسالی را وارد کنید</Label>
                     <div className='flex items-center gap-2 w-full'>
-                        <input {...register("verify_code")} className="input input-bordered w-full font-numerals my-2" name="verify_code" type="text" placeholder="کد ارسالی" />
+                        <input {...register("verify_code")} className={`input input-bordered w-full font-numerals my-2 ${errors.verify_code ? "input-error" : null}`} name="verify_code" type="text" placeholder="کد ارسالی" />
                         <button disabled={seconds > 0 || minutes > 0} onClick={resendOTP} className={`font-numerals px-4 py-3 text-white rounded-lg min-w-20 flex items-center justify-center ${seconds > 0 || minutes > 0 ? 'bg-[#54515d]' : 'bg-[#5227CC]'}`}>
                             {seconds > 0 || minutes > 0 ? (
                                 <p>
@@ -125,7 +127,7 @@ export default function OtpModal({ nextStep, prevStep, phone, setPhone }) {
                     </div>
                     <div className='flex gap-2 mt-2 sm:w-full'>
                         <SubmitButton loading={loading} type="submit" text="ورود" />
-                        <BackButton handleBack={handleBack} />
+                        <BackButton type="button" handleBack={prevStep} />
                     </div>
                 </div>
             </form>

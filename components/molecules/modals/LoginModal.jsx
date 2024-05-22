@@ -50,7 +50,6 @@ export default function LoginModal({ nextStep, setPhone }) {
     return (
         <div className='modal-container'>
             <form onSubmit={handleSubmit(submitHandler)} className='modal-form relative'>
-                {errors.phone && <span className="modal-error">{errors.phone.message}</span>}
                 <div className='flex flex-col items-start w-full'>
                     <div className='flex w-full justify-start mb-3 items-center'>
                         <span className='md:text-3xl sm:text-xl font-semibold '>خوش آمدید!</span>
@@ -58,7 +57,7 @@ export default function LoginModal({ nextStep, setPhone }) {
                     <Label htmlFor="phone">
                         لطفا شماره تماس خود را وارد کنید
                     </Label>
-                    <input {...register("phone")} className="input input-bordered w-full my-2 font-numerals" name="phone" type="text" placeholder="شماره تماس" />
+                    <input {...register("phone")} className={`input input-bordered w-full my-2 font-numerals ${errors.phone ? "input-error" : null}`} name="phone" type="text" placeholder="شماره تماس" />
                     <div className='flex gap-2 mt-2 sm:w-full'>
                         <SubmitButton type="submit" className="w-full" loading={loading} text="ارسال کد" />
                     </div>
