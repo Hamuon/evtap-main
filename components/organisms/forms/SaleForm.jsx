@@ -79,6 +79,7 @@ export default function SaleForm() {
 
   const {
     setValue,
+    getValues,
     register,
     handleSubmit,
     formState: { errors },
@@ -95,6 +96,10 @@ export default function SaleForm() {
         console.log(error);
       });
   }
+
+  useEffect(() => {
+    console.log(parseInt(getValues("sale_price")).toLocaleString());
+  }, [errors])
 
   const imageHandler = (e) => {
     const images = []
