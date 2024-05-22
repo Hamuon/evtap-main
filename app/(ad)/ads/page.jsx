@@ -1,10 +1,10 @@
-"use client"
-import React, { useContext, useEffect, useState } from 'react'
-import AdCard from '@/components/molecules/cards/AdCard'
-import FilteredAdsContext from '@/context/FilteredAdsProvider'
-import { getAds } from '@/services/authService'
-import { adsPerPage } from '@/services/authService'
-import PageSpinner from '@/components/atoms/spinner/PageSpinner'
+"use client";
+import React, { useContext, useEffect, useState } from "react";
+import AdCard from "@/components/molecules/cards/AdCard";
+import FilteredAdsContext from "@/context/FilteredAdsProvider";
+import { getAds } from "@/services/authService";
+import { adsPerPage } from "@/services/authService";
+import PageSpinner from "@/components/atoms/spinner/PageSpinner";
 export default function Ads() {
     const { filteredAds } = useContext(FilteredAdsContext)
 
@@ -22,38 +22,35 @@ export default function Ads() {
         })
     }
 
-    const getAdsPerPage = async () => {
-        setLoading(true)
-        await adsPerPage(page)
-            .then(response => {
-                setAds(response.data.advertising.data)
-                setLoading(false)
-            })
-            .catch(error => {
-                console.log(error)
-                setLoading(false)
-            })
-    }
+  const getAdsPerPage = async () => {
+    setLoading(true);
+    await adsPerPage(page)
+      .then((response) => {
+        setAds(response.data.advertising.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
 
-    function formatDate(date) {
-        var d = new Date(date),
-            month = '' + (d.getMonth() + 1),
-            day = '' + d.getDate(),
-            year = d.getFullYear();
+  function formatDate(date) {
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
 
-        if (month.length < 2)
-            month = '0' + month;
-        if (day.length < 2)
-            day = '0' + day;
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
 
-        return [year, month, day].join('-');
-    }
+    return [year, month, day].join("-");
+  }
 
-
-    useEffect(() => {
-        getAllAds()
-        getAdsPerPage()
-    }, [page])
+  useEffect(() => {
+    getAllAds();
+    getAdsPerPage();
+  }, [page]);
 
     return (
         <main className='w-full h-screen mx-auto flex flex-col items-center justify-between'>
