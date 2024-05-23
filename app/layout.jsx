@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
                   className="flex flex-col justify-between min-h-full"
                 >
                   {pathname === "/" ? (
-                    <MainNavigation toggleMenu={toggleMenu} />
+                    <MainNavigation toggleMenu={toggleMenu} open={open} />
                   ) : null}
                   {open ? (
                     <MobileMenu open={open} toggleMenu={toggleMenu} />

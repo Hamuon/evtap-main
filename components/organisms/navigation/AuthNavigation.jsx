@@ -1,13 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-export default function AuthNavigation({ toggleMenu }) {
+export default function AuthNavigation() {
     return (
-        <nav className='flex justify-between mx-auto z-30 w-full absolute top-0'>
+        <nav className='flex justify-between mx-auto z-40 w-full absolute top-0'>
             <div className='flex w-full justify-end items-center md:px-10 sm:px-10 mx-auto md:container h-32'>
-                <div onClick={toggleMenu} className='md:hidden'>
-                    <Image src="/icons/mobile-menu.svg" alt="mobile menu" width={45} height={45} />
-                </div>
+                <Link className='sm:block md:hidden' href="/">
+                    <span className=' font-semibold'>صفحه اصلی</span>
+                </Link>
                 {/* mobile visible navigation */}
                 <ul className='sm:hidden md:flex'>
                     <Link href="/">

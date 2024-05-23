@@ -29,7 +29,7 @@ export default function AuthLayout({ children }) {
         <ProtectLogin>
             <AuthProvider>
                 <ToastContainer />
-                <AuthNavigation toggleMenu={toggleMenu} />
+                <AuthNavigation toggleMenu={toggleMenu} open={open} />
                 {open ? <RequestMenu toggleMenu={toggleMenu} open={open} /> : null}
                 {
                     showLogin ? <StepForm /> : null

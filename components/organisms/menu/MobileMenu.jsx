@@ -3,8 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 export default function MobileMenu({ toggleMenu, open }) {
     return (
-        <div className={`w-72 h-screen fixed top-0 right-0 bg-white z-[10000] sm:block md:hidden transition-transform duration-300 ease-in-out ${open ? 'translate-x-0' : '-translate-x-full'}`}>
-            <Image className="absolute top-8 right-8" src="/icons/close.svg" alt='close' width={25} height={25} onClick={() => toggleMenu(!open)} />
+        <div className={`md:hidden h-screen shadow-md fixed top-0 z-40 bg-white w-full transition ease-in-out duration-300 ${open ? "translate-y-0 opacity-100 visible" : "-translate-y-[500px] opacity-0 invisible"}`}>
             <ul className='w-full h-full flex flex-col justify-center items-center gap-6 font-semibold'>
                 <Link onClick={toggleMenu} href="/experts">
                     <li>کارشناسان</li>

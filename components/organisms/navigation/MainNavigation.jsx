@@ -1,15 +1,14 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-export default function MainNavigation({ toggleMenu }) {
+import MenuButton from '@/components/atoms/buttons/menu/MenuButton'
+export default function MainNavigation({ toggleMenu, open }) {
 
     return (
         <nav className='flex justify-between mx-auto relative z-50 w-full'>
             <div className='flex w-full justify-between items-center md:px-10 sm:px-10 md:container mx-auto h-32'>
                 {/* mobile visible navigation */}
-                <div onClick={toggleMenu} className='md:hidden'>
-                    <Image src="/icons/mobile-menu.svg" alt="mobile menu" width={45} height={45} />
-                </div>
+                <MenuButton toggleMenu={toggleMenu} open={open} />
                 <div className='md:hidden'>
                     <Image src="/media/evtap-logo.png" alt="evtap logo" width={50} height={50} />
                 </div>

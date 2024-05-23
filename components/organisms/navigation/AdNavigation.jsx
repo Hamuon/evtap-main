@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SubmitButton from "@/components/atoms/buttons/SubmitButton";
 import { useRouter } from "next/navigation";
-export default function AuthNavigation({ setSearch, search, toggleMenu }) {
+import MenuButton from "@/components/atoms/buttons/menu/MenuButton";
+export default function AuthNavigation({ setSearch, search, toggleMenu, open }) {
   const pathname = usePathname();
   const router = useRouter();
   return (
@@ -33,7 +34,7 @@ export default function AuthNavigation({ setSearch, search, toggleMenu }) {
               </Link>
             ) : null}
           </ul>
-          {pathname === "/ads" ? (
+          {/* {pathname === "/ads" ? (
             <button
               onClick={() => setSearch(!search)}
               className="btn bg-white min-w-24 mr-12 border border-black "
@@ -96,21 +97,14 @@ export default function AuthNavigation({ setSearch, search, toggleMenu }) {
               </span>
               <span>جستجو</span>
             </button>
-          ) : null}
+          ) : null} */}
           <SubmitButton
             text="ثبت آگهی"
             handleClick={() => router.push("/add-ad")}
             type="button"
             className="mr-4 sm:hidden md:flex"
           />
-          <div onClick={toggleMenu} className="md:hidden">
-            <Image
-              src="/icons/mobile-menu.svg"
-              alt="mobile menu"
-              width={45}
-              height={45}
-            />
-          </div>
+          <MenuButton toggleMenu={toggleMenu} open={open} />
         </div>
       </div>
     </nav>

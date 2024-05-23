@@ -11,7 +11,7 @@ export default function AdLayout({ children }) {
 
     return (
         <div>
-            <AdNavigation toggleMenu={toggleMenu} setSearch={setSearch} search={search} />
+            <AdNavigation toggleMenu={toggleMenu} setSearch={setSearch} search={search} open={open} />
             {open ? <AdsMenu open={open} toggleMenu={toggleMenu} /> : null}
             {
                 search ? <AdSearchModal setSearch={setSearch} /> : null
