@@ -24,7 +24,7 @@ export default function InvoiceModal({ reqData, prevStep }) {
                     <div className='flex w-full border-b border-gray-300 md:px-6 py-2'>
                         <span className='ml-7 w-10'>آدرس</span>
                         <div className='flex gap-1 text-gray-500'>
-                            <span>{reqData?.data.request?.address}</span>
+                            <span>{reqData?.data.request?.address ? reqData.data.request.address : "هماهنگی با کارشناس"}</span>
                         </div>
                     </div>
                     <div className='flex w-full border-b border-gray-300 md:px-6 py-2'>
