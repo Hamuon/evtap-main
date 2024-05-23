@@ -74,6 +74,23 @@ export default function SaleForm() {
     "1403",
   ];
 
+  const persianToArabicMap = {
+    '۰': '0',
+    '۱': '1',
+    '۲': '2',
+    '۳': '3',
+    '۴': '4',
+    '۵': '5',
+    '۶': '6',
+    '۷': '7',
+    '۸': '8',
+    '۹': '9'
+  };
+
+  function convertPersianToArabic(input) {
+    return input.split('').map(char => persianToArabicMap[char] || char).join('');
+  }
+
   const {
     setValue,
     getValues,
@@ -420,7 +437,7 @@ export default function SaleForm() {
             onChange={(e) => setPrice(e.target.value)}
           />
           <p className="mt-1 pt-1 text-gray-500">
-            {price ? parseInt(price).toLocaleString() : 0} تومان
+            {convertPersianToArabic(price) ? parseInt(convertPersianToArabic(price)).toLocaleString() : 0} تومان
           </p>
         </div>
         <div className="w-full my-2 flex flex-col">
