@@ -82,6 +82,24 @@ export default function SaleForm() {
         "1403",
     ];
 
+    const persianToArabicMap = {
+        '۰': '0',
+        '۱': '1',
+        '۲': '2',
+        '۳': '3',
+        '۴': '4',
+        '۵': '5',
+        '۶': '6',
+        '۷': '7',
+        '۸': '8',
+        '۹': '9'
+      };
+    
+      function convertPersianToArabic(input) {
+        return input.split('').map(char => persianToArabicMap[char] || char).join('');
+      }
+    
+
     const {
         setValue,
         register,
@@ -395,7 +413,7 @@ export default function SaleForm() {
                         placeholder=" پیش اجاره به تومان"
                         onChange={(e) => setPre(e.target.value)}
                     />
-                    <p className="mt-1 pt-1 text-gray-500">{pre ? parseInt(pre).toLocaleString() : 0} تومان</p>
+                    <p className="mt-1 pt-1 text-gray-500">{convertPersianToArabic(pre) ? parseInt(convertPersianToArabic(pre)).toLocaleString() : 0} تومان</p>
 
                 </div>
                 <div className="w-full my-2 flex flex-col">
@@ -407,7 +425,7 @@ export default function SaleForm() {
                         placeholder="اجاره به تومان"
                         onChange={(e) => setPrice(e.target.value)}
                     />
-                    <p className="mt-1 pt-1 text-gray-500">{price ? parseInt(price).toLocaleString() : 0} تومان</p>
+                    <p className="mt-1 pt-1 text-gray-500">{convertPersianToArabic(price) ? parseInt(convertPersianToArabic(price)).toLocaleString() : 0} تومان</p>
                 </div>
             </div>
 
@@ -521,7 +539,7 @@ export default function SaleForm() {
                     </option>
                     <option value="promise">قول نامه</option>
                     <option value="single">تک برگ</option>
-                    <option value="endowment">وقف</option>{" "}
+                    <option value="endowment">سایر</option>{" "}
                 </select>
             </div>
 
