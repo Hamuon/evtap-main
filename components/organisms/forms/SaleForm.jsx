@@ -16,16 +16,10 @@ const schema = z.object({
     .string()
     .min(1, { message: "لطفا عنوان را وارد کنید" })
     .max(150, { message: "نام بیش از 100 کاراکتر" }),
-  description: z
-    .string()
-    .min(1, { message: "لطفا توضیحات را وارد کنید" }),
-  region: z
-    .string()
-    .max(150, { message: " کد ملی بیش از 10 کاراکتر" }),
+  description: z.string().min(1, { message: "لطفا توضیحات را وارد کنید" }),
+  region: z.string().max(150, { message: " کد ملی بیش از 10 کاراکتر" }),
   floor: z.string(),
-  street: z
-    .string()
-    .max(150, { message: " کد ملی بیش از 10 کاراکتر" }),
+  street: z.string().max(150, { message: " کد ملی بیش از 10 کاراکتر" }),
   sale_price: z.string().min(1, { message: "لطفا قیمت کل را وارد کنید" }),
   year: z.string().min(1, { message: "لطفا سال ساخت را وارد کنید" }),
   size: z
@@ -49,14 +43,13 @@ const schema = z.object({
 
 export default function SaleForm() {
   const [loading, setLoading] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
   const [provinces, setProvinces] = useState(null);
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [cityId, setCityId] = useState(null);
-  const [price, setPrice] = useState("0")
-  const [fullSize, setFullSize] = useState(null)
-
+  const [price, setPrice] = useState("0");
+  const [fullSize, setFullSize] = useState(null);
 
   const [uploadedImages, setUploadedImages] = useState([]);
 
@@ -80,6 +73,23 @@ export default function SaleForm() {
     "1402",
     "1403",
   ];
+
+  const persianToArabicMap = {
+    '۰': '0',
+    '۱': '1',
+    '۲': '2',
+    '۳': '3',
+    '۴': '4',
+    '۵': '5',
+    '۶': '6',
+    '۷': '7',
+    '۸': '8',
+    '۹': '9'
+  };
+
+  function convertPersianToArabic(input) {
+    return input.split('').map(char => persianToArabicMap[char] || char).join('');
+  }
 
   const {
     setValue,
@@ -106,8 +116,11 @@ export default function SaleForm() {
   // }, [errors])
 
   const imageHandler = (e) => {
-    const images = []
-    setValue("images", Object.entries(e.target.files).map(([key, value]) => value));
+    const images = [];
+    setValue(
+      "images",
+      Object.entries(e.target.files).map(([key, value]) => value)
+    );
     Object.entries(e.target.files).forEach(([key, value]) => {
       images.push(value.name);
       setUploadedImages(images);
@@ -115,7 +128,7 @@ export default function SaleForm() {
     toast.success("تصویر با موفقیت آپلود شد", {
       position: "top-center",
     });
-  }
+  };
 
   const changeHandler = (e) => {
     setSelectedProvince(e.target.value);
@@ -125,14 +138,13 @@ export default function SaleForm() {
     if (!Object.keys(errors).length === 0) {
       toast.error("لطفا تمام فیلد ها را پر کنید", {
         position: "top-center",
-      })
-    } else return
-  }, [errors])
+      });
+    } else return;
+  }, [errors]);
 
   useEffect(() => {
     getAllCities();
   }, []);
-
 
   const handleCityId = (e) => {
     provinces &&
@@ -140,8 +152,10 @@ export default function SaleForm() {
         selectedProvince
           ? selectedProvince === province.name
             ? province.cities.map((city) =>
-              city.name === e.target.value ? setValue("city_id", city.id) : null,
-            )
+                city.name === e.target.value
+                  ? setValue("city_id", city.id)
+                  : null
+              )
             : null
           : null
       );
@@ -168,7 +182,7 @@ export default function SaleForm() {
             position: "top-center",
           });
           setLoading(false);
-          router.push("/ads")
+          router.push("/ads");
         } else {
           toast.error("درخواست شما ثبت نشد");
           setLoading(false);
@@ -205,38 +219,63 @@ export default function SaleForm() {
           <FieldLabel>تصاویر (JPG, JPEG, PNG)</FieldLabel>
           <label
             for="dropzone-file"
-            className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ${errors.images ? "border-red" : " border-gray-300"
-              }`}
+            className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ${
+              errors.images ? "border-red" : " border-gray-300"
+            }`}
           >
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              {
-                uploadedImages.length > 0 ?
-
-                  <svg className="mb-2" xmlns="http://www.w3.org/2000/svg" viewBox="0,0,256,256" width="40px" height="40px">
-                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none">
-                      <g transform="scale(5.33333,5.33333)">
-                        <path d="M44,24c0,11.045 -8.955,20 -20,20c-11.045,0 -20,-8.955 -20,-20c0,-11.045 8.955,-20 20,-20c11.045,0 20,8.955 20,20z" fill="#d0d0d0"></path>
-                        <path d="M34.586,14.586l-13.57,13.586l-5.602,-5.586l-2.828,2.828l8.434,8.414l16.395,-16.414z" fill="#959595"></path>
-                      </g>
-                    </g>
-                  </svg>
-                  :
-                  <svg
-                    className="w-8 h-8 mb-4 text-gray-500 "
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
+              {uploadedImages.length > 0 ? (
+                <svg
+                  className="mb-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0,0,256,256"
+                  width="40px"
+                  height="40px"
+                >
+                  <g
                     fill="none"
-                    viewBox="0 0 20 16"
+                    fill-rule="nonzero"
+                    stroke="none"
+                    stroke-width="1"
+                    stroke-linecap="butt"
+                    stroke-linejoin="miter"
+                    stroke-miterlimit="10"
+                    stroke-dasharray=""
+                    stroke-dashoffset="0"
+                    font-family="none"
+                    font-weight="none"
+                    font-size="none"
+                    text-anchor="none"
                   >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                    />
-                  </svg>
-              }
+                    <g transform="scale(5.33333,5.33333)">
+                      <path
+                        d="M44,24c0,11.045 -8.955,20 -20,20c-11.045,0 -20,-8.955 -20,-20c0,-11.045 8.955,-20 20,-20c11.045,0 20,8.955 20,20z"
+                        fill="#d0d0d0"
+                      ></path>
+                      <path
+                        d="M34.586,14.586l-13.57,13.586l-5.602,-5.586l-2.828,2.828l8.434,8.414l16.395,-16.414z"
+                        fill="#959595"
+                      ></path>
+                    </g>
+                  </g>
+                </svg>
+              ) : (
+                <svg
+                  className="w-8 h-8 mb-4 text-gray-500 "
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 16"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                  />
+                </svg>
+              )}
               <p className="mb-2 text-sm text-gray-500 ">تصاویر </p>
               <p className="text-gray-600 text-sm"></p>
             </div>
@@ -249,11 +288,11 @@ export default function SaleForm() {
             />
           </label>
           <div className="flex flex-wrap gap-1 my-2">
-            {
-              uploadedImages?.map((image, index) => (
-                <p className="text-gray-500" key={index}>{image}/</p>
-              ))
-            }
+            {uploadedImages?.map((image, index) => (
+              <p className="text-gray-500" key={index}>
+                {image}/
+              </p>
+            ))}
           </div>
         </div>
       </div>
@@ -282,8 +321,9 @@ export default function SaleForm() {
           <FieldLabel>عنوان آگهی</FieldLabel>
           <input
             {...register("title")}
-            className={`input input-bordered ${errors.title ? "input-error" : null
-              }`}
+            className={`input input-bordered ${
+              errors.title ? "input-error" : null
+            }`}
             placeholder=" عنوان آگهی را بنویسید"
           />
         </div>
@@ -291,8 +331,9 @@ export default function SaleForm() {
           <FieldLabel> منطقه</FieldLabel>
           <input
             {...register("region")}
-            className={`input input-bordered ${errors.region ? "input-error" : null
-              }`}
+            className={`input input-bordered ${
+              errors.region ? "input-error" : null
+            }`}
             placeholder=" منطقه"
           />
         </div>
@@ -305,8 +346,9 @@ export default function SaleForm() {
             {...register("state")}
             onChange={changeHandler}
             name="state"
-            className={`select select-bordered w-full ${errors.state ? "select-error" : null
-              }`}
+            className={`select select-bordered w-full ${
+              errors.state ? "select-error" : null
+            }`}
           >
             <option value="" disabled selected>
               استان
@@ -324,8 +366,9 @@ export default function SaleForm() {
           <select
             onChange={handleCityId}
             name="city_id"
-            className={`select select-bordered w-full ${errors.city_id ? "select-error" : null
-              }`}
+            className={`select select-bordered w-full ${
+              errors.city_id ? "select-error" : null
+            }`}
           >
             <option value="" disabled selected>
               شهر
@@ -335,10 +378,10 @@ export default function SaleForm() {
                 selectedProvince
                   ? selectedProvince === province.name
                     ? province.cities.map((city, index) => (
-                      <option id={city.id} key={index} value={city.name}>
-                        {city.name}
-                      </option>
-                    ))
+                        <option id={city.id} key={index} value={city.name}>
+                          {city.name}
+                        </option>
+                      ))
                     : null
                   : null
               )}
@@ -351,8 +394,9 @@ export default function SaleForm() {
           <FieldLabel> پلاک</FieldLabel>
           <input
             {...register("plate")}
-            className={`input input-bordered ${errors.plate ? "input-error" : null
-              }`}
+            className={`input input-bordered ${
+              errors.plate ? "input-error" : null
+            }`}
             placeholder=" پلاک"
           />
         </div>
@@ -360,8 +404,9 @@ export default function SaleForm() {
           <FieldLabel> کوچه</FieldLabel>
           <input
             {...register("alley")}
-            className={`input input-bordered ${errors.alley ? "input-error" : null
-              }`}
+            className={`input input-bordered ${
+              errors.alley ? "input-error" : null
+            }`}
             placeholder="کوچه"
           />
         </div>
@@ -372,8 +417,9 @@ export default function SaleForm() {
           <FieldLabel> خیابان</FieldLabel>
           <input
             {...register("street")}
-            className={`input input-bordered ${errors.street ? "input-error" : null
-              }`}
+            className={`input input-bordered ${
+              errors.street ? "input-error" : null
+            }`}
             placeholder="خیابان"
           />
         </div>
@@ -384,23 +430,30 @@ export default function SaleForm() {
           <FieldLabel> قیمت کل</FieldLabel>
           <input
             {...register("sale_price")}
-            className={`input input-bordered ${errors.sale_price ? "input-error" : null
-              }`}
+            className={`input input-bordered ${
+              errors.sale_price ? "input-error" : null
+            }`}
             placeholder=" قیمت به تومان"
             onChange={(e) => setPrice(e.target.value)}
           />
-          <p className="mt-1 pt-1 text-gray-500">{price ? parseInt(price).toLocaleString() : 0} تومان</p>
+          <p className="mt-1 pt-1 text-gray-500">
+            {convertPersianToArabic(price) ? parseInt(convertPersianToArabic(price)).toLocaleString() : 0} تومان
+          </p>
         </div>
         <div className="w-full my-2 flex flex-col">
           <FieldLabel>متراژ</FieldLabel>
           <input
             {...register("size")}
-            className={`input input-bordered ${errors.size ? "input-error" : null
-              }`}
+            className={`input input-bordered ${
+              errors.size ? "input-error" : null
+            }`}
             placeholder="متراژ"
             onChange={(e) => setFullSize(e.target.value)}
           />
-          <p className="mt-1 pt-1 text-gray-500">{fullSize ? parseInt(price / fullSize).toLocaleString() : 0} تومان (هر متر مربع) </p>
+          <p className="mt-1 pt-1 text-gray-500">
+            {fullSize ? parseInt(price / fullSize).toLocaleString() : 0} تومان
+            (هر متر مربع){" "}
+          </p>
         </div>
       </div>
 
@@ -409,8 +462,9 @@ export default function SaleForm() {
           <FieldLabel>تعداد اتاق</FieldLabel>
           <select
             {...register("room_count")}
-            className={`select select-bordered ${errors.room_count ? "select-error" : null
-              }`}
+            className={`select select-bordered ${
+              errors.room_count ? "select-error" : null
+            }`}
           >
             <option selected disabled value="">
               انتخاب کنید
@@ -428,8 +482,9 @@ export default function SaleForm() {
           <FieldLabel>طبقه</FieldLabel>
           <input
             {...register("floor")}
-            className={`select select-bordered ${errors.floor ? "select-error" : null
-              }`}
+            className={`select select-bordered ${
+              errors.floor ? "select-error" : null
+            }`}
             placeholder="طبقه واحد"
           />
         </div>
@@ -440,8 +495,9 @@ export default function SaleForm() {
           <FieldLabel>سال ساخت </FieldLabel>
           <select
             {...register("year")}
-            className={`select select-bordered ${errors.year ? "select-error" : null
-              }`}
+            className={`select select-bordered ${
+              errors.year ? "select-error" : null
+            }`}
           >
             <option selected disabled value="">
               سال ساخت
@@ -459,8 +515,9 @@ export default function SaleForm() {
           <FieldLabel>انباری </FieldLabel>
           <select
             {...register("warehouse")}
-            className={`select select-bordered ${errors.warehouse ? "select-error" : null
-              }`}
+            className={`select select-bordered ${
+              errors.warehouse ? "select-error" : null
+            }`}
           >
             <option selected disabled value="">
               انتخاب کنید
@@ -476,8 +533,9 @@ export default function SaleForm() {
           <FieldLabel> آسانسور</FieldLabel>
           <select
             {...register("elevator")}
-            className={`select select-bordered ${errors.elevator ? "select-error" : null
-              }`}
+            className={`select select-bordered ${
+              errors.elevator ? "select-error" : null
+            }`}
           >
             <option selected disabled value="">
               انتخاب کنید
@@ -490,8 +548,9 @@ export default function SaleForm() {
           <FieldLabel>پارکینگ </FieldLabel>
           <select
             {...register("parking")}
-            className={`select select-bordered ${errors.parking ? "select-error" : null
-              }`}
+            className={`select select-bordered ${
+              errors.parking ? "select-error" : null
+            }`}
           >
             <option selected disabled value="">
               انتخاب کنید
@@ -506,15 +565,16 @@ export default function SaleForm() {
         <FieldLabel> نوع سند</FieldLabel>
         <select
           {...register("document")}
-          className={`select select-bordered ${errors.document ? "select-error" : null
-            }`}
+          className={`select select-bordered ${
+            errors.document ? "select-error" : null
+          }`}
         >
           <option selected disabled value="">
             انتخاب کنید
           </option>
           <option value="promise">قول نامه</option>
           <option value="single">تک برگ</option>
-          <option value="endowment">وقف</option>{" "}
+          <option value="endowment">سایر</option>{" "}
         </select>
       </div>
 
@@ -522,8 +582,9 @@ export default function SaleForm() {
         <FieldLabel>نوع آگهی </FieldLabel>
         <select
           {...register("type")}
-          className={`select select-bordered ${errors.type ? "select-error" : null
-            }`}
+          className={`select select-bordered ${
+            errors.type ? "select-error" : null
+          }`}
         >
           <option selected disabled value="">
             انتخاب کنید
@@ -539,8 +600,9 @@ export default function SaleForm() {
         <textarea
           {...register("address")}
           rows={2}
-          className={`textarea textarea-bordered w-full ${errors.address ? "textarea-error" : null
-            }`}
+          className={`textarea textarea-bordered w-full ${
+            errors.address ? "textarea-error" : null
+          }`}
           placeholder="آدرس را بنویسید"
         />
         <p className="text-xs my-2">آدرس شما در آگهی نمایش داده نمیشود.</p>
@@ -550,9 +612,10 @@ export default function SaleForm() {
         <FieldLabel> توضیحات</FieldLabel>
         <textarea
           {...register("description")}
-          rows={6}
-          className={`textarea textarea-bordered w-full ${errors.description ? "textarea-error" : null
-            }`}
+          rows={2}
+          className={`textarea textarea-bordered w-full whitespace-pre-wrap ${
+            errors.description ? "textarea-error" : null
+          }`}
           placeholder="توضیحات را بنویسید"
         />
       </div>
