@@ -521,7 +521,7 @@ export default function SaleForm() {
                     </option>
                     <option value="promise">قول نامه</option>
                     <option value="single">تک برگ</option>
-                    <option value="endowment">وقف</option>{" "}
+                    <option value="endowment">سایر</option>{" "}
                 </select>
             </div>
 
