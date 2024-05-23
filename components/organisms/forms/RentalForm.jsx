@@ -558,7 +558,7 @@ export default function SaleForm() {
                 <textarea
                     {...register("description")}
                     rows={6}
-                    className={`textarea textarea-bordered w-full whitespace-pre ${errors.description ? "textarea-error" : null
+                    className={`textarea textarea-bordered w-full ${errors.description ? "textarea-error" : null
                         }`}
                     placeholder="توضیحات را بنویسید"
                 />
