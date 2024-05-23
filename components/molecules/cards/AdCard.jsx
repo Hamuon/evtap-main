@@ -45,7 +45,7 @@ export default function AdCard({ type, title, region, price, time, ad_img, id })
   return (
     <Link href={`/ads/${id}`}>
       <div className="flex 2xl:w-auto font-numerals m-3 h-56 z-50 justify-between rounded-xl shadow-lg overflow-hidden border border-gray-300 bg-white">
-        <div className="p-4 flex flex-col justify-center w-52">
+        <div className="p-4 flex flex-col justify-center sm:w-40 md:w-64">
           <span className="w-fit mb-4 p-1 rounded-lg text-xs bg-gray-200 whitespace-nowrap">
             {type}
           </span>
