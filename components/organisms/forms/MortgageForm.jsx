@@ -598,17 +598,16 @@ export default function SaleForm() {
         <p className="text-xs my-2">آدرس شما در آگهی نمایش داده نمیشود.</p>
       </div>
 
-      <div className="w-full my-2 flex flex-col">
-        <FieldLabel> توضیحات</FieldLabel>
-        <textarea
-          {...register("description")}
-          rows={2}
-          className={`textarea textarea-bordered w-full ${
-            errors.description ? "textarea-error" : null
-          }`}
-          placeholder="توضیحات را بنویسید"
-        />
-      </div>
+            <div className="w-full my-2 flex flex-col">
+                <FieldLabel> توضیحات</FieldLabel>
+                <textarea
+                    {...register("description")}
+                    rows={6}
+                    className={`textarea textarea-bordered w-full ${errors.description ? "textarea-error" : null
+                        }`}
+                    placeholder="توضیحات را بنویسید"
+                />
+            </div>
 
       <div className="flex gap-2 mt-4 w-full">
         <SubmitButton type="submit" loading={loading} text="ثبت آگهی" />
