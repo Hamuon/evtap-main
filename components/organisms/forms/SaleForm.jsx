@@ -152,10 +152,10 @@ export default function SaleForm() {
         selectedProvince
           ? selectedProvince === province.name
             ? province.cities.map((city) =>
-                city.name === e.target.value
-                  ? setValue("city_id", city.id)
-                  : null
-              )
+              city.name === e.target.value
+                ? setValue("city_id", city.id)
+                : null
+            )
             : null
           : null
       );
@@ -219,9 +219,8 @@ export default function SaleForm() {
           <FieldLabel>تصاویر (JPG, JPEG, PNG)</FieldLabel>
           <label
             for="dropzone-file"
-            className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ${
-              errors.images ? "border-red" : " border-gray-300"
-            }`}
+            className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ${errors.images ? "border-red" : " border-gray-300"
+              }`}
           >
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
               {uploadedImages.length > 0 ? (
@@ -321,9 +320,8 @@ export default function SaleForm() {
           <FieldLabel>عنوان آگهی</FieldLabel>
           <input
             {...register("title")}
-            className={`input input-bordered ${
-              errors.title ? "input-error" : null
-            }`}
+            className={`input input-bordered ${errors.title ? "input-error" : null
+              }`}
             placeholder=" عنوان آگهی را بنویسید"
           />
         </div>
@@ -331,9 +329,8 @@ export default function SaleForm() {
           <FieldLabel> منطقه</FieldLabel>
           <input
             {...register("region")}
-            className={`input input-bordered ${
-              errors.region ? "input-error" : null
-            }`}
+            className={`input input-bordered ${errors.region ? "input-error" : null
+              }`}
             placeholder=" منطقه"
           />
         </div>
@@ -346,9 +343,8 @@ export default function SaleForm() {
             {...register("state")}
             onChange={changeHandler}
             name="state"
-            className={`select select-bordered w-full ${
-              errors.state ? "select-error" : null
-            }`}
+            className={`select select-bordered w-full ${errors.state ? "select-error" : null
+              }`}
           >
             <option value="" disabled selected>
               استان
@@ -366,9 +362,8 @@ export default function SaleForm() {
           <select
             onChange={handleCityId}
             name="city_id"
-            className={`select select-bordered w-full ${
-              errors.city_id ? "select-error" : null
-            }`}
+            className={`select select-bordered w-full ${errors.city_id ? "select-error" : null
+              }`}
           >
             <option value="" disabled selected>
               شهر
@@ -378,10 +373,10 @@ export default function SaleForm() {
                 selectedProvince
                   ? selectedProvince === province.name
                     ? province.cities.map((city, index) => (
-                        <option id={city.id} key={index} value={city.name}>
-                          {city.name}
-                        </option>
-                      ))
+                      <option id={city.id} key={index} value={city.name}>
+                        {city.name}
+                      </option>
+                    ))
                     : null
                   : null
               )}
@@ -394,9 +389,8 @@ export default function SaleForm() {
           <FieldLabel> پلاک</FieldLabel>
           <input
             {...register("plate")}
-            className={`input input-bordered ${
-              errors.plate ? "input-error" : null
-            }`}
+            className={`input input-bordered ${errors.plate ? "input-error" : null
+              }`}
             placeholder=" پلاک"
           />
         </div>
@@ -404,9 +398,8 @@ export default function SaleForm() {
           <FieldLabel> کوچه</FieldLabel>
           <input
             {...register("alley")}
-            className={`input input-bordered ${
-              errors.alley ? "input-error" : null
-            }`}
+            className={`input input-bordered ${errors.alley ? "input-error" : null
+              }`}
             placeholder="کوچه"
           />
         </div>
@@ -417,9 +410,8 @@ export default function SaleForm() {
           <FieldLabel> خیابان</FieldLabel>
           <input
             {...register("street")}
-            className={`input input-bordered ${
-              errors.street ? "input-error" : null
-            }`}
+            className={`input input-bordered ${errors.street ? "input-error" : null
+              }`}
             placeholder="خیابان"
           />
         </div>
@@ -430,9 +422,8 @@ export default function SaleForm() {
           <FieldLabel> قیمت کل</FieldLabel>
           <input
             {...register("sale_price")}
-            className={`input input-bordered ${
-              errors.sale_price ? "input-error" : null
-            }`}
+            className={`input input-bordered ${errors.sale_price ? "input-error" : null
+              }`}
             placeholder=" قیمت به تومان"
             onChange={(e) => setPrice(e.target.value)}
           />
@@ -444,9 +435,8 @@ export default function SaleForm() {
           <FieldLabel>متراژ</FieldLabel>
           <input
             {...register("size")}
-            className={`input input-bordered ${
-              errors.size ? "input-error" : null
-            }`}
+            className={`input input-bordered ${errors.size ? "input-error" : null
+              }`}
             placeholder="متراژ"
             onChange={(e) => setFullSize(e.target.value)}
           />
@@ -462,14 +452,13 @@ export default function SaleForm() {
           <FieldLabel>تعداد اتاق</FieldLabel>
           <select
             {...register("room_count")}
-            className={`select select-bordered ${
-              errors.room_count ? "select-error" : null
-            }`}
+            className={`select select-bordered ${errors.room_count ? "select-error" : null
+              }`}
           >
             <option selected disabled value="">
               انتخاب کنید
             </option>
-            {[...Array(4).keys()].map((room, index) => {
+            {[...Array(10).keys()].map((room, index) => {
               return (
                 <option value={room} key={index}>
                   {room}
@@ -482,9 +471,8 @@ export default function SaleForm() {
           <FieldLabel>طبقه</FieldLabel>
           <input
             {...register("floor")}
-            className={`select select-bordered ${
-              errors.floor ? "select-error" : null
-            }`}
+            className={`select select-bordered ${errors.floor ? "select-error" : null
+              }`}
             placeholder="طبقه واحد"
           />
         </div>
@@ -495,9 +483,8 @@ export default function SaleForm() {
           <FieldLabel>سال ساخت </FieldLabel>
           <select
             {...register("year")}
-            className={`select select-bordered ${
-              errors.year ? "select-error" : null
-            }`}
+            className={`select select-bordered ${errors.year ? "select-error" : null
+              }`}
           >
             <option selected disabled value="">
               سال ساخت
@@ -515,15 +502,14 @@ export default function SaleForm() {
           <FieldLabel>انباری </FieldLabel>
           <select
             {...register("warehouse")}
-            className={`select select-bordered ${
-              errors.warehouse ? "select-error" : null
-            }`}
+            className={`select select-bordered ${errors.warehouse ? "select-error" : null
+              }`}
           >
             <option selected disabled value="">
               انتخاب کنید
             </option>
             <option value="0">ندارد</option>
-            <option value="1">دارد</option>{" "}
+            <option value="1">دارد</option>
           </select>
         </div>
       </div>
@@ -533,30 +519,28 @@ export default function SaleForm() {
           <FieldLabel> آسانسور</FieldLabel>
           <select
             {...register("elevator")}
-            className={`select select-bordered ${
-              errors.elevator ? "select-error" : null
-            }`}
+            className={`select select-bordered ${errors.elevator ? "select-error" : null
+              }`}
           >
             <option selected disabled value="">
               انتخاب کنید
             </option>
             <option value="0">ندارد</option>
-            <option value="1">دارد</option>{" "}
+            <option value="1">دارد</option>
           </select>
         </div>
         <div className="w-full my-2 flex flex-col">
           <FieldLabel>پارکینگ </FieldLabel>
           <select
             {...register("parking")}
-            className={`select select-bordered ${
-              errors.parking ? "select-error" : null
-            }`}
+            className={`select select-bordered ${errors.parking ? "select-error" : null
+              }`}
           >
             <option selected disabled value="">
               انتخاب کنید
             </option>
             <option value="0">ندارد</option>
-            <option value="1">دارد</option>{" "}
+            <option value="1">دارد</option>
           </select>
         </div>
       </div>
@@ -565,16 +549,15 @@ export default function SaleForm() {
         <FieldLabel> نوع سند</FieldLabel>
         <select
           {...register("document")}
-          className={`select select-bordered ${
-            errors.document ? "select-error" : null
-          }`}
+          className={`select select-bordered ${errors.document ? "select-error" : null
+            }`}
         >
           <option selected disabled value="">
             انتخاب کنید
           </option>
           <option value="promise">قول نامه</option>
           <option value="single">تک برگ</option>
-          <option value="endowment">سایر</option>{" "}
+          <option value="endowment">سایر</option>
         </select>
       </div>
 
@@ -582,16 +565,15 @@ export default function SaleForm() {
         <FieldLabel>نوع آگهی </FieldLabel>
         <select
           {...register("type")}
-          className={`select select-bordered ${
-            errors.type ? "select-error" : null
-          }`}
+          className={`select select-bordered ${errors.type ? "select-error" : null
+            }`}
         >
           <option selected disabled value="">
             انتخاب کنید
           </option>
           <option value="sale">فروش</option>
           <option value="rent">اجاره</option>
-          <option value="mortgage">رهن</option>{" "}
+          <option value="mortgage">رهن</option>
         </select>
       </div>
 
@@ -600,9 +582,8 @@ export default function SaleForm() {
         <textarea
           {...register("address")}
           rows={2}
-          className={`textarea textarea-bordered w-full ${
-            errors.address ? "textarea-error" : null
-          }`}
+          className={`textarea textarea-bordered w-full ${errors.address ? "textarea-error" : null
+            }`}
           placeholder="آدرس را بنویسید"
         />
         <p className="text-xs my-2">آدرس شما در آگهی نمایش داده نمیشود.</p>
@@ -612,10 +593,9 @@ export default function SaleForm() {
         <FieldLabel> توضیحات</FieldLabel>
         <textarea
           {...register("description")}
-          rows={2}
-          className={`textarea textarea-bordered w-full whitespace-pre-wrap ${
-            errors.description ? "textarea-error" : null
-          }`}
+          rows={6}
+          className={`textarea textarea-bordered w-full whitespace-pre-wrap ${errors.description ? "textarea-error" : null
+            }`}
           placeholder="توضیحات را بنویسید"
         />
       </div>

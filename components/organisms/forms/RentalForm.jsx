@@ -93,12 +93,12 @@ export default function SaleForm() {
         '۷': '7',
         '۸': '8',
         '۹': '9'
-      };
-    
-      function convertPersianToArabic(input) {
+    };
+
+    function convertPersianToArabic(input) {
         return input.split('').map(char => persianToArabicMap[char] || char).join('');
-      }
-    
+    }
+
 
     const {
         setValue,
@@ -440,7 +440,7 @@ export default function SaleForm() {
                         <option selected disabled value="">
                             انتخاب کنید
                         </option>
-                        {[...Array(4).keys()].map((room, index) => {
+                        {[...Array(10).keys()].map((room, index) => {
                             return (
                                 <option value={room} key={index}>
                                     {room}
