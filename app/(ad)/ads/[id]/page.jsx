@@ -219,7 +219,7 @@ export default function page({ params: { id } }) {
             <AdPageMap lat={ad?.latitude} long={ad?.longitude} />
           </div>
         </div>
-        <div className="col-span-1 aspect-square flex flex-col gap-6">
+        <div className="col-span-1 aspect-square flex flex-col gap-6 lg:sticky lg:top-10">
           <MyGallery {...defaultProps} />
         </div>
         <div className="h-96 order-3 overflow-hidden w-full sm:flex justify-center md:hidden sm:mb-10 px-6">
