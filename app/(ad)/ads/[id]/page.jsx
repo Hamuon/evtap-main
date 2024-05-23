@@ -117,12 +117,12 @@ export default function page({ params: { id } }) {
               درخواست کارشناسی{" "}
             </p>
           </div>
-          {ad?.type === "rent" ? (
+          {/* {ad?.type === "rent" ? (
             <div className="flex gap-1 md:text-base sm:text-base font-semibold mb-8 text-gray-400">
               <span>{convertToInternationalCurrencySystem(convertPersianToArabic(ad.pre_rent))}</span>
               <span>تومان پیش</span>
             </div>
-          ) : null}
+          ) : null} */}
           <div className="w-full  font-semibold mb-6">
             <div className="flex sm:flex-col md:flex-row md:gap-10 border-b-2 border-gray-400 md:px-6 py-2">
               <div className="flex justify-between w-full">
@@ -193,7 +193,7 @@ export default function page({ params: { id } }) {
                 <div className="flex justify-between w-full">
                   <span>پیش</span>
                   <div className="flex gap-1 text-gray-500">
-                    <span>{ad?.pre_rent}</span>
+                    <span>{convertToInternationalCurrencySystem(convertPersianToArabic(ad?.pre_rent))}</span>
                   </div>
                 </div>
               </div>
