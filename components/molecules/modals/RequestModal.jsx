@@ -134,7 +134,7 @@ export default function RequestModal({ nextStep, setReqData }) {
   };
 
   return (
-    <div className="modal-container">
+    <div className="modal-container z-50">
       <form
         onSubmit={handleSubmit(handleClick)}
         className="modal-form font-numerals relative sm:w-[350px] md:w-[450px] sm:-top-6 md:top-0 sm:h-96 md:h-auto sm:px-4 md:px-10 sm:bg-transparent md:bg-white sm:shadow-none md:shadow-xl"

@@ -9,7 +9,7 @@ export default function AuthNavigation({ setSearch, search, toggleMenu }) {
   const router = useRouter();
   return (
     <nav className="flex justify-between mx-auto relative z-50 w-full">
-      <div className="flex w-full justify-between items-center md:px-6 sm:px-6 md:container h-32 mx-auto">
+      <div className="flex w-full justify-between items-center md:px-9 sm:px-9 md:container h-32 mx-auto">
         <Link href="/">
           <Image
             src="/media/evtap-logo.png"
