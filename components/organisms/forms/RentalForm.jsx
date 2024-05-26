@@ -48,7 +48,7 @@ const schema = z.object({
     images: z.any(),
 });
 
-export default function SaleForm() {
+export default function RentalForm() {
     const [loading, setLoading] = useState(false);
     const router = useRouter()
 

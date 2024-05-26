@@ -76,3 +76,11 @@ export function adsPerPage(page) {
 export function getUserAdvertising() {
   return http.get("/user/advertising", config);
 }
+
+export function updateAd(id, data) {
+  return http.post("/user/advertising/" + id, data, config);
+}
+
+export function userShowAd(id) {
+  return http.get("/user/advertising-show/" + id, config);
+}
