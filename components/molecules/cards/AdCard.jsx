@@ -49,7 +49,7 @@ export default function AdCard({ type, title, region, price, time, ad_img, id })
           <span className="w-fit mb-4 p-1 rounded-lg text-xs bg-gray-200 whitespace-nowrap">
             {type}
           </span>
-          <p className="sm:text-lg md:text-2xl font-semibold mb-6 truncate">{title}</p>
+          <p className="sm:text-lg md:text-lg font-semibold mb-6 truncate">{title}</p>
           <div className="flex gap-1 items-center text-gray-500 mb-2">
             <span className="">{price == "0" ? "توافقی" : convertToInternationalCurrencySystem(convertPersianToArabic(price))}</span>
           </div>

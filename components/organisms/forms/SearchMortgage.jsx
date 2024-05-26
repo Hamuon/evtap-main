@@ -118,6 +118,8 @@ export default function SearchMortgage({ setSearch }) {
     };
 
     return (
+        <div className="pt-3">
+        <hr className="py-2 text-gray-300" />
         <form
             onSubmit={handleSubmit(submitHandler)}
         >
@@ -126,23 +128,13 @@ export default function SearchMortgage({ setSearch }) {
                     <input
                         {...register("title")}
                         className="input input-sm input-bordered w-full my-2"
-                        placeholder="عنوان"
+                        placeholder="کلیدواژه در عنوان آگهی رهن"
                     />
-                    <select
-                        {...register("parking")}
-                        name="parking"
-                        className="select select-sm select-bordered w-full my-2"
-                    >
-                        <option selected disabled value="">
-                            پارکینگ
-                        </option>
-                        <option value="1">دارد</option>
-                        <option value="0">ندارد</option>
-                    </select>
+                    
                 </div>
 
-                <div className="flex gap-2 w-full">
-                    {/* <select onChange={(e) => setValue("status", e.target.value)} {...register("status")} name='status' className="select select-sm select-bordered w-full my-2" >
+                {/* <div className="flex gap-2 w-full">
+                    <select onChange={(e) => setValue("status", e.target.value)} {...register("status")} name='status' className="select select-sm select-bordered w-full my-2" >
                             <option selected disabled value="">وضعیت</option>
                             <option value="active">فعال</option>
                             <option value="inactive">غیر فعال</option>
@@ -150,7 +142,7 @@ export default function SearchMortgage({ setSearch }) {
                             <option value="pending">در انتظار</option>
                             <option value="complete">تکمیل شده</option>
                             <option value="saved">ذخیره شده</option>
-                        </select> */}
+                        </select>
                     <select
                         onChange={changeHandler}
                         name="state"
@@ -188,9 +180,9 @@ export default function SearchMortgage({ setSearch }) {
                                     : null
                             )}
                     </select>
-                </div>
+                </div> */}
 
-                <div className="flex gap-2 w-full">
+                {/* <div className="flex gap-2 w-full">
                     <select
                         onChange={(e) => setValue("have_image", e.target.value)}
                         {...register("have_image")}
@@ -216,10 +208,10 @@ export default function SearchMortgage({ setSearch }) {
                         <option value="rent">اجاره</option>
                         <option value="mortgage">رهن</option>
                     </select>
-                </div>
+                </div> */}
 
                 <div className="flex gap-2 w-full">
-                    <select
+                    {/* <select
                         {...register("document")}
                         name="document"
                         className="select select-sm select-bordered w-full my-2"
@@ -230,6 +222,17 @@ export default function SearchMortgage({ setSearch }) {
                         <option value="promise">قول نامه</option>
                         <option value="endowment">وقف</option>
                         <option value="single">تک برگ</option>
+                    </select> */}
+                    <select
+                        {...register("parking")}
+                        name="parking"
+                        className="select select-sm select-bordered w-full my-2"
+                    >
+                        <option selected disabled value="">
+                            پارکینگ
+                        </option>
+                        <option value="1">دارد</option>
+                        <option value="0">ندارد</option>
                     </select>
                     <select
                         {...register("elevator")}
@@ -271,7 +274,7 @@ export default function SearchMortgage({ setSearch }) {
                         placeholder="تا متراژ"
                     />
                 </div>
-                <div className="flex gap-2 w-full my-2 items-center">
+                {/* <div className="flex gap-2 w-full my-2 items-center">
                     <DatePicker
                         value={fromDate?.persian}
                         onChange={convertFrom}
@@ -308,10 +311,11 @@ export default function SearchMortgage({ setSearch }) {
                         format="YYYY/MM/DD"
                         locale={persian_fa}
                     />
-                </div>
+                </div> */}
 
                 <SubmitButton type="submit" className="w-full mt-4" text="جستجو" />
             </div>
         </form>
+        </div>
     );
 }
