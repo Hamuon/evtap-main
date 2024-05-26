@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
 export default function AdTable({ loading, setLoading, pageLength, setUserAds, userAds, page, setPage }) {
+
   const router = useRouter()
   const getUserAdsPerPage = async () => {
     setLoading(true)
@@ -64,9 +65,12 @@ export default function AdTable({ loading, setLoading, pageLength, setUserAds, u
                     <td>{ad?.title}</td>
                     <td>{ad?.type}</td>
                     <td>{ad?.city?.name}</td>
-                    <td>
+                    <td className='flex gap-3 items-center'>
                       <div className='cursor-pointer' onClick={handleDelete}>
                         <Image src="/icons/trash.png" id={ad.id} width={20} height={20} alt="trash" />
+                      </div>
+                      <div className='cursor-pointer' onClick={() => router.push(`/ads/${ad.id}/update?type=${ad.type}&id=${ad.id}`)}>
+                        <Image src="/icons/edit.png" id={ad.id} width={20} height={20} alt="edit" />
                       </div>
                     </td>
                   </tr>

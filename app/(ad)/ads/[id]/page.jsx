@@ -1,11 +1,10 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import MyGallery from "@/components/ImageGallery";
 import CallButton from "@/components/atoms/buttons/CallButton";
 import ShareButton from "@/components/atoms/buttons/ShareButton";
 import dynamic from "next/dynamic";
 import { getSingleAd } from "@/services/authService";
-import moment from "jalali-moment";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 const AdPageMap = dynamic(() => import("@/components/AdPageMap"), {
