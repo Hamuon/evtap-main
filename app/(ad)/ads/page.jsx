@@ -55,13 +55,13 @@ export default function Ads() {
   }, [page]);
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center md:container mx-auto">
       <div className="xl:w-1/5 lg:w-1/4 xs:hidden sm:hidden md:hidden lg:block xl:block">
-      <SearchSideBar />
+        <SearchSideBar />
       </div>
       <main className="flex flex-col items-center justify-between h-screen xl:w-4/5 lg:w-3/4 sm:w-full">
         {ads && ads.length > 0 ? (
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 w-full md:container z-0 sm:px-4 md:px-0 pb-10">
+          <div className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 w-full z-0 sm:px-4 md:px-0 pb-10">
             {ads?.map((ad, index) => (
               <AdCard
                 id={ad.id}
@@ -69,10 +69,10 @@ export default function Ads() {
                   ad.type === "mortgage"
                     ? "رهن"
                     : ad.type === "sale"
-                    ? "فروش"
-                    : ad.type === "rent"
-                    ? "اجاره"
-                    : null
+                      ? "فروش"
+                      : ad.type === "rent"
+                        ? "اجاره"
+                        : null
                 }
                 title={ad.title}
                 region={ad.region}
@@ -80,10 +80,10 @@ export default function Ads() {
                   ad.type === "mortgage"
                     ? ad.sale_price
                     : ad.type === "sale"
-                    ? ad.sale_price
-                    : ad.type === "rent"
-                    ? ad.rent
-                    : null
+                      ? ad.sale_price
+                      : ad.type === "rent"
+                        ? ad.rent
+                        : null
                 }
                 time={formatDate(ad.updated_at)}
                 ad_img={
