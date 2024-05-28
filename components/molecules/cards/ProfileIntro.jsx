@@ -237,7 +237,7 @@ export default function ProfileIntro({
     // },
     {
       tag: "تومان",
-      value: "25000 ",
+      value: user?.wallet,
       icon: (
         <svg
           className="ml-4"
@@ -296,7 +296,7 @@ export default function ProfileIntro({
     },
     {
       tag: "نفر دعوت شده",
-      value: "1 ",
+      value: user?.count_code,
       icon: (
         <svg
           className="ml-4"
