@@ -33,7 +33,7 @@ export default function ProfileIntro({
     },
     {
       tag: "",
-      value: "",
+      value: user?.code,
       icon: (
         <svg
           className="ml-4"
