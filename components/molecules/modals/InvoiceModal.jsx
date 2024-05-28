@@ -55,6 +55,13 @@ export default function InvoiceModal({ reqData }) {
                         </div>
                     </div>
                 </div>
+                {
+                    wallet > 0 ?
+                        <p className="text-sm text-red mb-4 text-justify">
+                            مبلغ پرداختی با احتساب اعتبار کیف پول و 9 درصد مالیات ارزش افزوده میباشد.
+                        </p>
+                        : null
+                }
                 <p className="text-sm text-gray-500 mb-4 text-justify">
                     کارشناس مربوطه در سریع ترین زمان ممکن با شما تماس خواهد گرفت، در صورت تاخیر در پیگیری کارشناس با شماره 04133356848 تماس حاصل فرمائید.
                 </p>
