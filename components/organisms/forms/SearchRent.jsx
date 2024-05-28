@@ -310,7 +310,7 @@ export default function SearchRent({ setSearch }) {
                         </select>
                     </div>
 
-                    <SubmitButton type="submit" className="w-full mt-4" text="جستجو" />
+                    <SubmitButton type="submit" className="w-full mt-4" text="اعمال فیلتر" />
                 </div>
             </form>
         </div>

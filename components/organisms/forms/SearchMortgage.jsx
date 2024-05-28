@@ -28,12 +28,12 @@ const schema = z.object({
 export default function SearchMortgage({ setSearch }) {
     const { setFilteredAds } = useContext(FilteredAdsContext);
 
-    const [provinces, setProvinces] = useState(null);
-    const [selectedProvince, setSelectedProvince] = useState(null);
-    const [cityId, setCityId] = useState("");
+    // const [provinces, setProvinces] = useState(null);
+    // const [selectedProvince, setSelectedProvince] = useState(null);
+    // const [cityId, setCityId] = useState("");
 
-    const [fromDate, setFromDate] = useState(null);
-    const [toDate, setToDate] = useState(null);
+    // const [fromDate, setFromDate] = useState(null);
+    // const [toDate, setToDate] = useState(null);
 
     const {
         setValue,
@@ -295,7 +295,7 @@ export default function SearchMortgage({ setSearch }) {
                         </select>
                     </div>
 
-                    <SubmitButton type="submit" className="w-full mt-4" text="جستجو" />
+                    <SubmitButton type="submit" className="w-full mt-4" text="اعمال فیلتر" />
                 </div>
             </form>
         </div>

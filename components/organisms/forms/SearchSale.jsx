@@ -12,6 +12,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { filterAds } from "@/services/authService";
 import FilteredAdsContext from "@/context/FilteredAdsProvider";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const schema = z.object({
   //   city_id: z.string(),
@@ -30,7 +32,7 @@ const schema = z.object({
 export default function SearchSale() {
   // const [ads, setAds] = useState(null);
   const { setFilteredAds, filteredAds } = useContext(FilteredAdsContext);
-
+  const [loading, setLoading] = useState(false)
   // const [provinces, setProvinces] = useState(null);
   // const [selectedProvince, setSelectedProvince] = useState(null);
   // const [cityId, setCityId] = useState("");
@@ -101,15 +103,34 @@ export default function SearchSale() {
   //     );
   // };
   const handleClick = async (data) => {
-    await filterAds(data)
+
+    setLoading(true)
+    console.log(data)
+
+    await axios.get(`https://new.evtap.ir/api/v1/advertising?title=${data.title}`)
+
       .then((res) => {
-        console.log(res);
-        setFilteredAds(res.data.advertising.data);
+        console.log(res)
+
+        if (res.status === 200) {
+          setFilteredAds(res.data.advertising.data)
+          setLoading(false)
+        } else {
+          toast.error("مشکل در برقراری ارتباط", {
+            position: "top-center"
+          })
+          setLoading(false)
+        }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((err) => {
+        console.log(err);
+        toast.error("خطای سرور", {
+          position: "top-center"
+        })
+        setLoading(false)
+      })
   };
+  console.log(filteredAds);
 
   return (
     <div className="pt-3">
@@ -295,6 +316,7 @@ export default function SearchSale() {
                     </div> */}
 
           <SubmitButton
+            loading={loading}
             type="submit"
             className="w-full mt-4"
             text="اعمال فیلتر"

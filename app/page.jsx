@@ -65,6 +65,9 @@ export default function Home() {
               <Link className='w-full' href="https://my.ssaa.ir/portal/ssar/request-status">
                 <li className='text-xl pt-4 pb-4 w-full border-b flex justify-center  font-semibold hover:text-gray-500 button-animation'>پیگیری وضعیت استعلام الکترونیک ملک</li>
               </Link>
+              <Link className='w-full' href="https://www.geoplaner.com">
+                <li className='text-xl pt-4 pb-4 w-full border-b flex justify-center  font-semibold hover:text-gray-500 button-animation'>استعلام آدرس سند</li>
+              </Link>
             </ul>
           </div>
         </div>
