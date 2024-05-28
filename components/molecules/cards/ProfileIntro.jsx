@@ -1,10 +1,9 @@
+"use client"
 import React from "react";
 import UserLoading from "../loadings/UserLoading";
 import { toast } from "react-toastify";
-
 export default function ProfileIntro({
   name,
-
   user,
   adsCount
 }) {

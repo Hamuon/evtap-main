@@ -6,7 +6,6 @@ import ProfileIntro from "@/components/molecules/cards/ProfileIntro";
 import ProfileMenu from "@/components/molecules/cards/ProfileMenu";
 import { getDashboard } from "@/services/authService";
 import { getUserAdvertising } from '@/services/authService'
-
 export default function ProfilePage() {
   const [showReqTable, setShowReqTable] = useState(true);
   const [user, setUser] = useState(null);
@@ -15,7 +14,6 @@ export default function ProfilePage() {
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
   const [adsCount, setAdsCount] = useState(0)
-
 
   async function getUser() {
     try {

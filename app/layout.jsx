@@ -46,23 +46,23 @@ export default function RootLayout({ children }) {
       >
         {mounted && (
           <AuthProvider>
-            <FilteredAdsProvider>
-              <ProtectRoute>
-                <ToastContainer />
-                <div
-                  className="flex flex-col justify-between min-h-full"
-                >
-                  {pathname === "/" ? (
-                    <MainNavigation toggleMenu={toggleMenu} open={open} />
-                  ) : null}
-                  {open ? (
-                    <MobileMenu open={open} toggleMenu={toggleMenu} />
-                  ) : null}
-                  {children}
-                  {pathname === "/" ? <MainFooter /> : null}
-                </div>
-              </ProtectRoute>
-            </FilteredAdsProvider>
+              <FilteredAdsProvider>
+                <ProtectRoute>
+                  <ToastContainer />
+                  <div
+                    className="flex flex-col justify-between min-h-full"
+                  >
+                    {pathname === "/" ? (
+                      <MainNavigation toggleMenu={toggleMenu} open={open} />
+                    ) : null}
+                    {open ? (
+                      <MobileMenu open={open} toggleMenu={toggleMenu} />
+                    ) : null}
+                    {children}
+                    {pathname === "/" ? <MainFooter /> : null}
+                  </div>
+                </ProtectRoute>
+              </FilteredAdsProvider>
           </AuthProvider>
         )}
       </body>

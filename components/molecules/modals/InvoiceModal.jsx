@@ -1,11 +1,24 @@
-import BackButton from '@/components/atoms/buttons/BackButton';
+import React, { useEffect, useState } from 'react';
 import SubmitButton from '@/components/atoms/buttons/SubmitButton';
-import React from 'react'
 import { useRouter } from 'next/navigation';
-export default function InvoiceModal({ reqData, prevStep }) {
+import { getDashboard } from '@/services/authService';
+export default function InvoiceModal({ reqData }) {
 
+    const [wallet, setWallet] = useState(0)
     const router = useRouter()
-    console.log(reqData);
+
+    async function getUser() {
+        try {
+            const response = await getDashboard();
+            setWallet(response.data.user[0].wallet);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getUser();
+    }, []);
 
     return (
         <div className='modal-container'>
@@ -36,7 +49,7 @@ export default function InvoiceModal({ reqData, prevStep }) {
                     <div className='flex w-full border-b border-gray-300 md:px-6 py-2'>
                         <span className='ml-7 w-10'>هزینه</span>
                         <div className='flex gap-1 text-gray-500'>
-                            <span>{reqData?.data.setting?.request_amount}</span>
+                            <span>{reqData?.data.setting?.request_amount - wallet}</span>
                             <span className="ml-2"> ریال</span>
                             <span className='bg-green text-white px-3 py-1 text-xs rounded-lg'>{reqData?.data.request?.status_title}</span>
                         </div>
