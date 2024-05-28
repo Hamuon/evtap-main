@@ -246,7 +246,7 @@ export default function ProfileIntro({
     // },
     {
       tag: "تومان",
-      value: "25000 ",
+      value: user?.wallet,
       icon: (
         <svg
           className="ml-4"

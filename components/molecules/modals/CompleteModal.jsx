@@ -1,6 +1,6 @@
 "use client"
 import { z } from 'zod'
-import React from 'react'
+import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 import Label from '@/components/atoms/labels/Label'
@@ -16,6 +16,7 @@ const schema = z.object({
     code: z.string()
 })
 export default function CompleteModal() {
+    const [loading, setLoading] = useState(false)
 
     let token
     if (typeof window !== "undefined") {
@@ -29,6 +30,7 @@ export default function CompleteModal() {
     )
     const router = useRouter()
     const submitHandler = async (data) => {
+        setLoading(true)
         await completeProfile(data, token)
             .then((res) => {
                 if (res.data.success) {
@@ -36,17 +38,20 @@ export default function CompleteModal() {
                     toast.success("اطلاعات شما تکمیل شد", {
                         position: "top-center"
                     })
+                    setLoading(false)
                     router.push('/')
                 } else {
                     toast.error(res.data.message, {
                         position: "top-center"
                     })
+                    setLoading(false)
                 }
             }).catch((error) => {
                 console.log(error);
                 toast.error("مشکل در برقراری ارتباط", {
                     position: "top-center"
                 })
+                setLoading(false)
             })
     }
 
@@ -65,7 +70,7 @@ export default function CompleteModal() {
                     </div>
                     <input {...register("national_code")} className="input input-bordered w-full my-1" name="national_code" type="text" placeholder="کد ملی" />
                     <input {...register("code")} className="input input-bordered w-full my-1" name="code" type="text" placeholder="کد دعوت" />
-                    <SubmitButton type="submit" className="mt-2 sm-w-full md:w-auto" text="ثبت" />
+                    <SubmitButton type="submit" loading={loading} className="mt-2 sm-w-full md:w-auto" text="ثبت" />
                 </div>
             </form>
         </div>
