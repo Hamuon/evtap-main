@@ -24,9 +24,9 @@ const CheckboxForm = () => {
   };
 
   return (
-    <div className="p-4 pr-10 pl-5">
+    <div className="p-4 pr-10 pl-5 sticky top-5">
       <h3 className="font-bold mb-5">فیلتر آگهی ها</h3>
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-2 font-numerals">
         <label className="flex items-center justify-between pb-2">
           <input
             type="checkbox"
@@ -36,7 +36,7 @@ const CheckboxForm = () => {
             onChange={handleCheckboxChange}
           />
           <span className="text-gray-700">فروش</span>
-          <span className="text-white bg-gray-500 rounded-lg p-1 text-xs">
+          <span className="text-white bg-gray-500 rounded-lg p-1 w-8 flex justify-center text-xs">
             56
           </span>
         </label>
@@ -49,7 +49,7 @@ const CheckboxForm = () => {
             onChange={handleCheckboxChange}
           />
           <span className="text-gray-700">اجاره</span>
-          <span className="text-white bg-gray-500 rounded-lg p-1 text-xs">
+          <span className="text-white bg-gray-500 rounded-lg p-1 w-8 flex justify-center text-xs">
             21
           </span>
         </label>
@@ -61,10 +61,10 @@ const CheckboxForm = () => {
             checked={checkedOption === "mortgage"}
             onChange={handleCheckboxChange}
           />
-            <span className="text-gray-700">رهن</span>
-            <span className="text-white bg-gray-500 rounded-lg p-1 text-xs">
-              35
-            </span>
+          <span className="text-gray-700">رهن</span>
+          <span className="text-white bg-gray-500 rounded-lg p-1 w-8 flex justify-center text-xs">
+            35
+          </span>
         </label>
       </div>
 

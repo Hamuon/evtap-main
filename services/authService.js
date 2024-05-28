@@ -38,7 +38,7 @@ export function getSingleAd(id) {
 }
 
 export function filterAds(data) {
-  return http.get("/advertising", data, config);
+  return http.get("/advertising", data);
 }
 
 export function getCities() {
