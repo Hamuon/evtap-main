@@ -68,8 +68,10 @@ export default function CompleteModal() {
                         <input {...register("first_name")} name="first_name" type="text" placeholder="نام" className="input input-bordered w-full my-2" />
                         <input {...register("last_name")} name="last_name" type="text" placeholder="نام خانوادگی" className="input input-bordered w-full my-2" />
                     </div>
-                    <input {...register("national_code")} className="input input-bordered w-full my-1" name="national_code" type="text" placeholder="کد ملی" />
-                    <input {...register("code")} className="input input-bordered w-full my-1" name="code" type="text" placeholder="کد دعوت" />
+                    <div className='flex gap-2'>
+                        <input {...register("national_code")} className="input input-bordered w-full my-2" name="national_code" type="text" placeholder="کد ملی" />
+                        <input {...register("code")} className="input input-bordered w-full my-2" name="code" type="text" placeholder="کد دعوت" />
+                    </div>
                     <SubmitButton type="submit" loading={loading} className="mt-2 sm-w-full md:w-auto" text="ثبت" />
                 </div>
             </form>
