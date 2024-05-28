@@ -1,12 +1,21 @@
 import React from "react";
 import UserLoading from "../loadings/UserLoading";
+import { toast } from "react-toastify";
 
 export default function ProfileIntro({
   name,
-  phone,
+
   user,
   adsCount
 }) {
+
+  const copyToClipboard = (e) => {
+    navigator.clipboard.writeText(e.target.id);
+    toast.success("کد دعوت کپی شد", {
+      position: "top-center",
+    });
+  };
+
   const introItems = [
     {
       tag: "",
@@ -86,7 +95,7 @@ export default function ProfileIntro({
           </g>
         </svg>
       ),
-      onClick: () => { },
+      onClick: copyToClipboard,
       additionalStyle: "",
     },
     {
@@ -324,6 +333,9 @@ export default function ProfileIntro({
       additionalStyle: "",
     },
   ];
+
+
+
   return (
     <div className="col-span-1 flex flex-col items-center py-6 h-full w-full rounded-xl shadow-lg border-2 border-gray-200">
       {
@@ -332,10 +344,10 @@ export default function ProfileIntro({
             <div className="mb-3 sm:text-base md:text-lg font-semibold">{name}</div>
             <div className="flex flex-col overflow-hidden text-sm text-gray-400 font-numerals">
               {introItems.map((item, index) => (
-                <div key={index} className="flex items-center w-full p-3 ">
+                <div onClick={item.onClick} key={index} className="flex items-center w-full p-3 ">
                   {item.icon}
                   <div className="flex gap-1">
-                    <span>{item.value}</span>
+                    <span id={item.value}>{item.value}</span>
                     <span>{item.tag}</span>
                   </div>
                 </div>
