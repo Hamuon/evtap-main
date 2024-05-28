@@ -12,8 +12,8 @@ import { useRouter } from 'next/navigation'
 const schema = z.object({
     first_name: z.string().min(1, { message: "لطفا نام خود را وارد کنید" }).max(20, { message: "نام بیش از 100 کاراکتر" }),
     last_name: z.string().min(1, { message: "لطفا نام خانوادگی خود را وارد کنید" }).max(20, { message: "نام خانوادگی بیش از 100 کاراکتر" }),
-    national_code: z.string().min(1, { message: "لطفا  کد ملی خود را وارد کنید" }).max(10, { message: " کد ملی بیش از 10 کاراکتر" })
-
+    national_code: z.string().min(1, { message: "لطفا  کد ملی خود را وارد کنید" }).max(10, { message: " کد ملی بیش از 10 کاراکتر" }),
+    code: z.string()
 })
 export default function CompleteModal() {
 
@@ -64,7 +64,7 @@ export default function CompleteModal() {
                         <input {...register("last_name")} name="last_name" type="text" placeholder="نام خانوادگی" className="input input-bordered w-full my-2" />
                     </div>
                     <input {...register("national_code")} className="input input-bordered w-full my-1" name="national_code" type="text" placeholder="کد ملی" />
-                    <input name="invitation_code" type="text" placeholder="کد دعوت" className="input input-bordered w-full my-2" />
+                    <input {...register("code")} className="input input-bordered w-full my-1" name="code" type="text" placeholder="کد دعوت" />
                     <SubmitButton type="submit" className="mt-2 sm-w-full md:w-auto" text="ثبت" />
                 </div>
             </form>
