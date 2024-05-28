@@ -305,7 +305,7 @@ export default function ProfileIntro({
     },
     {
       tag: "نفر دعوت شده",
-      value: "1 ",
+      value: user?.count_code,
       icon: (
         <svg
           className="ml-4"
