@@ -21,6 +21,8 @@ export default function page({ params: { id } }) {
     items: [],
   };
 
+
+
   useEffect(() => {
     getSingleAd(id)
       .then((response) => {
@@ -129,13 +131,14 @@ export default function page({ params: { id } }) {
                 <div className="flex gap-1 text-gray-500">
                   <span>
                     {ad?.type === "mortgage"
-                      ? convertToInternationalCurrencySystem(convertPersianToArabic(ad.sale_price))
+                      ? parseInt(convertPersianToArabic(ad.sale_price)).toLocaleString()
                       : ad?.type === "sale"
-                        ? convertToInternationalCurrencySystem(convertPersianToArabic(ad.sale_price))
+                        ? parseInt(convertPersianToArabic(ad.sale_price)).toLocaleString()
                         : ad?.type === "rent"
-                          ? convertToInternationalCurrencySystem(convertPersianToArabic(ad.rent))
+                          ? parseInt(convertPersianToArabic(ad.rent)).toLocaleString()
                           : null}
                   </span>
+                  <span>تومان</span>
                 </div>
               </div>
               <div className="flex justify-between w-full">

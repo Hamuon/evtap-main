@@ -593,7 +593,7 @@ export default function SaleForm() {
         <FieldLabel> توضیحات</FieldLabel>
         <textarea
           {...register("description")}
-          rows={6}
+          rows={16}
           className={`textarea textarea-bordered w-full whitespace-pre-wrap ${errors.description ? "textarea-error" : null
             }`}
           placeholder="توضیحات را بنویسید"

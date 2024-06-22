@@ -51,7 +51,8 @@ export default function AdCard({ type, title, region, price, time, ad_img, id })
           </span>
           <p className="sm:text-lg md:text-lg font-semibold mb-6 truncate">{title}</p>
           <div className="flex gap-1 items-center text-gray-500 mb-2">
-            <span className="">{price == "0" ? "توافقی" : convertToInternationalCurrencySystem(convertPersianToArabic(price))}</span>
+            <span className="">{price == "0" ? "توافقی" : parseInt(convertPersianToArabic(price)).toLocaleString()}</span>
+            <span>تومان</span>
           </div>
           <div className="text-gray-500 text-sm ">{moment(time, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</div>
         </div>
