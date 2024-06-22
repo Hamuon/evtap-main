@@ -14,6 +14,7 @@ export default function Ads() {
   const [page, setPage] = useState(1);
   const [pageLength, setPageLength] = useState();
 
+
   const getAllAds = async () => {
     await getAds()
       .then((response) => {
@@ -64,6 +65,7 @@ export default function Ads() {
           <div className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 w-full z-0 sm:px-4 md:px-0 pb-10">
             {ads?.map((ad, index) => (
               <AdCard
+                key={index}
                 id={ad.id}
                 type={
                   ad.type === "mortgage"

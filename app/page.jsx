@@ -86,7 +86,7 @@ export default function Home() {
         {/* play, location and badges */}
         <div className='col-span-1 grid-rows-3 place-items-center place-content-center sm:h-[400px] lg:h-full w-full gap-4 flex flex-col justify-between'>
           <div className='w-full h-1/3 flex sm:justify-between'>
-            <Link href="https://aparat.com/v/JuGfY" className='bg-[#F66120] shadow-lg w-full rounded-3xl flex justify-center items-center'>
+            <Link href="https://www.aparat.com/v/dpcu815" className='bg-[#F66120] shadow-lg w-full rounded-3xl flex justify-center items-center'>
               <svg width="36" height="39" viewBox="0 0 36 39" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" clipRule="evenodd" d="M1.99998 5.90271L1.99998 33.0975C1.99998 36.0887 5.23318 37.9663 7.83109 36.4801L31.5885 22.8931C34.2034 21.3975 34.2053 17.6273 31.5904 16.1298L7.83298 2.52013C5.23507 1.03399 1.99998 2.90963 1.99998 5.90271Z" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
