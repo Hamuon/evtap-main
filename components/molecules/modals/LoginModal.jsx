@@ -21,27 +21,14 @@ export default function LoginModal({ nextStep, setPhone }) {
         }
     )
 
-    const persianToArabicMap = {
-        '۰': '0',
-        '۱': '1',
-        '۲': '2',
-        '۳': '3',
-        '۴': '4',
-        '۵': '5',
-        '۶': '6',
-        '۷': '7',
-        '۸': '8',
-        '۹': '9'
-    };
 
-    function convertPersianToArabic(input) {
-        return input.split('').map(char => persianToArabicMap[char] || char).join('');
-    }
 
     const submitHandler = async (phone) => {
+
         setPhone(phone)
         setLoading(true)
-        await getOtp(convertPersianToArabic(phone))
+
+        await getOtp(phone)
             .then((res) => {
                 if (res.status === 200) {
                     toast.success('کد ارسال شد', {
