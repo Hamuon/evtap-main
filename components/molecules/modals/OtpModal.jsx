@@ -127,7 +127,6 @@ export default function OtpModal({ nextStep, prevStep, phone, setPhone }) {
                     </div>
                     <div className='flex gap-2 mt-2 sm:w-full'>
                         <SubmitButton loading={loading} type="submit" text="ورود" />
-                        <BackButton type="button" handleBack={prevStep} />
                     </div>
                 </div>
             </form>

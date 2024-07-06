@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://new.evtap.ir/api/v1";
+const BASE_URL = "https://api.evtap.ir/v1";
 
 const app = axios.create({
   baseURL: BASE_URL,
