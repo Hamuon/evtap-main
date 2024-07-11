@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "new.evtap.ir",
+        hostname: "api.evtap.ir",
         pathname: "/**",
       },
     ],
