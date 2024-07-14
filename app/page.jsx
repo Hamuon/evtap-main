@@ -1,137 +1,526 @@
-"use client"
-import React, { useState, useEffect } from 'react'
-import { getExperts } from '@/services/authService'
-import Link from 'next/link'
-import Image from 'next/image'
+"use client";
+import React, { useState, useEffect } from "react";
+import { getExperts } from "@/services/authService";
+import Link from "next/link";
+import Image from "next/image";
 export default function Home() {
-  const [inquiry, setInquiry] = useState(false)
-  const [experts, setExperts] = useState([])
+  const [inquiry, setInquiry] = useState(false);
+  const [experts, setExperts] = useState([]);
 
   async function getAllExperts() {
-    await getExperts().then(response => {
-      setExperts(response.data.experts)
-    }).catch(error => {
-      console.log(error)
-    })
+    await getExperts()
+      .then((response) => {
+        setExperts(response.data.experts);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   useEffect(() => {
-    getAllExperts()
-  }, [])
-
+    getAllExperts();
+  }, []);
 
   return (
-    <main className='flex justify-center items-center w-full sm:h-full lg:h-auto'>
-      <div className='grid grid-cols-1 grid-rows-3 lg:grid-rows-1 place-items-center place-content-center lg:h-96 max-w-[70rem] gap-4 lg:grid-cols-3 w-full h-full sm:px-10 lg:px-0'>
-        {/* inquiry and add */}
-        <div className='col-span-1 w-full h-full grid grid-rows-3 gap-4'>
-          <div className='bg-slate-200 cursor-pointer shadow-lg row-span-2 w-full rounded-3xl overflow-hidden relative'>
-            <Link href="/ads">
-              <div className='absolute bottom-8 w-full flex justify-between px-10 z-10'>
-                <span className='text-4xl font-semibold text-white'>آگهی ها</span>
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M12.2171 3.3335H27.7671C33.4337 3.3335 36.6671 6.5335 36.6671 12.2168V27.7835C36.6671 33.4335 33.4504 36.6668 27.7837 36.6668H12.2171C6.53374 36.6668 3.33374 33.4335 3.33374 27.7835V12.2168C3.33374 6.5335 6.53374 3.3335 12.2171 3.3335ZM21.3671 21.3835H26.1004C26.8671 21.3668 27.4837 20.7502 27.4837 19.9835C27.4837 19.2168 26.8671 18.6002 26.1004 18.6002H21.3671V13.9002C21.3671 13.1335 20.7504 12.5168 19.9837 12.5168C19.2171 12.5168 18.6004 13.1335 18.6004 13.9002V18.6002H13.8837C13.5171 18.6002 13.1671 18.7502 12.9004 19.0002C12.6504 19.2668 12.5004 19.6152 12.5004 19.9835C12.5004 20.7502 13.1171 21.3668 13.8837 21.3835H18.6004V26.1002C18.6004 26.8668 19.2171 27.4835 19.9837 27.4835C20.7504 27.4835 21.3671 26.8668 21.3671 26.1002V21.3835Z" fill="white" />
-                </svg>
+    <>
+      <body className='font-body'>
+        <section className='bg-white mb-20 md:mb-52 xl:mb-72'>
+          <div className='container max-w-screen-xl mx-auto px-4'>
+            <nav
+              className='flex-wrap lg:flex items-center py-14 xl:relative z-10'
+              x-data='{navbarOpen:false}'>
+              <div className='flex items-center justify-between mb-10 lg:mb-0'>
+                <img
+                  src='/image/navbar-logo.png'
+                  alt='Logo img'
+                  className='w-52 md:w-80 lg:w-full'
+                />
+
+                <button className='lg:hidden w-10 h-10 ml-auto flex items-center justify-center text-green-700 border border-green-700 rounded-md'>
+                  <i data-feather='menu'></i>
+                </button>
               </div>
-            </Link>
-            <Image className='hover:scale-150 scale-125 button-animation' src="/media/building.svg" alt="building" style={{ objectFit: "cover" }} layout='fill' />
-          </div>
-          <div className='row-span-1 h-full flex items-center justify-evenly rounded-3xl border-black border-4 hover:shadow-lg cursor-pointer button-animation'>
-            <div onClick={() => setInquiry(!inquiry)} className='flex w-full items-center justify-evenly '>
-              <svg width="28" height="16" viewBox="0 0 28 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 2L14 14.0519L26 2" stroke="black" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span className='text-4xl font-semibold'>استعلام</span>
-            </div>
-            <ul
-              className={`bg-white shadow-lg z-50 w-full h-full top-0 left-0 p-6 fixed flex flex-col items-center justify-center ${inquiry ? 'transform translate-y-0 opacity-100 visible transition duration-300 ease-in-out' : 'transform bg-slate-100 -translate-y-2 opacity-0 invisible transition duration-300 ease-in-out'}`}
-            >
-              <span onClick={() => setInquiry(false)} className='-top-10 mb-6'><Image src="/icons/close.svg" width={20} height={20} alt='close' /></span>
-              <Link className='w-full' href="https://my.ssaa.ir/portal/estate">
-                <li className='text-xl pb-4 w-full border-b flex justify-center font-semibold hover:text-gray-500 button-animation'>استعلام اصالت سند</li>
-              </Link>
-              <Link className='w-full' href="https://www.iranamlaak.ir/forms/contracts/filtercontractsbycontractside.aspx">
-                <li className='text-xl pt-4 pb-4 w-full border-b flex justify-center  font-semibold hover:text-gray-500 button-animation'>استعلام کد رهگیری</li>
-              </Link>
-              <Link className='w-full' href="https://my.ssaa.ir/portal/ssar/documnet-cost-calculate">
-                <li className='text-xl pt-4 pb-4 w-full border-b flex justify-center  font-semibold hover:text-gray-500 button-animation'>محاسبه هزینه سند</li>
-              </Link>
-              <Link className='w-full' href="https://pishkhan24.com/avarezmelk/">
-                <li className='text-xl pt-4 pb-4 w-full border-b flex justify-center  font-semibold hover:text-gray-500 button-animation'>استعلام و پرداخت عوارض شهرداری</li>
-              </Link>
-              <Link className='w-full' href="https://khodnevis.mrud.ir/inquiry">
-                <li className='text-xl pt-4 pb-4 w-full border-b flex justify-center  font-semibold hover:text-gray-500 button-animation'>استعلام کد رهگیری از سامانه خود نویس</li>
-              </Link>
-              <Link className='w-full' href="https://my.ssaa.ir/portal/ssar/request-status">
-                <li className='text-xl pt-4 pb-4 w-full border-b flex justify-center  font-semibold hover:text-gray-500 button-animation'>پیگیری وضعیت استعلام الکترونیک ملک</li>
-              </Link>
-              <Link className='w-full' href="https://www.geoplaner.com">
-                <li className='text-xl pt-4 pb-4 w-full border-b flex justify-center  font-semibold hover:text-gray-500 button-animation'>استعلام آدرس سند</li>
-              </Link>
-            </ul>
-          </div>
-        </div>
 
+              <ul
+                className={`lg:flex flex-col lg:flex-row lg:items-center lg:mx-auto lg:space-x-8 xl:space-x-16`}>
+                <li className='font-semibold text-gray-900 text-lg hover:text-gray-400 transition ease-in-out duration-300 mb-5 lg:mb-0'>
+                  <a href='#'>Landing</a>
+                </li>
 
-        {/* request for expert */}
-        <Link className='col-span-1 shadow-lg cursor-pointer h-full w-full relative overflow-hidden rounded-3xl' href="/request">
-          <div >
-            <span className='absolute z-10 bottom-8 w-full flex justify-center text-white text-4xl font-semibold'>درخواست کارشناسی</span>
-            <Image className='scale-125 hover:scale-150 button-animation' src="/media/expert-cartoon.jpg" alt="expert" layout='fill' style={{ objectFit: "cover" }} />
-          </div>
-        </Link>
+                <li className='font-semibold text-gray-900 text-lg hover:text-gray-400 transition ease-in-out duration-300 mb-5 lg:mb-0'>
+                  <a href='#'>Pages</a>
+                </li>
 
+                <li className='font-semibold text-gray-900 text-lg hover:text-gray-400 transition ease-in-out duration-300 mb-5 lg:mb-0'>
+                  <a href='#'>Contact</a>
+                </li>
 
+                <li className='font-semibold text-gray-900 text-lg hover:text-gray-400 transition ease-in-out duration-300 mb-5 lg:mb-0'>
+                  <a href='#'>About</a>
+                </li>
+              </ul>
 
-        {/* play, location and badges */}
-        <div className='col-span-1 grid-rows-3 place-items-center place-content-center sm:h-[400px] lg:h-full w-full gap-4 flex flex-col justify-between'>
-          <div className='w-full h-1/3 flex sm:justify-between'>
-            <Link href="https://www.aparat.com/v/dpcu815" className='bg-[#F66120] shadow-lg w-full rounded-3xl flex justify-center items-center'>
-              <svg width="36" height="39" viewBox="0 0 36 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clipRule="evenodd" d="M1.99998 5.90271L1.99998 33.0975C1.99998 36.0887 5.23318 37.9663 7.83109 36.4801L31.5885 22.8931C34.2034 21.3975 34.2053 17.6273 31.5904 16.1298L7.83298 2.52013C5.23507 1.03399 1.99998 2.90963 1.99998 5.90271Z" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-            <Link href="/profile" className="bg-black shadow-lg rounded-full mr-2 flex justify-center items-center aspect-square">
-              <svg width="34" height="42" viewBox="0 0 34 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clipRule="evenodd" d="M28.0292 11.1897C28.0292 17.3085 23.1232 22.2148 17 22.2148C10.879 22.2148 5.97091 17.3085 5.97091 11.1897C5.97091 5.07087 10.879 0.166656 17 0.166656C23.1232 0.166656 28.0292 5.07087 28.0292 11.1897ZM17 41.8333C7.96332 41.8333 0.333374 40.3646 0.333374 34.6978C0.333374 29.029 8.01125 27.6123 17 27.6123C26.0388 27.6123 33.6667 29.0811 33.6667 34.7478C33.6667 40.4166 25.9888 41.8333 17 41.8333Z" fill="white" />
-              </svg>
-            </Link>
-          </div>
-          <div className='w-full h-1/3'>
-            <div className=' h-full bg-white w-full flex items-center justify-evenly rounded-3xl shadow-lg'>
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clipRule="evenodd" d="M5.83337 17.1963C5.83337 9.52981 12.2398 3.33333 19.9891 3.33333C27.7602 3.33333 34.1667 9.52981 34.1667 17.1963C34.1667 21.0595 32.7617 24.646 30.4492 27.686C27.898 31.0392 24.7536 33.9608 21.2143 36.254C20.4042 36.784 19.6732 36.824 18.7841 36.254C15.2246 33.9608 12.0802 31.0392 9.55087 27.686C7.23668 24.646 5.83337 21.0595 5.83337 17.1963ZM15.3238 17.6279C15.3238 20.1962 17.4195 22.2161 19.9891 22.2161C22.5604 22.2161 24.6763 20.1962 24.6763 17.6279C24.6763 15.0797 22.5604 12.9614 19.9891 12.9614C17.4195 12.9614 15.3238 15.0797 15.3238 17.6279Z" fill="black" />
-              </svg>
-              <span className='text-4xl font-semibold '>ایران، تبریز</span>
-            </div>
-          </div>
-          <div className='w-full h-1/3 relative z-40 cursor-pointer'>
-            <div className='h-full sm:hidden lg:block bg-slate-50 rounded-full absolute right-60 hover:right-64 button-animation aspect-square overflow-hidden'>
-              <img src={`https://new.evtap.ir/uploads/${experts[0]?.avatar}`} alt="expert" />
-            </div>
-            <div className='h-full bg-slate-100 rounded-full absolute right-48 hover:right-52 button-animation aspect-square overflow-hidden'>
-              <img src={`https://new.evtap.ir/uploads/${experts[1]?.avatar}`} alt="expert" />
-            </div>
-            <div className='h-full bg-slate-200 rounded-full absolute right-36 hover:right-40 button-animation aspect-square overflow-hidden'>
-              <img src={`https://new.evtap.ir/uploads/${experts[2]?.avatar}`} alt="expert" />
-            </div>
-            <div className='h-full bg-slate-300 rounded-full absolute right-24 hover:right-28 button-animation aspect-square overflow-hidden'>
-              <img src={`https://new.evtap.ir/uploads/${experts[3]?.avatar}`} alt="expert" />
-            </div>
-            <div className='h-full bg-slate-400 rounded-full absolute right-12 hover:right-16 button-animation aspect-square overflow-hidden'>
-              <img src={`https://new.evtap.ir/uploads/${experts[4]?.avatar}`} alt="expert" />
-            </div>
-            <div className='h-full bg-white rounded-full absolute right-0 flex justify-center items-center font-numerals aspect-square '>
-              <Link href="/experts">
-                <span className='text-4xl font-bold flex justify-center items-center'>
-                  20+
-                </span>
-              </Link>
+              <button className='px-5 py-3 lg:block border-2 border-green-700 rounded-lg font-semibold text-green-700 text-lg hover:bg-greenhover:text-white transition ease-linear duration-500'>
+                Request quote
+              </button>
+            </nav>
+
+            <div className='flex items-center justify-center xl:justify-end'>
+              <div className='mt-28 text-center xl:text-left'>
+                <h1 className='font-semibold text-4xl md:text-6xl lg:text-7xl text-gray-900 leading-normal mb-6'>
+                  Get your dream <br /> house now
+                </h1>
+
+                <p className='font-normal text-xl text-gray-400 leading-relaxed mb-12'>
+                  Having a sweet home is everyone's dream. Have you <br /> owned
+                  your dream house?
+                </p>
+
+                <button className='px-6 py-4 bg-green text-white font-semibold text-lg rounded-xl hover:bg-green transition ease-in-out duration-500'>
+                  Contact us
+                </button>
+              </div>
+
+              <div className='hidden xl:block xl:absolute z-0 top-0 right-0'>
+                <img src='/image/home-img.png' alt='Home img' />
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </main>
-  )
+        </section>
+
+        <section className='bg-white py-10 md:py-16 xl:relative'>
+          <div className='container max-w-screen-xl mx-auto px-4'>
+            <div className='flex flex-col xl:flex-row justify-end'>
+              <div className='hidden xl:block xl:absolute left-0 bottom-0 w-full'>
+                <img src='/image/feature-img.png' alt='Feature img' />
+              </div>
+
+              <div className=''>
+                <h1 className='font-semibold text-gray-900 text-xl md:text-4xl text-center leading-normal mb-6'>
+                  Choice of various types of <br /> house
+                </h1>
+
+                <p className='font-normal text-gray-400 text-md md:text-xl text-center mb-16'>
+                  We provide a wide of selection of home types for you and your{" "}
+                  <br /> family and are free to choose a home model
+                </p>
+
+                <div className='flex flex-col md:flex-row justify-center xl:justify-start space-x-4 mb-20'>
+                  <div className='px-8 h-20 mx-auto md:mx-0 bg-gray-200 rounded-lg flex items-center justify-center mb-5 md:mb-0'>
+                    <i
+                      data-feather='check-circle'
+                      className=' text-green-900'></i>
+                  </div>
+
+                  <div className='text-center md:text-left'>
+                    <h4 className='font-semibold text-gray-900 text-2xl mb-2'>
+                      Best Home Guarantee
+                    </h4>
+                    <p className='font-normal text-gray-400 text-xl leading-relaxed'>
+                      We guarantees the quality of your home you bought <br />{" "}
+                      from D’house
+                    </p>
+                  </div>
+                </div>
+
+                <div className='flex flex-col md:flex-row justify-center xl:justify-start space-x-4 mb-20'>
+                  <div className='px-8 h-20 mx-auto md:mx-0 bg-gray-200 rounded-lg flex items-center justify-center mb-5 md:mb-0'>
+                    <i data-feather='lock' className=' text-green-900'></i>
+                  </div>
+
+                  <div className='text-center md:text-left'>
+                    <h4 className='font-semibold text-gray-900 text-2xl mb-2'>
+                      Safe Transaction
+                    </h4>
+                    <p className='font-normal text-gray-400 text-xl leading-relaxed'>
+                      Your transactions will always be kept confidential <br />{" "}
+                      and will get discounted
+                    </p>
+                  </div>
+                </div>
+
+                <div className='flex flex-col md:flex-row justify-center xl:justify-start space-x-4'>
+                  <div className='px-8 h-20 mx-auto md:mx-0 bg-gray-200 rounded-lg flex items-center justify-center mb-5 md:mb-0'>
+                    <i
+                      data-feather='credit-card'
+                      className=' text-green-900'></i>
+                  </div>
+
+                  <div className='text-center md:text-left'>
+                    <h4 className='font-semibold text-gray-900 text-2xl mb-2'>
+                      Low and Cost Home Taxes
+                    </h4>
+                    <p className='font-normal text-gray-400 text-xl leading-relaxed'>
+                      By buying a house from D’house, you will get a tax <br />{" "}
+                      discount
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className='bg-white py-10 md:py-16'>
+          <div className='container max-w-screen-xl mx-auto px-4'>
+            <h1 className='font-semibold text-gray-900 text-4xl text-center mb-10'>
+              Our Gallery
+            </h1>
+
+            <div className='hidden md:block flex items-center text-center space-x-10 lg:space-x-20 mb-12'>
+              <a
+                href='#'
+                className='px-6 py-2 bg-green text-white font-semibold text-xl rounded-lg hover:bg-green transition ease-in-out duration-500'>
+                All
+              </a>
+              <a
+                href='#'
+                className='px-6 py-2 text-gray-900 font-normal text-xl rounded-lg hover:bg-gray-200 hover:text-gray-400 transition ease-in-out duration-500'>
+                Exterior
+              </a>
+              <a
+                href='#'
+                className='px-6 py-2 text-gray-900 font-normal text-xl rounded-lg hover:bg-gray-200 hover:text-gray-400 transition ease-in-out duration-500'>
+                Interior
+              </a>
+              <a
+                href='#'
+                className='px-6 py-2 text-gray-900 font-normal text-xl rounded-lg hover:bg-gray-200 hover:text-gray-400 transition ease-in-out duration-500'>
+                Building
+              </a>
+            </div>
+
+            <div className='flex space-x-4 md:space-x-6 lg:space-x-8'>
+              <div>
+                <img
+                  src='/image/gallery-1.png'
+                  alt='image'
+                  className='mb-4 md:mb-6 lg:mb-8 hover:opacity-75 transition ease-in-out duration-500'
+                />
+                <img
+                  src='/image/gallery-4.png'
+                  alt='image'
+                  className='hover:opacity-75 transition ease-in-out duration-500'
+                />
+              </div>
+
+              <div>
+                <img
+                  src='/image/gallery-2.png'
+                  alt='image'
+                  className='mb-4 md:mb-6 lg:mb-8 hover:opacity-75 transition ease-in-out duration-500'
+                />
+                <img
+                  src='/image/gallery-5.png'
+                  alt='image'
+                  className='mb-3 md:mb-6 lg:mb-8 hover:opacity-75 transition ease-in-out duration-500'
+                />
+                <img
+                  src='/image/gallery-6.png'
+                  alt='image'
+                  className='hover:opacity-75 transition ease-in-out duration-500'
+                />
+              </div>
+
+              <div>
+                <img
+                  src='/image/gallery-3.png'
+                  alt='image'
+                  className='mb-4 md:mb-6 lg:mb-8 hover:opacity-75 transition ease-in-out duration-500'
+                />
+                <img
+                  src='/image/gallery-7.png'
+                  alt='image'
+                  className='hover:opacity-75 transition ease-in-out duration-500'
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className='bg-white py-10 md:py-16'>
+          <div className='container max-w-screen-xl mx-auto px-4 xl:relative'>
+            <p className='font-normal text-gray-400 text-lg md:text-xl text-center uppercase mb-6'>
+              Testimonial
+            </p>
+
+            <h1 className='font-semibold text-gray-900 text-2xl md:text-4xl text-center leading-normal mb-14'>
+              What People Say <br /> About D’house
+            </h1>
+
+            <div className='hidden xl:block xl:absolute top-0'>
+              <img src='/image/testimoni-1.png' alt='Image' />
+            </div>
+
+            <div className='hidden xl:block xl:absolute top-32'>
+              <img src='/image/testimoni-2.png' alt='Image' />
+            </div>
+
+            <div className='flex flex-col md:flex-row md:items-center justify-center md:space-x-8 lg:space-x-12 mb-10 md:mb-20'>
+              <div className='bg-gray-100 rounded-lg mb-10 md:mb-0'>
+                <img
+                  src='/image/testimoni-3.png'
+                  alt='Image'
+                  className='mx-8 my-8'
+                />
+
+                <div className='flex items-center gap-5 mx-8'>
+                  <i data-feather='star' className='text-yellow-500'></i>
+                  <i data-feather='star' className='text-yellow-500'></i>
+                  <i data-feather='star' className='text-yellow-500'></i>
+                  <i data-feather='star' className='text-yellow-500'></i>
+                  <i data-feather='star' className='text-yellow-500'></i>
+                </div>
+
+                <p className='font-normal text-sm lg:text-md text-gray-400 mx-8 my-8'>
+                  I recommend anyone to buy house on <br /> D’house. I received
+                  great customer service <br /> from the specialists who helped
+                  me.
+                </p>
+
+                <h3 className='font-semibold text-gray-900 text-xl md:text-2xl lg:text-3xl mx-8 mb-8'>
+                  Brooklyn Simmons
+                </h3>
+              </div>
+
+              <div className='bg-gray-100 rounded-lg'>
+                <img
+                  src='/image/testimoni-4.png'
+                  alt='Image'
+                  className='mx-8 my-8'
+                />
+
+                <div className='flex items-center gap-5 mx-8'>
+                  <i data-feather='star' className='text-yellow-500'></i>
+                  <i data-feather='star' className='text-yellow-500'></i>
+                  <i data-feather='star' className='text-yellow-500'></i>
+                  <i data-feather='star' className='text-yellow-500'></i>
+                  <i data-feather='star' className='text-yellow-500'></i>
+                </div>
+
+                <p className='font-normal text-sm lg:text-md text-gray-400 mx-8 my-8'>
+                  D’house is the best property agent in the <br /> world. I
+                  received great customer service <br /> from the D’house agent
+                </p>
+
+                <h3 className='font-semibold text-gray-900 text-xl md:text-2xl lg:text-3xl mx-8 mb-8'>
+                  Ralph Edwards
+                </h3>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className='bg-white py-10 md:py-16'>
+          <div className='container max-w-screen-xl mx-auto px-4 xl:relative'>
+            <div className='bg-green flex flex-col lg:flex-row items-center justify-evenly py-14 rounded-3xl'>
+              <div className='text-center lg:text-left mb-10 lg:mb-0'>
+                <h1 className='font-semibold text-white text-4xl md:text-5xl lg:text-7xl leading-normal mb-4'>
+                  Talk to us <br /> to discuss
+                </h1>
+
+                <p className='font-normal text-white text-md md:text-xl'>
+                  Need more time to discuss? Won’t worry, we are <br /> ready to
+                  help you. You can fill in the column on the <br /> right to
+                  book a meeting with us. Totally free.
+                </p>
+              </div>
+
+              <div className='hidden xl:block xl:absolute right-0'>
+                <img src='/image/book.png' alt='Image' />
+              </div>
+
+              <div className='hidden md:block bg-white xl:relative px-6 py-3 rounded-3xl'>
+                <div className='py-3'>
+                  <h3 className='font-semibold text-gray-900 text-3xl'>
+                    Book a meeting
+                  </h3>
+                </div>
+
+                <div className='py-3'>
+                  <input
+                    type='text'
+                    placeholder='Full Name'
+                    className='px-4 py-4 w-96 bg-gray-100 placeholder-gray-400 rounded-xl outline-none'
+                  />
+                </div>
+
+                <div className='py-3'>
+                  <input
+                    type='text'
+                    placeholder='Email'
+                    className='px-4 py-4 w-96 bg-gray-100 placeholder-gray-400 rounded-xl outline-none'
+                  />
+                </div>
+
+                <div className='py-3 relative'>
+                  <input
+                    type='text'
+                    placeholder='Date'
+                    className='px-4 py-4 w-96 bg-gray-100 font-normal text-lg placeholder-gray-400 rounded-xl outline-none'
+                  />
+
+                  <div className='absolute inset-y-0 left-80 ml-6 flex items-center text-xl text-gray-600'>
+                    <i data-feather='calendar'></i>
+                  </div>
+                </div>
+
+                <div className='py-3 relative'>
+                  <input
+                    type='text'
+                    placeholder='Virtual Meeting'
+                    className='px-4 py-4 w-96 bg-gray-100 placeholder-gray-400 rounded-xl outline-none'
+                  />
+
+                  <div className='absolute inset-y-0 left-80 ml-6 flex items-center text-xl text-gray-600'>
+                    <i data-feather='chevron-down'></i>
+                  </div>
+                </div>
+
+                <div className='py-3'>
+                  <button className='w-full py-4 font-semibold text-lg text-white bg-green rounded-xl hover:bg-green transition ease-in-out duration-500'>
+                    Booking
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer className='bg-white py-10 md:py-16'>
+          <div className='container max-w-screen-xl mx-auto px-4'>
+            <div className='flex flex-col lg:flex-row justify-between'>
+              <div className='text-center lg:text-left mb-10 lg:mb-0'>
+                <div className='flex justify-center lg:justify-start mb-5'>
+                  <img src='/image/footer-logo.png' alt='Image' />
+                </div>
+
+                <p className='font-light text-gray-400 text-xl mb-10'>
+                  Get your dream house with <br /> D’house
+                </p>
+
+                <div className='flex items-center justify-center lg:justify-start space-x-5'>
+                  <a
+                    href='#'
+                    className='px-3 py-3 bg-gray-200 text-gray-700 rounded-full hover:bg-green hover:text-white transition ease-in-out duration-500'>
+                    <i data-feather='facebook'></i>
+                  </a>
+
+                  <a
+                    href='#'
+                    className='px-3 py-3 bg-gray-200 text-gray-700 rounded-full hover:bg-green hover:text-white transition ease-in-out duration-500'>
+                    <i data-feather='twitter'></i>
+                  </a>
+
+                  <a
+                    href='#'
+                    className='px-3 py-3 bg-gray-200 text-gray-700 rounded-full hover:bg-green hover:text-white transition ease-in-out duration-500'>
+                    <i data-feather='linkedin'></i>
+                  </a>
+                </div>
+              </div>
+
+              <div className='text-center lg:text-left mb-10 lg:mb-0'>
+                <h4 className='font-semibold text-gray-900 text-2xl mb-6'>
+                  Sitemap
+                </h4>
+
+                <a
+                  href='#'
+                  className='block font-light text-gray-400 text-xl mb-6 hover:text-gray-800 transition ease-in-out duration-300'>
+                  Home
+                </a>
+
+                <a
+                  href='#'
+                  className='block font-light text-gray-400 text-xl mb-6 hover:text-gray-800 transition ease-in-out duration-300'>
+                  Features
+                </a>
+
+                <a
+                  href='#'
+                  className='block font-light text-gray-400 text-xl mb-6 hover:text-gray-800 transition ease-in-out duration-300'>
+                  Gallery
+                </a>
+
+                <a
+                  href='#'
+                  className='block font-light text-gray-400 text-xl mb-6 hover:text-gray-800 transition ease-in-out duration-300'>
+                  Testimoni
+                </a>
+
+                <a
+                  href='#'
+                  className='block font-light text-gray-400 text-xl mb-6 hover:text-gray-800 transition ease-in-out duration-300'>
+                  Book a meeting
+                </a>
+              </div>
+
+              <div className='text-center lg:text-left mb-10 lg:mb-0'>
+                <h4 className='font-semibold text-gray-900 text-2xl mb-6'>
+                  Landing
+                </h4>
+
+                <a
+                  href='#'
+                  className='block font-light text-gray-400 text-xl mb-6 hover:text-gray-800 transition ease-in-out duration-300'>
+                  Mobile App
+                </a>
+
+                <a
+                  href='#'
+                  className='block font-light text-gray-400 text-xl mb-6 hover:text-gray-800 transition ease-in-out duration-300'>
+                  Property
+                </a>
+
+                <a
+                  href='#'
+                  className='block font-light text-gray-400 text-xl mb-6 hover:text-gray-800 transition ease-in-out duration-300'>
+                  Personal Website
+                </a>
+
+                <a
+                  href='#'
+                  className='block font-light text-gray-400 text-xl mb-6 hover:text-gray-800 transition ease-in-out duration-300'>
+                  Web Developer
+                </a>
+
+                <a
+                  href='#'
+                  className='block font-light text-gray-400 text-xl mb-6 hover:text-gray-800 transition ease-in-out duration-300'>
+                  Online Course
+                </a>
+
+                <a
+                  href='#'
+                  className='block font-light text-gray-400 text-xl mb-6 hover:text-gray-800 transition ease-in-out duration-300'>
+                  Donation
+                </a>
+              </div>
+
+              <div className='text-center lg:text-left'>
+                <h4 className='font-semibold text-gray-900 text-2xl mb-6'>
+                  Utility
+                </h4>
+
+                <a
+                  href='#'
+                  className='block font-light text-gray-400 text-xl mb-6 hover:text-gray-800 transition ease-in-out duration-300'>
+                  FAQ
+                </a>
+
+                <a
+                  href='#'
+                  className='block font-light text-gray-400 text-xl mb-6 hover:text-gray-800 transition ease-in-out duration-300'>
+                  Terms & Conditions
+                </a>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+        <script>feather.replace()</script>
+      </body>
+    </>
+  );
 }
-
