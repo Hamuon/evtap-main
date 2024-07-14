@@ -90,7 +90,7 @@ export default function Ads() {
                 time={formatDate(ad.updated_at)}
                 ad_img={
                   ad.images
-                    ? `https://new.evtap.ir/uploads/${ad.images[0]}`
+                    ? `https://api.evtap.ir/uploads/${ad.images[0]}`
                     : "/media/imgHolder.jpg"
                 }
               />

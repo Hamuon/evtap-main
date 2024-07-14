@@ -28,7 +28,7 @@ export default function ExpertsPage() {
             <ExpertsCard
               key={index}
               expert_amount={expert.education}
-              expert_img={`https://www.new.evtap.ir/uploads/${expert.avatar}`}
+              expert_img={`https://api.evtap.ir/uploads/${expert.avatar}`}
               city={expert.status === "inactive" ? "غیرفعال" : "فعال"}
               co_op={expert.experience}
               expert_name={expert.full_name}

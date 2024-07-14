@@ -20,7 +20,7 @@ export default function MainNavigation({ toggleMenu, open }) {
                     <Link href="/experts">
                         <li className='mr-12 font-semibold'>کارشناسان</li>
                     </Link>
-                    <Link href="https://new.evtap.ir/local/about">
+                    <Link href="https://api.evtap.ir/local/about">
                         <li className='mr-12 font-semibold'>درباره ما</li>
                     </Link>
                 </ul>

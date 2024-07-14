@@ -29,7 +29,7 @@ export default function AuthNavigation({ setSearch, search, toggleMenu, open }) 
               <li className="mr-12 font-semibold"> صفحه اصلی</li>
             </Link>
             {pathname === "/experts" ? (
-              <Link href="https://new.evtap.ir/admin/login">
+              <Link href="https://api.evtap.ir/admin/login">
                 <li className="mr-12 font-semibold">پنل کارشناس</li>
               </Link>
             ) : null}

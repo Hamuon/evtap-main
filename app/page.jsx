@@ -107,19 +107,19 @@ export default function Home() {
           </div>
           <div className='w-full h-1/3 relative z-40 cursor-pointer'>
             <div className='h-full sm:hidden lg:block bg-slate-50 rounded-full absolute right-60 hover:right-64 button-animation aspect-square overflow-hidden'>
-              <img src={`https://new.evtap.ir/uploads/${experts[0]?.avatar}`} alt="expert" />
+              <img src={`https://api.evtap.ir/uploads/${experts[0]?.avatar}`} alt="expert" />
             </div>
             <div className='h-full bg-slate-100 rounded-full absolute right-48 hover:right-52 button-animation aspect-square overflow-hidden'>
-              <img src={`https://new.evtap.ir/uploads/${experts[1]?.avatar}`} alt="expert" />
+              <img src={`https://api.evtap.ir/uploads/${experts[1]?.avatar}`} alt="expert" />
             </div>
             <div className='h-full bg-slate-200 rounded-full absolute right-36 hover:right-40 button-animation aspect-square overflow-hidden'>
-              <img src={`https://new.evtap.ir/uploads/${experts[2]?.avatar}`} alt="expert" />
+              <img src={`https://api.evtap.ir/uploads/${experts[2]?.avatar}`} alt="expert" />
             </div>
             <div className='h-full bg-slate-300 rounded-full absolute right-24 hover:right-28 button-animation aspect-square overflow-hidden'>
-              <img src={`https://new.evtap.ir/uploads/${experts[3]?.avatar}`} alt="expert" />
+              <img src={`https://api.evtap.ir/uploads/${experts[3]?.avatar}`} alt="expert" />
             </div>
             <div className='h-full bg-slate-400 rounded-full absolute right-12 hover:right-16 button-animation aspect-square overflow-hidden'>
-              <img src={`https://new.evtap.ir/uploads/${experts[4]?.avatar}`} alt="expert" />
+              <img src={`https://api.evtap.ir/uploads/${experts[4]?.avatar}`} alt="expert" />
             </div>
             <div className='h-full bg-white rounded-full absolute right-0 flex justify-center items-center font-numerals aspect-square '>
               <Link href="/experts">
