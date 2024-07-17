@@ -107,7 +107,7 @@ export default function SearchSale() {
     setLoading(true)
     console.log(data)
 
-    await axios.get(`https://new.evtap.ir/api/v1/advertising?title=${data.title}`)
+    await axios.get(`https://api.evtap.ir/api/v1/advertising?title=${data.title}`)
 
       .then((res) => {
         console.log(res)

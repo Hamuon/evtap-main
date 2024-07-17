@@ -38,8 +38,8 @@ export default function page({ params: { id } }) {
       ad?.images?.map((image) =>
         defaultProps.items.push({
           sizes: "767px, 767px",
-          original: `https://new.evtap.ir/uploads/${image}`,
-          thumbnail: `https://new.evtap.ir/uploads/${image}`,
+          original: `https://api.evtap.ir/uploads/${image}`,
+          thumbnail: `https://api.evtap.ir/uploads/${image}`,
         })
       );
     } else {
