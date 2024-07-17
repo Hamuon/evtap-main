@@ -17,11 +17,10 @@ export default function ProfileNavigation() {
                         <Link href="/request">
                             <li className='mr-12 font-semibold'>درخواست کارشناسی</li>
                         </Link>
-                        <Link href="/ads">
+                        <Link href="https://melkevtap.ir/files">
                             <li className='mr-12 font-semibold'>آگهی ها </li>
                         </Link>
                     </ul>
-                    <SubmitButton text="ثبت آگهی" handleClick={() => router.push("/add-ad")} type="button" className="mr-4" />
                 </div>
             </div>
         </nav>

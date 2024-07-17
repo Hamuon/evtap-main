@@ -12,7 +12,7 @@ export default function AuthNavigation() {
                     <Link href="/">
                         <li className='mr-12 font-semibold'>صفحه اصلی</li>
                     </Link>
-                    <Link href="/ads">
+                    <Link href="https://melkevtap.ir/files">
                         <li className='mr-12 font-semibold'> آگهی ها</li>
                     </Link>
                 </ul>

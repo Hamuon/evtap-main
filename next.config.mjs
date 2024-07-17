@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: "api.evtap.ir",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "ipfs.filebase.io",
+        pathname: "/**",
+      },
     ],
   },
 };
