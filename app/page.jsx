@@ -1,15 +1,15 @@
 "use client"
 import React, { useState } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import VideoModal from '@/components/molecules/modals/VideoModal'
+import MainMenu from '@/components/atoms/buttons/mainMenu/MainMenu'
 
 export default function Home() {
   const [video, setVideo] = useState(false)
 
   return (
     <main className='w-full relative'>
-      <Image src="/media/main.jpg" fill style={{ objectFit: "cover" }} alt='banner image' />
+      <Image src="/media/real-estate.gif" fill style={{ objectFit: "cover" }} alt='banner image' />
       {video && <VideoModal setVideo={setVideo} />}
       <div className='w-full'>
         <div className='w-full h-screen relative flex items-center justify-center '>
@@ -17,11 +17,7 @@ export default function Home() {
             <p className='relative justify-center items-center z-30 md:flex sm:text-3xl lg:text-6xl font-bold lg:right-80 flex'>تا خانه‌ای پناه امن شما باشد.</p>
             <p className='relative justify-center items-center z-30 md:flex sm:text-xl lg:text-3xl font-semibold lg:right-80 flex text-gray-500'>کارشناسی تخصصی ملک اوتاپ.</p>
           </div> */}
-          <span onClick={() => setVideo(true)} className="relative justify-center items-center cursor-pointer h-24 w-24 z-30 flex">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-            <span className="relative inline-flex rounded-full bg-white h-24 w-24 "></span>
-            <Image className='absolute' src="/icons/play.png" width={44} height={44} alt='play' />
-          </span>
+          <MainMenu setVideo={setVideo} />
         </div>
       </div>
     </main>

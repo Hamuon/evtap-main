@@ -10,28 +10,26 @@ export default function MainNavigation({ toggleMenu, open, setInquiry }) {
                 {/* mobile visible navigation */}
                 {/* desktop visible navigation */}
                 <div className="flex items-center gap-4">
-                    <MenuButton toggleMenu={toggleMenu} open={open} />
                     <div className=''>
-                        <Image src="/media/evtap-logo.png" alt="evtap logo" width={50} height={50} />
+                        <Image src="/media/evtap-logo.png" alt="evtap logo" width={60} height={60} />
                     </div>
-                    <ul className='sm:hidden md:flex'>
-                        <Link href="/experts">
-                            <li className='mr-12 font-semibold '>کارشناسان</li>
-                        </Link>
-                        <Link href="https://melkevtap.ir/files">
-                            <li className='mr-12 font-semibold '>آگهی ها</li>
-                        </Link>
-                        <Link href="/request">
-                            <li className='mr-12 font-semibold '>درخواست کارشناسی</li>
-                        </Link>
-                        <li onClick={() => setInquiry(true)} className='mr-12 font-semibold cursor-pointer'>استعلام</li>
-                    </ul>
                 </div>
-                <div>
-                    <Link href="/profile">
-                        <span className='mr-12 font-semibold text-[#808080] border-2 border-[#808080] py-3 px-5 hover:bg-[#808080] hover:text-white'>ورود / ثبت نام</span>
+                {/* <ul className='sm:hidden md:flex'>
+                    <Link href="/experts">
+                        <li className='mr-12 font-semibold text-white '>کارشناسان</li>
                     </Link>
-                </div>
+                    <Link href="https://melkevtap.ir/files">
+                        <li className='mr-12 font-semibold text-white '>آگهی ها</li>
+                    </Link>
+                    <Link href="/request">
+                        <li className='mr-12 font-semibold text-white '>درخواست کارشناسی</li>
+                    </Link>
+                    <li onClick={() => setInquiry(true)} className='mr-12 font-semibold text-white cursor-pointer'>استعلام</li>
+                </ul> */}
+                <span onClick={() => setInquiry(true)} className='mr-12 font-semibold py-3 px-8 bg-white text-black'>استعلام</span>
+                {/* <MenuButton toggleMenu={toggleMenu} open={open} /> */}
+                {/* <div>
+                </div> */}
             </div>
         </nav>
     )
