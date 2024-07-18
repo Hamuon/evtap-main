@@ -9,6 +9,7 @@ export default function MainNavigation({ toggleMenu, open, setInquiry }) {
             <div className='flex w-full justify-between items-center md:px-10 sm:px-10 md:container mx-auto h-32'>
                 {/* mobile visible navigation */}
                 {/* desktop visible navigation */}
+                <span onClick={() => setInquiry(true)} className=' font-semibold py-3 px-8 bg-white text-black cursor-pointer'>استعلام</span>
                 <div className="flex items-center gap-4">
                     <div className=''>
                         <Image src="/media/evtap-logo.png" alt="evtap logo" width={60} height={60} />
@@ -26,7 +27,6 @@ export default function MainNavigation({ toggleMenu, open, setInquiry }) {
                     </Link>
                     <li onClick={() => setInquiry(true)} className='mr-12 font-semibold text-white cursor-pointer'>استعلام</li>
                 </ul> */}
-                <span onClick={() => setInquiry(true)} className='mr-12 font-semibold py-3 px-8 bg-white text-black'>استعلام</span>
                 {/* <MenuButton toggleMenu={toggleMenu} open={open} /> */}
                 {/* <div>
                 </div> */}
