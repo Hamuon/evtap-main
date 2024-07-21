@@ -100,7 +100,7 @@ export default function AuthNavigation({ setSearch, search, toggleMenu, open }) 
           ) : null} */}
           <SubmitButton
             text="ثبت آگهی"
-            handleClick={() => router.push("/add-ad")}
+            handleClick={() => router.push("https://melkeavtap.ir/files")}
             type="button"
             className="mr-4 sm:hidden md:flex"
           />
