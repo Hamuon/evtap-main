@@ -6,7 +6,6 @@ import ProfileMenu from "@/components/molecules/cards/ProfileMenu";
 import { getDashboard } from "@/services/authService";
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
-  const [adsCount, setAdsCount] = useState(0)
 
   async function getUser() {
     try {
@@ -36,7 +35,7 @@ export default function ProfilePage() {
         <div className="col-span-2 w-full flex items-start flex-col my-8 md:my-0 lg:my-0">
           <ReqTable user={user} />
         </div>
-        <ProfileMenu reqClick={handleReqClick} adClick={handleAdClick} />
+        <ProfileMenu />
       </div>
     </main>
   );
