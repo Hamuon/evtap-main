@@ -1,15 +1,16 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import MenuButton from '@/components/atoms/buttons/menu/MenuButton'
-export default function MainNavigation({ toggleMenu, open, setInquiry }) {
+export default function MainNavigation() {
 
     return (
         <nav className='flex justify-between mx-auto fixed top-0 z-50 w-full'>
             <div className='flex w-full justify-between items-center md:px-10 sm:px-10 md:container mx-auto h-32'>
                 {/* mobile visible navigation */}
                 {/* desktop visible navigation */}
-                <span onClick={() => setInquiry(true)} className=' font-semibold py-3 px-8 bg-white text-black cursor-pointer'>استعلام</span>
+                <Link href="https://melkevtap.ir/files">
+                    <span className=' font-semibold py-3 px-8 bg-white text-black cursor-pointer'>آگهی ها</span>
+                </Link>
                 <div className="flex items-center gap-4">
                     <div className=''>
                         <Image src="/media/evtap-logo.png" alt="evtap logo" width={60} height={60} />

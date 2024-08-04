@@ -1,12 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-export default function InquiryList({ inquiry, setInquiry }) {
+export default function InquiryList({ menu, setMenu }) {
     return (
         <ul
-            className={`bg-white shadow-lg z-50 w-full h-full top-0 left-0 p-6 fixed flex flex-col items-center justify-center ${inquiry ? 'transform translate-y-0 opacity-100 visible transition duration-300 ease-in-out' : 'transform bg-slate-100 -translate-y-2 opacity-0 invisible transition duration-300 ease-in-out'}`}
+            className={`bg-white shadow-lg z-50 w-full h-full top-0 left-0 p-6 fixed flex flex-col items-center justify-center ${menu ? 'transform translate-y-0 opacity-100 visible transition duration-300 ease-in-out' : 'transform bg-slate-100 -translate-y-2 opacity-0 invisible transition duration-300 ease-in-out'}`}
         >
-            <span onClick={() => setInquiry(false)} className='-top-10 mb-6 cursor-pointer'><Image src="/icons/close.svg" width={20} height={20} alt='close' /></span>
+            <span onClick={() => setMenu(false)} className='-top-10 mb-6 cursor-pointer'><Image src="/icons/close.svg" width={20} height={20} alt='close' /></span>
             <Link className='w-full' href="https://my.ssaa.ir/portal/estate">
                 <li className='text-xl pb-4 w-full border-b flex justify-center font-semibold hover:text-gray-500 button-animation'>استعلام اصالت سند</li>
             </Link>

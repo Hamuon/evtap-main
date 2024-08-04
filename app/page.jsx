@@ -1,15 +1,18 @@
 "use client"
-import React, { useState } from 'react'
-import Image from 'next/image'
+import React, { useState, useContext } from 'react'
+import { MenuContext } from '@/context/MenuContext'
 import VideoModal from '@/components/molecules/modals/VideoModal'
 import MainMenu from '@/components/atoms/buttons/mainMenu/MainMenu'
+import InquiryList from '@/components/molecules/modals/InquiryList'
 
 export default function Home() {
   const [video, setVideo] = useState(false)
+  const { menu, setMenu } = useContext(MenuContext)
 
   return (
-    <main className='w-full relative '>
+    <main className='w-full relative'>
       {/* <Image src="/media/real-estate.gif" fill className='object-cover' alt='banner image' /> */}
+      {menu ? <InquiryList setMenu={setMenu} menu={menu} /> : null}
       {video && <VideoModal setVideo={setVideo} />}
       <div className='w-full'>
         <div className='w-full h-screen relative flex items-center justify-center '>

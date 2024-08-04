@@ -4,19 +4,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { ToastContainer } from "react-toastify";
-import MainFooter from "@/components/organisms/footer/MainFooter";
 import MainNavigation from "@/components/organisms/navigation/MainNavigation";
 import ProtectRoute from "@/components/ProtectRoute";
 import AuthProvider from "@/context/AuthProvider";
 import MobileMenu from "@/components/organisms/menu/MobileMenu";
 import useMenu from "@/hooks/useMenu";
 import { FilteredAdsProvider } from "@/context/FilteredAdsProvider";
-import InquiryList from "@/components/molecules/modals/InquiryList";
+import MenuContextProvider from "@/context/MenuContext";
 export default function RootLayout({ children }) {
   const pathname = usePathname();
 
   const [mounted, setMounted] = useState(false);
-  const [inquiry, setInquiry] = useState(false)
   const { open, toggleMenu } = useMenu();
 
   useEffect(() => {
@@ -49,22 +47,22 @@ export default function RootLayout({ children }) {
         {mounted && (
           <AuthProvider>
             <FilteredAdsProvider>
-              <ProtectRoute>
-                <ToastContainer />
-                <div
-                  className="flex flex-col justify-between min-h-full"
-                >
-                  {pathname === "/" ? (
-                    <MainNavigation setInquiry={setInquiry} toggleMenu={toggleMenu} open={open} />
-                  ) : null}
-                  {open ? (
-                    <MobileMenu setInquiry={setInquiry} open={open} toggleMenu={toggleMenu} />
-                  ) : null}
-                  {children}
-                  {inquiry ? <InquiryList setInquiry={setInquiry} inquiry={inquiry} /> : null}
-                  {/* {pathname === "/" ? <MainFooter /> : null} */}
-                </div>
-              </ProtectRoute>
+              <MenuContextProvider>
+                <ProtectRoute>
+                  <ToastContainer />
+                  <div
+                    className="flex flex-col justify-between min-h-full"
+                  >
+                    {pathname === "/" ? (
+                      <MainNavigation toggleMenu={toggleMenu} open={open} />
+                    ) : null}
+                    {open ? (
+                      <MobileMenu open={open} toggleMenu={toggleMenu} />
+                    ) : null}
+                    {children}
+                  </div>
+                </ProtectRoute>
+              </MenuContextProvider>
             </FilteredAdsProvider>
           </AuthProvider>
         )}

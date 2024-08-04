@@ -1,7 +1,9 @@
 import React from 'react'
-import Link from 'next/link'
+import { useContext } from 'react'
+import { MenuContext } from '@/context/MenuContext'
 import "./mainMenu.css"
 export default function MainMenu({ setVideo, setInquiry }) {
+    const { menu, setMenu } = useContext(MenuContext)
     return (
         <div className="wrapper">
             <input type="checkbox" id="toggle" className="hidden-trigger" />
@@ -18,7 +20,7 @@ export default function MainMenu({ setVideo, setInquiry }) {
                 <a href="https://melkevtap.ir/files" className="sub-circle text-xs text-black font-semibold">
                     آگهی ها
                 </a>
-                <a onClick={() => setInquiry(true)} className="sub-circle text-xs text-black font-semibold">
+                <a onClick={() => setMenu(true)} className="sub-circle cursor-pointer text-xs text-black font-semibold">
                     استعلام
                 </a>
                 <a href="/experts" className="sub-circle text-xs text-black font-semibold">
