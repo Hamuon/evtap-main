@@ -8,8 +8,8 @@ export default function Home() {
   const [video, setVideo] = useState(false)
 
   return (
-    <main className='w-full relative bg-[#2D2D2D]'>
-      <Image src="/media/real-estate.gif" fill className='object-cover' alt='banner image' />
+    <main className='w-full relative '>
+      {/* <Image src="/media/real-estate.gif" fill className='object-cover' alt='banner image' /> */}
       {video && <VideoModal setVideo={setVideo} />}
       <div className='w-full'>
         <div className='w-full h-screen relative flex items-center justify-center '>

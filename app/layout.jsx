@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
       lang="fa"
       style={{
         backgroundImage: `url(${pathname === "/"
-          ? null
+          ? "/media/wtc.jpg"
           : pathname === "/login"
             ? "/media/bgotp.jpg"
             : pathname === "/request"
